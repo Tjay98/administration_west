@@ -23,4 +23,13 @@ class MY_Controller extends CI_Controller {
     function load_admin_views($viewName, $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
         //implement later
     }
+
+
+    //return admin url
+    function admin_url(){
+        $admin_url=$this->config->item('admin_url');
+
+        return $admin_url;
+    }
+    
 }
