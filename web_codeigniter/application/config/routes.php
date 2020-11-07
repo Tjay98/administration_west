@@ -50,6 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
+//$route['nome da rota que se quer chamar']= 'pasta frontend ou backend / controlador / açao';
+
+
 
 //must keep the base route, 404 and translate uri_dashes
 $route['default_controller'] = 'frontend/home/';
