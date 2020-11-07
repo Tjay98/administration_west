@@ -12,7 +12,6 @@
     <h1 class="jumbotron-heading">Empresas</h1>
 </section>
 
-<!-- <section class="text-center">
+<section class="text-center" style="min-height:600px">
     <h1 class="jumbotron-heading">A</h1>
 </section>
- -->
