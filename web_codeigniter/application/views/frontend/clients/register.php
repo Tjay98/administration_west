@@ -51,38 +51,37 @@
         }
         //se a passwrod passar em todas as regras 
         else{
-            //verificar se o NIF tem o tamanho certo
+            //verificar se o NIF não  tem o tamanho certo falha
             alert('senha boa');
-                if($('#inputNif').val().length==9){
-                alert('NIf ok');
-                return true;
-                } else{
-                    //se não for bom falha
+                if($('#inputNif').val().length!=9){
                     alert('NIF mau');
                     return false;
-                } 
-                //se tudo estiver conforme as regras ele envia os dados
-            return true;
-            $('#registo_form').on('submit',function(){
-                event.preventDefault();
-                username=$('#inputUsername').val();
-                email=$('#inputEmail').val();
-                nif=$('#inputNif').val();
-                data=$('#inputDate').val();
-                password=$('#inputPassword').val();
-                flag=true;
-                if(flag==true){
-                    formdata=$('#registo_form').serialize();
-                    $.ajax({
-                        type: "POST",
-                        url: "<?php echo base_url('clients/register'); ?>",
-                        data: formdata,
-                        success: function (response) {
-                            alert(response);
+                
+                } else{
+                     //se tudo estiver conforme as regras ele envia os dados
+                    return true;
+                    $('#registo_form').on('submit',function(){
+                        event.preventDefault();
+                        username=$('#inputUsername').val();
+                        email=$('#inputEmail').val();
+                        nif=$('#inputNif').val();
+                        data=$('#inputDate').val();
+                        password=$('#inputPassword').val();
+                        flag=true;
+                        if(flag==true){
+                            formdata=$('#registo_form').serialize();
+                            $.ajax({
+                                type: "POST",
+                                url: "<?php echo base_url('clients/register'); ?>",
+                                data: formdata,
+                                success: function (response) {
+                                    alert(response);
+                                }
+                            });
                         }
-                    });
-                }
-            })
+                    })
+                } 
+               
         }   
     });
     </script>
