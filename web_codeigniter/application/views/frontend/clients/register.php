@@ -6,24 +6,41 @@
                 <div class="form-signin">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="inputUsername">Nome</label> 
                             <input type="text" id="inputUsername" name="inputUsername" class="form-control-custom" placeholder="Nome de utilizador" tabindex="1" required autofocus>
+                            <small class="text-danger" id="username_error"></small>
+                            
+                            
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="inputEmail">Email</label> 
                             <input type="email" id="inputEmail" name="inputEmail" class="form-control-custom" placeholder="Email" tabindex="2" required autofocus>
+                            <small class="text-danger" id="email_error"></small>
+
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <label for="nif">NIF</label> 
+                            <label for="inputNif">NIF</label> 
                             <input type="text" id="inputNif" name="inputNif" class="form-control-custom"  placeholder="NIF" tabindex="3" required autofocus>
+                            <small class="text-danger" id="nif_error"></small>
+
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <label for="date">Data de nascimento</label>
+                            <label for="inputDate">Data de nascimento</label>
                             <input type="date" id="inputDate" name="inputDate" class="form-control-custom" placeholder="Data de nascimento" tabindex="4" required autofocus>
+                            <small class="text-danger" id="date_error"></small>
+
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="inputPassword">Password</label> 
                             <input type="password" id="inputPassword" name="inputPassword" class="form-control-custom" placeholder="Password" tabindex="5" required>
+                            <small class="text-danger" id="password_error"></small>
+
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="inputRepetirPassword">Repetir a password</label> 
                             <input type="password" id="inputRepetirPassword" class="form-control-custom" placeholder="Repetir Password" tabindex="6" required>
+                            <small class="text-danger" id="repeat_error"></small>
+
                         </div>
                     </div> 
                 <button class="btn btn-lg btn-primary btn-block btn-signin mt-4" type="submit" tabindex="7">Registo</button>
@@ -33,56 +50,80 @@
     </form>
 
     <script>
-    $('#registo_form').on('submit', function () {
-        //verificar se a palavra password é igual a "repetir password"
-        if($('#inputPassword').val() != $('#inputRepetirPassword').val()){
-            alert('Senhas diferentes');
-            return false;
-        } 
-        //verificar se a password é demasiado curta
-        else if($('#inputPassword').val().length<8){
-            alert('Senhas curta');
-            return false;
-        } 
-        //verificar se a password é demasiado longa
-        else if($('#inputPassword').val().length>25) {
-            alert('Senhas longa');
-            return false;
-        }
-        //se a passwrod passar em todas as regras 
-        else{
-            //verificar se o NIF não  tem o tamanho certo falha
-            alert('senha boa');
-                if($('#inputNif').val().length!=9){
-                    alert('NIF mau');
-                    return false;
+        $('#registo_form').on('submit', function () {
+            event.preventDefault();
+
+            //set variables from inputs
+            username=$('#inputUsername').val();
+            email=$('#inputEmail').val();
+            nif=$('#inputNif').val();
+            data=$('#inputDate').val();
+            password=$('#inputPassword').val();
+            repeat_password=$('#inputRepetirPassword').val();
+
+            //clear errors
+            $('#username_error').text('');
+            $('#email_error').text('');
+            $('#nif_error').text('');
+            $('#date_error').text('');
+            $('#password_error').text('');
+            $('#repeat_error').text('');
+
+            flag=true
+
+            if(username.length < 5 || username.length > 255){
+                $('#username_error').text('Preencha o seu nome');
+                flag=false;
+            }
+            if(email.length < 5 || email.length > 255){
+                $('#email_error').text('Preencha o seu nome');
+                flag=false;
+            }
+
+            if(nif.length!=9){
+                $('#nif_error').text('O nif é inválido');
+                flag=false;
+            }
+            if(data<1){
+                $('#date_error').text('Preencha a data de nascimento');
+                flag=false;
+            }
+            if(password.length < 6 || password.length > 25){
+                flag=false;
+                $('#password_error').text('A password não corresponde ao tamanho permitido (6 caractéres a 25)');
+            }
+            if(repeat_password!=password){
+                flag=false;
+                $('#repeat_error').text('As passwords não correspondem');
                 
-                } else{
-                     //se tudo estiver conforme as regras ele envia os dados
-                    return true;
-                    $('#registo_form').on('submit',function(){
-                        event.preventDefault();
-                        username=$('#inputUsername').val();
-                        email=$('#inputEmail').val();
-                        nif=$('#inputNif').val();
-                        data=$('#inputDate').val();
-                        password=$('#inputPassword').val();
-                        flag=true;
-                        if(flag==true){
-                            formdata=$('#registo_form').serialize();
-                            $.ajax({
-                                type: "POST",
-                                url: "<?php echo base_url('clients/register'); ?>",
-                                data: formdata,
-                                success: function (response) {
-                                    alert(response);
+            }
+
+            if(flag==true){
+                            
+                formdata=$('#registo_form').serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo base_url('clients/register'); ?>",
+                        data: formdata,
+                        success: function (response) {
+                            if(response=='success'){
+                                location.href('<?php echo base_url('clients/login') ?>')
+                            }else{
+                                if(response=='username_error'){
+                                    $('#username_error').text('Este nome de utilizador já está em uso');
                                 }
-                            });
+                                else if(response=='email_error'){
+                                    $('#email_error').text('Este email já está em uso');
+                                }else if(response=='nif_error'){
+                                    $('#nif_error').text('Este nif já está em uso');
+                                }
+                            }
                         }
-                    })
-                } 
+                    });
+
+            } 
                
-        }   
-    });
+           
+        });
     </script>
 
