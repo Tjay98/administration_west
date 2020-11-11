@@ -19,7 +19,7 @@ class Clients extends MY_Controller {
             $this->load_views('frontend/clients/register');
         }else{
             //register validation here
-            print_r($this->input->post(''));            
+            print_r($this->input->post());            
         }
     }
      
