@@ -22,8 +22,15 @@ class Client_model extends CI_Model{
        
     }
 
-    public function verify_login(){
-        
-    }
+    public function verify_login($login_form){
 
+        $this->db->where('password_hash', $login_form['password_hash']);
+        $validate_pass=$this->db->get('user')->row_array();
+
+        if(empty($validate_pass)){
+            $this->db->get('user', $login_form);
+        }else{
+            return 'password_error';
+        }
+    }
 }

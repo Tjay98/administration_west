@@ -47,7 +47,18 @@ class Clients extends MY_Controller {
             $this->load_views('frontend/clients/login');
         }else{
             //login validation here
-            
+            $login_form=[
+                'email'=>$this->input->post('inputEmail'),
+                'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
+            ];
+            $validate=$this->Client_model->verify_login($login_form);
+            if(empty($validate)){
+                //if register happens correctly
+                echo 'success';
+            }else{
+                echo $validate;
+            }
+           
             
            
         }
