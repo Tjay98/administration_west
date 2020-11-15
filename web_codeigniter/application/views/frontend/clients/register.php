@@ -107,7 +107,7 @@
                         data: formdata,
                         success: function (response) {
                             if(response=='success'){
-                                location.href('<?php echo base_url('clients/login') ?>')
+                                window.location.href = '<?php echo base_url('clients/login') ?>';
                             }else{
                                 if(response=='username_error'){
                                     $('#username_error').text('Este nome de utilizador já está em uso');
@@ -116,6 +116,16 @@
                                     $('#email_error').text('Este email já está em uso');
                                 }else if(response=='nif_error'){
                                     $('#nif_error').text('Este nif já está em uso');
+                                }else if(response=='pass_number_error'){
+                                    $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
+                                }else if(response=='pass_capital_letter'){
+                                    $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
+                                }else if(response=='pass_lower_letter'){
+                                    $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
+                                }else if(response== 'pass_special_caracter'){
+                                    $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
+                                }else{
+                                    $('#username_error').text(response);
                                 }
                             }
                         }

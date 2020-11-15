@@ -32,4 +32,7 @@ class MY_Controller extends CI_Controller {
         return $admin_url;
     }
     
+/*     function logout(){
+        $this->session->sess_destroy();
+    } */
 }

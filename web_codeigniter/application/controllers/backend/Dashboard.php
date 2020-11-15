@@ -5,19 +5,19 @@
  * @version : 1.0
  * @since : 7 november 2020
  */
-class Home extends MY_Controller {
+class Dashboard extends MY_Controller {
 
     function __construct()
     {
         parent::__construct();
     }
 
-
     public function index(){
 
-        $this->load_views('backend/dashboard');
-
+        $this->load_views('backend/home');
+        
     }
-    
 
+
+    
 }

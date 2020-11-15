@@ -76,9 +76,33 @@
     
             </ul>
             <ul class="navbar-nav ">
-                 <li class="nav-item">
-                    <b><a class="nav-link" href="<?php echo base_url('clients/login'); ?>">Entrar</a></b>
-                </li>
+                <?php if(empty($this->session->userdata('username'))){ ?>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="<?php echo base_url('clients/login'); ?>">Entrar</a></b>
+                    </li>
+                        
+                <?php }else{?>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="<?php echo base_url('clients/profile'); ?>"><i class="fa fa-shopping-cart"></i> Meus pedidos</a></b>
+                    </li>
+<!--                     <li class="nav-item">
+                        <b><a class="nav-link" href="<?php echo base_url('clients/profile'); ?>"><i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?></a></b>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="<?php echo base_url('clients/profile'); ?>">Perfil</a>
+                            <a class="dropdown-item" href="<?php echo base_url('clients/purchase_history'); ?>">Histórico de pedidos</a>
+                                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                            <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="<?php echo base_url('clients/logout'); ?>">Sair</a>
+                            </div>
+                        </div>
+                    </li>
+                <?php }?>
+                
             </ul>
 
         </div>

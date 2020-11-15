@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /* 
 Code to make the application be able to run frontend and backend controllers without routing problems
 
@@ -8,6 +8,7 @@ https://stackoverflow.com/questions/34713411/codeigniter-routing-folder-error
 Consultado a 07/11/2020
 
  */
+
 class MY_Router extends CI_Router {
     protected function _set_default_controller() {
 

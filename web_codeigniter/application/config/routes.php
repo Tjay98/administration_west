@@ -62,14 +62,20 @@ $route['translate_uri_dashes'] = FALSE;
 //new routers here
 
     //frontend
-    $route['clients/login']   =  'frontend/clients/login';
-    $route['clients/register']   =  'frontend/clients/register';
+        //cliente
+        $route['clients/login']   =  'frontend/clients/login';
+        $route['clients/register']   =  'frontend/clients/register';
+        $route['clients/logout']   =  'frontend/clients/logout';
+        $route['clients/profile']   =  'frontend/clients/profile';
+        $route['clients/purchase_history']   =  'frontend/clients/purchase_history';
+    
 
-
-    $route['products']   =  'frontend/products/index';
-    $route['products/search_product']   =  'frontend/products/search_product';
-    $route['categories'] = 'frontend/products/categories_index';
-    $route['companies'] = 'frontend/products/companies_index';
+        //produtos
+        $route['products']   =  'frontend/products/index';
+        $route['products/search_product']   =  'frontend/products/search_product';
+        $route['categories'] = 'frontend/products/categories_index';
+        $route['companies'] = 'frontend/products/companies_index';
 
 
     //backend
+        $route['admin']   =  'backend/dashboard/index';

@@ -51,12 +51,14 @@
                     data: formdata,
                     success: function (response) {
                         if(response=='success'){
-                            location.href="<?php echo base_url(''); ?>"
+                            window.location.href="<?php echo base_url(''); ?>"
                         }else{
                             if(response=='error'){
                                 $('#password_error').text('Verifique se as credenciais que escreveu estão corretas');
                             }else if(response=='banned'){
                                 $('#password_error').text('A sua conta foi desabilitada, contacte-nos caso acha que tenha sido um erro');
+                            }else{
+                                $('#password_error').text('Houve um problema inesperado, aguarde uns minutos ou contacte-nos caso o problema persista');
                             }
                         }
                     }
