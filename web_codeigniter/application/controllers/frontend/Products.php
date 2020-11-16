@@ -14,7 +14,7 @@ class Products extends MY_Controller {
 
     //implementar
     public function index(){
-
+        $this->load_views('frontend/products/products3');
     }
 
     public function search_product(){
