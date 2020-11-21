@@ -10,6 +10,7 @@ class Home extends MY_Controller {
     function __construct()
     {
         parent::__construct();
+
     }
 
     public function index(){
@@ -20,7 +21,7 @@ class Home extends MY_Controller {
 
     //implementar
     public function contactos(){
-        $this->load_views('frontend/contactos');
+        $this->load_views('frontend/contacts');
     }
 
     

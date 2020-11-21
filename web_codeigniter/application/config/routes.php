@@ -76,6 +76,10 @@ $route['translate_uri_dashes'] = FALSE;
         $route['categories'] = 'frontend/products/categories_index';
         $route['companies'] = 'frontend/products/companies_index';
 
+        //contactos
+        $route['contacts']   =  'frontend/home/contactos';
+
+
 
     //backend
         $route['admin']   =  'backend/dashboard/index';

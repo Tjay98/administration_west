@@ -4,7 +4,7 @@
         <p class="lead text-muted">Somos uma empresa criada com o objetivo de vender produtos de empreasas locais.</p>
         <p>
             <p class="lead text-muted">És uma empresa local e queres vender os teus produtos na nossa plataforma? Contacta-nos através do seguinte botão.</p>
-            <a href="#" class="btn btn-primary my-2">Contacta-nos</a>
+            <a href="<?php echo base_url('contacts'); ?>" class="btn btn-primary my-2">Contacta-nos</a>
         </p>
     </div>
 </section>
