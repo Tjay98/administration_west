@@ -83,3 +83,12 @@ $route['translate_uri_dashes'] = FALSE;
 
     //backend
         $route['admin']   =  'backend/dashboard/index';
+
+
+
+    
+    //api
+        $route['restful/products'] = 'api/restful/get_products';
+        $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
+        $route['restful/login'] = 'api/restful/login';
+       

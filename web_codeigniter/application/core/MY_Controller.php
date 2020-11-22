@@ -32,7 +32,10 @@ class MY_Controller extends CI_Controller {
         return $admin_url;
     }
     
-/*     function logout(){
-        $this->session->sess_destroy();
-    } */
+
+
+    /*      
+        metodo de ver os segmentos do url \/   
+        $segmento_url=$this->uri->segment_array(); 
+        print_r($segmento_url); */
 }
