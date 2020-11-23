@@ -92,8 +92,8 @@ class Restful extends MY_Controller {
     public function login(){
         if( (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) ){
             $login_form=[
-                'email'=>$this->input->post('inputEmail'),
-                'password'=>$this->input->post('inputPassword'),
+                'email'=>$this->input->post('email'),
+                'password'=>$this->input->post('password'),
             ];
             $validate=$this->Client_model->verify_login($login_form);
             if(empty($validate)){
@@ -105,12 +105,47 @@ class Restful extends MY_Controller {
             $array=$this->generate_error_message(400,'Invalid method');
         }
 
-        echo json_encode($array);
+        echo json_encode($array, JSON_PRETTY_PRINT);
         /* print_R($this->input->post()); */
     }
 
     public function register(){
-        //implementar
+        print_r($this->input->post());
+        if( (!empty($this->input->post('username'))) && (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) && (!empty($this->input->post('nif'))) && (!empty($this->input->post('birthday')))){
+            $user=strtolower($this->input->post('username'));
+            $email=strtolower($this->input->post('email'));
+        
+            //converter apenas o primeiro elemento de cada palavra para maiusculo
+            $username=ucwords($user);
+
+            //preenche o array 
+            $registo_form=[
+                'username'=>$username,
+                'email'=>$email,
+                'nif'=>$this->input->post('nif'),
+                'birthday_date'=>$this->input->post('birthday'),
+                'password_hash'=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
+            ];
+
+
+            $validate=$this->Client_model->register_client($registo_form);
+            if(empty($validate)){
+                $array=$this->generate_error_message(200,"Register successful");
+            }else{
+                $array=$this->generate_error_message(401,'The credentials are already in use');
+            }
+
+           
+        }else{
+            $array=$this->generate_error_message(400,'Invalid method');
+        }
+        echo json_encode($array, JSON_PRETTY_PRINT);
+    }
+
+    public function test(){
+        
+
+
     }
 
 

@@ -91,4 +91,5 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/products'] = 'api/restful/get_products';
         $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
         $route['restful/login'] = 'api/restful/login';
+        $route['restful/register'] = 'api/restful/register';
        
