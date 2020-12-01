@@ -21,7 +21,9 @@ class MY_Controller extends CI_Controller {
     }
 
     function load_admin_views($viewName, $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
-        //implement later
+        $this->load->view('frontend/template/new_header',$headerInfo);
+        $this->load->view($viewName, $pageInfo);
+        $this->load->view('frontend/template/new_footer', $footerInfo);
     }
 
 
@@ -31,8 +33,18 @@ class MY_Controller extends CI_Controller {
 
         return $admin_url;
     }
-    
 
+    function is_user_logged(){
+        if(empty($this->session->userdata('role_id'))){
+            return redirect('');
+        }
+    }
+
+    function is_admin_logged(){
+        if($this->session->userdata('role_id') <= 1){
+            return redirect('/admin');
+        }
+    }
 
     /*      
         metodo de ver os segmentos do url \/   

@@ -91,6 +91,8 @@ class Clients extends MY_Controller {
 
 
     public function logout(){
+        $this->is_user_logged();
+        
         //destroi a sessão
         $this->session->sess_destroy();
         redirect('');
@@ -98,9 +100,13 @@ class Clients extends MY_Controller {
 
 
     public function profile(){
-        $id=$this->session->userdata('id');
-        $dados=$this->Client_model->profile($id);
-        $this->load_views('frontend/clients/profile', $dados);
+        $this->is_user_logged();
+
+        $id=$this->session->userdata('user_id');
+        
+        $data['user']=$this->Client_model->profile($id);
+
+        $this->load_views('frontend/clients/profile', $data);
         
     }
 

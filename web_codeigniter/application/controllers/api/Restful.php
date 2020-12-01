@@ -110,7 +110,7 @@ class Restful extends MY_Controller {
     }
 
     public function register(){
-        print_r($this->input->post());
+        /* print_r($this->input->post()); */
         if( (!empty($this->input->post('username'))) && (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) && (!empty($this->input->post('nif'))) && (!empty($this->input->post('birthday')))){
             $user=strtolower($this->input->post('username'));
             $email=strtolower($this->input->post('email'));

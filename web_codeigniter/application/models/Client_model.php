@@ -80,10 +80,10 @@ class Client_model extends CI_Model{
     }
 
     public function profile($id){
-        $this->db->select('id , username, email, nif, birthday_date status, role_id');
-        $this->db->from('user');
-        $this->db->where(['user.id'=>$id]);
-        $data=$this->db->get();
-        return $data->row();
+        $this->db->select('id, username, email, nif, birthday_date, status, role_id');
+        $this->db->where('user.id',$id);
+        $data=$this->db->get('user')->row_array();
+
+        return $data;
     }
 }
