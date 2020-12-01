@@ -28,7 +28,7 @@
                         </div>
                     </div> 
                     <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:20px;">
-                            <button type="button"  data-toggle="modal" data-target="#passwordModal" class="btn btn-success" style="width:100%;">BOTAO TEMPORARIO QUE MUDA A PASSWORD</button>
+                            <button type="button"  onclick="open_edit_password()" class="btn btn-success" style="width:100%;">BOTAO TEMPORARIO QUE ABRE PARA MUDAR A PASSWORD</button>
                     </div>
             </div>
         </div><!-- /card-container -->
@@ -46,21 +46,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <label for="inputPassword">Password antiga</label> 
-                    <input type="password" id="inputOldPassword" name="inputOldPassword" class="form-control-custom" placeholder="Password antiga" tabindex="5" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label for="inputPassword">Password</label> 
-                    <input type="password" id="inputPassword" name="inputPassword" class="form-control-custom" placeholder="Password" tabindex="5" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label for="inputRepetirPassword">Repetir a password</label> 
-                    <input type="password" id="inputRepetirPassword" class="form-control-custom" placeholder="Repetir Password" tabindex="6" required>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label for="inputPassword">Password antiga</label> 
+                        <input type="password" id="inputOldPassword" name="inputOldPassword" class="form-control-custom" placeholder="Password antiga" tabindex="5" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputPassword">Password</label> 
+                        <input type="password" id="inputPassword" name="inputPassword" class="form-control-custom" placeholder="Password" tabindex="5" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputRepetirPassword">Repetir a password</label> 
+                        <input type="password" id="inputRepetirPassword" class="form-control-custom" placeholder="Repetir Password" tabindex="6" required>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" style="width:100%;">Editar</button>
+                <button type="button" class="btn btn-warning" style="width:100%;">Editar</button>
             </div>
         </div>
     </div>

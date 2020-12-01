@@ -20,10 +20,11 @@ class MY_Controller extends CI_Controller {
         $this->load->view('frontend/template/new_footer', $footerInfo);
     }
 
-    function load_admin_views($viewName, $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
-        $this->load->view('frontend/template/new_header',$headerInfo);
-        $this->load->view($viewName, $pageInfo);
-        $this->load->view('frontend/template/new_footer', $footerInfo);
+    function load_admin_views($viewName, $data = NULL){
+        $this->load->view('backend/template/header',$data);
+        $this->load->view('backend/template/sidebar');
+        $this->load->view($viewName);
+        $this->load->view('backend/template/footer');
     }
 
 

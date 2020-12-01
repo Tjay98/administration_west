@@ -38,7 +38,7 @@ class Products extends MY_Controller {
     //enviar produtos para a vista
     public function get_products($id){
         $products=$this->Product_model->get_detail_products($id);
-        $this->load_views('frontend/products/products_details', $products);
+        $this->load_views('frontend/products/product_details', $products);
     }
 
     //envia as informações das empresas para a página de empresas

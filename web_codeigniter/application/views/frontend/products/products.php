@@ -27,7 +27,7 @@
                     <div class="col-lg-7 col-md-5 col-sm-12 mt-5">
                         <h6>Descrição</h6>
                         <p><?php echo $products['small_description']; ?></p>
-                        <a href="<?php echo base_url('products/(:any)'); ?>" class="btn-primary">ver</a>
+                        <a href="<?php echo base_url('products/').$products['id']; ?>" class="btn-primary">ver</a>
                         <a href="<?php echo base_url('products'); ?>" class="btn-primary">carrinho</a>
                     </div>
 

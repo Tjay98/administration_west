@@ -14,7 +14,7 @@ class Dashboard extends MY_Controller {
 
     public function index(){
 
-        $this->load_views('backend/home');
+        $this->load_admin_views('backend/home');
         
     }
 

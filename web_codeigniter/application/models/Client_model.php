@@ -49,9 +49,6 @@ class Client_model extends CI_Model{
                     $data=[
                         'user_id'=>$user['id'],
                         'username'=>$user['username'],
-                        'email'=>$user['email'],
-                        'nif'=>$user['nif'],
-                        'birthday_date'=>$user['birthday_date'],
                         'status'=>$user['status'],
                         'role_id'=>$user['role_id'],
 
