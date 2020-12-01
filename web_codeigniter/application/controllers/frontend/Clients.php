@@ -98,7 +98,10 @@ class Clients extends MY_Controller {
 
 
     public function profile(){
-        print_r($this->session->userdata());
+        $id=$this->session->userdata('id');
+        $dados=$this->Client_model->profile($id);
+        $this->load_views('frontend/clients/profile', $dados);
+        
     }
 
     public function purchase_history(){

@@ -14,8 +14,10 @@ class Home extends MY_Controller {
     }
 
     public function index(){
-
-        $this->load_views('frontend/home');
+        $this->load->model('Product_model');
+        $data['categories']=$this->Product_model->get_categories();
+        $data2['companies']=$this->Product_model->get_companies();
+        $this->load_views('frontend/home', $data, $data2);
 
     }
 

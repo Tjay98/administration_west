@@ -72,6 +72,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //produtos
         $route['products']   =  'frontend/products/index';
+        $route['products/(:any)'] = 'frontend/products/get_products/$1';
         $route['products/search_product']   =  'frontend/products/search_product';
         $route['categories'] = 'frontend/products/categories_index';
         $route['companies'] = 'frontend/products/companies_index';

@@ -43,12 +43,15 @@ class Client_model extends CI_Model{
         if(!empty($validation)){
             if($validation['status']==1){
                 if (password_verify($login_form['password'], $validation['password_hash'])) {
-                    $this->db->select('id , username , status, role_id');
+                    $this->db->select('id , username, email, nif, birthday_date, status, role_id');
                     $this->db->where('email', $login_form['email']);
                     $user=$this->db->get('user')->row_array();
                     $data=[
                         'user_id'=>$user['id'],
                         'username'=>$user['username'],
+                        'email'=>$user['email'],
+                        'nif'=>$user['nif'],
+                        'birthday_date'=>$user['birthday_date'],
                         'status'=>$user['status'],
                         'role_id'=>$user['role_id'],
 
@@ -74,5 +77,13 @@ class Client_model extends CI_Model{
         if(empty($user_check)){
 
         }
+    }
+
+    public function profile($id){
+        $this->db->select('id , username, email, nif, birthday_date status, role_id');
+        $this->db->from('user');
+        $this->db->where(['user.id'=>$id]);
+        $data=$this->db->get();
+        return $data->row();
     }
 }

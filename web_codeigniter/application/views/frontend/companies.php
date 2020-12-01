@@ -3,11 +3,11 @@
     <div class="row">
         <ul>
             <?php 
-                foreach ($companies as $company): 
+                foreach ($companies as $companies): 
             ?>
-                <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo $company->image; ?>">
-                <li> <?php echo $company->company_name; ?></li>   
-                <li> <?php echo $company->description; ?></li>  
+                <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo $companies['image']; ?>">
+                <li> <?php echo $companies['company_name']; ?></li>   
+                <li> <?php echo $companies['description']; ?></li>  
             <?php 
                 endforeach;
             ?>
