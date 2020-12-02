@@ -28,7 +28,7 @@ class Sale_model extends CI_Model{
                 $data[$i]['sale']=$result;
 
                 $this->db->select('product.product_name, product.image');
-                $this->db->where('sale_group_id',$result['id']);
+                $this->db->where('sproduct.sale_group_id',$result['id']);
                 $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
                 $this->db->from('sales_product as sproduct');
                 $products=$this->db->get('sales_product')->result_array();
@@ -39,7 +39,10 @@ class Sale_model extends CI_Model{
                 $i++;
             }
         }
-        return $data;
+        if(!empty($data)){
+            return $data;
+        }
+        
     }
 
     public function get_sale($sale_id){

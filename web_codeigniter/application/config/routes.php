@@ -69,6 +69,10 @@ $route['translate_uri_dashes'] = FALSE;
         $route['clients/profile']   =  'frontend/clients/profile';
         $route['clients/purchase_history']   =  'frontend/clients/purchase_history';
     
+        //vendas
+        $route['sales/history']='frontend/sales/sale_history';
+        $route['sales/history/(:any)']= 'frontend/sales/sale_detail/$1';
+        //carrinho
 
         //produtos
         $route['products']   =  'frontend/products/index';
