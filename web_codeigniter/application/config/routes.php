@@ -79,7 +79,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //contactos
         $route['contacts']   =  'frontend/home/contactos';
-
+        
 
 
     //backend
