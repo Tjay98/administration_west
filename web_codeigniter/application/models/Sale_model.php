@@ -12,7 +12,7 @@ class Sale_model extends CI_Model{
 
                             baddress.name as billing_name,
                             baddress.nif as billing_nif,
-                            baddress.contact_number as billingg_contact,
+                            baddress.contact_number as billing_contact,
                             baddress.city as billing_city,
                             baddress.address as billing_address,
                             baddress.zip_code as billing_zip
@@ -25,7 +25,6 @@ class Sale_model extends CI_Model{
         if(!empty($results)){
             $i=0;
             foreach($results as $result){
-                $data[$i]['sale']=$result;
 
                 $this->db->select('product.product_name');
                 $this->db->where('sproduct.sale_group_id',$result['id']);
@@ -33,14 +32,14 @@ class Sale_model extends CI_Model{
                 $this->db->from('sales_product as sproduct');
                 $products=$this->db->get('sales_product')->result_array();
                 if(!empty($products)){
-                    $data[$i]['sale_products']=$products;
+                    $results[$i]['sale_products']=$products;
                 }
     
                 $i++;
             }
         }
-        if(!empty($data)){
-            return $data;
+        if(!empty($results)){
+            return $results;
         }
         
     }
@@ -57,7 +56,7 @@ class Sale_model extends CI_Model{
 
                             baddress.name as billing_name,
                             baddress.nif as billing_nif,
-                            baddress.contact_number as billingg_contact,
+                            baddress.contact_number as billing_contact,
                             baddress.city as billing_city,
                             baddress.address as billing_address,
                             baddress.zip_code as billing_zip
@@ -69,8 +68,8 @@ class Sale_model extends CI_Model{
         $results=$this->db->get()->row_array();
         if(!empty($results)){
 
-                $data['sale']=$results;
-                $this->db->select('product.product_name');
+                
+                $this->db->select('product.id, product.product_name, sproduct.quantity, sproduct.price,sproduct.price_iva');
                 $this->db->where('sale_group_id',$results['id']);
                 $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
                 $this->db->from('sales_product as sproduct');
@@ -78,11 +77,11 @@ class Sale_model extends CI_Model{
 
                 if(!empty($products)){
 
-                    $data['sale_products']=$products;
+                    $results['sale_products']=$products;
                 }
 
         }
-        return $data;
+        return $results;
     }
 
     public function get_all_sales(){

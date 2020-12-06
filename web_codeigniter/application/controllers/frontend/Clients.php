@@ -16,6 +16,7 @@ class Clients extends MY_Controller {
 
     //implementar
     public function register(){
+        $this->already_logged();
        //se estiver vazio volta a mostrar a pagina
         if(empty($this->input->post('inputEmail'))){
             $this->load_views('frontend/clients/register');
@@ -70,6 +71,7 @@ class Clients extends MY_Controller {
      
 
     public function login(){
+        $this->already_logged();
         if(empty($this->input->post('inputEmail'))){
             $this->load_views('frontend/clients/login');
         }else{
@@ -80,7 +82,7 @@ class Clients extends MY_Controller {
             ];
             $validate=$this->Client_model->verify_login($login_form);
             if(empty($validate)){
-                //if register happens correctly
+                //if login happens correctly
                 echo 'success';
             }else{
                 echo $validate;

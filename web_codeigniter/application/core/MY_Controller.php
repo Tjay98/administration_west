@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        setlocale(LC_TIME, 'Portuguese_Portugal');
     }
 
     function load_views($viewName, $pageInfo = NULL, $headerInfo = NULL, $footerInfo = NULL){
@@ -43,9 +44,21 @@ class MY_Controller extends CI_Controller {
 
     function is_admin_logged(){
         if($this->session->userdata('role_id') <= 1){
-            return redirect('/admin');
+            return redirect('admin/login');
         }
     }
+
+    function already_logged(){
+        if(!empty($this->session->userdata('username'))){
+
+            if($this->session->userdata('role_id') <=1){
+                return redirect('');
+            }elseif($this->session->userdata('role_id')>1){
+                return redirect('admin/');
+            }
+        }
+    }
+    
 
     /*      
         metodo de ver os segmentos do url \/   

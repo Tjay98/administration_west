@@ -20,7 +20,7 @@ class Sales extends MY_Controller {
 
         $data['sales']=$this->Sale_model->get_user_sales($id);
         
-        $this->load_views('frontend/clients/historico', $data);
+        $this->load_views('frontend/clients/purchase_history', $data);
         
 
         
@@ -37,11 +37,15 @@ class Sales extends MY_Controller {
         //$id=$this->session->userdata('user_id');
 
 
-        $data['sales']=$this->Sale_model->get_sale($sale_id);
-        
+        $sale=$this->Sale_model->get_sale($sale_id);
        
-               // print_r($data);
+        if($sale['user_id']==$this->session->userdata('user_id')){
+            $data['sale']=$sale;
+            $this->load_views('frontend/clients/purchase_history_details', $data);
+        }else{
+            return redirect('sales/history');
+        }
             
-        $this->load_views('frontend/clients/history_details', $data);
+        
     }
 }

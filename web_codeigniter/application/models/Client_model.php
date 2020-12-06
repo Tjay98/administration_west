@@ -66,13 +66,40 @@ class Client_model extends CI_Model{
         }
     }
 
-    public function admin_verification($user_id){
-        $this->db->where('id',$user_id);
-        $user_check=$this->db->get('user')->row_array();
+    public function admin_verification($login_form){
+        $this->db->select('password_hash , status , role_id');
+        $this->db->where('email', $login_form['email']);
+        $validation=$this->db->get('user')->row_array();
+
+        if(!empty($validation)){
+            if($validation['role_id'] > 1){
+
+                if($validation['status']==1){
+                    if (password_verify($login_form['password'], $validation['password_hash'])) {
+                        $this->db->select('id , username, email, status, role_id');
+                        $this->db->where('email', $login_form['email']);
+                        $user=$this->db->get('user')->row_array();
+                        $data=[
+                            'user_id'=>$user['id'],
+                            'username'=>$user['username'],
+                            'status'=>$user['status'],
+                            'role_id'=>$user['role_id'],
+
+                        ];
+                        $this->session->set_userdata($data);
+                    }else{
+                        return 'error';
+                    }
+                }else{
+                    return 'banned';
+                }
+            }else{
+                return 'role invalid';
+            }
 
 
-        if(empty($user_check)){
-
+        }else{
+            return 'error';
         }
     }
 
