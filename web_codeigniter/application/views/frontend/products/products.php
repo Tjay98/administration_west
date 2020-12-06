@@ -25,10 +25,13 @@
                         <p style="text-align: right;"><?php echo $products['price']; ?></p>
                     </div>
                     <div class="col-lg-7 col-md-5 col-sm-12 mt-5">
-                        <h6>Descrição</h6>
+                        <h6><b>Descrição</b></h6>
                         <p><?php echo $products['small_description']; ?></p>
-                        <a href="<?php echo base_url('products/').$products['id']; ?>" class="btn-primary">ver</a>
-                        <a href="<?php echo base_url('products'); ?>" class="btn-primary">carrinho</a>
+                        <br>
+                        <a href="<?php echo base_url('products/').$products['id']; ?>" class="btn-primary">Ver Detalhes do Produto</a>
+                        <br><br>
+                        <input type="number" id="inputUnit" name="inputUnit" >
+                        <a href="<?php echo base_url('products'); ?>" class="btn-primary">Adicionar ao Carrinho</a>
                     </div>
 
                 <?php } ?> 

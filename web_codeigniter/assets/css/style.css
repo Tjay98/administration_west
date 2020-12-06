@@ -140,3 +140,16 @@
 label{
     font-weight:bold;
 }
+
+table{
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+  }
+
+  th, td {
+    padding: 15px;
+  }

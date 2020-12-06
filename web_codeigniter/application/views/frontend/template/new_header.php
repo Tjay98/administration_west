@@ -85,7 +85,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<?php echo base_url('clients/profile'); ?>">Perfil</a>
-                            <a class="dropdown-item" href="<?php echo base_url('clients/purchase_history'); ?>">Histórico de pedidos</a>
+                            <a class="dropdown-item" href="<?php echo base_url('sales/history'); ?>">Histórico de pedidos</a>
                                 <!-- <a class="dropdown-item" href="#">Something else here</a> -->
                             <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?php echo base_url('clients/logout'); ?>">Sair</a>

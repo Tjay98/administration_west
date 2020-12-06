@@ -110,6 +110,54 @@ class Clients extends MY_Controller {
         
     }
 
+    public function password(){
+
+        $this->is_user_logged();
+
+        $id=$this->session->userdata('user_id');
+
+
+        if(empty($this->input->post('inputOldPassword'))){
+            $this->load_views('frontend/clients/profile');
+        }else{
+            $password_form=[
+                'old_password'=>password_hash($this->input->post('inputOldPassword'),PASSWORD_DEFAULT),
+                'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
+                'repeat_password'=>password_hash($this->input->post('inputRepetirPassword'),PASSWORD_DEFAULT),
+            ];
+            $validate=$this->Client_model->new_password_client($password_form, $id);
+            if(empty($validate)){
+                //if register happens correctly
+                echo 'success';
+            }else{
+                echo $validate;
+            }
+        }
+    }
+ 
+    public function moradas(){
+        if(empty($this->input->post('inputMoradaPrincipal'))){
+            $this->load_views('frontend/clients/profile');
+        }else{
+            $registo_address_form=[
+                'morada_principal'=>$this->input->post('inputMoradaPrincipal'),
+                'morada_secundaria'=>$this->input->post('inputMoradaSecundaria'),
+                'morada_fiscal'=>$this->input->post('inputMoradaFiscal'),
+            ];
+
+                    //vai enviar os dados para a função register_client do modelo Client_model 
+            /* print_r($registo_form);die; */
+            $validate=$this->Client_model->register_address_client($registo_address_form);
+            if(empty($validate)){
+                //if register happens correctly
+                echo 'success';
+            }else{
+                echo $validate;
+            }
+        }
+    }
+
+
     public function purchase_history(){
         echo "Historico de compra";
     }

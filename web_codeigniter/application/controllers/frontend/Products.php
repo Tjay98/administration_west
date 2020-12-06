@@ -29,17 +29,20 @@ class Products extends MY_Controller {
 
     // caso venhamos a ter uma página de categorias vamos usar esta função para enviar as categorias para a página
     public function categories_index(){
+        $data['categories']=$this->Product_model->get_categories();
+        $this->load_views('frontend/products/category', $data);
     }
-
+ 
     //para producar produtos com a mesma categoria
     public function get_products_by_category($category_id){  
     }
-
+ 
     //enviar produtos para a vista
     public function get_products($id){
-        $products=$this->Product_model->get_detail_products($id);
+        $products['product']=$this->Product_model->get_detail_products($id);
         $this->load_views('frontend/products/product_details', $products);
     }
+
 
     //envia as informações das empresas para a página de empresas
     public function companies_index(){

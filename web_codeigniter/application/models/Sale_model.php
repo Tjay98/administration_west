@@ -27,7 +27,7 @@ class Sale_model extends CI_Model{
             foreach($results as $result){
                 $data[$i]['sale']=$result;
 
-                $this->db->select('product.product_name, product.image');
+                $this->db->select('product.product_name');
                 $this->db->where('sproduct.sale_group_id',$result['id']);
                 $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
                 $this->db->from('sales_product as sproduct');
@@ -62,7 +62,7 @@ class Sale_model extends CI_Model{
                             baddress.address as billing_address,
                             baddress.zip_code as billing_zip
                             ');
-        $this->db->where('sgroup.id',$id);
+        $this->db->where('sgroup.id',$sale_id);
         $this->db->from('sales_group as sgroup');
         $this->db->join('shipping_address as saddress','saddress.id=sgroup.shipping_address_id','LEFT');
         $this->db->join('billing_address as baddress','saddress.id=sgroup.shipping_address_id','LEFT');
@@ -70,8 +70,8 @@ class Sale_model extends CI_Model{
         if(!empty($results)){
 
                 $data['sale']=$results;
-                $this->db->select('product.product_name, product.image');
-                $this->db->where('sale_group_id',$result['id']);
+                $this->db->select('product.product_name');
+                $this->db->where('sale_group_id',$results['id']);
                 $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
                 $this->db->from('sales_product as sproduct');
                 $products=$this->db->get()->result_array();

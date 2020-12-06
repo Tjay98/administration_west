@@ -43,7 +43,7 @@ class Client_model extends CI_Model{
         if(!empty($validation)){
             if($validation['status']==1){
                 if (password_verify($login_form['password'], $validation['password_hash'])) {
-                    $this->db->select('id , username, email, nif, birthday_date, status, role_id');
+                    $this->db->select('id , username, email, status, role_id');
                     $this->db->where('email', $login_form['email']);
                     $user=$this->db->get('user')->row_array();
                     $data=[
@@ -82,5 +82,33 @@ class Client_model extends CI_Model{
         $data=$this->db->get('user')->row_array();
 
         return $data;
+    }
+
+
+    public function new_password_client($password_form, $id){
+
+        $this->db->select('id, password_hash');
+        $this->db->where('user.id',$id);
+        $this->db->where('user.password_hash', $password_form['old_password']);
+
+        $data=$this->db->get('user')->row_array();
+
+        if($data->num_rows()>0){
+            $dados=$data->row();
+            if($dados->id==$this->session->userdata('id')){
+                $data=[
+                    'password_hash'=>$password_form['password_hash'],
+                ];
+                if($this->db->update('user',$data)){
+                    return "Password mudada com sucesso!";
+                } else {
+                    return "Alguma coisa esta errada.";
+                }
+            } else {
+                return "Alguma coisa esta errada! Password não foi mudada com sucesso";
+            }
+        } else {
+            return "Password antiga errada!";
+        }
     }
 }
