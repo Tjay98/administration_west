@@ -17,8 +17,8 @@ class Dashboard extends MY_Controller {
 
     public function index(){
         $this->is_admin_logged();
-    
-        $this->load_admin_views('backend/dashboard');
+        $data['page_title']="Dashboard";
+        $this->load_admin_views('backend/dashboard',$data);
         
     }
 
