@@ -11,13 +11,15 @@ class Products extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('Product_model');
+        $this->load->model('Category_model');
+        $this->load->model('Company_model');
     }
 
     //implementar
 
     //enviar os productos para a página de produtos as categorias tambem estao lá
     public function index(){
-        $data['categories']=$this->Product_model->get_categories();
+        $data['categories']=$this->Category_model->get_categories();
         $data2['products']=$this->Product_model->get_products();
         $this->load_views('frontend/products/products', $data, $data2);
     }
@@ -28,12 +30,12 @@ class Products extends MY_Controller {
     }
 
     public function categories_index(){
-        $data['categories']=$this->Product_model->get_categories();
+        $data['categories']=$this->Category_model->get_categories();
         $this->load_views('frontend/products/category', $data);
     }
 
     public function products_by_category($id){
-        $data['categories']=$this->Product_model->get_categories();
+        $data['categories']=$this->Category_model->get_categories();
         $data2['products']=$this->Product_model->get_products_by_categories($id);
         $this->load_views('frontend/products/products', $data, $data2);
     }
@@ -49,7 +51,7 @@ class Products extends MY_Controller {
 
     //envia as informações das empresas para a página de empresas
     public function companies_index(){
-        $data['companies']=$this->Product_model->get_companies();
+        $data['companies']=$this->Company_model->get_companies();
         $this->load_views('frontend/companies', $data);
     }
 

@@ -2,12 +2,6 @@
 
 class Product_model extends CI_Model{
 
-    //enviar categorias
-    public function get_categories(){
-        $results = $this->db->get('categories')->result_array();
-        return $results;
-    }
-
     public function get_products_by_categories($id){
         $this->db->select('products.id,
                             products.product_name, 
@@ -19,8 +13,8 @@ class Product_model extends CI_Model{
                             categories.category_name,
                             companies.company_name,  ');
         $this->db->from('products');
-        $this->db->join('categories','categories.id=products.category_id','RIGHT');
-        $this->db->join('companies','companies.id=products.company_id','RIGHT');
+        $this->db->join('categories','categories.id=products.category_id','LEFT');
+        $this->db->join('companies','companies.id=products.company_id','LEFT');
 
         $this->db->where('products.category_id', $id);
         $results = $this->db->get()->result_array();
@@ -40,16 +34,14 @@ class Product_model extends CI_Model{
                             companies.company_name');
                             
         $this->db->from('products');
-        $this->db->join('categories','categories.id=products.category_id','RIGHT');
-        $this->db->join('companies','companies.id=products.company_id','RIGHT');
+        $this->db->join('categories','categories.id=products.category_id','LEFT');
+        $this->db->join('companies','companies.id=products.company_id','LEFT');
 
-        if(!empty('products.id')){
-            $results=$this->db->get()->result_array();
-            return $results;
-            
-        } else {
-            
-        }
+        
+        $results=$this->db->get()->result_array();
+
+        return $results;
+
     }
 
     //enviar detalhes do produto
@@ -72,11 +64,15 @@ class Product_model extends CI_Model{
         return $result;
     }
 
-    //eniviar empresas
-    public function get_companies(){
-        $results = $this->db->get('companies')->result_array();
-        return $results;
+
+    function products_by_company($company_id){
+        $this->db->where('company_id',$company_id);
+        $products=$this->db->get('products')->result_array();
+
+        return $products;
     }
+    
+    
 
 
 }

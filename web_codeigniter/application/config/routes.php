@@ -97,6 +97,16 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin']   =  'backend/dashboard/index';
         $route['admin/login'] = 'backend/dashboard/login';
 
+        //products
+        $route['admin/products'] = 'backend/products/index';
+
+        //sales
+        $route['admin/sales'] = 'backend/sales/index';
+
+
+        //categories
+        $route['admin/categories'] = 'backend/categories/index';
+
 
 
     

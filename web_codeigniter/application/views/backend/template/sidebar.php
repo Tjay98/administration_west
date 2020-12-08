@@ -2,15 +2,16 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="<?php echo base_url('admin') ?>" class="brand-link">
-	<!-- <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-	<span class="brand-text font-weight-light">AdministrationWest</span>
+	<img src="<?php echo base_url('assets/images/logo_admin_white.png') ?>" alt="AdministrationWest-LOGO" class="brand-image" style="opacity: .8">
+	<span class="brand-text font-weight-light"><!-- AdministrationWest -->&nbsp;</span>
 	</a>
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<!-- Sidebar user (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<!-- <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
+				<img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Elliot_Grieveson.png" class="img-circle elevation-2" alt="User Image">
+				<!--Image credits to wikipedia-->
 			</div>
 			<div class="info">
 				<a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a>
@@ -32,7 +33,7 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-          <i class="fa fa-shopping-cart"></i>
+          				<i class="fa fa-shopping-cart"></i>
 						<p>
 							Ponto de venda
 							<i class="right fa fa-angle-left"></i>
@@ -40,20 +41,20 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="../../index.html" class="nav-link">
-                <i class="fa fa-barcode"></i>
+							<a href="<?php echo base_url('admin/products'); ?>" class="nav-link">
+                				<i class="fa fa-barcode"></i>
 								<p>Produtos</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="../../index2.html" class="nav-link">
-                <i class="fa fa-money"></i>
+							<a href="<?php echo base_url('admin/sales'); ?>" class="nav-link">
+                			<i class="fa fa-money"></i>
 								<p>Vendas</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="../../index3.html" class="nav-link">
-                <i class="fa fa-align-left"></i>
+							<a href="<?php echo base_url('admin/categories'); ?>" class="nav-link">
+                			<i class="fa fa-align-left"></i>
 								<p> Categorias</p>
 							</a>
 						</li>
@@ -88,7 +89,4 @@
 	<!-- /.container-fluid -->
 </section>
 <!-- Main content -->
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
+

@@ -96,4 +96,21 @@ class Sale_model extends CI_Model{
     public function cart(){
         
     }
+    
+    public function get_sale_by_company($company_id){
+        $this->db->where('company_id',$company_id);
+        $products=$this->db->get('products')->result_array();
+
+        return $products;
+        
+    }
+
+    public function get_all_sold_products(){
+        $products=$this->db->get('sales_product')->result_array();
+        return $products;
+    }
+    
+
+
+
 }

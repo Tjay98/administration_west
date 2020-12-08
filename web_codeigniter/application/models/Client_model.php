@@ -138,4 +138,12 @@ class Client_model extends CI_Model{
             return "Password antiga errada!";
         }
     }
+
+    public function get_company_by_user($user_id){
+        $this->db->select('company_id');
+        $this->db->where('id',$user_id);
+        $user=$this->db->get('user');
+
+        return $user['company_id'];
+    }
 }
