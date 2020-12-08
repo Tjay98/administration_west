@@ -107,7 +107,8 @@ $route['translate_uri_dashes'] = FALSE;
         //categories
         $route['admin/categories'] = 'backend/categories/index';
 
-
+        //companies
+        $route['admin/companies'] = 'backend/companies/index';
 
     
     //api

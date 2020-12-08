@@ -4,7 +4,7 @@
  * @author : Rodolfo Barreira
  * @since : 8 december 2020
  */
-class Products extends MY_Controller {
+class Categories extends MY_Controller {
 
     function __construct()
     {
@@ -17,8 +17,8 @@ class Products extends MY_Controller {
     }
 
     public function index(){
-        $data['page_title']="Produtos";
-        $this->load_admin_views('backend/products/index',$data);
+        $data['page_title']="Categorias";
+        $this->load_admin_views('backend/categories/index',$data);
     }
 
     public function get_datatable(){
