@@ -45,7 +45,18 @@ class Sales extends MY_Controller {
         }else{
             return redirect('sales/history');
         }
-            
+    }
+
+    function cart(){
+        $this->load_views('frontend/cart');
+
+    }
+
+    function add_to_cart(){
+        
+    }
+
+    function remove_from_cart(){
         
     }
 }

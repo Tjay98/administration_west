@@ -74,6 +74,10 @@ $route['translate_uri_dashes'] = FALSE;
         //vendas
         $route['sales/history']='frontend/sales/sale_history';
         $route['sales/history/(:any)']= 'frontend/sales/sale_detail/$1';
+        $route['add/cart']='frontend/sales/add_to_cart';
+        $route['remove/cart']='frontend/sales/remove_from_cart';
+        $route['cart']='frontend/sales/cart';
+
         //carrinho
 
         //produtos
@@ -82,6 +86,7 @@ $route['translate_uri_dashes'] = FALSE;
         $route['products/search_product']   =  'frontend/products/search_product';
         $route['categories'] = 'frontend/products/categories_index';
         $route['companies'] = 'frontend/products/companies_index';
+        $route['categories/(:any)'] = 'frontend/products/products_by_category/$1';
 
         //contactos
         $route['contacts']   =  'frontend/home/contactos';

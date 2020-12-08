@@ -92,4 +92,8 @@ class Sale_model extends CI_Model{
 
         return $results;
     }
+
+    public function cart(){
+        
+    }
 }

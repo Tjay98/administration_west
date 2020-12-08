@@ -1,42 +1,72 @@
+<style>
+    .custom-boxes{
+        padding: 20px;
+        box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+        background: #fff;
+        transition: 0.4s;
+        border-radius: 10px;
+        min-height:400px
+    }
+    .category a:hover{
+        text-decoration:none;
+    }
+
+    .custom-boxes a {
+		font-size: 15px;
+        color:#2c3e50;
+    }
+
+    .custom-boxes-products{
+        min-height:200px;
+        padding: 20px;
+        box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    }
+
+    .custom-boxes-products a{
+        font-size: 15px;
+        color:#fff;
+    }
+
+</style>
 <div class="container" style="margin-top:100px; margin-bottom:100px;">
     <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-12">
-            <h3 class="text-center">Categorias</h3>
-            <ul>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="custom-boxes" >
+                <h3 class="text-center mb-3">Categorias</h3>
                 <?php 
                 foreach ($categories as $categories){ ?>
-                <li> <a href="<?php echo base_url('products'); ?>"> <?php echo $categories['category_name']; ?></a> </li>   
+                <p class="text-center category"> <a href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> </p>   
                 <?php } ?>
-            </ul>
+            </div>
         </div>
-        <div class="col-lg-10 col-md-10 col-sm-12">
-            <div class="row">
-            
+        
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="custom-boxes" >
+                <h3 class="text-center">Produtos</h3>
                 <?php 
                 foreach ($products as $products){ ?>
-                        
-                    <div class="col-lg-2 col-md-3 col-sm-12 mt-5">
-                        <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="https://img.ibxk.com.br/2015/07/23/23170425700729.jpg?w=328">
+                    <div class="custom-boxes-products mb-3">
+                        <div class="row">
+                            <img class="image-products ml-3" style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:120px; max-height:70px; " src="https://img.ibxk.com.br/2015/07/23/23170425700729.jpg?w=328">
+                            <div class="col-lg-2 col-md-2 col-sm-12 ">
+                                <h4 style="text-align: center;"><?php echo $products['product_name']; ?></h4>
+                                <p class="text-center"><?php echo $products['category_name']; ?></p>
+                                <p class="text-center"><?php echo $products['company_name']; ?></p>
+                                <p class="text-right"><?php echo $products['price']." €"; ?></p>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12  ">
+                                <h6 class="text-center"><b>Descrição</b></h6>
+                                <p class="text-justify"><?php echo $products['small_description']; ?></p>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 " style="margin-top: auto; margin-bottom: auto;">
+                                <button class="btn-primary mr-3" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products/').$products['id']; ?>" >Ver Detalhes do Produto</a> </button>
+                                <br><br>
+                                <button id="addToCart" class="btn-primary" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products').$products['id']; ?>" >Adicionar ao Carrinho</a> </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12 mt-5">
-                        <h4 style="text-align: center;"><?php echo $products['product_name']; ?></h4>
-                        <p><?php echo $products['category_id']; ?></p>
-                        <p><?php echo $products['company_id']; ?></p>
-                        <p style="text-align: right;"><?php echo $products['price']; ?></p>
-                    </div>
-                    <div class="col-lg-7 col-md-5 col-sm-12 mt-5">
-                        <h6><b>Descrição</b></h6>
-                        <p><?php echo $products['small_description']; ?></p>
-                        <br>
-                        <a href="<?php echo base_url('products/').$products['id']; ?>" class="btn-primary">Ver Detalhes do Produto</a>
-                        <br><br>
-                        <input type="number" id="inputUnit" name="inputUnit" >
-                        <a href="<?php echo base_url('products'); ?>" class="btn-primary">Adicionar ao Carrinho</a>
-                    </div>
-
                 <?php } ?> 
-              
             </div>
         </div>
     </div>
-</div>
+</div>  

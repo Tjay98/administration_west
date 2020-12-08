@@ -27,15 +27,18 @@ class Products extends MY_Controller {
         echo $this->input->post('search_bar');
     }
 
-    // caso venhamos a ter uma página de categorias vamos usar esta função para enviar as categorias para a página
     public function categories_index(){
         $data['categories']=$this->Product_model->get_categories();
         $this->load_views('frontend/products/category', $data);
     }
- 
-    //para producar produtos com a mesma categoria
-    public function get_products_by_category($category_id){  
+
+    public function products_by_category($id){
+        $data['categories']=$this->Product_model->get_categories();
+        $data2['products']=$this->Product_model->get_products_by_categories($id);
+        $this->load_views('frontend/products/products', $data, $data2);
     }
+ 
+    
  
     //enviar produtos para a vista
     public function get_products($id){
