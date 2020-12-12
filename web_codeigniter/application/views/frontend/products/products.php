@@ -61,7 +61,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-12 " style="margin-top: auto; margin-bottom: auto;">
                                 <button class="btn-primary mr-3" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products/').$products['id']; ?>" >Ver Detalhes do Produto</a> </button>
                                 <br><br>
-                                <button id="addToCart" class="btn-primary" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products').$products['id']; ?>" >Adicionar ao Carrinho</a> </button>
+                                <button id="addToCart" class="btn-primary" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('add/cart/').$products['id']; ?>" >Adicionar ao Carrinho</a> </button>
                             </div>
                         </div>
                     </div>
