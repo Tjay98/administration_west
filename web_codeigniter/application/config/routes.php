@@ -79,9 +79,6 @@ $route['translate_uri_dashes'] = FALSE;
         $route['cart']='frontend/sales/cart';
         $route['checkout']='frontend/sales/orderSuccess/';
 
-
-        //carrinho
-
         //produtos
         $route['products']   =  'frontend/products/index';
         $route['products/(:any)'] = 'frontend/products/get_products/$1';
@@ -94,6 +91,8 @@ $route['translate_uri_dashes'] = FALSE;
         $route['contacts']   =  'frontend/home/contactos';
         
 
+        //tests
+        $route['ola']   =  'frontend/sales/ola_cart';
 
     //backend
         $route['admin']   =  'backend/dashboard/index';

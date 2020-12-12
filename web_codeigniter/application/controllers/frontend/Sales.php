@@ -11,12 +11,11 @@ class Sales extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('Sale_model');
-        
-
         $this->load->library('cart');
+        
     }
 
-    function sale_history(){
+    public function sale_history(){
         $this->is_user_logged();
 
         $id=$this->session->userdata('user_id');
@@ -33,7 +32,7 @@ class Sales extends MY_Controller {
         //mostrar produtos
     }
 
-    function sale_detail($sale_id){
+    public function sale_detail($sale_id){
         
         $this->is_user_logged();
 
@@ -50,16 +49,17 @@ class Sales extends MY_Controller {
         }
     }
 
-    function cart(){
+    public function cart(){
         $this->is_user_logged();
 
-        $data = array();
-        $data['cartItems'] =$this->cart->contents();
+        $cart_items = $this->cart->contents();
+        $data['cartItems']=$cart_items;
+
         $this->load_views('frontend/cart', $data);
 
     }
 
-    function add_to_cart($id){
+    public function add_to_cart($id){
 
         $this->is_user_logged();
 
@@ -80,7 +80,7 @@ class Sales extends MY_Controller {
         
     }
 
-    function updateItemQty(){
+    public function updateItemQty(){
         $this->is_user_logged();
 
         $update=0;
@@ -102,7 +102,7 @@ class Sales extends MY_Controller {
 
 
 
-    function remove_from_cart($rowid){
+    public function remove_from_cart($rowid){
 
         $this->is_user_logged();
 
@@ -111,7 +111,7 @@ class Sales extends MY_Controller {
         return redirect('cart');
     }
 
-    function checkout (){
+    public function checkout (){
         $this->is_user_logged();
 
         //dados do cliente
@@ -134,7 +134,7 @@ class Sales extends MY_Controller {
 
     }
 
-    function placeOrder(){
+    public function placeOrder(){
         $this->is_user_logged();
 
         //dados do cliente
@@ -175,10 +175,16 @@ class Sales extends MY_Controller {
         return false;
     }
 
-    function orderSuccess($ordId){
+    public function orderSuccess($ordId){
         $data['order']=$this->Sale_model->getOrder($ordId);
 
-        $this->load_view('frontend/checkout', $data);
+        $this->load_views('frontend/checkout', $data);
     }
+
+    public function ola_cart(){
+        print_r($this->cart);
+    }
+
+
 
 }

@@ -31,7 +31,7 @@
 <div class="container" style="margin-top:100px; margin-bottom:100px;">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12">
-            <div class="custom-boxes" >
+            <div class="custom-boxes"  style="position:fixed;">
                 <h3 class="text-center mb-3">Categorias</h3>
                 <?php 
                 foreach ($categories as $categories){ ?>
@@ -47,7 +47,7 @@
                 foreach ($products as $products){ ?>
                     <div class="custom-boxes-products mb-3">
                         <div class="row">
-                            <img class="image-products ml-3" style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:120px; max-height:70px; " src="https://img.ibxk.com.br/2015/07/23/23170425700729.jpg?w=328">
+                            <img class="image-products ml-3" style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:120px; max-height:70px; " src="<?php echo base_url('uploads/products/').$products['image']; ?>" alt="Imagem <?php echo $products['product_name']; ?>">
                             <div class="col-lg-2 col-md-2 col-sm-12 ">
                                 <h4 style="text-align: center;"><?php echo $products['product_name']; ?></h4>
                                 <p class="text-center"><?php echo $products['category_name']; ?></p>

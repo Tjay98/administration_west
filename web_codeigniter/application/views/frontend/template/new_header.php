@@ -74,14 +74,14 @@
                         
                 <?php }else{?>
                     <li class="nav-item">
-                        <b><a class="nav-link" href="<?php echo base_url('cart'); ?>"><i class="fa fa-shopping-cart"></i> Meus pedidos</a></b>
+                        <b><a class="nav-link" href="<?php echo base_url('cart'); ?>">Carrinho <i class="fa fa-shopping-cart"></i></a></b>
                     </li>
 <!--                     <li class="nav-item">
                         <b><a class="nav-link" href="<?php echo base_url('clients/profile'); ?>"><i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?></a></b>
                     </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?>
+                            <?php echo $this->session->userdata('username'); ?> <i class="fa fa-user"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<?php echo base_url('clients/profile'); ?>">Perfil</a>

@@ -156,13 +156,13 @@ class Sale_model extends CI_Model{
 
     public function insertOrder($userId, $ordData){
 
-        $this->db->select(' shipping_address.id,
+/*         $this->db->select(' shipping_address.id,
                             shipping_address.user_id,
                             billing_address.id,
                             billing_address.user_id');
         $shipping_user=$this->db->where('shipping_address.user_id', $userId);
         $billing_user=$this->db->where('billing_address.user_id', $userId);
-
+ */
         $data=[
             'user_id'=>$ordData['user_id'],
             'billing_address_id'=>$shipping_user,
