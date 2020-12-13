@@ -11,6 +11,7 @@ class Sales extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('Sale_model');
+        $this->load->model('Product_model');
         $this->load->library('cart');
         
     }
@@ -55,7 +56,7 @@ class Sales extends MY_Controller {
         $cart_items = $this->cart->contents();
         $data['cartItems']=$cart_items;
 
-        $this->load_views('frontend/cart', $data);
+        $this->load_views('frontend/sales/cart', $data);
 
     }
 
@@ -63,7 +64,7 @@ class Sales extends MY_Controller {
 
         $this->is_user_logged();
 
-        $product=$this->Sale_model->get_product($id);
+        $product=$this->Product_model->get_detail_products($id);
 
         $data=[
             'id'=>$product['id'],
@@ -85,14 +86,15 @@ class Sales extends MY_Controller {
 
         $update=0;
 
-        $rowid=$this->input->get('rowid');
-        $qty=$this->input->get('qty');
+        $rowid=$this->input->post('rowid');
+        $qty=$this->input->post('qty');
 
         if(!empty($rowid)&&!empty($qty)){
-            $data=array(
+
+            $data=[
                 'rowid'=>$rowid,
                 'qty'=>$qty,
-            );
+            ];
 
             $update=$this->cart->update($data);
         }
@@ -127,8 +129,8 @@ class Sales extends MY_Controller {
         $order=$this->placeOrder();
 
         if($order){
-            redirect(orderSuccess());
-        } else{
+            $this->orderSuccess($order);    
+        }else{
             'error';
         }
 
@@ -140,6 +142,7 @@ class Sales extends MY_Controller {
         //dados do cliente
         $userId=$this->session->userdata('user_id');
 
+        $cart_items = $this->cart->contents();
 
         $ordData=[
             'user_id'=>$userId,
@@ -150,18 +153,18 @@ class Sales extends MY_Controller {
         $insertOrder=$this->Sale_model->insertOrder($userId, $ordData);
 
         if($insertOrder){
-            $cartItems=$this->cart->contents();
 
-            $ordItemData=[];
-            $i=0;
-            foreach($cartItems as $cartItem){
-                $ordItemData[$i]['sales_group_id']=$insertOrder;
-                $ordItemData[$i]['sale_product_id']=$cartItem['id'];
-                $ordItemData[$i]['quantity']=$cartItem['qty'];
-                $ordItemData[$i]['price']=$cartItem["subtotal"];
-                $ordItemData[$i]['price_iva']=$cartItem['iva'];
+            foreach($cart_items as $cartItem){
 
-                $i++;
+                $ordItemData[]=[
+                    'sale_group_id'=>$insertOrder,
+                    'sale_product_id'=>$cartItem['id'],
+                    'quantity'=>$cartItem['qty'],
+                    'price'=>$cartItem["subtotal"],
+                    'price_iva'=>$cartItem['iva'],
+                ];
+
+                
             }
 
             if(!empty($ordItemData)){
@@ -178,7 +181,7 @@ class Sales extends MY_Controller {
     public function orderSuccess($ordId){
         $data['order']=$this->Sale_model->getOrder($ordId);
 
-        $this->load_views('frontend/checkout', $data);
+        $this->load_views('frontend/sales/checkout', $data);
     }
 
     public function ola_cart(){

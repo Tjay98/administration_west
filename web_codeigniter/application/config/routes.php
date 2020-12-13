@@ -76,8 +76,10 @@ $route['translate_uri_dashes'] = FALSE;
         $route['sales/history/(:any)']= 'frontend/sales/sale_detail/$1';
         $route['add/cart/(:any)']='frontend/sales/add_to_cart/$1';
         $route['remove/cart/(:any)']='frontend/sales/remove_from_cart/$1';
+        $route['update/cart/quantity']='frontend/sales/updateItemQty/';
         $route['cart']='frontend/sales/cart';
-        $route['checkout']='frontend/sales/orderSuccess/';
+        $route['checkout']='frontend/sales/checkout/';
+            
 
         //produtos
         $route['products']   =  'frontend/products/index';

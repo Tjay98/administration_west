@@ -74,7 +74,7 @@
                         
                 <?php }else{?>
                     <li class="nav-item">
-                        <b><a class="nav-link" href="<?php echo base_url('cart'); ?>">Carrinho <i class="fa fa-shopping-cart"></i></a></b>
+                        <b><a class="nav-link" href="<?php echo base_url('cart'); ?>">Carrinho <i class="fa fa-shopping-cart"><?php echo $count_cart; ?></i></a></b>
                     </li>
 <!--                     <li class="nav-item">
                         <b><a class="nav-link" href="<?php echo base_url('clients/profile'); ?>"><i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?></a></b>

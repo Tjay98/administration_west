@@ -35,6 +35,7 @@ class Product_model extends CI_Model{
                             products.image,
                             products.big_description,
                             products.price,
+                            products.price_iva,
                             products.category_id,
                             products.company_id,
                             categories.category_name,
@@ -69,8 +70,20 @@ class Product_model extends CI_Model{
 
 
     function products_by_company($company_id){
+        $this->db->select('products.id,
+                            products.product_name, 
+                            products.image, 
+                            products.small_description, 
+                            products.price,
+                            products.category_id,
+                            products.company_id,
+                            categories.category_name,
+                            companies.company_name,  ');
         $this->db->where('company_id',$company_id);
-        $products=$this->db->get('products')->result_array();
+        $this->db->from('products');
+        $this->db->join('categories','categories.id=products.category_id','LEFT');
+        $this->db->join('companies','companies.id=products.company_id','LEFT');
+        $products=$this->db->get()->result_array();
 
         return $products;
     }

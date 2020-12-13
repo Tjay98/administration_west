@@ -3,13 +3,14 @@
     <h1>Compra com Sucesso</h1>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <h3>Informação do cliente</h3>
-            <p>Nome do cliente: <?php echo $order['shipping_name']?></p>
+            <?php print_R($order);?>
+<!--             <p>Nome do cliente: <?php echo $order['shipping_name']?></p>
             <p>Email do cliente: <?php echo $order['user_email']?></p>
             <p>Telemóvel do cliente: <?php echo $order['shipping_contact_number']?></p>
             <p>Morada de faturação: <?php echo $order['shipping_address'].$order['shipping_zip_code']?></p>
             <p>Morada de entrega: <?php echo $order['billing_address'].$order['billing_zip_code']?></p>
             <p></p>
-
+ -->
         </div>
 
         <div class="col-lg-6 col-md-6 col-sm-12">
