@@ -13,16 +13,15 @@ class MY_Controller extends CI_Controller {
     {
         parent::__construct();
         setlocale(LC_TIME, 'Portuguese_Portugal');
+        $this->load->library('cart');
     }
 
     function load_views($viewName, $pageInfo = NULL, $headerInfo = NULL, $footerInfo = NULL){
 
-        $cart_items = $this->cart->contents();
+        $count_cart_items = count($this->cart->contents());
+        
+        $headerInfo['count_cart']=$count_cart_items;
 
-        if(!empty($cart_items)){
-            $count_cart_items=count($cart_items);
-            $headerInfo['count_cart']=$count_cart_items;
-        }
         $this->load->view('frontend/template/new_header',$headerInfo);
         $this->load->view($viewName, $pageInfo);
         $this->load->view('frontend/template/new_footer', $footerInfo);
@@ -65,6 +64,7 @@ class MY_Controller extends CI_Controller {
             }
         }
     }
+    
     
 
     /*      

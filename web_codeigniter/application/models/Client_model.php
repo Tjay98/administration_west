@@ -84,6 +84,7 @@ class Client_model extends CI_Model{
                             'username'=>$user['username'],
                             'status'=>$user['status'],
                             'role_id'=>$user['role_id'],
+                            'store_id'=>$user['store_id'],
 
                         ];
                         $this->session->set_userdata($data);

@@ -5,13 +5,7 @@ class Product_model extends CI_Model{
 
     //enviar todos os produtos
     public function get_products(){
-        $this->db->select('products.id,
-                            products.product_name,
-                            products.image,
-                            products.small_description,
-                            products.price,
-                            products.company_id,
-                            products.category_id,
+        $this->db->select('products.*,
                             categories.category_name, 
                             companies.company_name');
                             
@@ -30,14 +24,7 @@ class Product_model extends CI_Model{
     //enviar detalhes do produto
     public function get_detail_products($id){
         $this->db->where('products.id',$id);
-        $this->db->select('products.id,
-                            products.product_name,
-                            products.image,
-                            products.big_description,
-                            products.price,
-                            products.price_iva,
-                            products.category_id,
-                            products.company_id,
+        $this->db->select('products.*,
                             categories.category_name,
                             companies.company_name, ');
     $this->db->from('products');
@@ -70,13 +57,7 @@ class Product_model extends CI_Model{
 
 
     function products_by_company($company_id){
-        $this->db->select('products.id,
-                            products.product_name, 
-                            products.image, 
-                            products.small_description, 
-                            products.price,
-                            products.category_id,
-                            products.company_id,
+        $this->db->select('products.*,
                             categories.category_name,
                             companies.company_name,  ');
         $this->db->where('company_id',$company_id);

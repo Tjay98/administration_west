@@ -12,7 +12,7 @@ class Sales extends MY_Controller {
         parent::__construct();
         $this->load->model('Sale_model');
         $this->load->model('Product_model');
-        $this->load->library('cart');
+        
         
     }
 

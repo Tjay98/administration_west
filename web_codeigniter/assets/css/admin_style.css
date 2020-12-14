@@ -24,3 +24,71 @@ div.dtsp-searchPane .dtsp-searchIcon {
     position: absolute;
     padding: 15px 13px;
 }
+td{
+    vertical-align:middle;
+}
+th,td{
+    text-align:center;
+}
+
+.dt-buttons{
+    display:none;
+}
+
+/* @media only screen and (min-width: 600px) {
+    .dt-buttons{
+        position: absolute;
+    }
+} */
+
+/* .dropbtn:hover {
+    background: #3c8dbc;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+    background: #3c8dbc;
+    border-radius: 8px;
+    transform: translate3d(-140px, 0px, 0px);
+}
+
+.dropdown-content a ,.dropdown-content button{
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border-color:transparent;
+}
+.dropdown-content a i button {
+    position: relative;
+    top: 2px;
+    
+}
+.dropdown-content a:hover,.dropdown-content button:hover {
+    color: #fff;
+    border-color: #3c8dbc;
+    border-radius: 0;
+    background-color: #0f5972;
+    background-image: linear-gradient(#3c8dbc, #01485a);
+} 
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #00c0ef;
+} */
+
+.btn_white_color{
+    color:white;
+}
+
+.modal-title{
+    font-weight:bold;
+}
