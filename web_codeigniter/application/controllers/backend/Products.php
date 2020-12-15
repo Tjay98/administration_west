@@ -125,7 +125,7 @@ class Products extends MY_Controller {
                     $imagem='';
 
             }else{
-                    $image_data = array('upload_data' => $this->upload->data());
+                    $image_data = $this->upload->data();
                     $imagem=$image_data['file_name'];
                     
             }
@@ -158,6 +158,7 @@ class Products extends MY_Controller {
                 'price_iva'=>$value_iva,
             ];
             $this->db->insert('products',$data);
+            redirect('admin/products');
         }
     }
 
@@ -175,11 +176,11 @@ class Products extends MY_Controller {
             if ( ! $this->upload->do_upload('product_image')){
                     $error = array('error' => $this->upload->display_errors());
                     $imagem='';
-                    print_R($error);die;
 
 
             }else{
-                    $image_data = array('upload_data' => $this->upload->data());
+                    $image_data = $this->upload->data();
+                    
                     $imagem=$image_data['file_name'];
                     
             }
@@ -215,6 +216,7 @@ class Products extends MY_Controller {
 
             $this->db->where('id',$product_id);
             $this->db->update('products',$data);
+            redirect('admin/products');
         }
     }
 
