@@ -28,9 +28,6 @@
         text-decoration:none;
 	}
     
-
-  
-
 </style>
 
 <section class="jumbotron text-center">
@@ -69,6 +66,7 @@
                 foreach ($companies as $companies): 
                 ?>
                     <div class="col-lg-4 col-md-4 col-sm-12 mt-2 mb-5 mr-2 ml-2">
+                        <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
                         <div class="custom-boxes" style="min-height:200px">
                             <div class="row">
                                 <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo $companies['image']; ?>">
@@ -76,6 +74,7 @@
                             </div>  
                             <p class="text-justify"> <?php echo $companies['description']; ?></p> 
                         </div> 
+                        </a>
                     </div> 
                 <?php  endforeach; ?>
             </div>

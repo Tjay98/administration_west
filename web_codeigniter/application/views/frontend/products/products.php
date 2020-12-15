@@ -32,10 +32,16 @@
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="custom-boxes"  style="position:fixed;">
-                <h3 class="text-center mb-3">Categorias</h3>
+                <h3 class="text-center mt-1">Categorias</h3>
                 <?php 
                 foreach ($categories as $categories){ ?>
                 <p class="text-center category"> <a href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> </p>   
+                <?php } ?>
+
+                <h3 class="text-center mt-5">Empresas</h3>
+                <?php 
+                foreach ($companies as $companies){ ?>
+                <p class="text-center category"> <a href="<?php echo base_url('companies/').$companies['id']; ?>"> <?php echo $companies['company_name']; ?></a> </p>   
                 <?php } ?>
             </div>
         </div>
