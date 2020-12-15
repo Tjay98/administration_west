@@ -15,6 +15,8 @@
         transition: 0.4s;
         border-radius: 10px;
         text-align: center;
+        font-size: 18px;
+        color:#2c3e50;
     }
    
     .custom-boxes:hover {
@@ -22,17 +24,12 @@
         transform: translateY(-10px);
         -webkit-transform: translateY(-10px);
         -moz-transform: translateY(-10px);
-	}
-    
-    .custom-boxes a {
-		font-size: 18px;
-        color:#2c3e50;
-    }
-
-    .custom-boxes a:hover {
         color:#000;
         text-decoration:none;
-    }
+	}
+    
+
+  
 
 </style>
 
@@ -54,9 +51,7 @@
             <?php 
                 foreach ($categories as $categories){ ?>
                 <div class="col-lg-2 col-md-2 col-sm-12 mt-2 mb-5 mr-2 ml-2">
-                    <div class="custom-boxes" >
-                        <a href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
-                    </div>
+                    <a class="custom-boxes" href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
                 </div>          
             <?php } ?>
             </div>

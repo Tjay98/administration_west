@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Administration_west</string>
+    <string name="nome">Nome</string>
+    <string name="nif">NIF</string>
+    <string name="data">Data de nascimento</string>
+    <string name="email">Email</string>
+    <string name="passsword">Password</string>
+    <string name="passsword_2">Repetir a password</string>
+    <string name="login">Login</string>
+
+    <string name="login_2">Fazer Login</string>
+    <string name="registo">Ainda não tem conta? Crie</string>
+
+    <string name="registo_2">Criar conta</string>
+    <string name="registo_3">Já tem conta? Faça login</string>
+
+
+
 </resources>
