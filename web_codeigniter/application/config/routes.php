@@ -105,8 +105,10 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/product_table']='backend/products/get_datatable';
         $route['admin/products/add'] = 'backend/products/add';
         $route['admin/products/edit/(:any)'] = 'backend/products/edit/$1';
+        $route['admin/products/delete/(:any)'] = 'backend/products/delete/$1';
         $route['admin/products/show/(:any)'] = 'backend/products/show_product/$1';
-        $route['admin/products/test_ola'] ='backend/products/test_ola';
+        
+        /* $route['admin/products/test_ola'] ='backend/products/test_ola'; */
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';

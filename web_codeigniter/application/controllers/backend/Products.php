@@ -14,10 +14,11 @@ class Products extends MY_Controller {
         $this->load->model('Company_model');
         $this->load->model('Category_model');
         $this->load->model('Client_model');
+        $this->is_admin_logged();
     }
 
     public function index(){
-        $this->is_admin_logged();
+        
         $data['page_title']="Produtos";
         $data['categories']=$this->Category_model->get_categories();
         $data['companies']=$this->Company_model->get_companies();
@@ -27,7 +28,7 @@ class Products extends MY_Controller {
     }
 
     public function get_datatable(){
-        $this->is_admin_logged();
+       
         if($this->session->userdata('role_id')==3){
             $admin=true;
         }
@@ -111,15 +112,15 @@ class Products extends MY_Controller {
 
     public function add(){
         if(!empty($this->input->post('product_name'))){
-            $config['upload_path']          = './uploads/products';
+            $config['upload_path']          = base_url('/uploads/products');
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 0;
             $config['max_width']            = 0;
             $config['max_height']           = 0;
-
+            
             $this->load->library('upload', $config);
 
-            if ( ! $this->upload->do_upload('userfile')){
+            if ( ! $this->upload->do_upload('product_image')){
                     $error = array('error' => $this->upload->display_errors());
                     $imagem='';
 
@@ -135,7 +136,7 @@ class Products extends MY_Controller {
             $category_info=$this->Category_model->get_category_by_id($category_id);
 
             if(!empty($category_info)){
-                $iva=$cateogry_info['iva']/100;
+                $iva=$category_info['iva']/100;
                 
             }else{
                 $iva=0.23;
@@ -154,7 +155,7 @@ class Products extends MY_Controller {
                 'quantity_in_stock'=>$this->input->post('product_quantity'),
                 'price'=>$price,
                 'price_without_iva'=>$price_without_iva,
-                'product_name'=>$value_iva,
+                'price_iva'=>$value_iva,
             ];
             $this->db->insert('products',$data);
         }
@@ -162,17 +163,20 @@ class Products extends MY_Controller {
 
     public function edit($product_id){
         if(!empty($this->input->post('product_name'))){
+            
             $config['upload_path']          = './uploads/products';
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 0;
             $config['max_width']            = 0;
             $config['max_height']           = 0;
-
+            
             $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('userfile')){
+            $this->upload->initialize($config);
+            if ( ! $this->upload->do_upload('product_image')){
                     $error = array('error' => $this->upload->display_errors());
                     $imagem='';
+                    print_R($error);die;
+
 
             }else{
                     $image_data = array('upload_data' => $this->upload->data());
@@ -186,7 +190,7 @@ class Products extends MY_Controller {
             $category_info=$this->Category_model->get_category_by_id($category_id);
 
             if(!empty($category_info)){
-                $iva=$cateogry_info['iva']/100;
+                $iva=$category_info['iva']/100;
                 
             }else{
                 $iva=0.23;
@@ -205,11 +209,38 @@ class Products extends MY_Controller {
                 'quantity_in_stock'=>$this->input->post('product_quantity'),
                 'price'=>$price,
                 'price_without_iva'=>$price_without_iva,
-                'product_name'=>$value_iva,
+                'price_iva'=>$value_iva,
+                
             ];
-            
+
             $this->db->where('id',$product_id);
             $this->db->update('products',$data);
+        }
+    }
+
+    public function delete($product_id){
+        if($this->session->userdata('role_id')==3){
+            $admin=true;
+        }
+
+        if($admin){
+            $this->db->where('id',$product_id);
+            $this->db->set('status','0');
+            $this->db->update('products');
+            echo "success";
+        }else{
+            $store_id=$this->session->userdata('store_id');
+            $this->db->where('id',$product_id);
+            $this->db->where('company_id',$store_id);
+            $product_check=$this->db->get('products');
+            if(empty($product_check)){
+                echo "error";
+            }else{
+                $this->db->where('id',$product_id);
+                $this->db->set('status','0');
+                $this->db->update('products');
+                echo "success";
+            }
         }
     }
 

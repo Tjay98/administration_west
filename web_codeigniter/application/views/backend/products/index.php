@@ -76,7 +76,7 @@
             <div class="modal-header">
                 
                 <h5 class="modal-title" id="editModalLabel"></h5>
-                <div class="pull-right" id="editModal_remove">Ola</div>
+                <div class="pull-right" id="editModal_remove"></div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -223,14 +223,13 @@
             product_name=$('#product_name').val();
             price=$('#product_price').val();
             stock=$('#product_quantity').val();
-            small_description=$('#product_small_description').text();
-            big_description=$('#product_big_description').text();
+            small_description=$('#product_small_description').val();
+            big_description=$('#product_big_description').val();
             category=$('#product_category').val();
             company=$('#product_company').val();
 
-            
 
-            if (product_name.length < 1 || product_name.length < 255) {
+            if (product_name.length < 1 || product_name.length > 255) {
                 flag=false;
                 $('#product_name_error').text('Preencha o campo');
             }
@@ -275,7 +274,7 @@
 
             
             if(flag==true){
-                $(this).submit();
+                this.submit();
             }
         })
 
@@ -291,15 +290,17 @@
         }
     });
     function show_add_product(){
+            clear_submit_product_errors();
             $('#editModalLabel').text("Adicionar produto");
             $('#button_product_submit').text('Adicionar');
+            $('#editModal_remove').html('');
 
             $('#product_name').val('');
             $('#product_price').val('');
             $('#product_category').val('');
             $('#product_quantity').val('');
-            $('#product_small_description').text('');
-            $('#product_big_description').text('');
+            $('#product_small_description').val('');
+            $('#product_big_description').val('');
             $('#product_company').val('');
 
             $('#product_image').val('');
@@ -310,14 +311,7 @@
 
     function show_edit_product(product_id){
 
-            $('#product_name_error').text('');
-            $('#product_price_error').text('');
-            $('#product_quantity_error').text('');
-            $('#product_image_error').text('');
-            $('#product_small_description_error').text('');
-            $('#product_big_description_error').text('');
-            $('#product_category_error').text('');
-            $('#product_company_error').text('');
+        clear_submit_product_errors();
 
         $.ajax({
             type: "POST",
@@ -328,7 +322,8 @@
                     var obj = JSON.parse(response);
                     $('#editModalLabel').text("Editar "+obj.product_name);
                     $('#button_product_submit').text('Editar');
-
+                    button_delete='<div style="padding-left:20px;"><button class="btn btn-sm btn-danger" onclick="delete_product('+product_id+')">Apagar produto<i class="fa fa-times"></i></button></div>';
+                    $('#editModal_remove').html(button_delete);
 
                     $('#product_name').val(obj.product_name);
                     $('#product_price').val(obj.price);
@@ -345,7 +340,24 @@
         });
         
     }
-    function clear_submit_product_error(){
+    function delete_product(product_id){
+        
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('admin/products/delete/') ?>"+product_id,
+            data: {'product_id':product_id},
+            success: function (response) {
+                alert(response);
+                if(response=='error'){
+                    alert('O produto que tentou remover não existe ou ocorreu um erro');
+                }else if(response=='success'){
+                    alert('Produto removido');
+                    window.location.reload();
+                }
+            }
+        });
+    }
+    function clear_submit_product_errors(){
             $('#product_name_error').text('');
             $('#product_price_error').text('');
             $('#product_quantity_error').text('');
@@ -355,4 +367,6 @@
             $('#product_category_error').text('');
             $('#product_company_error').text('');
     }
+
+
 </script>
