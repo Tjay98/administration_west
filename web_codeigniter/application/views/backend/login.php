@@ -104,9 +104,9 @@
                 url: "<?php echo base_url('admin/login') ?>",
                 data: {'email':email,'password':password},
                 success: function (response) {
-                    /* alert(response); */
+                    alert(response);
                     if(response=='success'){
-                        window.location.href="<?php echo base_url('admin/') ?>";
+                        window.location.href="<?php echo base_url('admin/'); ?>";
                     }else{
                         if(response=='error'){
                             $('#password_error').text('Dados incorretos');

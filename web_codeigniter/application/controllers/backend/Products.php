@@ -110,10 +110,112 @@ class Products extends MY_Controller {
     }
 
     public function add(){
+        if(!empty($this->input->post('product_name'))){
+            $config['upload_path']          = './uploads/products';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 0;
+            $config['max_width']            = 0;
+            $config['max_height']           = 0;
 
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('userfile')){
+                    $error = array('error' => $this->upload->display_errors());
+                    $imagem='';
+
+            }else{
+                    $image_data = array('upload_data' => $this->upload->data());
+                    $imagem=$image_data['file_name'];
+                    
+            }
+
+            $category_id=$this->input->post('product_category');
+            $price=$this->input->post('product_price');
+
+            $category_info=$this->Category_model->get_category_by_id($category_id);
+
+            if(!empty($category_info)){
+                $iva=$cateogry_info['iva']/100;
+                
+            }else{
+                $iva=0.23;
+            }
+            
+            $value_iva=round($price*$iva,2);
+            $price_without_iva=round($price-$value_iva);
+
+            $data=[
+                'product_name'=>$this->input->post('product_name'),
+                'image'=>$imagem,
+                'small_description'=>$this->input->post('product_small_description'),
+                'big_description'=>$this->input->post('product_big_description'),
+                'category_id'=>$category_id,
+                'company_id'=>$this->input->post('product_company'),
+                'quantity_in_stock'=>$this->input->post('product_quantity'),
+                'price'=>$price,
+                'price_without_iva'=>$price_without_iva,
+                'product_name'=>$value_iva,
+            ];
+            $this->db->insert('products',$data);
+        }
     }
 
-    public function edit(){
+    public function edit($product_id){
+        if(!empty($this->input->post('product_name'))){
+            $config['upload_path']          = './uploads/products';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 0;
+            $config['max_width']            = 0;
+            $config['max_height']           = 0;
 
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('userfile')){
+                    $error = array('error' => $this->upload->display_errors());
+                    $imagem='';
+
+            }else{
+                    $image_data = array('upload_data' => $this->upload->data());
+                    $imagem=$image_data['file_name'];
+                    
+            }
+
+            $category_id=$this->input->post('product_category');
+            $price=$this->input->post('product_price');
+
+            $category_info=$this->Category_model->get_category_by_id($category_id);
+
+            if(!empty($category_info)){
+                $iva=$cateogry_info['iva']/100;
+                
+            }else{
+                $iva=0.23;
+            }
+            
+            $value_iva=round($price*$iva,2);
+            $price_without_iva=round($price-$value_iva);
+
+            $data=[
+                'product_name'=>$this->input->post('product_name'),
+                'image'=>$imagem,
+                'small_description'=>$this->input->post('product_small_description'),
+                'big_description'=>$this->input->post('product_big_description'),
+                'category_id'=>$category_id,
+                'company_id'=>$this->input->post('product_company'),
+                'quantity_in_stock'=>$this->input->post('product_quantity'),
+                'price'=>$price,
+                'price_without_iva'=>$price_without_iva,
+                'product_name'=>$value_iva,
+            ];
+            
+            $this->db->where('id',$product_id);
+            $this->db->update('products',$data);
+        }
+    }
+
+    public function test_ola(){
+        $price=98;
+        $value_iva=round($price*0.23,2);
+        print_r($value_iva);
     }
 }

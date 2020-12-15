@@ -18,7 +18,7 @@
                                 <i class="fa fa-cogs"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item"  href="<?php echo base_url('admin/products/add') ?>"><i class="fa fa-plus"></i> Adicionar produto</a>
+                                <a class="dropdown-item"  onclick="show_add_product()" href="#"><i class="fa fa-plus"></i> Adicionar produto</a>
                                 <a class="dropdown-item"  id="export_pdf_button" href="#"><i class="fa fa-file-pdf-o"></i> Exportar PDF</a>
                                 <a class="dropdown-item" id="export_excel_button" href="#"><i class="fa fa-file-excel-o"></i> Exportar Excel da tabela</a>
                             </div>
@@ -40,7 +40,6 @@
 				<div class="info-box">
                     
                     <div class="box-body table-responsive" >
-                    <?php print_R($companies); ?>
                         <table class="table table-striped table-bordered table-hover" id="table-products" style="width:100%;">
                             <thead>
                                 <tr>
@@ -77,23 +76,26 @@
             <div class="modal-header">
                 
                 <h5 class="modal-title" id="editModalLabel"></h5>
+                <div class="pull-right" id="editModal_remove">Ola</div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="<?php echo base_url('admin/products/add') ?>" method="post" enctype="multipart/form-data">
+                 <form id="product_form" action="<?php echo base_url('admin/products/add') ?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>Nome do produto</label>
                                 <input type="text" name="product_name" id="product_name" class="form-control">
+                                <small class="text-danger" id="product_name_error"></small>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Imagem</label>
                                 <input type="file" name="product_image" id="product_image" accept="image/*" style="form-control">
+                                <small class="text-danger" id="product_image_error"></small>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -102,24 +104,40 @@
                                 <select name="product_category" id="product_category" class="form-control">
                                     <option value="">Selecione uma opção</option>
                                     <?php foreach($categories as $category){ ?>
-                                        <option value="<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></option>
+                                        <option value="<?php echo $category['id']; ?>"><?php echo $category['category_name']."( Iva ".$category['iva']."% )"; ?></option>
                                     <?php }?>
                                 </select>
+                                <small class="text-danger" id="product_category_error"></small>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Preço</label>
                                 <input type="number" name="product_price" id="product_price" class="form-control">
+                                <small class="text-danger" id="product_price_error"></small>
                             </div>
                         </div>  
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Stock</label>
                                 <input type="number" name="product_quantity" id="product_quantity" class="form-control">
+                                <small class="text-danger" id="product_quantity_error"></small>
                             </div>
                         </div> 
-
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Pequena descrição (MAX 255 caractéres)</label>
+                                <textarea rows="4" style="resize:vertical;" name="product_small_description" id="product_small_description" class="form-control"></textarea>
+                                <small class="text-danger" id="product_small_description_error"></small>
+                            </div>
+                        </div>  
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Grande descrição</label>
+                                <textarea rows="4" style="resize:vertical;" name="product_big_description" id="product_big_description" class="form-control"></textarea>
+                                <small class="text-danger" id="product_big_description_error"></small>
+                            </div>
+                        </div>  
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label>Empresa</label>
@@ -130,14 +148,16 @@
                                         <option value="<?php echo $company['id']; ?>"><?php echo $company['company_name']; ?></option>
                                     <?php }?>
                                 </select>
+                                <small class="text-danger" id="product_company_error"></small>
                                 
                             </div>
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" style="width:100%">Editar</button>
+                <button type="submit" class="btn btn-success" id="button_product_submit"style="width:100%">Editar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -192,9 +212,113 @@
         $('#export_excel_button').on('click',function(){
             $('#excelButton').click();
         })
+
+
+        $("#product_form").on("submit", function(){
+            event.preventDefault();
+
+            clear_submit_product_error();
+
+            flag=true;
+            product_name=$('#product_name').val();
+            price=$('#product_price').val();
+            stock=$('#product_quantity').val();
+            small_description=$('#product_small_description').text();
+            big_description=$('#product_big_description').text();
+            category=$('#product_category').val();
+            company=$('#product_company').val();
+
+            
+
+            if (product_name.length < 1 || product_name.length < 255) {
+                flag=false;
+                $('#product_name_error').text('Preencha o campo');
+            }
+
+            if (price < 1 ) {
+                flag=false;
+                $('#product_price_error').text('Preencha o campo');
+            }
+            if (stock.length < 0 || stock > 99999999 ) {
+                flag=false;
+                $('#product_quantity_error').text('Preencha o campo');
+            }
+
+            if ($('#product_image').get(0).files.length === 0) {
+                flag=false;
+                $('#product_image_error').text('Selecione uma imagem');
+            }
+
+            if (small_description.length < 1 ) {
+                flag=false;
+                $('#product_small_description_error').text('Preencha o campo');
+            }
+            if(small_description.length > 255){
+                flag=false;
+                $('#product_small_description_error').text('Máximo 255 catactéres');
+            }
+
+            if (big_description.length < 1 ) {
+                flag=false;
+                $('#product_big_description_error').text('Preencha o campo');
+            }
+
+            if(!category){
+                flag=false;
+                $('#product_category_error').text('Selecione uma categoria');
+            }
+
+            if(!company){
+                flag=false;
+                $('#product_company_error').text('Selecione uma empresa');
+            }
+
+            
+            if(flag==true){
+                $(this).submit();
+            }
+        })
+
+        function clear_submit_product_error(){
+            $('#product_name_error').text('');
+            $('#product_price_error').text('');
+            $('#product_quantity_error').text('');
+            $('#product_image_error').text('');
+            $('#product_small_description_error').text('');
+            $('#product_big_description_error').text('');
+            $('#product_category_error').text('');
+            $('#product_company_error').text('');
+        }
     });
+    function show_add_product(){
+            $('#editModalLabel').text("Adicionar produto");
+            $('#button_product_submit').text('Adicionar');
+
+            $('#product_name').val('');
+            $('#product_price').val('');
+            $('#product_category').val('');
+            $('#product_quantity').val('');
+            $('#product_small_description').text('');
+            $('#product_big_description').text('');
+            $('#product_company').val('');
+
+            $('#product_image').val('');
+
+            $('#product_form').attr('action', '<?php echo base_url('admin/products/add/'); ?>');
+            $('#editModal').modal('show');
+    }
 
     function show_edit_product(product_id){
+
+            $('#product_name_error').text('');
+            $('#product_price_error').text('');
+            $('#product_quantity_error').text('');
+            $('#product_image_error').text('');
+            $('#product_small_description_error').text('');
+            $('#product_big_description_error').text('');
+            $('#product_category_error').text('');
+            $('#product_company_error').text('');
+
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('admin/products/show/');?>"+product_id,
@@ -203,15 +327,32 @@
                 if(response){
                     var obj = JSON.parse(response);
                     $('#editModalLabel').text("Editar "+obj.product_name);
+                    $('#button_product_submit').text('Editar');
+
+
                     $('#product_name').val(obj.product_name);
-                    $('#product_price').val(obj.product_name);
-                    $('#product_name').val(obj.product_name);
-                    $('#product_name').val(obj.product_name);
-                    $('#product_name').val(obj.product_name);
+                    $('#product_price').val(obj.price);
+                    $('#product_category').val(obj.category_id);
+                    $('#product_quantity').val(obj.quantity_in_stock);
+                    $('#product_company').val(obj.company_id);
+
+                    $('#product_form').attr('action', '<?php echo base_url('admin/products/edit/'); ?>'+obj.id);
+                    
+                    $('#editModal').modal('show');
 
                 }
             }
         });
-        $('#editModal').modal('show');
+        
+    }
+    function clear_submit_product_error(){
+            $('#product_name_error').text('');
+            $('#product_price_error').text('');
+            $('#product_quantity_error').text('');
+            $('#product_image_error').text('');
+            $('#product_small_description_error').text('');
+            $('#product_big_description_error').text('');
+            $('#product_category_error').text('');
+            $('#product_company_error').text('');
     }
 </script>
