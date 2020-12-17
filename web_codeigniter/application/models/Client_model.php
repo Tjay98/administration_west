@@ -76,7 +76,7 @@ class Client_model extends CI_Model{
 
                 if($validation['status']==1){
                     if (password_verify($login_form['password'], $validation['password_hash'])) {
-                        $this->db->select('id , username, email, status, role_id');
+                        $this->db->select('id , username, email, status, role_id , store_id');
                         $this->db->where('email', $login_form['email']);
                         $user=$this->db->get('user')->row_array();
                         $data=[
@@ -84,7 +84,7 @@ class Client_model extends CI_Model{
                             'username'=>$user['username'],
                             'status'=>$user['status'],
                             'role_id'=>$user['role_id'],
-                            //'store_id'=>$user['store_id'],
+                            'store_id'=>$user['store_id'],
 
                         ];
                         $this->session->set_userdata($data);
