@@ -25,7 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config['base_url'] = 'http://localhost/administration_west/web_codeigniter/';
-$config['base_url'] = 'http://localhost/administration_west/web_codeigniter/';
 $config['admin_url'] = 'http://localhost/administration_west/web_codeigniter/backend/';
 
 /*
