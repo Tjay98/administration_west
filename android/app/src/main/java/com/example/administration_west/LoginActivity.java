@@ -28,18 +28,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
-    Button SignUp, DoLogin;
+   /* Button SignUp, DoLogin;
     EditText etEmail, etPassword;
 
     public String username, password;
 
-
     Gson gson;
     String URL = "http://localhost/administration_west/web_codeigniter/restful/login";
-
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //procurar nas vistas os id para fazer o login
         //EditText
-        etEmail = findViewById(R.id.eTEmailLogin);
+        /*etEmail = findViewById(R.id.eTEmailLogin);
         etPassword = findViewById(R.id.eTPasswordLogin);
         //Button
         SignUp = findViewById(R.id.buttonDoRegistLogin);
@@ -115,11 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             etEmail.setError(null);
             return true;
-        }
+        }*/
     }
-
-
-
-
 
 }

@@ -14,5 +14,8 @@
     <string name="registo_2">Criar conta</string>
     <string name="registo_3">Já tem conta? Faça login</string>
 
+    <string name="perfil">Perfil</string>
+    <string name="mudar_password">Mudar a password</string>
+
 
 </resources>
