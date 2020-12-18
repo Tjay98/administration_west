@@ -39,12 +39,16 @@ class Products extends MY_Controller {
     public function products_by_category($id){
         $data['categories']=$this->Category_model->get_categories();
         $data2['products']=$this->Product_model->get_products_by_categories($id);
+        $data['companies']=$this->Company_model->get_companies();
+
         $this->load_views('frontend/products/products', $data, $data2);
     }
  
     public function products_by_company($id){
         $data['categories']=$this->Category_model->get_categories();
         $data2['products']=$this->Product_model->products_by_company($id);
+        $data['companies']=$this->Company_model->get_companies();
+
         $this->load_views('frontend/products/products', $data, $data2);
     }
  
