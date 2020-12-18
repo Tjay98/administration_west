@@ -80,6 +80,10 @@ public class RegisterActivity extends AppCompatActivity {
         } else if(nif.length()!=9) {
             eTNif.setError("O NIF não tem o tamanho permitido");
             return false;
+        }
+        else if(nif.matches("(?=.*[0-9])")) {
+            eTPassword.setError("O nif tem de ser só números");
+            return false;
         } else {
             eTNif.setError(null);
             return true;
@@ -87,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // validação de dados Password
-    public Boolean validadeData(){
+    public Boolean validateData(){
         String data = eTDataNascimento.getText().toString();
         if(data.isEmpty()) {
             eTDataNascimento.setError("A data de nascimento não pode estar vazio");

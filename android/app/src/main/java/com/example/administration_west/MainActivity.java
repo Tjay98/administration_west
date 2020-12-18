@@ -18,9 +18,10 @@ import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
-    //final SwipeRefreshLayout refreshLayout;
     private GridView gridProducts;
     private GridViewAdapterProducts adaptador;
+    SwipeRefreshLayout refreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //refreshLayout = findViewById(R.id.swiperefreshMain);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMain);
 
-        gridProducts = findViewById(R.id.gridProductMain);
 
         //SingletonProductManager gestor = SingletonProductManager.getInstance(getContext());
 
-        adaptador = new GridViewAdapterProducts(getContext(),SingletonProductManager.getInstance(getContext().getProductlist()));
 
-        gridProducts.setAdapter(adaptador);
 
         gridProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,7 +44,46 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        gridProducts = findViewById(R.id.gridProductMain);
+
+        //adaptador = new GridViewAdapterProducts(getContext(), SingletonProductManager.getInstance(getContext().getProductlist()));
+
+        gridProducts.setAdapter(adaptador);
+
+
+         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+
+        adaptador.notifyDataSetChanged();
+        refreshLayout.setRefreshing(false);
+    }
+    });
+   /* refreshLayout.post(new Runnable() {
+        @Override
+        public void run() {
+            refreshLayout.setRefreshing(true);
+
+            gestor.getAllHamburgerAPI(getContext(), HamburgerJsonParse.isConnectionInternet(getContext()));
+
+        }
+    });
+
+        */
+
+
     }
 
 
+
+
+
+
 }
+
+
+
+
+
+

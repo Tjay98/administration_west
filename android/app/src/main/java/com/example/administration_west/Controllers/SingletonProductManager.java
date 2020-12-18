@@ -47,7 +47,6 @@ public class SingletonProductManager {
     
 
     public ArrayList<Products> getProductlist(){
-
         return this.productlist;
     }
     
