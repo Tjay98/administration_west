@@ -11,6 +11,9 @@ class Restful extends MY_Controller {
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->model('Client_model');
+        $this->load->model('Category_model');
+        $this->load->model('Company_model');
+        $this->load->model('Sale_model');
     }
     /*
         ERROR MESSAGE TYPES
@@ -77,16 +80,42 @@ class Restful extends MY_Controller {
 
     public function get_products(){
         $products=$this->Product_model->get_products();
-
-        echo json_encode($products, JSON_PRETTY_PRINT);
+        if(!empty($products)){
+            echo json_encode($products, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
     }
 
     public function get_product($id){
-        $products=$this->Product_model->get_detail_products($id);
-
-        echo json_encode($products, JSON_PRETTY_PRINT);
+        $product=$this->Product_model->get_detail_products($id);
+        if(!empty($product)){
+            echo json_encode($product, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
     }
-
+    
+    public function get_products_by_company($id){
+        $product=$this->Product_model->products_by_company($id);
+        if(!empty($product)){
+            echo json_encode($product, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
+    public function get_products_by_category($id){
+        $product=$this->Product_model->get_products_by_categories($id);
+        if(!empty($product)){
+            echo json_encode($product, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
     //funçao de login esta com problemas a validar a password. descobrir porquê
 
     public function login(){
@@ -142,10 +171,60 @@ class Restful extends MY_Controller {
         echo json_encode($array, JSON_PRETTY_PRINT);
     }
 
-    public function test(){
-        
+    public function get_categories(){
+        $categories=$this->Category_model->get_categories();
+        if(!empty($categories)){
+            echo json_encode($categories, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
+
+    public function get_category($id){
+        $category=$this->Category_model->get_category_by_id($id);
+        if(!empty($category)){
+            echo json_encode($category, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
+
+    public function get_companies(){
+        $companies=$this->Company_model->get_companies();
+        if(!empty($companies)){
+            echo json_encode($companies, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
+
+    public function get_company($id){
+        $company=$this->Company_model->get_company_by_id($id);
+        if(!empty($company)){
+            echo json_encode($company, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
 
 
+    public function create_sale(){
+        if(!empty($this->input->post('sales'))){
+            $sales=$this->input->post('sales');
+            foreach($sales as $sale){
+                //criar metodo de criar venda e validação
+            }
+        }
+    }
+
+    public function edit_profile(){
+        if(!empty($this->input->post('profile_info'))){
+            $profile=$this->input->post('profile_info');
+        }
     }
 
 

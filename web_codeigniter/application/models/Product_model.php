@@ -5,6 +5,9 @@ class Product_model extends CI_Model{
 
     //enviar todos os produtos
     public function get_products(){
+        if($this->session->userdata('role_id')!=3){
+            $this->db->where('status',1);
+        }
         $this->db->select('products.*,
                             categories.category_name, 
                             companies.company_name');

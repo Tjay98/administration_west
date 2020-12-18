@@ -50,8 +50,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-//$route['nome da rota que se quer chamar']= 'pasta frontend ou backend / controlador / açao';
+/*
 
+METODO PARA CRIAR UMA ROTA \/
+
+$route['nome da rota que se quer chamar']= 'pasta frontend ou backend / controlador / açao';
+
+*/
 
 
 //must keep the base route, 404 and translate uri_dashes
@@ -94,9 +99,6 @@ $route['translate_uri_dashes'] = FALSE;
         $route['contacts']   =  'frontend/home/contactos';
         
 
-        //tests
-        $route['ola']   =  'frontend/sales/ola_cart';
-
     //backend
         $route['admin']   =  'backend/dashboard/index';
         $route['admin/login'] = 'backend/dashboard/login';
@@ -109,7 +111,6 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/products/delete/(:any)'] = 'backend/products/delete/$1';
         $route['admin/products/show/(:any)'] = 'backend/products/show_product/$1';
         
-        /* $route['admin/products/test_ola'] ='backend/products/test_ola'; */
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';
@@ -123,8 +124,29 @@ $route['translate_uri_dashes'] = FALSE;
 
     
     //api
-        $route['restful/products'] = 'api/restful/get_products';
-        $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
+
+        //login & register
         $route['restful/login'] = 'api/restful/login';
         $route['restful/register'] = 'api/restful/register';
+
+        //products
+        $route['restful/products'] = 'api/restful/get_products';
+        $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
+        $route['restful/products_company/(:any)'] = 'api/restful/get_products_by_company/$1';
+        $route['restful/products_category/(:any)'] = 'api/restful/get_products_by_category/$1';
+
+        //companies
+        $route['restful/companies'] = 'api/restful/get_companies';
+        $route['restful/company/(:any)'] = 'api/restful/get_company/$1';
+
+        //categories
+        $route['restful/categories'] = 'api/restful/get_categories';
+        $route['restful/category/(:any)'] = 'api/restful/get_category/$1';
+
+        //sales
+        //$route['restful/cart'] ='api/restful/cart';
+        $route['restful/create_sale'] = 'api/restful/create_sale';
+
+
+
        
