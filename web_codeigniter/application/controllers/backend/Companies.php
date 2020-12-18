@@ -14,6 +14,7 @@ class Companies extends MY_Controller {
         $this->load->model('Company_model');
         $this->load->model('Category_model');
         $this->load->model('Client_model');
+        $this->is_admin_logged();
     }
 
     public function index(){

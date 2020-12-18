@@ -6,7 +6,7 @@ class Product_model extends CI_Model{
     //enviar todos os produtos
     public function get_products(){
         if($this->session->userdata('role_id')!=3){
-            $this->db->where('status',1);
+            $this->db->where('products.status',1);
         }
         $this->db->select('products.*,
                             categories.category_name, 
@@ -40,6 +40,9 @@ class Product_model extends CI_Model{
 
 
     public function get_products_by_categories($id){
+        if($this->session->userdata('role_id')!=3){
+            $this->db->where('products.status',1);
+        }
         $this->db->select('products.id,
                             products.product_name, 
                             products.image, 
@@ -60,6 +63,9 @@ class Product_model extends CI_Model{
 
 
     function products_by_company($company_id){
+        if($this->session->userdata('role_id')!=3){
+            $this->db->where('products.status',1);
+        }
         $this->db->select('products.*,
                             categories.category_name,
                             companies.company_name,  ');
