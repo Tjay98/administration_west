@@ -16,7 +16,7 @@ class Product_model extends CI_Model{
         $this->db->join('categories','categories.id=products.category_id','LEFT');
         $this->db->join('companies','companies.id=products.company_id','LEFT');
 
-        
+        $this->db->order_by('products.id','desc');
         $results=$this->db->get()->result_array();
 
         return $results;
@@ -55,7 +55,7 @@ class Product_model extends CI_Model{
         $this->db->from('products');
         $this->db->join('categories','categories.id=products.category_id','LEFT');
         $this->db->join('companies','companies.id=products.company_id','LEFT');
-
+        $this->db->order_by('products.id','desc');
         $this->db->where('products.category_id', $id);
         $results = $this->db->get()->result_array();
         return $results;
@@ -73,6 +73,7 @@ class Product_model extends CI_Model{
         $this->db->from('products');
         $this->db->join('categories','categories.id=products.category_id','LEFT');
         $this->db->join('companies','companies.id=products.company_id','LEFT');
+        $this->db->order_by('products.id','desc');
         $products=$this->db->get()->result_array();
 
         return $products;

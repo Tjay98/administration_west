@@ -1,6 +1,8 @@
 <?php 
     if($this->session->userdata('role_id')==3){
         $admin=true;
+    }else{
+        $admin=false;
     }
 ?>
 <!-- Content Header (Page header) -->
@@ -347,7 +349,7 @@
             url: "<?php echo base_url('admin/products/delete/') ?>"+product_id,
             data: {'product_id':product_id},
             success: function (response) {
-                alert(response);
+                //alert(response);
                 if(response=='error'){
                     alert('O produto que tentou remover não existe ou ocorreu um erro');
                 }else if(response=='success'){

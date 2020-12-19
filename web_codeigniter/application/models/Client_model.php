@@ -141,10 +141,24 @@ class Client_model extends CI_Model{
     }
 
     public function get_company_by_user($user_id){
-        $this->db->select('company_id');
+        $this->db->select('store_id');
         $this->db->where('id',$user_id);
-        $user=$this->db->get('user');
+        $user=$this->db->get('user')->row_array();
 
-        return $user['company_id'];
+        return $user['store_id'];
+    }
+
+
+    public function count_clients(){
+        $this->db->select('id');
+        $this->db->where('role_id',1);
+        $clients=$this->db->get('user')->result_array();
+        if(!empty($clients)){
+            $clients_count=count($clients); 
+            return $clients_count;
+        }
+        
+
+        
     }
 }

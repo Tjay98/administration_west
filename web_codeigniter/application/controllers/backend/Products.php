@@ -31,6 +31,8 @@ class Products extends MY_Controller {
        
         if($this->session->userdata('role_id')==3){
             $admin=true;
+        }else{
+            $admin=false;
         }
 
 
@@ -70,21 +72,37 @@ class Products extends MY_Controller {
                 $actions=$button1;
                 
 
+                if($admin){
+                    $data[]=[
+                        $id,
+                        $image,
+                        $product_name,
+                        $stock,
+                        $category,
+                        $company,
+                        $price,
+                        $price_without_iva,
+                        $iva_value,
+                        $created_date,
+                        $actions,
 
-                $data[]=[
-                    $id,
-                    $image,
-                    $product_name,
-                    $stock,
-                    $category,
-                    $company,
-                    $price,
-                    $price_without_iva,
-                    $iva_value,
-                    $created_date,
-                    $actions,
-
-                ];
+                    ];
+                }else{
+                    $data[]=[
+                        $id,
+                        $image,
+                        $product_name,
+                        $stock,
+                        $category,
+                        //$company,
+                        $price,
+                        $price_without_iva,
+                        $iva_value,
+                        $created_date,
+                        $actions,
+    
+                    ];
+                }
             } 
 
             $records=['data'=>$data];
@@ -96,6 +114,8 @@ class Products extends MY_Controller {
     public function show_product($id){
         if($this->session->userdata('role_id')==3){
             $admin=true;
+        }else{
+            $admin=false;
         }
         $product=$this->Product_model->get_detail_products($id);
 

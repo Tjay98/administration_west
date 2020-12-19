@@ -9,62 +9,76 @@
 	</div>
 	<!-- /.container-fluid -->
 </section>
+<?php 
 
+//count variables
+$company_count=count($companies);
+$products_count=count($all_products);
+$sales_count=count($products_sold);
+$sales=array_slice($products_sold, 0, 5);
+$products=array_slice($all_products, 0, 5);
+
+?>
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
 		<!-- Info boxes -->
 		<div class="row">
 			<div class="col-12 col-sm-6 col-md-3">
-				<div class="info-box">
-					<span class="info-box-icon bg-info elevation-1"><i class="fa fa-cog"></i></span>
-					<div class="info-box-content">
-						<span class="info-box-text">CPU Traffic</span>
-						<span class="info-box-number">
-						10
-						<small>%</small>
-						</span>
+				<a href="<?php echo base_url('admin/companies'); ?>">
+					<div class="info-box">
+						<span class="info-box-icon bg-info elevation-1"><i class="fa fa-building-o"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Empresas</span>
+							<span class="info-box-number"><?php if(!empty($company_count)){echo $company_count;}else{echo 0;}  ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
-				</div>
+				</a>
 				<!-- /.info-box -->
 			</div>
 			<!-- /.col -->
 			<div class="col-12 col-sm-6 col-md-3">
-				<div class="info-box mb-3">
-					<span class="info-box-icon bg-danger elevation-1"><i class="fa fa-thumbs-up"></i></span>
-					<div class="info-box-content">
-						<span class="info-box-text">Likes</span>
-						<span class="info-box-number">41,410</span>
+				<a href="<?php echo base_url('admin/products'); ?>">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-danger elevation-1"><i class="fa fa-product-hunt"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Produtos</span>
+							<span class="info-box-number"><?php if(!empty($products_count)){ echo $products_count; }else{ echo 0;} ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
-				</div>
+				</a>
 				<!-- /.info-box -->
 			</div>
 			<!-- /.col -->
 			<!-- fix for small devices only -->
 			<div class="clearfix hidden-md-up"></div>
 			<div class="col-12 col-sm-6 col-md-3">
-				<div class="info-box mb-3">
-					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
-					<div class="info-box-content">
-						<span class="info-box-text">Sales</span>
-						<span class="info-box-number">760</span>
+				<a href="<?php echo base_url('admin/sales'); ?>">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Vendas</span>
+							<span class="info-box-number"><?php if(!empty($sales_count)){ echo $sales_count;}else{echo 0;} ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
-				</div>
+				</a>
 				<!-- /.info-box -->
 			</div>
 			<!-- /.col -->
 			<div class="col-12 col-sm-6 col-md-3">
-				<div class="info-box mb-3">
-					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
-					<div class="info-box-content">
-						<span class="info-box-text">New Members</span>
-						<span class="info-box-number">2,000</span>
+				<a href="<?php echo base_url('admin/clients'); ?>">
+					<div class="info-box mb-3">
+						<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">Utilizadores</span>
+							<span class="info-box-number"><?php if(!empty($client_count)){ echo $clients_count;}else{echo 0;} ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
-				</div>
+				</a>
 				<!-- /.info-box -->
 			</div>
 			<!-- /.col -->
@@ -92,69 +106,29 @@
 							<table class="table m-0">
 								<thead>
 									<tr>
-										<th>Order ID</th>
-										<th>Item</th>
-										<th>Status</th>
-										<th>Popularity</th>
+										<th>ID</th>
+										<th>Produto</th>
+										<!-- <th>Cliente</th> -->
+										<th>Quantidade</th>
+										<th>Estado</th>
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($sales as $sale){ 
+										if($sale['status']=='0'){
+											$status='<span class="badge badge-warning">Pendente</span>';
+										}elseif($sale['status']==1){
+											$status='<span class="badge badge-success">Enviado</span>';
+										} ?>
 									<tr>
-										<td><a href="pages/examples/invoice.html">OR9842</a></td>
-										<td>Call of Duty IV</td>
-										<td><span class="badge badge-success">Shipped</span></td>
-										<td>
-											<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-										</td>
+										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/edit/').$sale['id']; ?>">Venda #<?php echo $sale['id']; ?></a></td>
+										<td><?php echo $sale['product_name']; ?></td>
+										<td><?php echo $sale['product_name']; ?></td>
+										<th><?php echo $sale['quantity']; ?></th>
+										<td><?php echo $status; ?></td>
 									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR1848</a></td>
-										<td>Samsung Smart TV</td>
-										<td><span class="badge badge-warning">Pending</span></td>
-										<td>
-											<div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-										</td>
-									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR7429</a></td>
-										<td>iPhone 6 Plus</td>
-										<td><span class="badge badge-danger">Delivered</span></td>
-										<td>
-											<div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-										</td>
-									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR7429</a></td>
-										<td>Samsung Smart TV</td>
-										<td><span class="badge badge-info">Processing</span></td>
-										<td>
-											<div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-										</td>
-									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR1848</a></td>
-										<td>Samsung Smart TV</td>
-										<td><span class="badge badge-warning">Pending</span></td>
-										<td>
-											<div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-										</td>
-									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR7429</a></td>
-										<td>iPhone 6 Plus</td>
-										<td><span class="badge badge-danger">Delivered</span></td>
-										<td>
-											<div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-										</td>
-									</tr>
-									<tr>
-										<td><a href="pages/examples/invoice.html">OR9842</a></td>
-										<td>Call of Duty IV</td>
-										<td><span class="badge badge-success">Shipped</span></td>
-										<td>
-											<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-										</td>
-									</tr>
+
+									<?php } ?>
 								</tbody>
 							</table>
 						</div>
@@ -162,8 +136,8 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer clearfix">
-						<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Criar nova venda</a>
-						<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Ver todas as vendas</a>
+						<a href="<?php echo base_url('admin/sales/add'); ?>" class="btn btn-sm btn-info float-left">Criar nova venda</a>
+						<a href="<?php echo base_url('admin/sales/'); ?>" class="btn btn-sm btn-secondary float-right">Ver todas as vendas</a>
 					</div>
 					<!-- /.card-footer -->
 				</div>
@@ -185,20 +159,24 @@
 					<!-- /.card-header -->
 					<div class="card-body p-0">
 						<ul class="products-list product-list-in-card pl-2 pr-2">
-							<li class="item">
-								<div class="product-img">
-									<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-								</div>
-								<div class="product-info">
-									<a href="javascript:void(0)" class="product-title">Samsung TV
-									<span class="badge badge-warning float-right">$1800</span></a>
-									<span class="product-description">
-									Samsung 32" 1080p 60Hz LED Smart HDTV.
-									</span>
-								</div>
-							</li>
+							<?php if(!empty($products)){ 
+									foreach($products as $product){?>
+									<li class="item">
+										<div class="product-img">
+											<img src="<?php echo base_url('uploads/products/'.$product['image']); ?>" alt="Product Image" class="img-size-50">
+										</div>
+										<div class="product-info">
+											<p class="product-title"><?php echo $product['product_name']; ?>
+											<span class="badge badge-warning float-right"><?php echo $product['price']."€"; ?></span></p>
+											<span class="product-description">
+											<?php echo $product['small_description']; ?>
+											</span>
+										</div>
+									</li>
+							<?php }
+								}?>
 							<!-- /.item -->
-							<li class="item">
+<!-- 							<li class="item">
 								<div class="product-img">
 									<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
 								</div>
@@ -209,42 +187,13 @@
 									26" Mongoose Dolomite Men's 7-speed, Navy Blue.
 									</span>
 								</div>
-							</li>
-							<!-- /.item -->
-							<li class="item">
-								<div class="product-img">
-									<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-								</div>
-								<div class="product-info">
-									<a href="javascript:void(0)" class="product-title">
-									Xbox One <span class="badge badge-danger float-right">
-									$350
-									</span>
-									</a>
-									<span class="product-description">
-									Xbox One Console Bundle with Halo Master Chief Collection.
-									</span>
-								</div>
-							</li>
-							<!-- /.item -->
-							<li class="item">
-								<div class="product-img">
-									<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-								</div>
-								<div class="product-info">
-									<a href="javascript:void(0)" class="product-title">PlayStation 4
-									<span class="badge badge-success float-right">$399</span></a>
-									<span class="product-description">
-									PlayStation 4 500GB Console (PS4)
-									</span>
-								</div>
-							</li>
+							</li> -->
 							<!-- /.item -->
 						</ul>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer text-center">
-						<a href="javascript:void(0)" class="uppercase">View All Products</a>
+						<a href="<?php echo base_url('admin/products/'); ?>" class="uppercase">Ver todos os produtos</a>
 					</div>
 					<!-- /.card-footer -->
 				</div>
