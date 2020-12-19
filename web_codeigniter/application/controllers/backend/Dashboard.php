@@ -19,16 +19,22 @@ class Dashboard extends MY_Controller {
     public function index(){
         $this->is_admin_logged();
         $data['page_title']="Dashboard";
-        $company_id=1; // valor temporario
 
+        $user_id=$this->session->userdata('user_id');
+        $company_id=$this->Client_model->get_company_by_user($user_id); 
+
+        $data['companies']=$this->Company_model->get_companies();
+        $data['client_count']=$this->Client_model->count_clients();
         if($this->session->userdata('role_id')==2){
-            $data['company_products']=$this->Product_model->products_by_company($company_id);
-            $data['products_sold']=$this->Sale_model->products_by_company($company_id);
+            $data['all_products']=$this->Product_model->products_by_company($company_id);
+            $data['products_sold']=$this->Sale_model->get_sale_by_company($company_id);
         }else{
+            $data['all_products']=$this->Product_model->get_products();
+            $data['all_sales']=$this->Sale_model->get_all_sale_groups();
             $data['products_sold']=$this->Sale_model->get_all_sold_products();
-            $data['all_sales']=$this->Sale_model->get_all_sales();
         }
 
+       // print_R($data);die;
         $this->load_admin_views('backend/dashboard',$data);
         
     }
@@ -54,6 +60,14 @@ class Dashboard extends MY_Controller {
                 echo $validate;
             }
         }
+    }
+
+    public function logout(){
+        $this->is_admin_logged();
+        
+        //destroi a sessão
+        $this->session->sess_destroy();
+        redirect('admin');
     }
     
 

@@ -102,6 +102,7 @@ $route['translate_uri_dashes'] = FALSE;
     //backend
         $route['admin']   =  'backend/dashboard/index';
         $route['admin/login'] = 'backend/dashboard/login';
+        $route['admin/logout'] = 'backend/dashboard/logout';
 
         //products
         $route['admin/products'] = 'backend/products/index';
@@ -114,6 +115,10 @@ $route['translate_uri_dashes'] = FALSE;
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';
+        $route['admin/sales_table']='backend/sales/get_datatable';
+        $route['admin/sales/add'] = 'backend/sales/add';
+        $route['admin/sales/edit/(:any)'] = 'backend/sales/edit/$1';
+        $route['admin/sales/delete/(:any)'] = 'backend/sales/delete/$1';
 
 
         //categories
@@ -121,6 +126,9 @@ $route['translate_uri_dashes'] = FALSE;
 
         //companies
         $route['admin/companies'] = 'backend/companies/index';
+
+        //contacts
+        $route['admin/contacts'] = 'backend/contacts/index';
 
     
     //api

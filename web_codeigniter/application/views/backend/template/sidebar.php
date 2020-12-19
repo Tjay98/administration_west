@@ -14,7 +14,7 @@
 				<!--Image credits to wikipedia-->
 			</div>
 			<div class="info">
-				<a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a>
+				<a href="#" class="d-block"><?php echo $this->session->userdata('username'); ?></a><a class="d-block" href="<?php echo base_url('admin/logout'); ?>">Sair <i class="fa fa-sign-out"></i></a>
 			</div>
 		</div>
 		<!-- SidebarSearch Form -->
@@ -56,6 +56,29 @@
 							<a href="<?php echo base_url('admin/categories'); ?>" class="nav-link">
                 			<i class="fa fa-align-left"></i>
 								<p> Categorias</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="fa fa-users"></i>
+						<p>
+							Zona administrativa
+							<i class="right fa fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="<?php echo base_url('admin/clients'); ?>" class="nav-link">
+								<i class="fa fa-user"></i>
+								<p>Utilizadores</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?php echo base_url('admin/companies'); ?>" class="nav-link">
+                				<i class="fa fa-building-o"></i>
+								<p>Empresas</p>
 							</a>
 						</li>
 					</ul>

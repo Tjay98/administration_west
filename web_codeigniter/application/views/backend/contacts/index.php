@@ -101,7 +101,7 @@
     $(document).ready(function() {  
 
         //datatable
-        var table=$('#table-sales').DataTable({
+        var table=$('#table-products').DataTable({
             "ajax": {
                 url : "<?php echo base_url('admin/sales_table') ?>",
                 type : 'POST',

@@ -19,27 +19,92 @@ class Sales extends MY_Controller {
     }
 
     public function index(){
+        
         $data['page_title']="Vendas";
+        $data['categories']=$this->Category_model->get_categories();
+        $data['companies']=$this->Company_model->get_companies();
         $this->load_admin_views('backend/sales/index',$data);
+
     }
 
+
     public function get_datatable(){
+       
         if($this->session->userdata('role_id')==3){
             $admin=true;
+        }else{
+            $admin=false;
         }
 
 
         if(!$admin){
             $user_id=$this->session->userdata('user_id');
-            $company_id=$this->client_model->get_company_by_user($user_id); 
+            $company_id=$this->Client_model->get_company_by_user($user_id); 
     
-            $products=$this->product_model->products_by_company($company_id);
-        }else{
-            $products=$this->product_model->get_products();
+            $sales=$this->Sale_model->get_sale_by_company($company_id);
+        }else{  
+            $sales=$this->Sale_model->get_all_sold_products();
+
+            
         }
 
+        if(!empty($sales)){
+            foreach($sales as $sale){
+                $id=$sale['id'];
+
+                
+                $product_name=$sale['product_name'];
+                $client='';
+                $company='';
+                $address='';
+                $status='';
+                $payment='';
+                $total='';
+                $created_date=$sale['created_date'];
+
+                
+                $button1="<button class='btn btn-md btn-warning btn_white_color' onclick='edit_sale(".$id.")' ><i class='fa fa-pencil'></i></button>";
+                $button2="<button class='btn btn-md btn-danger btn_white_color' onclick='delete_sale(".$id.")' ><i class='fa fa-trash-o'></i></button>";
 
 
+                $actions=$button1.$button2;
+                
 
+                if($admin){
+                    $data[]=[
+                        $id,
+                        $product_name,
+                        $client,
+                        $company,
+                        $address,
+                        $status,
+                        $payment,
+                        $total,
+                        $created_date,
+                        $actions,
+
+                    ];
+                }else{
+                    $data[]=[
+                        $id,
+                        $product_name,
+                        $client,
+                        //$company,
+                        $address,
+                        $status,
+                        $payment,
+                        $total,
+                        $created_date,
+                        $actions,
+
+                    ];
+                }
+            } 
+
+            $records=['data'=>$data];
+            $records= json_encode($records);
+            echo $records;
+        }    
     }
+
 }

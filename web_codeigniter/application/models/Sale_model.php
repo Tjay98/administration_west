@@ -21,6 +21,7 @@ class Sale_model extends CI_Model{
         $this->db->from('sales_group as sgroup');
         $this->db->join('shipping_address as saddress','saddress.id=sgroup.shipping_address_id','LEFT');
         $this->db->join('billing_address as baddress','saddress.id=sgroup.shipping_address_id','LEFT');
+        $this->db->order_by('sgroup.id','desc');
         $results=$this->db->get()->result_array();
         if(!empty($results)){
             $i=0;
@@ -84,10 +85,11 @@ class Sale_model extends CI_Model{
         return $results;
     }
 
-    public function get_all_sales(){
+    public function get_all_sale_groups(){
         $this->db->select('sgroup.*, user.username,user.nif');
         $this->db->from('sales_group as sgroup');
         $this->db->join('user','user.id=sgroup.user_id');
+        $this->db->order_by('sgroup.id','desc');
         $results=$this->db->get()->result_array();
 
         return $results;
@@ -97,15 +99,23 @@ class Sale_model extends CI_Model{
 
     
     public function get_sale_by_company($company_id){
+        $this->db->select('sale_product.*,products.product_name');
         $this->db->where('company_id',$company_id);
-        $products=$this->db->get('products')->result_array();
+        $this->db->from('sales_product as sale_product');
+        $this->db->order_by('sale_product.id','desc');
+        $this->db->join('products','products.id=sale_product.sale_product_id');
+        $products=$this->db->get()->result_array();
 
         return $products;
         
     }
 
     public function get_all_sold_products(){
-        $products=$this->db->get('sales_product')->result_array();
+        $this->db->select('sale_product.*,products.product_name');
+        $this->db->from('sales_product as sale_product');
+        $this->db->join('products','products.id=sale_product.sale_product_id');
+        $this->db->order_by('sale_product.id','desc');
+        $products=$this->db->get()->result_array();
         return $products;
     }
     
@@ -212,6 +222,7 @@ class Sale_model extends CI_Model{
            return 'success';
         }
     }
+
 
 
 
