@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText eTName, eTEmail, eTNif, eTDataNascimento, eTPassword, eTPassword2;
+   // EditText eTName, eTEmail, eTNif, eTDataNascimento, eTPassword, eTPassword2;
     Button buttonRegister, buttonDoLogin;
 
     @Override
@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //procurar nas vistas os id para fazer o registo
         //EditText
-        eTName=findViewById(R.id.eTNameRegister);
+        /*eTName=findViewById(R.id.eTNameRegister);
         eTEmail=findViewById(R.id.eTEmailRegister);
         eTNif=findViewById(R.id.eTNIFRegister);
         eTDataNascimento=findViewById(R.id.etDataRegister);
@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             eTPassword.setError(null);
             return true;
-        }
+        }*/
     }
 
 

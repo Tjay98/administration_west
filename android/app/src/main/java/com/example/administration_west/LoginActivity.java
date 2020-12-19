@@ -28,8 +28,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-   /* Button SignUp, DoLogin;
-    EditText etEmail, etPassword;
+    Button SignUp, DoLogin;
+   /* EditText etEmail, etPassword;
 
     public String username, password;
 
@@ -47,12 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         /*etEmail = findViewById(R.id.eTEmailLogin);
         etPassword = findViewById(R.id.eTPasswordLogin);
         //Button
+        DoLogin = findViewById(R.id.buttonLogin); */
         SignUp = findViewById(R.id.buttonDoRegistLogin);
-        DoLogin = findViewById(R.id.buttonLogin);
+
+
 
 
         //clicar no botao para ligar vista do Registo no Login
-        SignUp.setOnClickListener(new View.OnClickListener() {
+       SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -60,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        DoLogin.setOnClickListener(new View.OnClickListener() {
+     /*   DoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validateEmail();

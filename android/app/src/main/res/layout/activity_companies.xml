@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Pages.ProductActivity">
+    tools:context=".Pages.CompaniesActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefreshMainProduct"
+        android:id="@+id/swiperefreshMainCompanies"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecicleViewProduct"
+            android:id="@+id/RecicleViewCompanies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="auto_fit"/>

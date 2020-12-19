@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FinalizarCompraActivity">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Compra Realizada com Sucesso!"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Informação do Cliente" />
+
+    <TextView
+        android:id="@+id/tVEmailFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email" />
+
+    <TextView
+        android:id="@+id/tVNifFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NIF" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:text="Informação de Entrega" />
+
+    <TextView
+        android:id="@+id/tVNomeEntregaFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do Cliente Entrega" />
+
+    <TextView
+        android:id="@+id/tVTelemovelEntregaFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Número de Telemóvel Entrega" />
+
+    <TextView
+        android:id="@+id/tVMoradaEntregaFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Morada de Entrega" />
+
+    <TextView
+        android:id="@+id/tVCodigoPostalEntregaFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Código Postal de Entrega" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:text="Informação de Faturação" />
+
+    <TextView
+        android:id="@+id/tVNomeFaturacaoFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nome Cliente Faturação" />
+
+    <TextView
+        android:id="@+id/tVTelemovelFaturacaoFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Número Telemóvel Faturação" />
+
+    <TextView
+        android:id="@+id/tVMoradaFaturacaoFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Morada de Faturação" />
+
+    <TextView
+        android:id="@+id/tVCodigoPostalFaturacaoFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Código Postal Faturação" />
+
+
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Informação da Compra" />
+
+    <TextView
+        android:id="@+id/tVDataFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tVPrecoTotalFC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="Preço Total" />
+
+        <TextView
+            android:id="@+id/tVIvaTotalFC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço Total IVA" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tVPagamentoFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Método de Pagamento" />
+
+    <Button
+        android:id="@+id/buttonProdutosFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Voltar a Produtos" />
+
+</LinearLayout>
