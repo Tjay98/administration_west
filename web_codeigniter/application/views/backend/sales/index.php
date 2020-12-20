@@ -46,11 +46,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Produto</th>
                                     <th>Cliente</th>
-                                    <?php if($admin){  ?>
-                                        <th>Empresa</th>
-                                    <?php }?>
                                     <th>Morada</th>
                                     <th>Estado</th>
                                     <th>Método de pagamento</th>

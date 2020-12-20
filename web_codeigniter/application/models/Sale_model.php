@@ -86,7 +86,7 @@ class Sale_model extends CI_Model{
     }
 
     public function get_all_sale_groups(){
-        $this->db->select('sgroup.*, user.username,user.nif');
+        $this->db->select('sgroup.*, user.username,user.phone_number');
         $this->db->from('sales_group as sgroup');
         $this->db->join('user','user.id=sgroup.user_id');
         $this->db->order_by('sgroup.id','desc');
@@ -94,7 +94,17 @@ class Sale_model extends CI_Model{
 
         return $results;
     }
+    public function get_company_sale_groups($company_id){
+        
+        $this->db->select('sgroup.*, user.username,user.phone_number');
+        $this->db->where('sgroup.company_id',$company_id);
+        $this->db->from('sales_group as sgroup');
+        $this->db->join('user','user.id=sgroup.user_id');
+        $this->db->order_by('sgroup.id','desc');
+        $results=$this->db->get()->result_array();
 
+        return $results;
+    }
     
 
     
@@ -104,6 +114,7 @@ class Sale_model extends CI_Model{
         $this->db->from('sales_product as sale_product');
         $this->db->order_by('sale_product.id','desc');
         $this->db->join('products','products.id=sale_product.sale_product_id');
+        $this->db->join('user','user.id=sale_product.sale_product_id');
         $products=$this->db->get()->result_array();
 
         return $products;
@@ -169,7 +180,7 @@ class Sale_model extends CI_Model{
         $this->db->select('sales_group.*,
                             user.id,
                             user.email as user_email,
-                            user.nif,
+                            user.phone_number,
 
                             shipping_address.id,
                             shipping_address.name as shipping_name,
@@ -221,6 +232,12 @@ class Sale_model extends CI_Model{
 
            return 'success';
         }
+    }
+
+    public function payment_methods(){
+        $payment_methods=$this->db->get('payment_methods')->result_array();
+
+        return $payment_methods;
     }
 
 

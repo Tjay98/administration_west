@@ -26,14 +26,12 @@
                             <td><?php echo $sale['shipping_contact']; ?></td>
                             <td>
                                 <?php if($sale['status']==0){
-                                    echo "Por pagar";
+                                    echo "Em processamento";
                                 }elseif($sale['status']==1){
-                                    echo "Pago";
-                                }elseif($sale['status']==2){
                                     echo "Enviado";
-                                }elseif($sale['status']==3){
+                                }elseif($sale['status']==2){
                                     echo "Cancelado";
-                                } ?>
+                                }?>
                             </td>
                             <td><?php echo $sale['total_price']."€"; ?></td>
                             <td><?php echo $sale['total_iva']."€"; ?></td>

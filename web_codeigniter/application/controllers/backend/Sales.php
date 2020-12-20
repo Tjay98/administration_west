@@ -36,30 +36,45 @@ class Sales extends MY_Controller {
             $admin=false;
         }
 
-
+        $payment_methods=$this->Sale_model->payment_methods();
         if(!$admin){
             $user_id=$this->session->userdata('user_id');
             $company_id=$this->Client_model->get_company_by_user($user_id); 
     
-            $sales=$this->Sale_model->get_sale_by_company($company_id);
+            $sales=$this->Sale_model->get_company_sale_groups($company_id);
         }else{  
-            $sales=$this->Sale_model->get_all_sold_products();
+            $sales=$this->Sale_model->get_all_sale_groups();
 
             
         }
 
         if(!empty($sales)){
+            /* print_R($sales);die; */
             foreach($sales as $sale){
                 $id=$sale['id'];
 
                 
-                $product_name=$sale['product_name'];
-                $client='';
-                $company='';
-                $address='';
-                $status='';
+                $client=$sale['username'];
+                $address='<button class="btn btn-md btn-info" onclick="show_address('.$sale['id'].')">Ver moradas</button>';
+
+                if($sale['status']==0){
+                    $status="<button class='btn btn-md btn-info'>Por processar</button>";
+                }elseif($sale['status']==1){
+                    $status="<button class='btn btn-md btn-warning' disabled>Enviado</button>";
+                }elseif($sale['status']==2){
+                    $status="<button class='btn btn-md btn-info'>Cancelado</button>";
+                }else{
+                    $status='';
+                }
+
                 $payment='';
-                $total='';
+                foreach($payment_methods as $payments){
+                    if($sale['payment_method_id']==$payments['id']){
+                        $payment= $payments['name'];
+                    }
+                }
+
+                $total=$sale['total_price'];
                 $created_date=$sale['created_date'];
 
                 
@@ -68,14 +83,10 @@ class Sales extends MY_Controller {
 
 
                 $actions=$button1.$button2;
-                
 
-                if($admin){
                     $data[]=[
                         $id,
-                        $product_name,
                         $client,
-                        $company,
                         $address,
                         $status,
                         $payment,
@@ -84,27 +95,37 @@ class Sales extends MY_Controller {
                         $actions,
 
                     ];
-                }else{
-                    $data[]=[
-                        $id,
-                        $product_name,
-                        $client,
-                        //$company,
-                        $address,
-                        $status,
-                        $payment,
-                        $total,
-                        $created_date,
-                        $actions,
 
-                    ];
-                }
             } 
 
             $records=['data'=>$data];
             $records= json_encode($records);
             echo $records;
         }    
+    }
+
+    public function add(){
+        if($this->session->userdata('role_id')==3){
+            $admin=true;
+        }else{
+            $admin=false;
+        }
+
+        if(!$admin){
+            $user_id=$this->session->userdata('user_id');
+            $company_id=$this->Client_model->get_company_by_user($user_id); 
+            $data['products']=$this->Product_model->products_by_company($company_id);
+        }else{
+            $data['products']=$this->Product_model->get_products();
+        }
+
+        $data['page_title']="Criar venda";
+        $data['clients']=$this->Client_model->get_clients();
+        
+        
+        $data['categories']=$this->Category_model->get_categories();
+        $data['companies']=$this->Company_model->get_companies();
+        $this->load_admin_views('backend/sales/crud',$data);
     }
 
 }

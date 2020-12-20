@@ -74,7 +74,7 @@ $products=array_slice($all_products, 0, 5);
 						<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Utilizadores</span>
-							<span class="info-box-number"><?php if(!empty($client_count)){ echo $clients_count;}else{echo 0;} ?></span>
+							<span class="info-box-number"><?php if(!empty($client_count)){ echo $client_count;}else{echo 0;} ?></span>
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -123,7 +123,7 @@ $products=array_slice($all_products, 0, 5);
 									<tr>
 										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/edit/').$sale['id']; ?>">Venda #<?php echo $sale['id']; ?></a></td>
 										<td><?php echo $sale['product_name']; ?></td>
-										<td><?php echo $sale['product_name']; ?></td>
+
 										<th><?php echo $sale['quantity']; ?></th>
 										<td><?php echo $status; ?></td>
 									</tr>

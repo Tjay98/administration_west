@@ -14,8 +14,8 @@
                             <label   class="form-control-custom" readonly><?php echo $user['email'];?></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <label for="inputNif">NIF</label> 
-                            <label   class="form-control-custom" readonly ><?php echo $user['nif'];?></label>
+                            <label for="inputPhoneNumber">Número de telemóvel</label> 
+                            <label   class="form-control-custom" readonly ><?php echo $user['phone_number'];?></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="inputDate">Data de nascimento</label>

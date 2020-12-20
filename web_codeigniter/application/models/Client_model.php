@@ -8,14 +8,14 @@ class Client_model extends CI_Model{
         $validate_email=$this->db->get('user')->row_array();
         
         if(empty($validate_email)){
-            $this->db->where('nif',$registo_form['nif']);
-            $validate_nif=$this->db->get('user')->row_array();
+            $this->db->where('phone_number',$registo_form['phone_number']);
+            $validate_phone_number=$this->db->get('user')->row_array();
             //print_r($registo_form);die;
-            if(empty($validate_nif)){
+            if(empty($validate_phone_number)){
                 $data=[
                     'username'=>$registo_form['username'],
                     'email'=>$registo_form['email'],
-                    'nif'=>$registo_form['nif'],
+                    'phone_number'=>$registo_form['phone_number'],
                     'birthday_date'=>$registo_form['birthday_date'],
                     'password_hash'=>$registo_form['password_hash'],
                     'role_id'=>1,
@@ -26,7 +26,7 @@ class Client_model extends CI_Model{
                 /* print_R($data);die; */
                 $this->db->insert('user',$data);
             }else{
-                return 'nif_error';
+                return 'phone_number_error';
             }
         }else{
             return 'email_error';
@@ -105,7 +105,7 @@ class Client_model extends CI_Model{
     }
 
     public function profile($id){
-        $this->db->select('id, username, email, nif, birthday_date, status, role_id');
+        $this->db->select('id, username, email, phone_number, birthday_date, status, role_id');
         $this->db->where('user.id',$id);
         $data=$this->db->get('user')->row_array();
 
@@ -160,5 +160,13 @@ class Client_model extends CI_Model{
         
 
         
+    }
+
+    public function get_clients(){
+        $this->db->select('id,username,email,phone_number');
+        $this->db->where('role_id',1);
+        $clients=$this->db->get('user')->result_array();
+
+        return $clients;
     }
 }

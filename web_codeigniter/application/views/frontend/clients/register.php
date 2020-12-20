@@ -19,9 +19,9 @@
 
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <label for="inputNif">NIF</label> 
-                            <input type="text" id="inputNif" name="inputNif" class="form-control-custom"  placeholder="NIF" tabindex="3" required autofocus>
-                            <small class="text-danger" id="nif_error"></small>
+                            <label for="inputPhone">Número de telemóvel</label> 
+                            <input type="text" id="inputPhone" name="inputPhone" class="form-control-custom"  placeholder="Nº de telemóvel" tabindex="3" required autofocus>
+                            <small class="text-danger" id="phone_error"></small>
 
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -56,7 +56,7 @@
             //set variables from inputs
             username=$('#inputUsername').val();
             email=$('#inputEmail').val();
-            nif=$('#inputNif').val();
+            phone=$('#inputPhone').val();
             data=$('#inputDate').val();
             password=$('#inputPassword').val();
             repeat_password=$('#inputRepetirPassword').val();
@@ -64,7 +64,7 @@
             //clear errors
             $('#username_error').text('');
             $('#email_error').text('');
-            $('#nif_error').text('');
+            $('#phone_error').text('');
             $('#date_error').text('');
             $('#password_error').text('');
             $('#repeat_error').text('');
@@ -81,7 +81,7 @@
             }
 
             if(nif.length!=9){
-                $('#nif_error').text('O nif é inválido');
+                $('#phone_error').text('O número é inválido');
                 flag=false;
             }
             if(data<1){
@@ -115,7 +115,7 @@
                                 else if(response=='email_error'){
                                     $('#email_error').text('Este email já está em uso');
                                 }else if(response=='nif_error'){
-                                    $('#nif_error').text('Este nif já está em uso');
+                                    $('#phone_error').text('Este número está associado a uma conta');
                                 }else if(response=='pass_number_error'){
                                     $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
                                 }else if(response=='pass_capital_letter'){
