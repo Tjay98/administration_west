@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ProductsJsonParse {
-    public static boolean isConnectionInternet(Context contexto){
+    /*public static boolean isConnectionInternet(Context contexto){
         ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo= cm.getActiveNetworkInfo();
 
@@ -69,6 +69,6 @@ public class ProductsJsonParse {
             Toast.makeText(contexto, "ERRO:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         return products;
-    }
+    }*/
 
 }

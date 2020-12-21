@@ -87,14 +87,22 @@
                             </div>
                             <div class="row">
                                 
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h4>Morada de envio</h4>
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:10px;">
+                                    <h4 class="col-lg-12 col-md-12 col-sm-12">
+                                        Morada de envio 
+                                        <button type="button" class="btn btn-info btn-sm " onclick="create_address_shipping()">Criar</button>
+                                    </h4>
+                                    
                                 </div>
 
                             </div>
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h4>Morada de faturação</h4>
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:10px;">
+                                    <h4 class="col-lg-12 col-md-12 col-sm-12">
+                                        Morada de faturação
+                                        <button type="button" class="btn btn-info btn-sm " onclick="create_address_billing()">Criar</button>
+                                    </h4>
+                                    
                                 </div>
 
                                 
@@ -178,7 +186,26 @@
         $('#client_name').val(username);
         $('#client_phone').val(phone_number);
         $('#client_email').val(email);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('admin/sales/client_address') ?>",
+            data: {'user_id':id},
+            success: function (response) {
 
+                obj=JSON.parse(response);
+
+                if(obj.shipping_address.length){
+                    alert('ola');
+/*                     $.each(obj, function( key, value ) {
+                        console.log(key);
+                        console.log(value);
+                    }); */
+                }
+                if(obj.billing_address){
+
+                }
+            }
+        });
         $('.hidden-client').show();
     }
 
@@ -277,6 +304,14 @@
         }
     }
 
+    function create_address_billing(){
+
+    }
+    
+    function create_address_shipping(){
+
+    }
+
     $(document).ready(function() {  
 
         //datatable
@@ -322,7 +357,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="overflow-y:scroll;">
                 <table class="table table-bordered table-hover table_datatable" style="width:100%;">
                     <thead>
                         <tr>   
@@ -366,7 +401,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="overflow-y:scroll;">
                 <table class="table table-bordered table-hover table_datatable" style="width:100%;">
                     <thead>
                         <tr>   

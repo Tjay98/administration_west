@@ -169,4 +169,23 @@ class Client_model extends CI_Model{
 
         return $clients;
     }
+
+    public function get_client_addresses($user_id){
+        $this->db->where('user_id',$user_id);
+        $billing= $this->db->get('billing_address')->row_array();
+        if(!empty($billing)){
+            $data['billing_address']=$billing;
+        }
+
+        $this->db->where('user_id',$user_id);
+        $shipping= $this->db->get('shipping_address')->row_array();
+        if(!empty($billing)){
+            $data['shipping_address']=$shipping;
+        }
+
+        if(!empty($data)){
+            return $data;
+        }
+
+    }
 }

@@ -119,6 +119,7 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/sales/add'] = 'backend/sales/add';
         $route['admin/sales/edit/(:any)'] = 'backend/sales/edit/$1';
         $route['admin/sales/delete/(:any)'] = 'backend/sales/delete/$1';
+        $route['admin/sales/client_address'] = 'backend/sales/client_address';
 
 
         //categories

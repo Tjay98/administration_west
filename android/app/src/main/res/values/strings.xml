@@ -19,6 +19,9 @@
 
 
     <string name="nome_produto">Nome do Produto</string>
+    <string name="search">Search</string>
 
+
+    <string name="title_notifications">Carrinho</string>
 
 </resources>

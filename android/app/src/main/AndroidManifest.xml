@@ -19,7 +19,7 @@
         <activity android:name=".Pages.ProductActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
         -->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Pages.ProductActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

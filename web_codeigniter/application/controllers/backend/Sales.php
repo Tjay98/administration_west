@@ -105,27 +105,40 @@ class Sales extends MY_Controller {
     }
 
     public function add(){
-        if($this->session->userdata('role_id')==3){
-            $admin=true;
+        if(empty($this->input->post())){
+            if($this->session->userdata('role_id')==3){
+                $admin=true;
+            }else{
+                $admin=false;
+            }
+    
+            if(!$admin){
+                $user_id=$this->session->userdata('user_id');
+                $company_id=$this->Client_model->get_company_by_user($user_id); 
+                $data['products']=$this->Product_model->products_by_company($company_id);
+            }else{
+                $data['products']=$this->Product_model->get_products();
+            }
+    
+            $data['page_title']="Criar venda";
+            $data['clients']=$this->Client_model->get_clients();
+            
+            
+            $data['categories']=$this->Category_model->get_categories();
+            $data['companies']=$this->Company_model->get_companies();
+            $this->load_admin_views('backend/sales/crud',$data);
         }else{
-            $admin=false;
-        }
 
-        if(!$admin){
-            $user_id=$this->session->userdata('user_id');
-            $company_id=$this->Client_model->get_company_by_user($user_id); 
-            $data['products']=$this->Product_model->products_by_company($company_id);
-        }else{
-            $data['products']=$this->Product_model->get_products();
         }
-
-        $data['page_title']="Criar venda";
-        $data['clients']=$this->Client_model->get_clients();
-        
-        
-        $data['categories']=$this->Category_model->get_categories();
-        $data['companies']=$this->Company_model->get_companies();
-        $this->load_admin_views('backend/sales/crud',$data);
     }
 
+    public function client_address(){
+        if(!empty($this->input->post('user_id'))){
+            $client_id=$this->input->post('user_id');
+            $addresses=$this->Client_model->get_client_addresses($client_id);
+
+            echo json_encode($addresses);
+        }
+        
+    }
 }
