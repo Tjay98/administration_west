@@ -86,21 +86,26 @@ class Sale_model extends CI_Model{
     }
 
     public function get_all_sale_groups(){
-        $this->db->select('sgroup.*, user.username,user.phone_number');
+        $this->db->select('sgroup.*, user.username,user.phone_number,count(sproduct.id) as product_quantity');
         $this->db->from('sales_group as sgroup');
+        $this->db->join('sales_product as sproduct','sproduct.sale_group_id=sgroup.id');
         $this->db->join('user','user.id=sgroup.user_id');
         $this->db->order_by('sgroup.id','desc');
+        $this->db->group_by('sgroup.id');
         $results=$this->db->get()->result_array();
 
         return $results;
     }
     public function get_company_sale_groups($company_id){
         
-        $this->db->select('sgroup.*, user.username,user.phone_number');
-        $this->db->where('sgroup.company_id',$company_id);
+        $this->db->select('sgroup.*, user.username,user.phone_number, count(sproduct.id) as product_quantity');
+        $this->db->where('product.company_id',$company_id);
         $this->db->from('sales_group as sgroup');
         $this->db->join('user','user.id=sgroup.user_id');
+        $this->db->join('sales_product as sproduct','sproduct.sale_group_id=sgroup.id');
+        $this->db->join('products as product','product.id=sproduct.sale_product_id');
         $this->db->order_by('sgroup.id','desc');
+        $this->db->group_by('sgroup.id');
         $results=$this->db->get()->result_array();
 
         return $results;
@@ -241,6 +246,14 @@ class Sale_model extends CI_Model{
     }
 
 
+    public function get_sale_products($sale_id){
+        $this->db->select('sproduct.id as sale_product_id, product.id, product.company_id, product.product_name, sproduct.quantity, sproduct.price,sproduct.price_iva,sproduct.status');
+        $this->db->where('sale_group_id',$sale_id);
+        $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
+        $this->db->from('sales_product as sproduct');
+        $products=$this->db->get()->result_array();
 
 
+        return $products;
+    }
 }

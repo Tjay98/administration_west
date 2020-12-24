@@ -7,17 +7,13 @@
     android:orientation="vertical"
     tools:context=".Pages.CompaniesActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefreshMainCompanies"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecicleViewCompanies"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:numColumns="auto_fit"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecicleViewCompanies"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="auto_fit"/>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

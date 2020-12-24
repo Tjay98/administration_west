@@ -179,7 +179,7 @@ class Client_model extends CI_Model{
 
         $this->db->where('user_id',$user_id);
         $shipping= $this->db->get('shipping_address')->row_array();
-        if(!empty($billing)){
+        if(!empty($shipping)){
             $data['shipping_address']=$shipping;
         }
 
