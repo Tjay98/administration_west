@@ -92,3 +92,7 @@ th,td{
 .modal-title{
     font-weight:bold;
 }
+
+th,tr, td{
+    white-space: nowrap;
+}

@@ -2,6 +2,7 @@ package com.example.administration_west.Adapters;
 
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -30,116 +31,46 @@ import java.util.ArrayList;
 
 
 
-public class CategoriesAdapter  extends RecyclerView.Adapter<CategoriesAdapter.CategoriesRVViewHolder>{
+public class CategoriesAdapter  extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
+    private Context ccontext;
+    private ArrayList<Categories> ccategories;
 
-
-    private ArrayList<Categories> items;
-
-    int row_index = -1;
-
-
-
-    public CategoriesAdapter(ArrayList<Categories> items){
-
-        this.items = items;
-
+    public CategoriesAdapter(Context context, ArrayList<Categories> categories) {
+        ccontext = context;
+        ccategories = categories;
     }
 
+    public class CategoriesViewHolder extends RecyclerView.ViewHolder {
+        public TextView category_name;
 
-
-    @NonNull
-
-    @Override
-
-    public CategoriesRVViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recicle_categories, parent, false);
-
-        CategoriesRVViewHolder categoriesRVViewHolder = new CategoriesRVViewHolder(view);
-
-        return categoriesRVViewHolder;
-
-    }
-
-
-
-    @Override
-
-    public void onBindViewHolder(@NonNull CategoriesRVViewHolder holder, int position) {
-
-        Categories categories = items.get(position);
-
-        holder.nameCategory.setText(categories.getCategory_name());
-
-
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                row_index = position;
-
-                notifyDataSetChanged();
-
-            }
-
-        });
-
-
-
-        if(row_index==position){
-
-            holder.linearLayout.setBackgroundResource(R.drawable.categories_recycle_view_bg_selected);
-
-        } else {
-
-            holder.linearLayout.setBackgroundResource(R.drawable.categories_recycle_view_bg);
-
-
-
-        }
-
-    }
-
-
-
-    @Override
-
-    public int getItemCount() {
-
-        return items.size();
-
-    }
-
-
-
-    public static class CategoriesRVViewHolder extends RecyclerView.ViewHolder {
-
-
-
-        TextView nameCategory;
-
-        LinearLayout linearLayout;
-
-
-
-
-
-        public CategoriesRVViewHolder(@NonNull View itemView){
-
+        public CategoriesViewHolder(View itemView) {
             super(itemView);
-
-            nameCategory=itemView.findViewById(R.id.tvCategoryName);
-
-            linearLayout = itemView.findViewById(R.id.linearLayoutCategories);
-
-
-
+            category_name = itemView.findViewById(R.id.tvCategoryName);
         }
+    }
+
+    @Override
+    public CategoriesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view=LayoutInflater.from(ccontext).inflate(R.layout.item_recicle_categories, parent, false);
+        return new CategoriesViewHolder(view);
+    }
+
+
+    @Override
+    public void onBindViewHolder(CategoriesViewHolder holder, int position) {
+        Categories currentItem=ccategories.get(position);
+
+        String category_name = currentItem.getCategory_name();
+
+        holder.category_name.setText(category_name);
 
     }
+
+    @Override
+    public int getItemCount() {
+        return ccategories.size();
+    }
+
 
 }

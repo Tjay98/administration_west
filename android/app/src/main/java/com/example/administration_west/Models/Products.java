@@ -4,7 +4,7 @@ public class Products {
 
     private int id;
     private String product_name;
-    private int image;
+    private String image;
     private double price;
 /*private String big_description;
 private String category_name;
@@ -30,7 +30,7 @@ this.setPrice(price);
 this.setPrice_iva(price_iva);
 }*/
 
-    public Products(int id, String product_name, int image, double price){
+    public Products(int id, String product_name, String image, double price){
         this.id =id;
         this.product_name = product_name;
         this.image = image;
@@ -54,11 +54,11 @@ this.setPrice_iva(price_iva);
         this.product_name = product_name;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

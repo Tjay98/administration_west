@@ -14,13 +14,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ProductsJsonParse {
-    /*public static boolean isConnectionInternet(Context contexto){
+    public static boolean isConnectionInternet(Context contexto){
         ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo= cm.getActiveNetworkInfo();
 
         return networkInfo != null&&networkInfo.isConnected();
     }
-
+/*
     public static ArrayList<Products> parseJsonProducts(JSONArray response, Context contexto){
         ArrayList<Products> lista= new ArrayList<Products>();
         try {
