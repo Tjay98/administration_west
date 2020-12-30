@@ -125,6 +125,9 @@ $route['translate_uri_dashes'] = FALSE;
 
         //categories
         $route['admin/categories'] = 'backend/categories/index';
+        $route['admin/categories_table']='backend/categories/get_datatable';
+        $route['admin/categories/add'] = 'backend/categories/add';
+        $route['admin/categories/edit/(:any)'] = 'backend/categories/edit/$1';
 
         //companies
         $route['admin/companies'] = 'backend/companies/index';
