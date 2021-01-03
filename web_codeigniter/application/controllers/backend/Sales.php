@@ -202,11 +202,23 @@ class Sales extends MY_Controller {
                         'price'=>$product['price'],
                         'price_iva'=>$product['iva'],
                     ];
-                    $this->Sale_model->reduce_stock($product['id'],$product['quantity']);
+                    
+                    
+                   
                 }
-                $this->db->insert_batch('sales_product',$sale_product);
+                $reduce=$this->Sale_model->reduce_stock($sale_product);
+                
+                if($reduce=="success"){
+                    $this->db->insert_batch('sales_product',$sale_product);
+                    redirect('admin/sales');
+                }else{
+                    $this->session->set_flashdata('error', 'Um ou mais produtos não têm quantidade suficiente em stock');
+                    redirect('admin/sales/add');
+                }
+                
+
             }
-            redirect('admin/sales');
+           
         }
     }
 
@@ -238,14 +250,20 @@ class Sales extends MY_Controller {
 
         if(!empty($this->input->post('product'))){
             $sales_products=$this->input->post('product');
-            
+            /* print_r($sales_products);die; */
             foreach($sales_products as $sale_product){
                 //$this->db->where('')
-                $sale_group_id=$sale_product['sale_group_id'];
-                $this->db->where('id',$sale_product['sale_product_id']);
-                $this->db->set('status',$sale_product['status']);
-                $this->db->update('sales_product');
+                if(!empty($sale_product['status'])){
+
+                    $sale_group_id=$sale_product['sale_group_id'];
+                    $this->db->where('id',$sale_product['sale_product_id']);
+                    $this->db->set('status',$sale_product['status']);
+                    $this->db->update('sales_product');
+
+                }
+
             }
+            /* print_r($sale_product['status']);die; */
             $this->db->select('count(sale_group_id) as still_processing');
             $this->db->where('sale_group_id',$sale_group_id);
             $this->db->where('status',0);

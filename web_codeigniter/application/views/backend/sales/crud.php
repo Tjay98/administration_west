@@ -39,6 +39,14 @@
             </div>
 
 		</div>
+        <div class="row">
+            <?php if(!empty($this->session->flashdata('error'))){?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $this->session->flashdata('error'); ?>
+                </div>
+            <?php } ?>
+        </div>
+
         
 	</div>
 	<!-- /.container-fluid -->

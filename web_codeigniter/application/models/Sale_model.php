@@ -221,21 +221,44 @@ class Sale_model extends CI_Model{
     }
 
 
-    public function reduce_stock($product_id,$quantity){
-        $this->db->where('id',$product_id);
-        $product=$this->db->get('products');
+    public function reduce_stock($products){
 
+        $validate_reduce=true;
+        
+        $i=0;
+        foreach($products as $product){
+            $product_id=$product['sale_product_id']; 
+            $quantity = $product['quantity'];
+            $this->db->where('id',$product_id);
+            $product=$this->db->get('products')->row_array();
+            
+            if($product['quantity_in_stock']<$quantity){
+                $validate_reduce=false;
 
-        if($product['quantity_in_stock']<$quantity){
-            return 'error_quantity';
-        }else{
-           $new_quantity=$product['quantity_in_stock']-$quantity;
+               
+            }else{
+                $products[$i]['quantity_in_stock']=$product['quantity_in_stock'];
+            }
+
+            $i++;
+        }
+
+        if($validate_reduce == true) {
+            foreach($products as $product){
+
+                $product_id=$product['sale_product_id']; 
+                $quantity = $product['quantity'];
+
+                $new_quantity=$product['quantity_in_stock']-$quantity;
            
-           $this->db->where('id',$product_id);
-           $this->db->set('quantity_in_stock',$new_quantity);
-           $this->db->update('products');
+                $this->db->where('id',$product_id);
+                $this->db->set('quantity_in_stock',$new_quantity);
+                $this->db->update('products');
+            }
+            return "success";
 
-           return 'success';
+        }else{
+            return "error";
         }
     }
 

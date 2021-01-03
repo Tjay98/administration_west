@@ -3,14 +3,16 @@ package com.example.administration_west.Models;
 public class Companies {
     private int id;
     private String company_name;
-//private int image;
-//private String description;
+    private String image;
+    private String description;
 
 
     //construtor
-    public Companies(int id, String company_name){
-        this.setId(id);
-        this.setCompany_name(company_name);
+    public Companies(int id, String company_name, String image, String description){
+        this.id =id;
+        this.company_name = company_name;
+        this.image = image;
+        this.description=description;
     }
 
 
@@ -30,19 +32,19 @@ public class Companies {
         this.company_name = company_name;
     }
 
-/*public int getImage() {
-return image;
-}
+    public String getImage() {
+        return image;
+    }
 
-public void setImage(int image) {
-this.image = image;
-}
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-/* public String getDescription() {
-return description;
-}
+    public String getDescription() {
+        return description;
+    }
 
-public void setDescription(String description) {
-this.description = description;
-}*/
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

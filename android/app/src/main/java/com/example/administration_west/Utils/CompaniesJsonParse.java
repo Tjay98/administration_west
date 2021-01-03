@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.example.administration_west.Models.Companies;
-import com.example.administration_west.Models.Products;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ProductsJsonParse {
+public class CompaniesJsonParse {
     public static boolean isConnectionInternet(Context contexto){
         ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo= cm.getActiveNetworkInfo();
@@ -22,20 +21,20 @@ public class ProductsJsonParse {
         return networkInfo != null&&networkInfo.isConnected();
     }
 
-    public static ArrayList<Products> parseJsonProducts(JSONArray response, Context contexto){
-        ArrayList<Products> lista= new ArrayList<Products>();
+    public static ArrayList<Companies> parseJsonCompanies(JSONArray response, Context contexto){
+        ArrayList<Companies> lista= new ArrayList<Companies>();
         try {
             for(int i =0; i<response.length(); i++){
 
-                JSONObject productsapi = (JSONObject)response.get(i);
+                JSONObject companiesapi = (JSONObject)response.get(i);
 
-                Products products=new Products(productsapi.getInt("id"),
-                        productsapi.getString("product_name"),
+                Companies companies=new Companies(companiesapi.getInt("id"),
+                        companiesapi.getString("company_name"),
+                        companiesapi.getString("image"),
+                        companiesapi.getString("description"));
 
-                        productsapi.getDouble("price"),
-                        productsapi.getString("image"));
 
-                lista.add(products);
+                lista.add(companies);
             }
         }catch (JSONException e) {
             e.printStackTrace();
@@ -46,17 +45,20 @@ public class ProductsJsonParse {
     }
 
 
-    public static Products parserJsonProducts(JSONObject response, Context contexto){
-        Products products = null;
+    public static Companies parserJsonCompanies(JSONObject response, Context contexto){
+        Companies companies = null;
         try {
-            products =new Products(response.getInt("id"),
-                    response.getString("product_name"),
-                    response.getDouble("price"),
-                    response.getString("image"));
+            companies =new Companies(response.getInt("id"),
+                    response.getString("company_name"),
+                    response.getString("image"),
+                    response.getString("description"));
+
         }catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(contexto, "ERRO:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        return products;
+        return companies;
     }
+
+
 }

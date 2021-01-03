@@ -73,7 +73,7 @@ $products=array_slice($all_products, 0, 5);
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
 						<div class="info-box-content">
-							<span class="info-box-text">Utilizadores</span>
+							<span class="info-box-text">Clientes</span>
 							<span class="info-box-number"><?php if(!empty($client_count)){ echo $client_count;}else{echo 0;} ?></span>
 						</div>
 						<!-- /.info-box-content -->

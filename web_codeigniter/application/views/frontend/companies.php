@@ -34,7 +34,7 @@
                     <div class="custom-boxes">
                         <h4 class="text-center"> <?php echo $companies['company_name']; ?></h4>   
                         <p class="text-justify"> <?php echo $companies['description']; ?></p>  
-                        <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo $companies['image']; ?>">
+                        <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
                     </div>
                 </div>
             <?php endforeach; ?>

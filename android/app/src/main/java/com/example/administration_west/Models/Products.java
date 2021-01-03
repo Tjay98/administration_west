@@ -30,11 +30,11 @@ this.setPrice(price);
 this.setPrice_iva(price_iva);
 }*/
 
-    public Products(int id, String product_name, String image, double price){
+    public Products(int id, String product_name, double price , String image){
         this.id =id;
         this.product_name = product_name;
-        this.image = image;
         this.price = price;
+        this.image = image;
     }
 
 
@@ -55,11 +55,11 @@ this.setPrice_iva(price_iva);
     }
 
     public String getImage() {
-        return image;
-    }
+          return image;
+      }
 
-    public void setImage(String image) {
-        this.image = image;
+      public void setImage(String image) {
+          this.image = image;
     }
 
     public double getPrice() {

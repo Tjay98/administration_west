@@ -69,7 +69,7 @@
                         <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
                         <div class="custom-boxes" style="min-height:200px">
                             <div class="row">
-                                <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo $companies['image']; ?>">
+                                <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
                                 <h4><b> <?php echo $companies['company_name']; ?> </b> </h4> 
                             </div>  
                             <p class="text-justify"> <?php echo $companies['description']; ?></p> 

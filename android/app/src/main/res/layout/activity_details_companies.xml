@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailsCompaniesActivity">
+    tools:context=".Pages.DetailsCompaniesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
