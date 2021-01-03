@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.example.administration_west.Pages.ProductActivity.ip;
+
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
     private Context ccontext;
     private ArrayList<Products> cproducts;
@@ -55,7 +57,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         String product_name = currentItem.getProduct_name();
         String product_price = String.valueOf(currentItem.getPrice());
-        String product_image = "http://192.168.1.109/administration_west/web_codeigniter/uploads/products/"+currentItem.getImage();
+        String product_image =  ip + "uploads/products/"+currentItem.getImage();
 
 
         holder.product_name.setText(product_name);

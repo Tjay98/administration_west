@@ -53,6 +53,8 @@ public class ProductActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
 
 
+    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +82,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void parseJSONCategories(final Context context){
-        String url= "http://192.168.1.109/administration_west/web_codeigniter/restful/categories";
+        String url= ip + "restful/categories";
         JsonArrayRequest request=new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -102,7 +104,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void parseJSONProducts(final Context context){
-        String url= "http://192.168.1.109/administration_west/web_codeigniter/restful/products";
+        String url= ip + "restful/products";
         JsonArrayRequest request=new JsonArrayRequest(
                 Request.Method.GET,
                 url,

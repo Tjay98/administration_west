@@ -22,6 +22,8 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import static com.example.administration_west.Pages.ProductActivity.ip;
+
 public class CompaniesActivity extends AppCompatActivity {
 
 
@@ -48,7 +50,7 @@ public class CompaniesActivity extends AppCompatActivity {
     }
 
     private void parseJSONCompanies(final Context context) {
-        String url = "http://192.168.1.109/administration_west/web_codeigniter/restful/companies";
+        String url = ip + "restful/companies";
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,

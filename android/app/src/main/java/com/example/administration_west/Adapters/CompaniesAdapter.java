@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.example.administration_west.Pages.ProductActivity.ip;
+
 public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.CompaniesViewHolder> {
 
     private Context ccontext;
@@ -69,7 +71,7 @@ onCompanyListener.OnCompanyListener(getAdapterPosition());
 
         String company_name = currentItem.getCompany_name();
         //String company_image = currentItem.getImage();
-        String company_image = "http://192.168.1.109/administration_west/web_codeigniter/uploads/companies/"+currentItem.getImage();
+        String company_image =  ip + "uploads/companies/"+currentItem.getImage();
 
 
 
