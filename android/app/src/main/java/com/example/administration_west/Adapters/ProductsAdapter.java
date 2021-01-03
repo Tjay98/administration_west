@@ -61,18 +61,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.product_name.setText(product_name);
         holder.product_price.setText(product_price + " €"); 
  
-       if (product_image != null && product_image.isEmpty()) {
-            // iview.setImageResource(R.drawable.placeholder);
-        } else {
+
             Picasso.with(ccontext).load(product_image)
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_background)
                     .fit()
                     .centerInside()
                     .into(holder.product_image);
-        }
-        //Picasso.with(ccontext).load(product_image).fit().centerInside().into(holder.product_image);
-
 
     }
 

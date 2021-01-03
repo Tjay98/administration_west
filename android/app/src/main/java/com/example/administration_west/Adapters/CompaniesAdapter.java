@@ -76,21 +76,17 @@ onCompanyListener.OnCompanyListener(getAdapterPosition());
 
         holder.company_name.setText(company_name);
 
-        if (company_image != null && company_image.isEmpty()) {
-// iview.setImageResource(R.drawable.placeholder);
-        } else {
-            Picasso.with(ccontext).load(company_image)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
-                    .fit()
-                    .centerInside()
-                    .into(holder.company_image);
+
+        Picasso.with(ccontext).load(company_image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .fit()
+                .centerInside()
+                .into(holder.company_image);
         }
 
-//Picasso.with(ccontext).load(company_image).fit().centerInside().into(holder.company_image);
 
 
-    }
 
     @Override
     public int getItemCount() {
