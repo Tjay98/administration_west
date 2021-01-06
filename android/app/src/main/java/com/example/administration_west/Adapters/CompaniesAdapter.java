@@ -1,6 +1,8 @@
 package com.example.administration_west.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.administration_west.Models.Companies;
 import com.example.administration_west.Models.Products;
+import com.example.administration_west.Pages.DetailsCompaniesActivity;
 import com.example.administration_west.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.example.administration_west.Pages.ProductActivity.ip;
@@ -24,37 +28,47 @@ public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.Comp
 
     private Context ccontext;
     private ArrayList<Companies> companiesList;
-//private OnCompanyListener onCompanyListener;
+    private OnItemClickListener mListener;
 
-/* public interface OnCompanyListener {
-void OnCompanyListener (int position);
-}*/
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public CompaniesAdapter(Context context, ArrayList<Companies> companies) {
         this.ccontext = context;
         this.companiesList = companies;
-// this.onCompanyListener=onListener;
     }
 
     public class CompaniesViewHolder extends RecyclerView.ViewHolder {
         public TextView company_name;
         public ImageView company_image;
-//OnCompanyListener onCompanyListener;
 
         public CompaniesViewHolder(View itemView) {
             super(itemView);
             company_name = itemView.findViewById(R.id.tvCompanyName);
             company_image = itemView.findViewById(R.id.ivCompany);
-// this.onCompanyListener = onCompanyListener;
 
-// itemView.setOnClickListener(this);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener !=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+
 
         }
 
-/* @Override
-public void onClick(View v) {
-onCompanyListener.OnCompanyListener(getAdapterPosition());
-}*/
     }
 
 
@@ -85,7 +99,7 @@ onCompanyListener.OnCompanyListener(getAdapterPosition());
                 .fit()
                 .centerInside()
                 .into(holder.company_image);
-        }
+    }
 
 
 

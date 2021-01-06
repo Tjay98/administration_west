@@ -21,9 +21,19 @@ import java.util.ArrayList;
 import static com.example.administration_west.Pages.ProductActivity.ip;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+
     private Context ccontext;
     private ArrayList<Products> cproducts;
-    int row_index = -1;
+    private OnItemClickListener mListener;
+
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public ProductsAdapter(Context context, ArrayList<Products> products) {
         this.ccontext = context;
@@ -40,6 +50,18 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             product_name = itemView.findViewById(R.id.tvProductNameGrid);
             product_price = itemView.findViewById(R.id.tvPriceNameGrid);
             product_image = itemView.findViewById(R.id.ivProductImageGrid);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener !=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -61,15 +83,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
 
         holder.product_name.setText(product_name);
-        holder.product_price.setText(product_price + " €"); 
- 
+        holder.product_price.setText(product_price + " €");
 
-            Picasso.with(ccontext).load(product_image)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
-                    .fit()
-                    .centerInside()
-                    .into(holder.product_image);
+
+        Picasso.with(ccontext).load(product_image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .fit()
+                .centerInside()
+                .into(holder.product_image);
 
     }
 
@@ -77,56 +99,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public int getItemCount() {
         return cproducts.size();
     }
-} 
- 
- 
- 
-  /*  @Override 
-    public ProductsRVViewHolder onCreateViewHolder( ViewGroup parent, int viewType) { 
-        View view = LayoutInflater.from(context).inflate(R.layout.item_recicle_product, parent, false); 
-// ProductsAdapter.ProductsRVViewHolder productsRVViewHolder = new ProductsAdapter.ProductsRVViewHolder(view); 
-        return new ProductsRVViewHolder(view); 
-    } 
- 
-    @Override 
-    public void onBindViewHolder( ProductsAdapter.ProductsRVViewHolder holder, int position) { 
-        Products products = items.get(position); 
- 
-        holder.nameProduct.setText(products.getProduct_name()); 
-        holder.price.setText(String.valueOf(products.getProduct_name())); 
- 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() { 
-            @Override 
-            public void onClick(View v) { 
-                row_index = position; 
-                notifyDataSetChanged(); 
-            } 
-        }); 
- 
-        if (row_index == position) { 
-            holder.linearLayout.setBackgroundResource(R.drawable.product_recycle_view_bg_selected); 
-        } else { 
-            holder.linearLayout.setBackgroundResource(R.drawable.product_recycle_view_bg); 
- 
-        } 
-    } 
- 
-    @Override 
-    public int getItemCount() { 
-        return items.size(); 
-    } 
- 
-    public static class ProductsRVViewHolder extends RecyclerView.ViewHolder { 
-        TextView nameProduct, price; 
-        LinearLayout linearLayout; 
- 
-        public ProductsRVViewHolder( View itemView) { 
-            super(itemView); 
-            nameProduct = itemView.findViewById(R.id.tvProductNameGrid); 
-            linearLayout = itemView.findViewById(R.id.linearLayoutProducts); 
-            price = itemView.findViewById(R.id.tvPriceNameGrid); 
- 
-        } 
- 
-    } 
-*/ 
+}
+
+

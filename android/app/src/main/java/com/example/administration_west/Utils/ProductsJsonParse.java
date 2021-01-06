@@ -31,9 +31,16 @@ public class ProductsJsonParse {
 
                 Products products=new Products(productsapi.getInt("id"),
                         productsapi.getString("product_name"),
-
+                        productsapi.getString("image"),
+                        productsapi.getString("big_description"),
+                        productsapi.getString("category_name"),
+                        productsapi.getInt("category_id"),
+                        productsapi.getString("company_name"),
+                        productsapi.getInt("company_id"),
+                        productsapi.getInt("quantity_in_stock"),
                         productsapi.getDouble("price"),
-                        productsapi.getString("image"));
+                        productsapi.getDouble("price_iva")
+                );
 
                 lista.add(products);
             }
@@ -51,8 +58,15 @@ public class ProductsJsonParse {
         try {
             products =new Products(response.getInt("id"),
                     response.getString("product_name"),
+                    response.getString("image"),
+                    response.getString("big_description"),
+                    response.getString("category_name"),
+                    response.getInt("category_id"),
+                    response.getString("company_name"),
+                    response.getInt("company_id"),
+                    response.getInt("quantity_in_stock"),
                     response.getDouble("price"),
-                    response.getString("image"));
+                    response.getDouble("price_iva"));
         }catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(contexto, "ERRO:" + e.getMessage(), Toast.LENGTH_SHORT).show();

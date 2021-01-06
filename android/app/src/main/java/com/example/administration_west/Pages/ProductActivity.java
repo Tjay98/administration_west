@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Adapters.CategoriesAdapter;
+import com.example.administration_west.Adapters.CompaniesAdapter;
 import com.example.administration_west.Adapters.ProductsAdapter;
 import com.example.administration_west.Models.Categories;
+import com.example.administration_west.Models.Companies;
 import com.example.administration_west.Models.Products;
 import com.example.administration_west.R;
 import com.example.administration_west.Utils.CategoriesJsonParse;
@@ -40,7 +43,13 @@ import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity implements ProductsAdapter.OnItemClickListener {
+
+    public static final String EXTRA_PRODUCT_IMAGE = "product_image";
+    public static final String EXTRA_PRODUCT_NAME = "product_name";
+    public static final String EXTRA_PRODUCT_CATEGORY = "product_category";
+    public static final String EXTRA_PRODUCT_COMPANY = "product_company";
+    public static final String EXTRA_PRODUCT_DESCRIPTION = "product_description";
 
 
 
@@ -115,6 +124,7 @@ public class ProductActivity extends AppCompatActivity {
                         productsList = ProductsJsonParse.parseJsonProducts(response, context);
                         adapterProducts = new ProductsAdapter(ProductActivity.this, productsList);
                         recyclerViewProducts.setAdapter(adapterProducts);
+                        adapterProducts.setOnItemClickListener(ProductActivity.this);
 
                     }
                 }, new Response.ErrorListener() {
@@ -124,6 +134,21 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent detail = new Intent (this, DetailsProductsActivity.class);
+        Products clicked = productsList.get(position);
+
+        detail.putExtra(EXTRA_PRODUCT_IMAGE, ip + "uploads/products/" + clicked.getImage());
+        detail.putExtra(EXTRA_PRODUCT_NAME, clicked.getProduct_name());
+        detail.putExtra(EXTRA_PRODUCT_CATEGORY, clicked.getCategory_name());
+        detail.putExtra(EXTRA_PRODUCT_COMPANY, clicked.getCompany_name());
+        detail.putExtra(EXTRA_PRODUCT_DESCRIPTION, clicked.getBig_description());
+
+        startActivity(detail);
+
     }
 }
 

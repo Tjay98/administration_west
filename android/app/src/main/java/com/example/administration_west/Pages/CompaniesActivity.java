@@ -1,11 +1,13 @@
 package com.example.administration_west.Pages;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +26,11 @@ import java.util.ArrayList;
 
 import static com.example.administration_west.Pages.ProductActivity.ip;
 
-public class CompaniesActivity extends AppCompatActivity {
+public class CompaniesActivity extends AppCompatActivity implements CompaniesAdapter.OnItemClickListener {
+
+    public static final String EXTRA_IMAGE = "image";
+    public static final String EXTRA_COMPANY_NAME = "name";
+    public static final String EXTRA_DESCRIPTION = "description";
 
 
     private RecyclerView recyclerViewCompanies;
@@ -37,6 +43,11 @@ public class CompaniesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_companies);
+
+        final SwipeRefreshLayout refreshLayout;
+
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMainProduct);
+
 
 
         recyclerViewCompanies = findViewById(R.id.RecicleViewCompanies);
@@ -61,6 +72,7 @@ public class CompaniesActivity extends AppCompatActivity {
                         companiesList = CompaniesJsonParse.parseJsonCompanies(response, context);
                         adapterCompanies = new CompaniesAdapter(CompaniesActivity.this, companiesList);
                         recyclerViewCompanies.setAdapter(adapterCompanies);
+                        adapterCompanies.setOnItemClickListener(CompaniesActivity.this);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -71,30 +83,16 @@ public class CompaniesActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    public static class CartActivity extends AppCompatActivity {
+    @Override
+    public void onItemClick(int position) {
+        Intent detail = new Intent (this, DetailsCompaniesActivity.class);
+        Companies clicked = companiesList.get(position);
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_cart);
-        }
-    }
+        detail.putExtra(EXTRA_IMAGE, ip + "uploads/companies/" + clicked.getImage());
+        detail.putExtra(EXTRA_COMPANY_NAME, clicked.getCompany_name());
+        detail.putExtra(EXTRA_DESCRIPTION, clicked.getDescription());
 
-    public static class DepoisCarrinhoActivity extends AppCompatActivity {
+        startActivity(detail);
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_moradas);
-        }
     }
 }
-
-
-/* @Override
-public void OnCompanyListener(int position) {
-// companiesList.get(position);
-
-Intent detail = new Intent(this, DetailsCompaniesActivity.class);
-startActivity(detail);
-}*/
