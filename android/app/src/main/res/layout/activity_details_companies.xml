@@ -18,7 +18,8 @@
                 android:layout_width="100dp"
                 android:layout_height="200dp"
                 android:layout_weight="1"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/ic_launcher_background"
+                />
 
             <TextView
                 android:id="@+id/tVNomeEmpresaDC"
@@ -47,6 +48,7 @@
             android:layout_weight="1"
             android:text="Descrição"
             android:textSize="25sp"
+
             android:textAlignment="center"
             android:layout_marginTop="20dp" />
 

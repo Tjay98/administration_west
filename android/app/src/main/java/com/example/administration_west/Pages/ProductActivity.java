@@ -62,7 +62,7 @@ public class ProductActivity extends AppCompatActivity implements ProductsAdapte
     private RequestQueue requestQueue;
 
 
-    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

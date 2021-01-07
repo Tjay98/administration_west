@@ -16,7 +16,7 @@
         />
 
     <TextView
-        android:id="@+id/textViewNomeProfile"
+        android:id="@+id/tVNomeProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -25,7 +25,7 @@
         android:textSize="25sp"/>
 
     <TextView
-        android:id="@+id/textViewEmailProfile"
+        android:id="@+id/tVEmailProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -34,7 +34,7 @@
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/textViewNifProfile"
+        android:id="@+id/tVMobileProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -44,7 +44,7 @@
 
 
     <TextView
-        android:id="@+id/textViewDataProfile"
+        android:id="@+id/tVDataProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

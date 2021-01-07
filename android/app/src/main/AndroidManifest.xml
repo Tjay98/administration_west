@@ -12,17 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-        <activity android:name=".Pages.DetailsProductsActivity$PagamentoActivity"></activity>
-        <activity android:name=".Pages.DetailsCompaniesActivity$FinalizarCompraActivity" />
-        <activity android:name=".Pages.CompaniesActivity$CartActivity" />
-        <activity android:name=".Pages.CompaniesActivity$DepoisCarrinhoActivity" />
+        <activity android:name=".Pages.DetailsProductsActivity"></activity>
         <activity android:name=".Pages.DetailsCompaniesActivity" />
-        <activity android:name=".Pages.DetailsProductsActivity" />
-        <!--
+        <activity android:name=".Pages.FinalizarCompraActivity" />
+        <activity android:name=".Pages.PagamentoActivity" />
+        <activity android:name=".Pages.CompaniesActivity" />
+        <activity android:name=".Pages.CartActivity" />
+        <activity android:name=".Pages.DepoisCarrinhoActivity" />
+
         <activity android:name=".Pages.ProductActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        -->
-        <activity android:name=".Pages.ProductActivity">
+        <activity android:name=".Pages.RegisterActivity"></activity>
+
+        <activity android:name=".Pages.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

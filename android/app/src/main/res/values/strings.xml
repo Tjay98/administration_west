@@ -10,6 +10,8 @@
 
     <string name="login_2">Fazer Login</string>
     <string name="registo">Ainda não tem conta? Crie</string>
+    <string name="telemovel">Telemóvel</string>
+
 
     <string name="registo_2">Criar conta</string>
     <string name="registo_3">Já tem conta? Faça login</string>
