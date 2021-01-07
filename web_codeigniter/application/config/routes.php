@@ -111,7 +111,6 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/products/edit/(:any)'] = 'backend/products/edit/$1';
         $route['admin/products/delete/(:any)'] = 'backend/products/delete/$1';
         $route['admin/products/show/(:any)'] = 'backend/products/show_product/$1';
-        
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';
@@ -131,9 +130,37 @@ $route['translate_uri_dashes'] = FALSE;
 
         //companies
         $route['admin/companies'] = 'backend/companies/index';
+        $route['admin/companies_table']='backend/companies/get_datatable';
+        $route['admin/companies/add'] = 'backend/companies/add';
+        $route['admin/companies/edit/(:any)'] = 'backend/companies/edit/$1';
+        $route['admin/companies/delete/(:any)'] = 'backend/companies/delete/$1';
+
+
+        //users e clients mesmo controlador
+
+            //clientes
+            $route['admin/clients'] = 'backend/clients/client_index';
+            $route['admin/client_table']='backend/clients/get_client_datatable';
+            $route['admin/clients/add'] = 'backend/clients/client_add';
+            $route['admin/clients/edit/(:any)'] = 'backend/clients/client_edit/$1';
+            $route['admin/clients/delete/(:any)'] = 'backend/clients/client_delete/$1';
+
+            //utilizadores
+            $route['admin/users'] = 'backend/clients/user_index';
+            $route['admin/user_table']='backend/clients/get_user_datatable';
+            $route['admin/users/add'] = 'backend/clients/user_add';
+            $route['admin/users/edit/(:any)'] = 'backend/clients/user_edit/$1';
+            $route['admin/users/delete/(:any)'] = 'backend/clients/user_delete/$1';
+
+            //adicionar utilizador a empresa
+            $route['admin/users/create_company_user'] = 'backend/clients/create_company_user';
+        
 
         //contacts
         $route['admin/contacts'] = 'backend/contacts/index';
+        $route['admin/contact_table']='backend/contacts/get_client_datatable';
+        $route['admin/contacts/edit/(:any)'] = 'backend/contacts/edit/$1';
+        $route['admin/contacts/delete/(:any)'] = 'backend/contacts/delete/$1';
 
     
     //api
@@ -151,6 +178,9 @@ $route['translate_uri_dashes'] = FALSE;
         //companies
         $route['restful/companies'] = 'api/restful/get_companies';
         $route['restful/company/(:any)'] = 'api/restful/get_company/$1';
+
+        //users 
+        $route['restful/users/profile'] = 'api/restful/profile';
 
         //categories
         $route['restful/categories'] = 'api/restful/get_categories';

@@ -80,7 +80,7 @@
                 flag=false;
             }
 
-            if(nif.length!=9){
+            if(phone.length!=9){
                 $('#phone_error').text('O número é inválido');
                 flag=false;
             }

@@ -140,7 +140,7 @@ class Restful extends MY_Controller {
 
     public function register(){
         /* print_r($this->input->post()); */
-        if( (!empty($this->input->post('username'))) && (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) && (!empty($this->input->post('nif'))) && (!empty($this->input->post('birthday')))){
+        if( (!empty($this->input->post('username'))) && (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) && (!empty($this->input->post('phone_number'))) && (!empty($this->input->post('birthday')))){
             $user=strtolower($this->input->post('username'));
             $email=strtolower($this->input->post('email'));
         
@@ -151,7 +151,7 @@ class Restful extends MY_Controller {
             $registo_form=[
                 'username'=>$username,
                 'email'=>$email,
-                'nif'=>$this->input->post('nif'),
+                'phone_number'=>$this->input->post('phone_number'),
                 'birthday_date'=>$this->input->post('birthday'),
                 'password_hash'=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
             ];
