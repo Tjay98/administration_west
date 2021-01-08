@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -12,26 +11,24 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+<<<<<<< Updated upstream
 import com.example.administration_west.Models.Users;
+=======
+>>>>>>> Stashed changes
 import com.example.administration_west.R;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.administration_west.Pages.ProductActivity.ip;
+import static com.example.administration_west.Pages.ProductFragment.ip;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -83,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void mainactivity() {
-        Intent intentMain = new Intent(this, ProductActivity.class);
+        Intent intentMain = new Intent(this, ProductFragment.class);
         startActivity(intentMain);
         finish();
     }

@@ -8,11 +8,14 @@
         android:title="@string/search"
         app:showAsAction="always"
         app:actionViewClass="android.widget.SearchView"
+        android:iconTint="@color/white"
+
         />
     <item
         android:id="@+id/shop"
         android:icon="@drawable/ic_shopping_cart"
         android:title="@string/title_notifications"
         app:showAsAction="always"
+        android:iconTint="@color/white"
         />
 </menu>

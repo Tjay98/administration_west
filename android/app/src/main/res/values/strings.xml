@@ -19,7 +19,10 @@
 
     <string name="perfil">Perfil</string>
     <string name="mudar_password">Mudar a password</string>
+    <string name="company">Empresas</string>
+    <string name="profile">Perfil</string>
 
+    <string name="produto">Produtos</string>
 
     <string name="nome_produto">Nome do Produto</string>
     <string name="search">Search</string>

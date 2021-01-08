@@ -1,28 +1,21 @@
 package com.example.administration_west.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.administration_west.Models.Companies;
-import com.example.administration_west.Models.Products;
-import com.example.administration_west.Pages.DetailsCompaniesActivity;
 import com.example.administration_west.R;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import static com.example.administration_west.Pages.ProductActivity.ip;
+import static com.example.administration_west.Pages.ProductFragment.ip;
 
 public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.CompaniesViewHolder> {
 

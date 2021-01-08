@@ -3,8 +3,11 @@ package com.example.administration_west.Pages;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,9 +27,9 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-import static com.example.administration_west.Pages.ProductActivity.ip;
+import static com.example.administration_west.Pages.ProductFragment.ip;
 
-public class CompaniesActivity extends AppCompatActivity implements CompaniesAdapter.OnItemClickListener {
+public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnItemClickListener {
 
     public static final String EXTRA_IMAGE = "image";
     public static final String EXTRA_COMPANY_NAME = "name";
@@ -38,27 +41,31 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesAda
     private ArrayList<Companies> companiesList;
     private RequestQueue requestQueue;
 
+    public CompaniesFragment(){
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_companies);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_companies, container, false);
 
         final SwipeRefreshLayout refreshLayout;
 
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMainProduct);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainProduct);
 
 
-
-        recyclerViewCompanies = findViewById(R.id.RecicleViewCompanies);
-        recyclerViewCompanies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerViewCompanies = view.findViewById(R.id.RecicleViewCompanies);
+        recyclerViewCompanies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         companiesList = new ArrayList<>();
 
-        requestQueue = Volley.newRequestQueue(this);
-        parseJSONCompanies(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(getContext());
+        parseJSONCompanies(getContext());
 
-    }
+
+return view;
+}
 
     private void parseJSONCompanies(final Context context) {
         String url = ip + "restful/companies";
@@ -70,9 +77,9 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesAda
                     @Override
                     public void onResponse(JSONArray response) {
                         companiesList = CompaniesJsonParse.parseJsonCompanies(response, context);
-                        adapterCompanies = new CompaniesAdapter(CompaniesActivity.this, companiesList);
+                        adapterCompanies = new CompaniesAdapter(getContext(), companiesList);
                         recyclerViewCompanies.setAdapter(adapterCompanies);
-                        adapterCompanies.setOnItemClickListener(CompaniesActivity.this);
+                        adapterCompanies.setOnItemClickListener(CompaniesFragment.this);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -85,7 +92,7 @@ public class CompaniesActivity extends AppCompatActivity implements CompaniesAda
 
     @Override
     public void onItemClick(int position) {
-        Intent detail = new Intent (this, DetailsCompaniesActivity.class);
+        Intent detail = new Intent (getContext(), DetailsCompaniesActivity.class);
         Companies clicked = companiesList.get(position);
 
         detail.putExtra(EXTRA_IMAGE, ip + "uploads/companies/" + clicked.getImage());

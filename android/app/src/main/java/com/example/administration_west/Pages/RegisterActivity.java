@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,7 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+<<<<<<< Updated upstream
 import com.example.administration_west.Models.Users;
+=======
+>>>>>>> Stashed changes
 import com.example.administration_west.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -28,7 +30,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.administration_west.Pages.ProductActivity.ip;
+import static com.example.administration_west.Pages.ProductFragment.ip;
 
 public class RegisterActivity extends AppCompatActivity {
 

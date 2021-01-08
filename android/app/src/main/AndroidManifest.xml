@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administration_west">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,18 +13,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-        <activity android:name=".Pages.DetailsProductsActivity"></activity>
-        <activity android:name=".Pages.DetailsCompaniesActivity" />
+       <!-- <activity android:name=".Pages.MainActivity"
+            android:screenOrientation="portrait"
+            />-->
+        <activity android:name=".Pages.DetailsProductsActivity"
+            android:parentActivityName=".Pages.ProductFragment"
+            />
+
+        <activity android:name=".Pages.DetailsCompaniesActivity"
+            android:parentActivityName=".Pages.CompaniesFragment"/>
+
         <activity android:name=".Pages.FinalizarCompraActivity" />
+
         <activity android:name=".Pages.PagamentoActivity" />
-        <activity android:name=".Pages.CompaniesActivity" />
-        <activity android:name=".Pages.CartActivity" />
+
+        <activity android:name=".Pages.CartActivity"
+            android:parentActivityName=".Pages.MainActivity"/>
+
+        <!--<activity android:name=".Pages.ProfileFragment"
+            android:parentActivityName=".Pages.MainActivity"/>
+
+        <activity android:name=".Pages.CompaniesFragment"
+            android:parentActivityName=".Pages.MainActivity"/>
+        <activity android:name=".Pages.ProductFragment"
+            android:parentActivityName=".Pages.ProductFragment"/>-->
+
         <activity android:name=".Pages.DepoisCarrinhoActivity" />
 
-        <activity android:name=".Pages.ProductActivity"></activity>
-        <activity android:name=".Pages.RegisterActivity"></activity>
 
-        <activity android:name=".Pages.LoginActivity">
+
+        <activity android:name=".Pages.RegisterActivity"
+            android:parentActivityName=".Pages.LoginActivity"/>
+
+        <activity
+            android:name=".Pages.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

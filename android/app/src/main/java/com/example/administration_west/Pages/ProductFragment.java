@@ -1,6 +1,5 @@
 package com.example.administration_west.Pages;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,39 +10,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Adapters.CategoriesAdapter;
-import com.example.administration_west.Adapters.CompaniesAdapter;
 import com.example.administration_west.Adapters.ProductsAdapter;
 import com.example.administration_west.Models.Categories;
-import com.example.administration_west.Models.Companies;
 import com.example.administration_west.Models.Products;
 import com.example.administration_west.R;
 import com.example.administration_west.Utils.CategoriesJsonParse;
 import com.example.administration_west.Utils.ProductsJsonParse;
 //import com.example.administration_west.slington.ProductsModel;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
-public class ProductActivity extends AppCompatActivity implements ProductsAdapter.OnItemClickListener {
+public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener {
 
     public static final String EXTRA_PRODUCT_IMAGE = "product_image";
     public static final String EXTRA_PRODUCT_NAME = "product_name";
@@ -64,30 +51,36 @@ public class ProductActivity extends AppCompatActivity implements ProductsAdapte
 
     public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
 
+    public ProductFragment(){
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         //Categories
-        recyclerViewCategories= findViewById(R.id.RecicleViewCategories);
+        recyclerViewCategories= view.findViewById(R.id.RecicleViewCategories);
         recyclerViewCategories.setHasFixedSize(true);
-        recyclerViewCategories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
 
         categoriesList = new ArrayList<>();
 
-        requestQueue = Volley.newRequestQueue(this);
-        parseJSONCategories(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(getContext());
+        parseJSONCategories(getContext());
 
         //Products
-        recyclerViewProducts= findViewById(R.id.RecicleViewProduct);
+        recyclerViewProducts= view.findViewById(R.id.RecicleViewProduct);
         recyclerViewProducts.setHasFixedSize(true);
-        recyclerViewProducts.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        recyclerViewProducts.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
 
         productsList = new ArrayList<>();
 
-        requestQueue = Volley.newRequestQueue(this);
-        parseJSONProducts(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(getContext());
+        parseJSONProducts(getContext());
+
+        return view;
     }
 
     private void parseJSONCategories(final Context context){
@@ -100,7 +93,7 @@ public class ProductActivity extends AppCompatActivity implements ProductsAdapte
                     @Override
                     public void onResponse(JSONArray response) {
                         categoriesList = CategoriesJsonParse.parseJsonCategories(response, context);
-                        adapterCategories=new CategoriesAdapter(ProductActivity.this, categoriesList);
+                        adapterCategories=new CategoriesAdapter(getContext(), categoriesList);
                         recyclerViewCategories.setAdapter(adapterCategories);
                     }
                 }, new Response.ErrorListener() {
@@ -122,9 +115,9 @@ public class ProductActivity extends AppCompatActivity implements ProductsAdapte
                     @Override
                     public void onResponse(JSONArray response) {
                         productsList = ProductsJsonParse.parseJsonProducts(response, context);
-                        adapterProducts = new ProductsAdapter(ProductActivity.this, productsList);
+                        adapterProducts = new ProductsAdapter(getContext(), productsList);
                         recyclerViewProducts.setAdapter(adapterProducts);
-                        adapterProducts.setOnItemClickListener(ProductActivity.this);
+                        adapterProducts.setOnItemClickListener(ProductFragment.this);
 
                     }
                 }, new Response.ErrorListener() {
@@ -138,7 +131,7 @@ public class ProductActivity extends AppCompatActivity implements ProductsAdapte
 
     @Override
     public void onItemClick(int position) {
-        Intent detail = new Intent (this, DetailsProductsActivity.class);
+        Intent detail = new Intent (getContext(), DetailsProductsActivity.class);
         Products clicked = productsList.get(position);
 
         detail.putExtra(EXTRA_PRODUCT_IMAGE, ip + "uploads/products/" + clicked.getImage());

@@ -10,14 +10,11 @@ import android.widget.TextView;
 import com.example.administration_west.R;
 import com.squareup.picasso.Picasso;
 
-import static com.example.administration_west.Pages.CompaniesActivity.EXTRA_COMPANY_NAME;
-import static com.example.administration_west.Pages.CompaniesActivity.EXTRA_DESCRIPTION;
-import static com.example.administration_west.Pages.CompaniesActivity.EXTRA_IMAGE;
-import static com.example.administration_west.Pages.ProductActivity.EXTRA_PRODUCT_CATEGORY;
-import static com.example.administration_west.Pages.ProductActivity.EXTRA_PRODUCT_COMPANY;
-import static com.example.administration_west.Pages.ProductActivity.EXTRA_PRODUCT_DESCRIPTION;
-import static com.example.administration_west.Pages.ProductActivity.EXTRA_PRODUCT_IMAGE;
-import static com.example.administration_west.Pages.ProductActivity.EXTRA_PRODUCT_NAME;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_CATEGORY;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_COMPANY;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_DESCRIPTION;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_IMAGE;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_NAME;
 
 public class DetailsProductsActivity extends AppCompatActivity {
 
