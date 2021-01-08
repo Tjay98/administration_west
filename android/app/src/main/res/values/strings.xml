@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Administration_west</string>
+    <string name="app_name">Administration West</string>
     <string name="nome">Nome</string>
     <string name="nif">NIF</string>
     <string name="data">Data de nascimento</string>
@@ -10,6 +10,7 @@
 
     <string name="login_2">Fazer Login</string>
     <string name="registo">Ainda não tem conta? Crie</string>
+    <string name="registo_titulo">Registo</string>
     <string name="telemovel">Telemóvel</string>
 
 

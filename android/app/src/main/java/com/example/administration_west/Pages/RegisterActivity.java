@@ -16,8 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.administration_west.Controllers.SharedPrefManager;
-import com.example.administration_west.Controllers.VolleySingleton;
 import com.example.administration_west.Models.Users;
 import com.example.administration_west.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,6 +25,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.example.administration_west.Pages.ProductActivity.ip;
 
@@ -72,7 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
                 validadeMobile();
                 validateData();
                 validadePassword();
-                registerUser();
+                if(validateName() && validateEmail() && validadeMobile() && validateData() && validadePassword()){
+                    registerUser();
+                }
             }
         });
     }
@@ -102,13 +104,17 @@ public class RegisterActivity extends AppCompatActivity {
                             String status = jsonObject.getString("status");
 
                             if (status.equals("200")) {
-                                Toast.makeText(RegisterActivity.this, "Register Success!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Registo efetuado com sucesso!", Toast.LENGTH_LONG).show();
+                                loginPage();
+
+                            }else{
+                                Toast.makeText(RegisterActivity.this, status, Toast.LENGTH_LONG).show();
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(RegisterActivity.this, "Register Error! " + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Erro no registo! " + e.toString(), Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -116,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Erro no registo! " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -124,9 +130,9 @@ public class RegisterActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", name);
                 params.put("email", email);
-                params.put("password_hash", password);
+                params.put("password", password);
                 params.put("phone_number", mobile);
-                params.put("birthday_date", data);
+                params.put("birthday", data);
 
                 return params;
             }
@@ -191,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
     public Boolean validateData(){
         String data = eTDataNascimento.getEditText().getText().toString();
         if(data.isEmpty()) {
-            eTDataNascimento.setError("A data de nascimento não pode estar vazio");
+            eTDataNascimento.setError("A data de nascimento não pode estar vazia");
             return false;
         } else {
             eTDataNascimento.setError(null);
@@ -201,39 +207,55 @@ public class RegisterActivity extends AppCompatActivity {
 
     // validação de dados Password
     public Boolean validadePassword(){
+
         String password = eTPassword.getEditText().getText().toString();
         String password2 = eTPassword2.getEditText().getText().toString();
 
-        if(password.isEmpty()) {
-            eTPassword.setError("Password não pode estar vazio @string/login_2");
-            return false;
-        } else if(password2.isEmpty()) {
-            eTPassword2.setError("Repetir password não pode estar vazio");
-            return false;
-        }else if(!password.equals(password2)) {
-            eTPassword2.setError("A password repetida tem de ser igual a password");
-            return false;
-        }else if(password.length()<6 ||password.length()>25) {
-            eTPassword.setError("A password não tem o tamanho permitido");
-            return false;
+        Boolean verify_password = true;
+        Boolean verify_repeat = true;
 
-        }else if(password.matches("(?=.*[a-z])")) {
-            eTPassword.setError("A password tem de ter letra minúscula");
-            return false;
-        }else if(password.matches("(?=.*[A-Z])")) {
-            eTPassword.setError("A password tem de ter letra maiúscula");
-            return false;
-        }else if(password.matches("(?=.*[0-9])")) {
-            eTPassword.setError("A password tem de ter um número");
-            return false;
-        }else if(password.matches("(?=.*[@#$%^&+=])")) {
-            eTPassword.setError("A password tem de ter um caracter especial");
-            return false;
-        } else {
+        if(password2.isEmpty()) {
+            eTPassword2.setError("Repetir password não pode estar vazia");
+            verify_repeat = false;
+        }
+        if(!password.equals(password2)) {
+            eTPassword2.setError("A password repetida tem de ser igual à password");
+            verify_repeat = false;
+        }
+
+
+         if(password.length()<6 ||password.length()>25) {
+            eTPassword.setError("A password não tem o tamanho permitido");
+            verify_password = false;
+        }else if (!password.matches(".*[a-z].*")) {
+            eTPassword.setError("A password deve conter 1 letra minúscula, 1 maiúscula, 1 número e 1 caractere especial");
+            verify_password = false;
+        }else if(!password.matches(".*[A-Z].*")){
+            eTPassword.setError("A password deve conter 1 letra minúscula, 1 maiúscula, 1 número e 1 caractere especial");
+            verify_password = false;
+        }else if (!password.matches(".*[!@#$%^&*+=?-].*")) {
+            eTPassword.setError("A password deve conter 1 letra minúscula, 1 maiúscula, 1 número e 1 caractere especial");
+            verify_password = false;
+        }
+
+
+        if(verify_repeat){
+            eTPassword2.setError(null);
+        }
+
+        if(verify_password){
             eTPassword.setError(null);
+        }
+
+        if(verify_repeat && verify_password){
+
             return true;
+        }else{
+            return false;
         }
     }
+
+
 
 
 }

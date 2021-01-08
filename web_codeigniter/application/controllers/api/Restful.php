@@ -152,7 +152,7 @@ class Restful extends MY_Controller {
                 'username'=>$username,
                 'email'=>$email,
                 'phone_number'=>$this->input->post('phone_number'),
-                'birthday_date'=>$this->input->post('birthday'),
+                'birthday_date'=>date("Y-m-d",strtotime($this->input->post('birthday'))),
                 'password_hash'=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
             ];
 
