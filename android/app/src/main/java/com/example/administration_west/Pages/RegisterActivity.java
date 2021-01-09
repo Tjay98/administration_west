@@ -15,10 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-<<<<<<< Updated upstream
+
 import com.example.administration_west.Models.Users;
-=======
->>>>>>> Stashed changes
+
 import com.example.administration_west.R;
 import com.google.android.material.textfield.TextInputLayout;
 

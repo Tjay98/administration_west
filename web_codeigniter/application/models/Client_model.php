@@ -12,6 +12,11 @@ class Client_model extends CI_Model{
             $validate_phone_number=$this->db->get('user')->row_array();
             //print_r($registo_form);die;
             if(empty($validate_phone_number)){
+
+                //generate unique key
+                /* $key = md5(microtime().rand());  */
+                $key = md5(uniqid(rand(), true));
+
                 $data=[
                     'username'=>$registo_form['username'],
                     'email'=>$registo_form['email'],
@@ -20,6 +25,7 @@ class Client_model extends CI_Model{
                     'password_hash'=>$registo_form['password_hash'],
                     'role_id'=>1,
                     'status'=>1,
+                    'unique_key'=>$key,
                     'created_at'=>date("Y-m-d_H:i:s"),
                     'updated_at'=>date("Y-m-d_H:i:s"),  
                 ];
@@ -43,7 +49,7 @@ class Client_model extends CI_Model{
         if(!empty($validation)){
             if($validation['status']==1){
                 if (password_verify($login_form['password'], $validation['password_hash'])) {
-                    $this->db->select('id , username, email, status, role_id');
+                    $this->db->select('id , username, email, status, role_id, unique_key');
                     $this->db->where('email', $login_form['email']);
                     $user=$this->db->get('user')->row_array();
                     $data=[
@@ -54,6 +60,11 @@ class Client_model extends CI_Model{
 
                     ];
                     $this->session->set_userdata($data);
+
+                    $array=[
+                        'unique'=>$user['unique_key'],
+                    ];
+                    return $array;
                 }else{
                     return 'error';
                 }
@@ -111,7 +122,34 @@ class Client_model extends CI_Model{
 
         return $data;
     }
+    
+    public function get_profile_by_key($key){
+        $this->db->select('id as user_id, username, email, phone_number, birthday_date');
+        $this->db->where('user.unique_key',$key);
+        $data=$this->db->get('user')->row_array();
 
+        return $data;
+    }
+
+    public function get_shipping_address_by_key($key){
+        $this->db->select('shipping_address.*');
+        $this->db->where('user.unique_key',$key);
+        $this->db->from('user');
+        $this->db->join('shipping_address','shipping_address.user_id = user.id','LEFT');
+        $data=$this->db->get()->row_array();
+        
+        return $data;
+    }
+
+    public function get_billing_address_by_key($key){
+        $this->db->select('billing_address.*');
+        $this->db->where('user.unique_key',$key);
+        $this->db->from('user');
+        $this->db->join('billing_address','billing_address.user_id = user.id','LEFT');
+        $data=$this->db->get()->row_array();
+
+        return $data;
+    }
 
     public function new_password_client($password_form, $id){
 

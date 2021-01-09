@@ -30,23 +30,23 @@
         <activity android:name=".Pages.CartActivity"
             android:parentActivityName=".Pages.MainActivity"/>
 
-        <!--<activity android:name=".Pages.ProfileFragment"
-            android:parentActivityName=".Pages.MainActivity"/>
+<!--        <activity android:name=".Pages.ProfileFragment"-->
+<!--            android:parentActivityName=".Pages.MainActivity"/>-->
 
         <activity android:name=".Pages.CompaniesFragment"
             android:parentActivityName=".Pages.MainActivity"/>
         <activity android:name=".Pages.ProductFragment"
-            android:parentActivityName=".Pages.ProductFragment"/>-->
+            android:parentActivityName=".Pages.MainActivity"/>
 
         <activity android:name=".Pages.DepoisCarrinhoActivity" />
-
+        <activity android:name=".Pages.MainActivity" />
 
 
         <activity android:name=".Pages.RegisterActivity"
             android:parentActivityName=".Pages.LoginActivity"/>
 
         <activity
-            android:name=".Pages.MainActivity" >
+            android:name=".Pages.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

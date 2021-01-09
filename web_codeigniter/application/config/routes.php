@@ -180,7 +180,9 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/company/(:any)'] = 'api/restful/get_company/$1';
 
         //users 
-        $route['restful/users/profile'] = 'api/restful/profile';
+        $route['restful/users/profile'] = 'api/restful/get_profile';
+        $route['restful/users/shipping_address'] = 'api/restful/get_shipping_address';
+        $route['restful/users/billing_address'] = 'api/restful/get_billing_address';
 
         //categories
         $route['restful/categories'] = 'api/restful/get_categories';

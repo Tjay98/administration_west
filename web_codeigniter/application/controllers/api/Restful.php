@@ -121,12 +121,15 @@ class Restful extends MY_Controller {
     public function login(){
         if( (!empty($this->input->post('email'))) && (!empty($this->input->post('password'))) ){
             $login_form=[
-                'email'=>$this->input->post('email'),
+                'email'=>strtolower($this->input->post('email')),
                 'password'=>$this->input->post('password'),
             ];
             $validate=$this->Client_model->verify_login($login_form);
-            if(empty($validate)){
+/*             print_R(json_encode($validate));
+            die; */
+            if(!empty($validate['unique'])){
                 $array=$this->generate_error_message(200,"Login successful");
+                $array['key']=$validate['unique'];
             }else{
                 $array=$this->generate_error_message(401,"Invalid login");
             }
@@ -221,9 +224,74 @@ class Restful extends MY_Controller {
         }
     }
 
+    public function get_profile(){
+        if(!empty($this->input->post('profile_key'))){
+            $profile_key= $this->input->post('profile_key');
+            $check_profile=$this->Client_model->get_profile_by_key($profile_key);
+
+            if( (!empty($check_profile['user_id'])) && (!empty($check_profile['username'])) && (!empty($check_profile['email'])) && (!empty($check_profile['phone_number'])) && (!empty($check_profile['birthday_date']))){
+                $array=$this->generate_error_message(200);
+                $array['profile']=$check_profile;
+            }else{
+                $array=$this->generate_error_message(404);
+                
+            }
+            
+            
+        }else{
+            $array=$this->generate_error_message(404);
+        }
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function get_shipping_address(){
+
+        if(!empty($this->input->post('profile_key'))){
+            $profile_key= $this->input->post('profile_key');
+            $check_shipping=$this->Client_model->get_shipping_address_by_key($profile_key);
+            
+            if( (!empty($check_shipping['user_id'])) && (!empty($check_shipping['name'])) ){
+                $array=$this->generate_error_message(200);
+                $array['shipping_address']=$check_shipping;
+            }else{
+                $array=$this->generate_error_message(404);
+                
+            }
+            
+            
+        }else{
+            $array=$this->generate_error_message(404);
+        }
+
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    
+    public function get_billing_address(){
+        if(!empty($this->input->post('profile_key'))){
+            $profile_key= $this->input->post('profile_key');
+            $check_billing=$this->Client_model->get_billing_address_by_key($profile_key);
+
+            if( (!empty($check_billing['user_id'])) && (!empty($check_billing['name'])) ){
+                $array=$this->generate_error_message(200);
+                $array['billing_address']=$check_billing;
+            }else{
+                $array=$this->generate_error_message(404);
+                
+            }
+            
+            
+        }else{
+            $array=$this->generate_error_message(404);
+        }
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
     public function edit_profile(){
         if(!empty($this->input->post('profile_info'))){
             $profile=$this->input->post('profile_info');
+
+            
         }
     }
 

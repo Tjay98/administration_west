@@ -49,7 +49,7 @@ class Clients extends MY_Controller {
                 //preenche o array 
                 $registo_form=[
                     'username'=>$username,
-                    'email'=>$email,
+                    'email'=>strtolower($email),
                     'phone_number'=>$this->input->post('inputPhone'),
                     'birthday_date'=>$this->input->post('inputDate'),
                     'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
@@ -77,11 +77,11 @@ class Clients extends MY_Controller {
         }else{
             //login validation here
             $login_form=[
-                'email'=>$this->input->post('inputEmail'),
+                'email'=>strtolower($this->input->post('inputEmail')),
                 'password'=>$this->input->post('inputPassword'),
             ];
             $validate=$this->Client_model->verify_login($login_form);
-            if(empty($validate)){
+            if(!empty($validate['unique'])){
                 //if login happens correctly
                 echo 'success';
             }else{

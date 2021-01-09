@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.administration_west.Controllers.SharedPrefManager;
+//import com.example.administration_west.Controllers.SharedPrefManager;
 import com.example.administration_west.Models.Users;
 import com.example.administration_west.R;
 
@@ -32,13 +32,7 @@ public class ProfileFragment extends Fragment {
         tVMobile = (TextView) view.findViewById(R.id.tVMobileProfile);
         tVData = (TextView) view.findViewById(R.id.tVDataProfile);
 
-        Users user = SharedPrefManager.getInstance(getContext()).getUser();
 
-        //setting the values to the textviews
-        tVNome.setText(String.valueOf(user.getUsername()));
-        tVEmail.setText(user.getEmail());
-        tVMobile.setText(user.getMobile());
-        tVData.setText(user.getBirthday_date());
 
 return view;
     }

@@ -18,6 +18,9 @@
     <string name="registo_3">Já tem conta? Faça login</string>
 
     <string name="perfil">Perfil</string>
+    <string name="contacts">Contactos</string>
+    <string name="logout">Logout</string>
+
     <string name="mudar_password">Mudar a password</string>
     <string name="company">Empresas</string>
     <string name="profile">Perfil</string>
@@ -29,5 +32,7 @@
 
 
     <string name="title_notifications">Carrinho</string>
+    <string name="ndOpen">Open</string>
+    <string name="ndClose">Close</string>
 
 </resources>
