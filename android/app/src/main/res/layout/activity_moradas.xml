@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Pages.CompaniesActivity$DepoisCarrinhoActivity">
+    tools:context=".Pages.MoradasActivity">
 
 
 
@@ -16,14 +16,14 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="30sp"
-            android:text="Moradas" />
+            android:text="@string/moradas" />
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Morada de Faturação" />
+            android:text="@string/morada_faturacao" />
 
         <RadioButton
             android:id="@+id/radioButtonMoradaFaturacao"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
-            android:text="Morada de Entrega" />
+            android:text="@string/morada_entrega" />
 
         <RadioButton
             android:id="@+id/radioButtonMoradaEntrega"
@@ -49,15 +49,15 @@
 
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Morada" />
+            android:text="@string/editar_morada" />
 
         <Button
             android:id="@+id/buttonProsseguirMoradas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Prosseguir" />
+            android:text="@string/prosseguir" />
 </LinearLayout>

@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Pages.DetailsCompaniesActivity$FinalizarCompraActivity">
+    tools:context=".Pages.FinalizarCompraActivity">
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Compra Realizada com Sucesso!"
+        android:text="@string/compra_finalizada"
         android:textAlignment="center"
         android:textSize="30sp"/>
 
@@ -150,10 +150,10 @@
         android:text="Método de Pagamento" />
 
     <Button
-        android:id="@+id/buttonProdutosFC"
+        android:id="@+id/buttonMainFC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Voltar a Produtos" />
+        android:text="@string/menu_principal" />
 
 </LinearLayout>

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Nome do produto"
+                android:text=" "
                 android:textAlignment="center"
                 android:textSize="25sp" />
 
@@ -44,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Categoria do produto"
+                android:text=" "
                 android:textSize="20sp"/>
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="Empresa do produto"
+                android:text=" "
                 android:textSize="20sp"/>
         </LinearLayout>
 
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Descrição"
+        android:text="@string/descricao"
         android:textSize="25sp"
         android:textAlignment="center"
         android:layout_marginTop="20dp" />
@@ -82,37 +82,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Descrição do Produto"
+        android:text=" "
         android:layout_marginTop="10dp"
         android:textSize="15sp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/eTQuantidadeDP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:inputType="number"
-                android:hint="Quantidade"
-                android:textAlignment="center"
-                android:layout_marginHorizontal="10dp"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/BAdicionarDP"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Adicionar ao Carinho"
+                android:layout_height="50dp"
+                android:tint="@color/white"
+                android:background="@drawable/button_shop"
+                android:src="@drawable/ic_add_shopping_cart"
                 android:layout_marginHorizontal="10dp"/>
-            />
+
         </LinearLayout>
 
-
-    </LinearLayout>
 </LinearLayout>

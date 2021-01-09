@@ -13,6 +13,11 @@
     <string name="registo_titulo">Registo</string>
     <string name="telemovel">Telemóvel</string>
 
+    <string name="descricao">Descrição</string>
+
+    <string name="compra_finalizada">Compra Realizada com Sucesso!</string>
+
+
 
     <string name="registo_2">Criar conta</string>
     <string name="registo_3">Já tem conta? Faça login</string>
@@ -20,6 +25,10 @@
     <string name="perfil">Perfil</string>
     <string name="contacts">Contactos</string>
     <string name="logout">Logout</string>
+
+    <string name="continuar_comprar">Continuar a Comprar</string>
+    <string name="finalizar_comprar">Finalizar a Comprar</string>
+
 
     <string name="mudar_password">Mudar a password</string>
     <string name="company">Empresas</string>
@@ -34,5 +43,11 @@
     <string name="title_notifications">Carrinho</string>
     <string name="ndOpen">Open</string>
     <string name="ndClose">Close</string>
+    <string name="moradas">Moradas</string>
+    <string name="morada_faturacao">Morada de Faturação</string>
+    <string name="morada_entrega">Morada de Entrega</string>
+    <string name="prosseguir">Prosseguir</string>
+    <string name="editar_morada">Editar Morada</string>
+    <string name="menu_principal">Voltar ao Menu Principal</string>
 
 </resources>

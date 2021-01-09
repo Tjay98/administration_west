@@ -9,35 +9,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.administration_west.R;
 
-public class CartActivity extends AppCompatActivity {
+public class MoradasActivity extends AppCompatActivity {
 
 
-    Button Compra, Pagamento;
-
+    Button Editar, Prosseguir;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_moradas);
 
+        Editar = findViewById(R.id.buttonEditar);
+        Prosseguir = findViewById(R.id.buttonProsseguirMoradas);
 
-        Compra = findViewById(R.id.buttonContinuarComprar);
-        Pagamento = findViewById(R.id.buttonFinalizarCompras);
-
-        Compra.setOnClickListener(new View.OnClickListener() {
+        Editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarMainAcivity();
             }
         });
 
-        Pagamento.setOnClickListener(new View.OnClickListener() {
+        Prosseguir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mostrarMorada();
+                mostrarPagamentos();
             }
         });
+
     }
 
     private void mostrarMainAcivity() {
@@ -46,11 +45,10 @@ public class CartActivity extends AppCompatActivity {
         finish();
     }
 
-    private void mostrarMorada() {
-        Intent intentMorada = new Intent(this, MoradasActivity.class);
+    private void mostrarPagamentos() {
+        Intent intentMorada = new Intent(this, PagamentoActivity.class);
         startActivity(intentMorada);
         finish();
     }
-
 
 }

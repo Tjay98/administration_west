@@ -6,13 +6,15 @@ public class Users {
     private String email;
     private String birthday_date;
     private String mobile;
+    private String unique_key;
 
-    public Users(int id, String username, String email, String birthday_date,  String mobile){
+    public Users(int id, String username, String email, String birthday_date,  String mobile, String unique_key){
         this.setId(id);
         this.setUsername(username);
         this.setEmail(email);
         this.setBirthday_date(birthday_date);
         this.setMobile(mobile);
+        this.setUnique_key(unique_key);
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class Users {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getUnique_key() {
+        return unique_key;
+    }
+
+    public void setUnique_key(String unique_key) {
+        this.unique_key = unique_key;
     }
 }

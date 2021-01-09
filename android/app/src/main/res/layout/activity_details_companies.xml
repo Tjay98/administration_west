@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Nome da empresa"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="25sp" />
 
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Descrição"
+            android:text="@string/descricao"
             android:textSize="25sp"
 
             android:textAlignment="center"
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Descrição da empresa"
+            android:text=""
             android:layout_marginTop="10dp"
             android:textSize="15sp"/>
 

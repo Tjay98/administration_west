@@ -20,6 +20,9 @@
             android:parentActivityName=".Pages.ProductFragment"
             />
 
+        <activity android:name=".Pages.MoradasActivity"
+            />
+
         <activity android:name=".Pages.DetailsCompaniesActivity"
             android:parentActivityName=".Pages.CompaniesFragment"/>
 
@@ -30,13 +33,13 @@
         <activity android:name=".Pages.CartActivity"
             android:parentActivityName=".Pages.MainActivity"/>
 
-<!--        <activity android:name=".Pages.ProfileFragment"-->
-<!--            android:parentActivityName=".Pages.MainActivity"/>-->
+      <!-- <activity android:name=".Pages.ProfileFragment"
+            android:parentActivityName=".Pages.MainActivity"/>
 
         <activity android:name=".Pages.CompaniesFragment"
             android:parentActivityName=".Pages.MainActivity"/>
         <activity android:name=".Pages.ProductFragment"
-            android:parentActivityName=".Pages.MainActivity"/>
+            android:parentActivityName=".Pages.MainActivity"/>-->
 
         <activity android:name=".Pages.DepoisCarrinhoActivity" />
         <activity android:name=".Pages.MainActivity" />
