@@ -130,9 +130,13 @@ public class LoginActivity extends AppCompatActivity {
                     String status = jsonObject.getString("status");
                     if (status.equals("200")){
 
-                            Toast.makeText(LoginActivity.this, "Success",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Bem Vindo!",Toast.LENGTH_LONG).show();
                             mainactivity();
                         }
+                    else{
+                        Toast.makeText(LoginActivity.this, "Aconteceu algum problema! Verifique se o email e a password estão corretas.",Toast.LENGTH_LONG).show();
+
+                    }
 
 
                 } catch (Exception e) {

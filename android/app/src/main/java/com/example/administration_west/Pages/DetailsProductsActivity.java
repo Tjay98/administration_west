@@ -39,8 +39,8 @@ public class DetailsProductsActivity extends AppCompatActivity {
 
 
         Picasso.with(this).load(product_image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.sem_imagem)
+                .error(R.drawable.sem_imagem)
                 .fit()
                 .centerInside()
                 .into(image);
@@ -49,6 +49,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         category_name.setText(product_category_name);
         product_company_name1.setText(product_company_name);
         product_description2.setText(product_description);
+
 
     }
 

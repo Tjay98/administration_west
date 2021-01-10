@@ -60,7 +60,9 @@
 
     </LinearLayout>
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,10 +95,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:tint="@color/white"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_shop"
-                android:src="@drawable/ic_add_shopping_cart"
-                android:layout_marginHorizontal="10dp"/>
+                android:src="@drawable/ic_add_shopping_cart" />
 
         </LinearLayout>
+
+</ScrollView>
 
 </LinearLayout>
