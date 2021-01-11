@@ -80,7 +80,14 @@ class Restful extends MY_Controller {
 
     public function get_products(){
         $products=$this->Product_model->get_products();
+        
         if(!empty($products)){
+/*             foreach($products as $product){
+                if($product['quantity']>0){
+                    $data[]=$product;
+                }
+            }
+            echo json_encode($data, JSON_PRETTY_PRINT); */
             echo json_encode($products, JSON_PRETTY_PRINT);
         }else{
             $array=$this->generate_error_message(404);
@@ -215,15 +222,6 @@ class Restful extends MY_Controller {
     }
 
 
-    public function create_sale(){
-        if(!empty($this->input->post('sales'))){
-            $sales=$this->input->post('sales');
-            foreach($sales as $sale){
-                //criar metodo de criar venda e validação
-            }
-        }
-    }
-
     public function get_profile(){
         if(!empty($this->input->post('profile_key'))){
             $profile_key= $this->input->post('profile_key');
@@ -295,5 +293,83 @@ class Restful extends MY_Controller {
         }
     }
 
+    public function show_payment_methods(){
+        $methods=$this->Sale_model->payment_methods();
+        echo json_encode($methods, JSON_PRETTY_PRINT);
+    }
+
+    public function create_sale(){
+        if(!empty($this->input->post('sales'))){
+            $sales=$this->input->post('sales');
+            $user_info=$this->input->post('user_info');
+            $payment_method=$this->input->post('payment_method');
+
+
+            $profile=$this->Client_model->get_profile_by_key($user_info['profile_key']);
+
+
+            $this->db->where('user_id',$profile['user_id']);
+            $billing_address=$this->db->get('billing_address')->row_array();
+            if(!empty($billing_address)){
+                $this->db->where('user_id',$profile['user_id']);
+                $this->db->update('billing_address',$user_info['billing_address']);
+            }else{
+                $this->db->where('user_id',$profile['user_id']);
+                $this->db->insert('billing_address',$user_info['billing_address']);
+            }
+            
+
+            $this->db->where('user_id',$profile['user_id']);
+            $shipping_address=$this->db->get('shipping_address')->row_array();
+            if(!empty($billing_address)){
+                $this->db->where('user_id',$profile['user_id']);
+                $this->db->update('shipping_address',$user_info['shipping_address']);
+            }else{
+                $this->db->where('user_id',$profile['user_id']);
+                $this->db->insert('shipping_address',$user_info['shipping_address']);
+            }
+
+            $sale_data=[
+                'user_id'=>$client_id,
+                'billing_address_id'=>$user_info['billing_address']['id'],
+                'shipping_address_id'=>$user_info['shipping_address']['id'],
+                'payment_method_id'=>$payment_method,
+                'total_price'=>$total_price,
+                'total_iva'=>$total_price_iva,
+
+            ];
+            $this->db->insert('sales_group',$sale_data);
+            $sale_group_id=$this->db->insert_id();
+            if(!empty($sale_group_id)){
+
+                foreach($sales as $sale){
+                    $sale_products[]=[
+                        'sale_group_id'=>$sale_group_id,
+                        'sale_product_id'=>$sale['id'],
+                        'quantity'=>$sale['quantity'],
+                        'price'=>$sale['price'],
+                        'price_iva'=>$sale['iva'],
+                    ];
+                }
+
+                $this->Sale_model->reduce_stock($sale_products);
+                if($reduce=="success"){
+                    $this->db->insert_batch('sales_product',$sale_product);
+                    $array=$this->generate_error_message(200,'Compra efetuada com sucesso');
+                    echo json_encode($array,JSON_PRETTY_PRINT);
+                }else{
+                    $this->db->where('id',$sale_group_id);
+                    $this->db->delete('sales_group');
+
+                    $array=$this->generate_error_message(412,'Quantidade de um dos produtos é insuficiente.Verifique o pedido');
+                    echo json_encode($array,JSON_PRETTY_PRINT);
+                }
+            }else{
+                $array=$this->generate_error_message(404,'Alguma informação está errada');
+                echo json_encode($array,JSON_PRETTY_PRINT);
+            }
+
+        }
+    }
 
 }
