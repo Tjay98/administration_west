@@ -41,6 +41,7 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
     private ArrayList<Companies> companiesList;
     private RequestQueue requestQueue;
 
+
     public CompaniesFragment(){
 
     }
@@ -50,9 +51,9 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_companies, container, false);
 
-        final SwipeRefreshLayout refreshLayout;
+        final SwipeRefreshLayout refreshLayoutCompanies;
 
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainProduct);
+        refreshLayoutCompanies = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainCompanies);
 
 
         recyclerViewCompanies = view.findViewById(R.id.RecicleViewCompanies);
@@ -63,6 +64,23 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
         requestQueue = Volley.newRequestQueue(getContext());
         parseJSONCompanies(getContext());
 
+
+
+        refreshLayoutCompanies.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayoutCompanies.setRefreshing(true);
+                parseJSONCompanies(getContext());
+                adapterCompanies.notifyDataSetChanged();
+                refreshLayoutCompanies.setRefreshing(false);
+            }
+        });
+
+     /*   refreshLayoutCompanies.post(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });*/
 
 return view;
 }

@@ -3,6 +3,7 @@ package com.example.administration_west.Pages;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,13 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
+
+        final SwipeRefreshLayout refreshLayoutProducts;
+
+        refreshLayoutProducts = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainProduct);
+
+
+
         //Categories
         recyclerViewCategories= view.findViewById(R.id.RecicleViewCategories);
         recyclerViewCategories.setHasFixedSize(true);
@@ -79,6 +87,20 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
         requestQueue = Volley.newRequestQueue(getContext());
         parseJSONProducts(getContext());
+
+
+        refreshLayoutProducts.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayoutProducts.setRefreshing(true);
+                parseJSONCategories(getContext());
+                parseJSONProducts(getContext());
+                adapterCategories.notifyDataSetChanged();
+                adapterProducts.notifyDataSetChanged();
+                refreshLayoutProducts.setRefreshing(false);
+            }
+        });
+
 
         return view;
     }
