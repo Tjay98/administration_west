@@ -130,10 +130,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_profile:
                 fragmento = new ProfileFragment();
                 navigationview.setCheckedItem(R.id.nav_profile);
+                setTitle(item.getTitle());
                 break;
             case R.id.nav_contacts:
                 fragmento = null;
                 navigationview.setCheckedItem(R.id.nav_contacts);
+                setTitle(item.getTitle());
                 break;
             case R.id.nav_logout:
                 navigationview.setCheckedItem(R.id.nav_logout);

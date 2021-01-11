@@ -18,7 +18,6 @@ public class SessionUser {
 
     private static final String PREF_NAME = "LOGIN";
     private  static final String LOGIN = "IS_LOGIN";
-    public static final String EMAIL = "EMAIL";
     public static final String UNIQUE_KEY = "UNIQUE_KEY";
 
 
@@ -28,10 +27,9 @@ public class SessionUser {
         editor=sharedPreferences.edit();
     }
 
-    public void createSession(String email, String key){
+    public void createSession(String key){
         editor.putBoolean(LOGIN, true);
-        editor.putString(EMAIL, email);
-        editor.putString(UNIQUE_KEY, email);
+        editor.putString(UNIQUE_KEY, key);
         editor.apply();
     }
 
@@ -49,7 +47,6 @@ public class SessionUser {
 
     public HashMap<String, String> getUserDetail(){
         HashMap<String, String> user = new HashMap<>();
-        user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
         user.put(UNIQUE_KEY, sharedPreferences.getString(UNIQUE_KEY, null));
 
         return user;

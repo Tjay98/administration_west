@@ -130,8 +130,8 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
                     if (status.equals("200")){
-                        String key = jsonObject.getString("key");
-                            sessionUser.createSession(email, key);
+                            String key = jsonObject.getString("key");
+                            sessionUser.createSession(key);
                             Toast.makeText(LoginActivity.this, "Bem Vindo!",Toast.LENGTH_LONG).show();
                             mainactivity();
                         }
