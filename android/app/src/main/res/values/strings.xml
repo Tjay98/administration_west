@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Administration West</string>
     <string name="nome">Nome</string>
-    <string name="nif">NIF</string>
+    <string name="mobile">Telemóvel</string>
     <string name="data">Data de nascimento</string>
     <string name="email">Email</string>
     <string name="passsword">Password</string>

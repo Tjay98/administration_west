@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -28,12 +29,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationview;
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
-
+    SessionUser sessionUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sessionUser= new SessionUser(this);
+        sessionUser.checkLogin();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 navigationview.setCheckedItem(R.id.nav_logout);
-                logout();
+                sessionUser.logout();
                 break;
 
         }
@@ -146,7 +150,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    public void logout(){
-
-    }
 }

@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.Models.Users;
 
 import com.example.administration_west.R;
@@ -34,15 +35,15 @@ public class LoginActivity extends AppCompatActivity {
     Button SignUp, DoLogin;
     TextInputLayout etEmail, etPassword;
 
-
     String LOGIN_URL = ip + "restful/login";
+    SessionUser sessionUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        sessionUser= new SessionUser(this);
 
         //procurar nas vistas os id para fazer o login
         //EditText
@@ -129,7 +130,8 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
                     if (status.equals("200")){
-
+                        String key = jsonObject.getString("key");
+                            sessionUser.createSession(email, key);
                             Toast.makeText(LoginActivity.this, "Bem Vindo!",Toast.LENGTH_LONG).show();
                             mainactivity();
                         }
