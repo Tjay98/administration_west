@@ -37,6 +37,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     public static final String EXTRA_PRODUCT_NAME = "product_name";
     public static final String EXTRA_PRODUCT_CATEGORY = "product_category";
     public static final String EXTRA_PRODUCT_COMPANY = "product_company";
+    public static final String EXTRA_PRODUCT_PRICE = "product_price";
     public static final String EXTRA_PRODUCT_DESCRIPTION = "product_description";
 
 
@@ -160,6 +161,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         detail.putExtra(EXTRA_PRODUCT_NAME, clicked.getProduct_name());
         detail.putExtra(EXTRA_PRODUCT_CATEGORY, clicked.getCategory_name());
         detail.putExtra(EXTRA_PRODUCT_COMPANY, clicked.getCompany_name());
+        detail.putExtra(EXTRA_PRODUCT_PRICE, String.valueOf(clicked.getPrice()));
         detail.putExtra(EXTRA_PRODUCT_DESCRIPTION, clicked.getBig_description());
 
         startActivity(detail);

@@ -15,6 +15,7 @@ import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUC
 import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_DESCRIPTION;
 import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_IMAGE;
 import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_NAME;
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_PRICE;
 
 public class DetailsProductsActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         String product_name = intent.getStringExtra(EXTRA_PRODUCT_NAME);
         String product_category_name = intent.getStringExtra(EXTRA_PRODUCT_CATEGORY);
         String product_company_name = intent.getStringExtra(EXTRA_PRODUCT_COMPANY);
+        String product_price = intent.getStringExtra(EXTRA_PRODUCT_PRICE);
         String product_description = intent.getStringExtra(EXTRA_PRODUCT_DESCRIPTION);
 
 
@@ -35,6 +37,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.tVNomeProdutoDP);
         TextView category_name = findViewById(R.id.tVCategoriaProdutoDP);
         TextView product_company_name1 = findViewById(R.id.tVEmpresaProdutoDP);
+        TextView product_price1 = findViewById(R.id.tVPriceProdutoDP);
         TextView product_description2 = findViewById(R.id.tVDescricaoProdutoDP);
 
 
@@ -49,6 +52,8 @@ public class DetailsProductsActivity extends AppCompatActivity {
         category_name.setText(product_category_name);
         product_company_name1.setText(product_company_name);
         product_description2.setText(product_description);
+        product_price1.setText(product_price + " €");
+
 
 
     }
