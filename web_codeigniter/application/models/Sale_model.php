@@ -279,4 +279,24 @@ class Sale_model extends CI_Model{
 
         return $products;
     }
+
+    public function get_cart_by_user_product_id($user_id,$product_id){
+
+        $this->db->where('user_id',$user_id);
+        $this->db->where('product_id',$product_id);
+        $cart=$this->db->get('user_cart')->row_array();
+
+        return $cart;   
+
+    }
+
+    public function get_user_cart($user_id){
+        $this->db->select('products.id, products.product_name, products.image,products.price,products.price_iva, user_cart.quantity');
+        $this->db->where('user_id',$user_id);
+        $this->db->from('user_cart');
+        $this->db->join('products','products.id = user_cart.product_id','LEFT');
+        $cart=$this->db->get()->result_array();
+        
+        return $cart;
+    }
 }

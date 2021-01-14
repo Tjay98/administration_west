@@ -372,4 +372,83 @@ class Restful extends MY_Controller {
         }
     }
 
+    public function add_product_cart(){
+       /*  session_destroy(); */
+        $product_id= $this->input->post('product');
+        $quantity= $this->input->post('quantity');
+        $user_key=$this->input->post('profile_key');
+
+        if( (!empty($product_id)) && (!empty($quantity))  && !empty($user_key)){
+
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+
+            $cart = $this->Sale_model->get_cart_by_user_product_id($profile['user_id'],$product_id);
+
+
+            if(!empty($cart)){
+                $old_quantity=$cart['quantity'];
+                if( ($old_quantity + ($quantity)) <= 0){
+                    $this->db->where('user_id',$profile['user_id']);
+                    $this->db->where('product_id',$product_id);
+                    $this->db->delete('user_cart');
+
+                    $array=$this->generate_error_message(200,'Produto apagado do carrinho');
+                }else{
+                    $new_quantity = $old_quantity + $quantity;
+
+                    $this->db->where('user_id',$profile['user_id']);
+                    $this->db->where('product_id',$product_id);
+                    $this->db->set('quantity',$new_quantity);
+                    $this->db->update('user_cart');
+
+                    $array=$this->generate_error_message(200,'Produto inserido com sucesso');
+                }
+                /* $new_quantity=$cart['quantity'] */
+            }else{
+                if($quantity > 0){
+                    $product_data= [
+                        'user_id'=>$profile['user_id'],
+                        'product_id'=>$product_id,
+                        'quantity'=>$quantity,
+                    ];
+                    
+                    $this->db->insert(' user_cart',$product_data);
+                    $insert_id=$this->db->insert_id();
+
+                    $array=$this->generate_error_message(200,'Produto inserido com sucesso');
+                }
+
+            }
+
+        }else{
+            $array=$this->generate_error_message(404,'Alguma informação está errada');
+        }
+
+
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function view_cart(){
+        $user_key=$this->input->post('profile_key');
+
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+
+            $cart= $this->Sale_model->get_user_cart($profile['user_id']);
+            /* print_r($cart); */
+            if(!empty($cart)){
+                $array=$this->generate_error_message(200);
+                $array['cart']=$cart;
+    
+                
+            }else{
+                $array=$this->generate_error_message(404,'Carrinho vazio');
+               
+            }
+            echo json_encode($array,JSON_PRETTY_PRINT);
+
+
+        }
+    }
+
 }

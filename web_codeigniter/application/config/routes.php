@@ -194,6 +194,9 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/payment_methods'] = 'api/restful/show_payment_methods';
         
 
+        $route['restful/add_product_cart'] = 'api/restful/add_product_cart';
+        $route['restful/view_cart'] = 'api/restful/view_cart';
+
 
 
        
