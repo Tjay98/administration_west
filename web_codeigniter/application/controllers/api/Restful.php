@@ -388,23 +388,23 @@ class Restful extends MY_Controller {
             if(!empty($cart)){
                 $old_quantity=$cart['quantity'];
                 if( ($old_quantity + ($quantity)) <= 0){
+                    //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
                     $this->db->where('user_id',$profile['user_id']);
                     $this->db->where('product_id',$product_id);
                     $this->db->delete('user_cart');
-
                     $array=$this->generate_error_message(200,'Produto apagado do carrinho');
                 }else{
+                    //verifica se a quantidade é superior a 0, caso seja atualiza
                     $new_quantity = $old_quantity + $quantity;
-
                     $this->db->where('user_id',$profile['user_id']);
                     $this->db->where('product_id',$product_id);
                     $this->db->set('quantity',$new_quantity);
                     $this->db->update('user_cart');
-
-                    $array=$this->generate_error_message(200,'Produto inserido com sucesso');
+                    $array=$this->generate_error_message(200,'Produto atualizado');
                 }
-                /* $new_quantity=$cart['quantity'] */
+
             }else{
+                //adiciona o produto ao carrinho
                 if($quantity > 0){
                     $product_data= [
                         'user_id'=>$profile['user_id'],
@@ -425,6 +425,28 @@ class Restful extends MY_Controller {
         }
 
 
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function delete_product_cart(){
+        $product_id= $this->input->post('product');
+        $user_key=$this->input->post('profile_key');
+
+        if( (!empty($product_id)) && !empty($user_key)){
+
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+
+            $this->db->where('user_id',$profile['user_id']);
+            $this->db->where('product_id',$product_id);
+            $this->db->delete('user_cart');
+
+            $array=$this->generate_error_message(200,'Produto apagado do carrinho');
+
+        }else{
+            
+            $array=$this->generate_error_message(404,'Alguma informação está errada');
+        }
+        
         echo json_encode($array,JSON_PRETTY_PRINT);
     }
 
