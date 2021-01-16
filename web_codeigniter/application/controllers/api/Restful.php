@@ -573,6 +573,7 @@ class Restful extends MY_Controller {
                 if(empty($shipping_address)){
                     $update=$this->db->insert('shipping_address',$data);
                 }else{
+                    $data['modified_date']=date('Y-m-d H:i:s');
                     $this->db->where('id',$shipping_address['id']);
                     $update=$this->db->update('shipping_address',$data);
                 }
@@ -621,6 +622,7 @@ class Restful extends MY_Controller {
                 if(empty($billing_address)){
                     $update=$this->db->insert('billing_address',$data);
                 }else{
+                    $data['modified_date']=date('Y-m-d H:i:s');
                     $this->db->where('id',$billing_address['id']);
                     $update=$this->db->update('billing_address',$data);
                 }
