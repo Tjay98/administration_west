@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +23,7 @@ import com.example.administration_west.Adapters.CategoriesAdapter;
 import com.example.administration_west.Adapters.ProductsAdapter;
 import com.example.administration_west.Models.Categories;
 import com.example.administration_west.Models.Products;
+import com.example.administration_west.Models.ProductsDBHelper;
 import com.example.administration_west.R;
 import com.example.administration_west.Utils.CategoriesJsonParse;
 import com.example.administration_west.Utils.ProductsJsonParse;
@@ -51,8 +53,12 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     private ArrayList<Products> productsList;
     private RequestQueue requestQueue;
 
+    //base de dados
+    private ProductsDBHelper db;
 
-    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
+//    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
+    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+
 
     public ProductFragment(){
 
@@ -88,7 +94,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         productsList = new ArrayList<>();
 
         requestQueue = Volley.newRequestQueue(getContext());
-        parseJSONProducts(getContext());
+        parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
 
 
         refreshLayoutProducts.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -96,7 +102,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
             public void onRefresh() {
                 refreshLayoutProducts.setRefreshing(true);
                 parseJSONCategories(getContext());
-                parseJSONProducts(getContext());
+                parseJSONProducts(getContext(), ProductsJsonParse.isConnected(getContext()));
                 adapterCategories.notifyDataSetChanged();
                 adapterProducts.notifyDataSetChanged();
                 refreshLayoutProducts.setRefreshing(false);
@@ -108,6 +114,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     }
 
     private void parseJSONCategories(final Context context){
+
         String url= ip + "restful/categories";
         JsonArrayRequest request=new JsonArrayRequest(
                 Request.Method.GET,
@@ -129,28 +136,51 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         requestQueue.add(request);
     }
 
-    public void parseJSONProducts(final Context context){
-        String url= ip + "restful/products";
-        JsonArrayRequest request=new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        productsList = ProductsJsonParse.parseJsonProducts(response, context);
-                        adapterProducts = new ProductsAdapter(getContext(), productsList);
-                        recyclerViewProducts.setAdapter(adapterProducts);
-                        adapterProducts.setOnItemClickListener(ProductFragment.this);
+    public void parseJSONProducts(final Context context, final boolean isConnected){
+        if(!isConnected){
+            Toast.makeText(context, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+            productsList = db.getAllProducts();
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(request);
+            adapterProducts = new ProductsAdapter(getContext(), productsList);
+            recyclerViewProducts.setAdapter(adapterProducts);
+            adapterProducts.setOnItemClickListener(ProductFragment.this);
+
+        }else{
+
+            String url= ip + "restful/products";
+            JsonArrayRequest request=new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            productsList = ProductsJsonParse.parseJsonProducts(response, context);
+
+
+                            adapterProducts = new ProductsAdapter(getContext(), productsList);
+                            recyclerViewProducts.setAdapter(adapterProducts);
+                            adapterProducts.setOnItemClickListener(ProductFragment.this);
+
+                            adicionarProdutosDB(productsList);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue.add(request);
+        }
+
+    }
+
+    public void adicionarProdutosDB(ArrayList<Products> lista){
+
+        System.out.println(lista);
+//        db.removerAllProductsDB();
+//        for(Products products: lista)
+//            db.addProductsdb(products);
     }
 
     @Override

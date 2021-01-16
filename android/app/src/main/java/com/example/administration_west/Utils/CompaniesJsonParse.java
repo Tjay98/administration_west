@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CompaniesJsonParse {
-    public static boolean isConnectionInternet(Context contexto){
+    public static boolean isConnected(Context contexto){
         ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo= cm.getActiveNetworkInfo();
 

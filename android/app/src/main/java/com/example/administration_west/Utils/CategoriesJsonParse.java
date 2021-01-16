@@ -15,6 +15,14 @@ import java.util.ArrayList;
 
 public class CategoriesJsonParse {
 
+    public static boolean isConnected(Context contexto){
+        ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo= cm.getActiveNetworkInfo();
+
+        return networkInfo != null&&networkInfo.isConnected();
+    }
+
+
     public static ArrayList<Categories> parseJsonCategories(JSONArray resposta, Context contexto){
         ArrayList<Categories> lista= new ArrayList<Categories>();
         try {
@@ -53,11 +61,5 @@ public class CategoriesJsonParse {
     //1.5.3 para limpar os dados da tabela
 
 
-    public static boolean isConnectionInternet(Context contexto){
-        ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo= cm.getActiveNetworkInfo();
-
-        return networkInfo != null&&networkInfo.isConnected();
-    }
 
 }
