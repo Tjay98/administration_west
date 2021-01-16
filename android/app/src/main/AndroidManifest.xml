@@ -13,9 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-       <!-- <activity android:name=".Pages.MainActivity"
-            android:screenOrientation="portrait"
-            />-->
+
         <activity android:name=".Pages.DetailsProductsActivity"
             android:parentActivityName=".Pages.ProductFragment"
             />
@@ -33,15 +31,9 @@
         <activity android:name=".Pages.CartActivity"
             android:parentActivityName=".Pages.MainActivity"/>
 
-      <!-- <activity android:name=".Pages.ProfileFragment"
-            android:parentActivityName=".Pages.MainActivity"/>
-
-        <activity android:name=".Pages.CompaniesFragment"
-            android:parentActivityName=".Pages.MainActivity"/>
-        <activity android:name=".Pages.ProductFragment"
-            android:parentActivityName=".Pages.MainActivity"/>-->
 
         <activity android:name=".Pages.DepoisCarrinhoActivity" />
+
         <activity android:name=".Pages.MainActivity" />
 
 

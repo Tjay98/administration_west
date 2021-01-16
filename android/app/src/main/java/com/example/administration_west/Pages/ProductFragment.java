@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener {
 
+    public static final String EXTRA_PRODUCT_ID = "product_id";
     public static final String EXTRA_PRODUCT_IMAGE = "product_image";
     public static final String EXTRA_PRODUCT_NAME = "product_name";
     public static final String EXTRA_PRODUCT_CATEGORY = "product_category";
@@ -128,7 +129,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         requestQueue.add(request);
     }
 
-    private void parseJSONProducts(final Context context){
+    public void parseJSONProducts(final Context context){
         String url= ip + "restful/products";
         JsonArrayRequest request=new JsonArrayRequest(
                 Request.Method.GET,
@@ -157,6 +158,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         Intent detail = new Intent (getContext(), DetailsProductsActivity.class);
         Products clicked = productsList.get(position);
 
+        detail.putExtra(EXTRA_PRODUCT_ID, String.valueOf(clicked.getId()));
         detail.putExtra(EXTRA_PRODUCT_IMAGE, ip + "uploads/products/" + clicked.getImage());
         detail.putExtra(EXTRA_PRODUCT_NAME, clicked.getProduct_name());
         detail.putExtra(EXTRA_PRODUCT_CATEGORY, clicked.getCategory_name());

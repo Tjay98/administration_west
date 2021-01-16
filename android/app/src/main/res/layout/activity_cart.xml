@@ -9,21 +9,62 @@
     tools:context=".Pages.CartActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecycleViewCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/buttonContinuarComprar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/continuar_comprar" />
 
-    <Button
-        android:id="@+id/buttonFinalizarCompras"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp">
+    <TextView
+        android:id="@+id/PrecoTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/total"/>
+
+    <TextView
+        android:id="@+id/PrecoTotalCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/finalizar_comprar" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonContinuarComprar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/continuar_comprar" />
+
+        <Button
+            android:id="@+id/buttonFinalizarCompras"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/finalizar_comprar" />
+
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>

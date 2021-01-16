@@ -291,7 +291,7 @@ class Sale_model extends CI_Model{
     }
 
     public function get_user_cart($user_id){
-        $this->db->select('products.id, products.product_name, products.image,products.price,products.price_iva, user_cart.quantity');
+        $this->db->select('products.id as product_id,  products.product_name, products.image,products.price,products.price_iva, user_cart.quantity');
         $this->db->where('user_id',$user_id);
         $this->db->from('user_cart');
         $this->db->join('products','products.id = user_cart.product_id','LEFT');

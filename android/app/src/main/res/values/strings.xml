@@ -27,7 +27,7 @@
     <string name="logout">Logout</string>
 
     <string name="continuar_comprar">Continuar a Comprar</string>
-    <string name="finalizar_comprar">Finalizar a Comprar</string>
+    <string name="finalizar_comprar">Finalizar a Compra</string>
 
 
     <string name="mudar_password">Mudar a password</string>
@@ -49,5 +49,7 @@
     <string name="prosseguir">Prosseguir</string>
     <string name="editar_morada">Editar Morada</string>
     <string name="menu_principal">Voltar ao Menu Principal</string>
+    <string name="total">Total</string>
+    <string name="quant">Quant</string>
 
 </resources>
