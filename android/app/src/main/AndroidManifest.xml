@@ -34,6 +34,11 @@
 
         <activity android:name=".Pages.DepoisCarrinhoActivity" />
 
+        <activity android:name=".Pages.ShippingAddressActivity" />
+
+        <activity android:name=".Pages.BillingAddressActivity" />
+
+
         <activity android:name=".Pages.MainActivity" />
 
 

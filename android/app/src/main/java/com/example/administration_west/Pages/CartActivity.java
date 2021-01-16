@@ -115,7 +115,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
     }
 
     private void mostrarMorada() {
-        Intent intentMorada = new Intent(this, MoradasActivity.class);
+        Intent intentMorada = new Intent(this, ShippingAddressActivity.class);
         startActivity(intentMorada);
         finish();
     }

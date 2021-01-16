@@ -17,26 +17,31 @@
             android:textSize="30sp"
             android:text="Métodos de Pagamento" />
 
-    <RadioButton
+
+
+    <CheckBox
         android:id="@+id/radioButtonMetodoPagamento1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Método de Pagamento 1" />
+        android:text="Método de Pagamento 1"
+        android:onClick="onCheckboxClicked"/>
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/radioButtonMetodoPagamento2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Método de Pagamento 2" />
+        android:text="Método de Pagamento 2"
+        android:onClick="onCheckboxClicked"/>
 
 
 
     <Button
-        android:id="@+id/buttonProsseguirPagamento"
+        android:id="@+id/buttonVoltarBillingAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Prosseguir" />
-
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/voltar"
+        android:textColor="@color/secondblue" />
 
     </LinearLayout>

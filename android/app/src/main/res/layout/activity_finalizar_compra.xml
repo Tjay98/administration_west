@@ -17,6 +17,9 @@
         android:textAlignment="center"
         android:textSize="30sp"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
@@ -150,10 +153,21 @@
         android:text="Método de Pagamento" />
 
     <Button
-        android:id="@+id/buttonMainFC"
+        android:id="@+id/buttonFinalizarCompra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/menu_principal" />
+        android:text="@string/finalizar_compra" />
+
+    <Button
+        android:id="@+id/buttonVoltarBillingAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/menu_principal"
+        android:textColor="@color/secondblue" />
+
+    </ScrollView>
 
 </LinearLayout>

@@ -17,6 +17,7 @@
 
     <string name="compra_finalizada">Compra Realizada com Sucesso!</string>
 
+    <string name="finalizar_compra">Finalizar Compra!</string>
 
 
     <string name="registo_2">Criar conta</string>
@@ -51,5 +52,13 @@
     <string name="menu_principal">Voltar ao Menu Principal</string>
     <string name="total">Total</string>
     <string name="quant">Quant</string>
+    <string name="voltar">Voltar</string>
+
+    <string name="nif">NIF</string>
+    <string name="cidade">Cidade</string>
+    <string name="morada">Morada</string>
+    <string name="codigo_postal">Código Postal</string>
+    <string name="enviar_morada">Enviar Morada</string>
+
 
 </resources>
