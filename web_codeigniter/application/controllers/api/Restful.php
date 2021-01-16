@@ -341,7 +341,8 @@ class Restful extends MY_Controller {
             $this->db->insert('sales_group',$sale_data);
             $sale_group_id=$this->db->insert_id();
             if(!empty($sale_group_id)){
-
+                $total_price = 0;
+                $total_iva = 0;
                 foreach($sales as $sale){
                     $sale_products[]=[
                         'sale_group_id'=>$sale_group_id,
@@ -352,7 +353,7 @@ class Restful extends MY_Controller {
                     ];
                 }
 
-                $this->Sale_model->reduce_stock($sale_products);
+                $reduce= $this->Sale_model->reduce_stock($sale_products);
                 if($reduce=="success"){
                     $this->db->insert_batch('sales_product',$sale_product);
                     $array=$this->generate_error_message(200,'Compra efetuada com sucesso');
@@ -369,6 +370,75 @@ class Restful extends MY_Controller {
                 echo json_encode($array,JSON_PRETTY_PRINT);
             }
 
+        }
+    }
+
+    public function new_create_sale(){
+        $user_key=$this->input->post('profile_key');
+
+        if(!empty($user_key)){
+            $profile = $this->Client_model->get_profile_by_key($user_key);
+            $shipping_address = $this->Client_model->get_shipping_address_by_key($user_key);
+            $billing_address = $this->Client_model->get_billing_address_by_key($user_key);
+
+            $cart_products= $this->Sale_model->get_user_cart($profile['user_id']);
+
+            $sale_data=[
+                'user_id'=>$profile['user_id'],
+                'billing_address_id'=>$shipping_address['id'],
+                'shipping_address_id'=>$billing_address['id'],
+                'payment_method_id'=>/* $payment_method */1,
+                'total_price'=>0,
+                'total_iva'=>0,
+
+            ];
+            $this->db->insert('sales_group',$sale_data);
+            $sale_group_id=$this->db->insert_id();
+            if(!empty($sale_group_id)){
+
+                $total_price = 0;
+                $total_iva = 0;
+
+                foreach($cart_products as $cart){
+
+                    $price = $cart['price'] * $cart['quantity'];
+                    $price_iva = $cart['price_iva'] * $cart['quantity'];
+                    
+                    $total_price+=$price;
+                    $total_iva+=$price_iva;
+
+                    $sale_products[]=[
+                        'sale_group_id'=>$sale_group_id,
+                        'sale_product_id'=>$cart['product_id'],
+                        'quantity'=>$cart['quantity'],
+                        'price'=>$price,
+                        'price_iva'=>$price_iva,
+                    ];
+                }
+
+                $reduce=$this->Sale_model->reduce_stock($sale_products);
+                if($reduce=="success"){
+                    $this->db->insert_batch('sales_product',$sale_products);
+
+                    $this->db->where('id',$sale_group_id);
+                    $this->db->set('total_price',$total_price);
+                    $this->db->set('total_iva',$total_iva);
+                    $this->db->update('sales_group');
+
+                    $array=$this->generate_error_message(200,'Compra efetuada com sucesso');
+                    echo json_encode($array,JSON_PRETTY_PRINT);
+                }else{
+                    //apagar o grupo quando falha
+                    $this->db->where('id',$sale_group_id);
+                    $this->db->delete('sales_group');
+
+                    $array=$this->generate_error_message(412,'Quantidade de um dos produtos é insuficiente.Verifique o pedido');
+                    echo json_encode($array,JSON_PRETTY_PRINT);
+                }
+            }else{
+                $array=$this->generate_error_message(404,'Alguma informação está errada');
+                echo json_encode($array,JSON_PRETTY_PRINT);
+            }
         }
     }
 
@@ -471,6 +541,99 @@ class Restful extends MY_Controller {
 
 
         }
+    }
+
+    public function create_shipping_address(){
+        $user_key=$this->input->post('profile_key');
+
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+            $shipping_address=$this->Client_model->get_shipping_address_by_key($user_key);
+
+            $name=$this->input->post('name');
+            $nif=$this->input->post('nif');
+            $contact=$this->input->post('contact');
+            $city=$this->input->post('city');
+            $address=$this->input->post('address');
+            $zip=$this->input->post('zip');
+            
+            if( $name && $nif && $contact && $city && $address && $zip){
+                    $data=[
+                        'user_id'=>$profile['user_id'],
+                        'name'=>$name,
+                        'nif'=>$nif,
+                        'contact_number'=>$contact,
+                        'city'=>$city,
+                        'address'=>$address,
+                        'zip_code'=>$zip,
+                        
+                    ];
+
+                if(empty($shipping_address)){
+                    $update=$this->db->insert('shipping_address',$data);
+                }else{
+                    $this->db->where('id',$shipping_address['id']);
+                    $update=$this->db->update('shipping_address',$data);
+                }
+
+                if($update){
+                    $array=$this->generate_error_message(200);
+                }
+                
+            }else{
+                $array=$this->generate_error_message(404,'Alguma informação está em falta');
+            }
+
+        }else{
+            $array=$this->generate_error_message(404,'Alguma informação está em falta');
+        }
+        echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function create_billing_address(){
+        $user_key=$this->input->post('profile_key');
+
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+            $billing_address=$this->Client_model->get_billing_address_by_key($user_key);
+
+            $name=$this->input->post('name');
+            $nif=$this->input->post('nif');
+            $contact=$this->input->post('contact');
+            $city=$this->input->post('city');
+            $address=$this->input->post('address');
+            $zip=$this->input->post('zip');
+            
+            if( $name && $nif && $contact && $city && $address && $zip){
+                $data=[
+                    'user_id'=>$profile['user_id'],
+                    'name'=>$name,
+                    'nif'=>$nif,
+                    'contact_number'=>$contact,
+                    'city'=>$city,
+                    'address'=>$address,
+                    'zip_code'=>$zip,
+                    
+                ];
+
+                if(empty($billing_address)){
+                    $update=$this->db->insert('billing_address',$data);
+                }else{
+                    $this->db->where('id',$billing_address['id']);
+                    $update=$this->db->update('billing_address',$data);
+                }
+
+                if($update){
+                    $array=$this->generate_error_message(200);
+                }
+            }else{
+                $array=$this->generate_error_message(404,'Alguma informação está em falta');
+            }
+            
+        }else{
+            $array=$this->generate_error_message(404,'Alguma informação está em falta');
+        }
+        echo json_encode($array,JSON_PRETTY_PRINT);
     }
 
 }

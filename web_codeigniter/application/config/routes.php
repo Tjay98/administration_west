@@ -189,14 +189,18 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/category/(:any)'] = 'api/restful/get_category/$1';
 
         //sales
-        //$route['restful/cart'] ='api/restful/cart';
+
         $route['restful/create_sale'] = 'api/restful/create_sale';
+        $route['restful/new_create_sale'] = 'api/restful/new_create_sale';
         $route['restful/payment_methods'] = 'api/restful/show_payment_methods';
         
 
         $route['restful/add_product_cart'] = 'api/restful/add_product_cart';
         $route['restful/delete_product_cart'] = 'api/restful/delete_product_cart';
         $route['restful/view_cart'] = 'api/restful/view_cart';
+
+        $route['restful/create_shipping'] = 'api/restful/create_shipping_address';
+        $route['restful/create_billing'] = 'api/restful/create_billing_address';
 
 
 
