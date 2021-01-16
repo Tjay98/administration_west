@@ -375,8 +375,9 @@ class Restful extends MY_Controller {
 
     public function new_create_sale(){
         $user_key=$this->input->post('profile_key');
+        $payment_method = $this->input->post('payment_id');
 
-        if(!empty($user_key)){
+        if(!empty($user_key) && !empty($payment_method)){
             $profile = $this->Client_model->get_profile_by_key($user_key);
             $shipping_address = $this->Client_model->get_shipping_address_by_key($user_key);
             $billing_address = $this->Client_model->get_billing_address_by_key($user_key);
@@ -387,7 +388,7 @@ class Restful extends MY_Controller {
                 'user_id'=>$profile['user_id'],
                 'billing_address_id'=>$shipping_address['id'],
                 'shipping_address_id'=>$billing_address['id'],
-                'payment_method_id'=>/* $payment_method */1,
+                'payment_method_id'=>$payment_method,
                 'total_price'=>0,
                 'total_iva'=>0,
 
@@ -579,7 +580,7 @@ class Restful extends MY_Controller {
                 if($update){
                     $array=$this->generate_error_message(200);
                 }
-                
+
             }else{
                 $array=$this->generate_error_message(404,'Alguma informação está em falta');
             }
@@ -592,6 +593,7 @@ class Restful extends MY_Controller {
 
     public function create_billing_address(){
         $user_key=$this->input->post('profile_key');
+        
 
         if(!empty($user_key)){
             $profile=$this->Client_model->get_profile_by_key($user_key);
