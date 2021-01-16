@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -16,17 +17,17 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
     //dados da tabela
     private static final String TABELA = "Produtos";
 
-    private static final int ID_PRODUTO = 0;
-    private static final String NOME_PRODUTO = "nome";
-    private static final String IMAGEM = "imagem";
-    private static final Double PRECO = 0.0;
-    private static final String BIG_DESCRIPTION = "descriçao";
-    private static final String CATEGORY_NAME = "categoria";
-    private static final int CATEGORY_ID = 0;
-    private static final String COMPANY_NAME = "empresa";
-    private static final int COMPANY_ID = 0;
-    private static final int QUANTITY_IN_STOCK = 0;
-    private static final double PRICE_IVA = 0.0;
+    private static final String ID = "id";
+    private static final String PRODUCT_NAME = "product_name";
+    private static final String IMAGE = "image";
+    private static final String BIG_DESCRIPTION = "big_description";
+    private static final String CATEGORY_NAME = "category_name";
+    private static final String CATEGORY_ID = "category_id";
+    private static final String COMPANY_NAME = "company_name";
+    private static final String COMPANY_ID = "company_id";
+    private static final String QUANTITY_IN_STOCK = "quantity_in_stock";
+    private static final String PRICE = "price";
+    private static final String PRICE_IVA = "price_iva";
 
     private final SQLiteDatabase basedados;
 
@@ -38,22 +39,20 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlTabela = String.format("CREATE TABLE %s(%d INTEGER PRIMARY KEY, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DOUBLE NOT NULL, %s TEXT NOT NULL, %s DOUBLE NOT NULL, %sSTRING NOT NULL,%dINT NOT NULL,%sSTRING NOT NULL,%dINT NOT NULL,%dINT NOT NULL,%sDOUBLE NOT NULL,)", TABELA, ID_PRODUTO, NOME_PRODUTO, IMAGEM, PRECO, BIG_DESCRIPTION, PRECO, CATEGORY_NAME, CATEGORY_ID, COMPANY_NAME, COMPANY_ID, QUANTITY_IN_STOCK, PRICE_IVA);
-//        String sqlTabela = "CREATE TABLE " + TABELA + "(" +
-//                ID_PRODUTO + " INTEGER PRIMARY KEY, " +
-//                NOME_PRODUTO + " TEXT NOT NULL, " +
-//                IMAGEM + " TEXT NOT NULL, " +
-//                PRECO + " DOUBLE NOT NULL, " +
-//                BIG_DESCRIPTION + " TEXT NOT NULL, " +
-//                PRECO + " DOUBLE NOT NULL, " +
-//                CATEGORY_NAME + "STRING NOT NULL,"+
-//                CATEGORY_ID + "INT NOT NULL,"+
-//                COMPANY_NAME + "STRING NOT NULL,"+
-//                COMPANY_ID + "INT NOT NULL,"+
-//                QUANTITY_IN_STOCK + "INT NOT NULL,"+
-//                PRICE_IVA + "DOUBLE NOT NULL,"+
-//
-//                ")";
+
+        String sqlTabela = "CREATE TABLE " + TABELA + "(" +
+                ID + " INTEGER PRIMARY KEY, " +
+                PRODUCT_NAME + " TEXT NOT NULL, " +
+                IMAGE + " TEXT, " +
+                BIG_DESCRIPTION + " TEXT NOT NULL, " +
+                CATEGORY_NAME + " TEXT NOT NULL, "+
+                CATEGORY_ID + " INTEGER , "+
+                COMPANY_NAME + " TEXT NOT NULL, "+
+                COMPANY_ID + " INTEGER, " +
+                QUANTITY_IN_STOCK + " INTEGER, " +
+                PRICE + " DOUBLE NOT NULL, " +
+                PRICE_IVA + " DOUBLE  )";
+
         db.execSQL(sqlTabela);
     }
 
@@ -65,19 +64,22 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
 
     //Definir os métodos CRUD para gerir a base de dados
 
+
+
+
     public Products addProductsdb(Products products){
         ContentValues valores = new ContentValues();
-        valores.put(String.valueOf(ID_PRODUTO), products.getId());
-        valores.put(NOME_PRODUTO, products.getProduct_name());
-        valores.put(IMAGEM, products.getImage());
-        valores.put(String.valueOf(PRECO), products.getPrice());
+        valores.put(ID, products.getId());
+        valores.put(PRODUCT_NAME, products.getProduct_name());
+        valores.put(IMAGE, products.getImage());
         valores.put(BIG_DESCRIPTION, products.getBig_description());
         valores.put(CATEGORY_NAME, products.getCategory_name());
-        valores.put(String.valueOf(CATEGORY_ID), products.getCategory_id());
+        valores.put(CATEGORY_ID, products.getCategory_id());
         valores.put(COMPANY_NAME, products.getCompany_name());
-        valores.put(String.valueOf(COMPANY_ID), products.getCompany_id());
-        valores.put(String.valueOf(QUANTITY_IN_STOCK), products.getQuantity_in_stock());
-        valores.put(String.valueOf(PRICE_IVA), products.getPrice_iva());
+        valores.put(COMPANY_ID, products.getCompany_id());
+        valores.put(QUANTITY_IN_STOCK, products.getQuantity_in_stock());
+        valores.put(PRICE, products.getPrice());
+        valores.put(PRICE_IVA, products.getPrice_iva());
 
         int id = (int) this.basedados.insert(TABELA, null, valores);
         if(id > -1){
@@ -117,9 +119,8 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
     public ArrayList<Products> getAllProducts(){
         ArrayList<Products> lista = new ArrayList<>();
 
-
         Cursor cursor = this.basedados.query(TABELA,
-                new String [] {String.valueOf(ID_PRODUTO), NOME_PRODUTO, IMAGEM, String.valueOf(PRECO), BIG_DESCRIPTION, CATEGORY_NAME, String.valueOf(CATEGORY_ID), COMPANY_NAME, String.valueOf(COMPANY_ID), String.valueOf(QUANTITY_IN_STOCK), String.valueOf(PRICE_IVA)},
+                new String [] {ID, PRODUCT_NAME, IMAGE,  BIG_DESCRIPTION, CATEGORY_NAME, CATEGORY_ID, COMPANY_NAME, COMPANY_ID, QUANTITY_IN_STOCK, PRICE, PRICE_IVA},
                 null, null, null, null, null);
 
         if(cursor.moveToFirst()){

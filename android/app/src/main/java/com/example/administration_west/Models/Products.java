@@ -5,13 +5,13 @@ public class Products {
     private int id;
     private String product_name;
     private String image;
-    private double price;
     private String big_description;
     private String category_name;
     private int category_id;
     private String company_name;
     private int company_id;
     private int quantity_in_stock;
+    private double price;
     private double price_iva;
 
 

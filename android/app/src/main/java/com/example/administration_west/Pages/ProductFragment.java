@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,10 +55,13 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     private RequestQueue requestQueue;
 
     //base de dados
-    private ProductsDBHelper db;
+    //private ProductsDBHelper db;
 
-//    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
-    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+    //private SQLiteDatabase bd;
+
+
+    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
+//    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
 
 
     public ProductFragment(){
@@ -139,7 +143,9 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     public void parseJSONProducts(final Context context, final boolean isConnected){
         if(!isConnected){
             Toast.makeText(context, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
-            productsList = db.getAllProducts();
+
+            ProductsDBHelper Pbd = new ProductsDBHelper(getContext());
+            productsList = Pbd.getAllProducts();
 
             adapterProducts = new ProductsAdapter(getContext(), productsList);
             recyclerViewProducts.setAdapter(adapterProducts);
@@ -172,15 +178,16 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
             });
             requestQueue.add(request);
         }
-
     }
 
     public void adicionarProdutosDB(ArrayList<Products> lista){
+        ProductsDBHelper Pbd = new ProductsDBHelper(getContext());
+        Pbd.removerAllProductsDB();
+        for(Products products: lista){
+            Pbd.addProductsdb(products);
+        }
+      //  db.close();
 
-        System.out.println(lista);
-//        db.removerAllProductsDB();
-//        for(Products products: lista)
-//            db.addProductsdb(products);
     }
 
     @Override
