@@ -8,14 +8,15 @@
     android:orientation="vertical">
 
 
-
     <ImageView
         android:id="@+id/imageViewLogin"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@mipmap/ic_adm_west_logo"  />
 
     <TextView
         android:id="@+id/textViewLogin"

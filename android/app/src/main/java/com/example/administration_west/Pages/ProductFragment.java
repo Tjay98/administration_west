@@ -57,8 +57,8 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
 
 
-    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
-//    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+//    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
+    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
 
 
     public ProductFragment(){
