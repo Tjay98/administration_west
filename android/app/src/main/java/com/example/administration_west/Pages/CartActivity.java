@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.administration_west.Pages.ProductFragment.EXTRA_PRODUCT_PRICE;
 import static com.example.administration_west.Pages.ProductFragment.ip;
 
 public class CartActivity extends AppCompatActivity implements CartAdapter.OnItemClickListener  {
@@ -58,6 +59,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
 
     String getKey;
     int getProductID;
+
+    public static final Double EXTRA_TOTAL_PRECO = 0.0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +155,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
 
 
                                 }
+
+
                                 Total.setText(totalPrice + " €");
 
 

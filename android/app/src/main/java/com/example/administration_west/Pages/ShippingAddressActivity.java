@@ -37,7 +37,8 @@ public class ShippingAddressActivity  extends AppCompatActivity {
         SessionUser sessionUser;
         String getKey;
 
-        @Override
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.shipping_address);
@@ -156,6 +157,7 @@ public class ShippingAddressActivity  extends AppCompatActivity {
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
+
 
         }
 

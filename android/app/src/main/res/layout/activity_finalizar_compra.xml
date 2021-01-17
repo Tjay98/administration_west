@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Pages.FinalizarCompraActivity">
+    tools:context=".Pages.FinalizarCompraActivity"
+    android:layout_marginHorizontal="20dp">
 
     <TextView
         android:id="@+id/textView10"
@@ -17,9 +18,6 @@
         android:textAlignment="center"
         android:textSize="30sp"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
@@ -30,18 +28,6 @@
         android:text="Informação do Cliente" />
 
     <TextView
-        android:id="@+id/tVEmailFC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email" />
-
-    <TextView
-        android:id="@+id/tVNifFC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NIF" />
-
-    <TextView
         android:id="@+id/textView27"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,29 +36,83 @@
         android:textSize="15sp"
         android:text="Informação de Entrega" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tVNomeEntrega"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Nome do Cliente" />
+
     <TextView
         android:id="@+id/tVNomeEntregaFC"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do Cliente Entrega" />
+        android:text="Nome do Cliente" />
 
-    <TextView
-        android:id="@+id/tVTelemovelEntregaFC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Número de Telemóvel Entrega" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tVMoradaEntregaFC"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tVTelemovelEntrega"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Número de Telemóvel" />
+
+        <TextView
+            android:id="@+id/tVTelemovelEntregaFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número de Telemóvel" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tVMoradaEntrega"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="Morada de Entrega" />
 
+        <TextView
+            android:id="@+id/tVMoradaEntregaFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Morada de Entrega" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
     <TextView
-        android:id="@+id/tVCodigoPostalEntregaFC"
-        android:layout_width="match_parent"
+        android:id="@+id/tVCodigoPostalEntrega"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Código Postal de Entrega" />
+        android:layout_marginEnd="10dp"
+        android:text="Código Postal" />
+        <TextView
+            android:id="@+id/tVCodigoPostalEntregaFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código Postal" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView28"
@@ -82,33 +122,79 @@
         android:textAlignment="center"
         android:textSize="15sp"
         android:text="Informação de Faturação" />
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
     <TextView
-        android:id="@+id/tVNomeFaturacaoFC"
-        android:layout_width="match_parent"
+        android:id="@+id/tVNomeFaturacao"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        android:text="Nome Cliente Faturação" />
+        android:text="Nome Cliente" />
 
-    <TextView
-        android:id="@+id/tVTelemovelFaturacaoFC"
+                <TextView
+                    android:id="@+id/tVNomeFaturacaoFC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nome Cliente" />
+            </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Número Telemóvel Faturação" />
-
+        android:orientation="horizontal">
     <TextView
-        android:id="@+id/tVMoradaFaturacaoFC"
+        android:id="@+id/tVTelemovelFaturacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Número Telemóvel" />
+
+        <TextView
+            android:id="@+id/tVTelemovelFaturacaoFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número Telemóvel" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tVMoradaFaturacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="Morada de Faturação" />
 
-    <TextView
-        android:id="@+id/tVCodigoPostalFaturacaoFC"
+        <TextView
+            android:id="@+id/tVMoradaFaturacaoFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Morada de Faturação" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Código Postal Faturação" />
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tVCodigoPostalFaturacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Código Postal" />
 
-
+        <TextView
+            android:id="@+id/tVCodigoPostalFaturacaoFC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código Postal" />
+    </LinearLayout>
 
 
     <TextView
@@ -120,37 +206,25 @@
         android:textSize="20sp"
         android:text="Informação da Compra" />
 
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <TextView
-        android:id="@+id/tVDataFC"
-        android:layout_width="match_parent"
+        android:id="@+id/tVPagamentoN"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
-        android:text="Data" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tVPrecoTotalFC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="Preço Total" />
-
-        <TextView
-            android:id="@+id/tVIvaTotalFC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preço Total IVA" />
-    </LinearLayout>
+        android:text="Método de Pagamento" />
 
     <TextView
         android:id="@+id/tVPagamentoFC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Método de Pagamento" />
+</LinearLayout>
 
     <Button
         android:id="@+id/buttonFinalizarCompra"
@@ -168,6 +242,5 @@
         android:text="@string/menu_principal"
         android:textColor="@color/secondblue" />
 
-    </ScrollView>
 
 </LinearLayout>

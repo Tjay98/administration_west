@@ -54,10 +54,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     private ArrayList<Products> productsList;
     private RequestQueue requestQueue;
 
-    //base de dados
-    //private ProductsDBHelper db;
 
-    //private SQLiteDatabase bd;
 
 
     public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";

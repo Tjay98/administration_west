@@ -56,10 +56,6 @@ public class DetailsProductsActivity extends AppCompatActivity {
         sessionUser= new SessionUser(getApplicationContext());
         sessionUser.checkLogin();
 
-
-
-
-
         Intent intent = getIntent();
         String product_image = intent.getExtras().getString(EXTRA_PRODUCT_IMAGE);
         String product_name = intent.getExtras().getString(EXTRA_PRODUCT_NAME);

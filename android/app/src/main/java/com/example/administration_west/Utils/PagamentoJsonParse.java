@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
-import com.example.administration_west.Models.Categories;
+import com.example.administration_west.Models.Pagamento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CategoriesJsonParse {
+public class PagamentoJsonParse {
 
     public static boolean isConnected(Context contexto){
         ConnectivityManager cm= (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -23,19 +23,19 @@ public class CategoriesJsonParse {
     }
 
 
-    public static ArrayList<Categories> parseJsonCategories(JSONArray resposta, Context contexto){
-        ArrayList<Categories> lista= new ArrayList<Categories>();
+    public static ArrayList<Pagamento> parseJsonPagamento(JSONArray resposta, Context contexto){
+        ArrayList<Pagamento> lista= new ArrayList<Pagamento>();
         try {
 
             for(int i =0; i<resposta.length(); i++){
 
-                JSONObject categoriesapi = (JSONObject)resposta.get(i);
+                JSONObject pagamentoapi = (JSONObject)resposta.get(i);
 
-                Categories categories=new Categories(categoriesapi.getInt("id"),
-                        categoriesapi.getString("category_name"));
+                Pagamento pagamento=new Pagamento(pagamentoapi.getInt("id"),
+                        pagamentoapi.getString("name"));
 
 
-                lista.add(categories);
+                lista.add(pagamento);
             }
         }catch (JSONException e) {
             e.printStackTrace();
@@ -46,17 +46,17 @@ public class CategoriesJsonParse {
 
     }
 
-    public static Categories parserJsonCategories(JSONObject resposta, Context contexto){
-        Categories categories = null;
+    public static Pagamento parserJsonPagamento(JSONObject resposta, Context contexto){
+        Pagamento pagamento = null;
         try {
-            categories =new Categories(resposta.getInt("id"),
-                    resposta.getString("category_name"));
+            pagamento =new Pagamento(resposta.getInt("id"),
+                    resposta.getString("name"));
 
         }catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(contexto, "ERRO:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        return categories;
+        return pagamento;
     }
 
 }

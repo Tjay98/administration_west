@@ -8,18 +8,23 @@
     android:orientation="vertical"
     tools:context=".Pages.CartActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecycleViewCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
     <TextView
         android:id="@+id/PrecoTotal"
         android:layout_width="wrap_content"
@@ -36,6 +41,10 @@
         android:textSize="20sp"
         />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -15,7 +15,7 @@
 
     <string name="descricao">Descrição</string>
 
-    <string name="compra_finalizada">Compra Realizada com Sucesso!</string>
+    <string name="compra_finalizada">Compra realizada com sucesso!</string>
 
     <string name="finalizar_compra">Finalizar Compra!</string>
 
@@ -59,6 +59,7 @@
     <string name="morada">Morada</string>
     <string name="codigo_postal">Código Postal</string>
     <string name="enviar_morada">Enviar Morada</string>
+    <string name="m_todos_de_pagamento">Métodos de Pagamento</string>
 
 
 </resources>

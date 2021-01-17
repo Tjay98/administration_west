@@ -38,6 +38,7 @@ public class BillingAddressActivity extends AppCompatActivity {
     SessionUser sessionUser;
     String getKey;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,10 +154,14 @@ public class BillingAddressActivity extends AppCompatActivity {
 
                 return params;
             }
+
         };
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+
+
 
     }
 
