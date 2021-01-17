@@ -35,6 +35,15 @@ public class CategoriesAdapter  extends RecyclerView.Adapter<CategoriesAdapter.C
 
     private Context ccontext;
     private ArrayList<Categories> ccategories;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onCategoryClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public CategoriesAdapter(Context context, ArrayList<Categories> categories) {
         ccontext = context;
@@ -47,6 +56,17 @@ public class CategoriesAdapter  extends RecyclerView.Adapter<CategoriesAdapter.C
         public CategoriesViewHolder(View itemView) {
             super(itemView);
             category_name = itemView.findViewById(R.id.tvCategoryName);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener !=null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.onCategoryClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -71,6 +91,7 @@ public class CategoriesAdapter  extends RecyclerView.Adapter<CategoriesAdapter.C
     public int getItemCount() {
         return ccategories.size();
     }
+
 
 
 }

@@ -132,11 +132,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                         ArrayList<Cart> lista= new ArrayList<Cart>();
 
                         try {
+
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             JSONArray jsonArray = jsonObject.getJSONArray("cart");
 
-                            if(status.equals("200")){
+                            if( status.equals("200") ){
                                 totalPrice=0.0;
                                     for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -164,10 +165,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                                 mRecyclerView.setAdapter(cartAdapter);
                                 cartAdapter.setOnItemClickListener(CartActivity.this);
 
+                            }else{
+                                Toast.makeText(CartActivity.this, "Não tem produtos no carrinho!", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Erro " +e.toString(),Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getApplicationContext(), "Erro " +e.toString(),Toast.LENGTH_LONG).show();
 
                         }
 
@@ -215,6 +218,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                             if (status.equals("200")) {
                                 Toast.makeText(CartActivity.this, "Produto eliminado com sucesso!", Toast.LENGTH_LONG).show();
 
+
                             }else{
                                 Toast.makeText(CartActivity.this, status, Toast.LENGTH_LONG).show();
                             }
@@ -249,7 +253,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
 
        // cartList.remove(position);
         cartAdapter.clear();
-        getCartDetail();
+        mostrarMainAcivity();
+        //getCartDetail();
 
 
     }

@@ -226,6 +226,7 @@ public class FinalizarCompraActivity extends AppCompatActivity {
                             String status = jsonObject.getString("status");
                             if (status.equals("200")){
                                 Toast.makeText(FinalizarCompraActivity.this, "Compra efetuada com sucesso!",Toast.LENGTH_LONG).show();
+                                mostrarMain();
                             } else if(status.equals("412")) {
                                 Toast.makeText(FinalizarCompraActivity.this, "Falta de stock num dos produtos. Contacte-nos",Toast.LENGTH_LONG).show();
                             } else{

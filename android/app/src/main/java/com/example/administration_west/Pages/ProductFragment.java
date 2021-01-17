@@ -34,7 +34,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener {
+public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener, CategoriesAdapter.OnItemClickListener {
 
     public static final String EXTRA_PRODUCT_ID = "product_id";
     public static final String EXTRA_PRODUCT_IMAGE = "product_image";
@@ -136,6 +136,28 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         });
         requestQueue.add(request);
     }
+    private void parseJSONCategoriesProducts(final Context context, String category_id){
+
+        String url= ip + "restful/products_category/"+category_id;
+        JsonArrayRequest request=new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        productsList = ProductsJsonParse.parseJsonProducts(response, context);
+                        adapterProducts=new ProductsAdapter(getContext(), productsList);
+                        recyclerViewCategories.setAdapter(adapterProducts);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+    }
 
     public void parseJSONProducts(final Context context, final boolean isConnected){
         if(!isConnected){
@@ -201,6 +223,17 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         detail.putExtra(EXTRA_PRODUCT_DESCRIPTION, clicked.getBig_description());
 
         startActivity(detail);
+
+    }
+
+    @Override
+    public void onCategoryClick(int position) {
+        Categories clicked = categoriesList.get(position);
+
+        Toast.makeText(getContext(), position, Toast.LENGTH_SHORT).show();
+//
+//        String id = String.valueOf(clicked.getId());
+//        parseJSONCategoriesProducts(getContext(),id);
 
     }
 }
