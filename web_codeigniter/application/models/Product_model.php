@@ -43,13 +43,7 @@ class Product_model extends CI_Model{
         if($this->session->userdata('role_id')!=3){
             $this->db->where('products.status',1);
         }
-        $this->db->select('products.id,
-                            products.product_name, 
-                            products.image, 
-                            products.small_description, 
-                            products.price,
-                            products.category_id,
-                            products.company_id,
+        $this->db->select('products.*,
                             categories.category_name,
                             companies.company_name,  ');
         $this->db->from('products');

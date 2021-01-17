@@ -57,8 +57,8 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
 
 
-    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
-//    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
+//    public static final String ip = "http://192.168.1.67/administration_west/web_codeigniter/";
+    public static final String ip = "http://192.168.1.109/administration_west/web_codeigniter/";
 
 
     public ProductFragment(){
@@ -127,6 +127,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
                         categoriesList = CategoriesJsonParse.parseJsonCategories(response, context);
                         adapterCategories=new CategoriesAdapter(getContext(), categoriesList);
                         recyclerViewCategories.setAdapter(adapterCategories);
+                        adapterCategories.setOnItemClickListener(ProductFragment.this);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -147,8 +148,12 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
                     @Override
                     public void onResponse(JSONArray response) {
                         productsList = ProductsJsonParse.parseJsonProducts(response, context);
-                        adapterProducts=new ProductsAdapter(getContext(), productsList);
-                        recyclerViewCategories.setAdapter(adapterProducts);
+
+
+                        adapterProducts = new ProductsAdapter(getContext(), productsList);
+                        recyclerViewProducts.setAdapter(adapterProducts);
+                        adapterProducts.setOnItemClickListener(ProductFragment.this);
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -229,11 +234,11 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     @Override
     public void onCategoryClick(int position) {
         Categories clicked = categoriesList.get(position);
-
-        Toast.makeText(getContext(), position, Toast.LENGTH_SHORT).show();
 //
-//        String id = String.valueOf(clicked.getId());
-//        parseJSONCategoriesProducts(getContext(),id);
+//        Toast.makeText(getContext(), position, Toast.LENGTH_SHORT).show();
+
+        String id = String.valueOf(clicked.getId());
+        parseJSONCategoriesProducts(getContext(),id);
 
     }
 }
