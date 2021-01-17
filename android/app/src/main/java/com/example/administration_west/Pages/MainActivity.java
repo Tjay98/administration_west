@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
+//            case R.id.search:
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+//                return true;
             case R.id.shop:
                 mostrarCart();
                 return true;
@@ -132,11 +132,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationview.setCheckedItem(R.id.nav_profile);
                 setTitle("Perfil");
                 break;
-            case R.id.nav_contacts:
-                fragmento = null;
-                navigationview.setCheckedItem(R.id.nav_contacts);
-                setTitle("Contactos");
-                break;
+//            case R.id.nav_contacts:
+//                fragmento = null;
+//                navigationview.setCheckedItem(R.id.nav_contacts);
+//                setTitle("Contactos");
+//                break;
             case R.id.nav_logout:
                 navigationview.setCheckedItem(R.id.nav_logout);
                 sessionUser.logout();
