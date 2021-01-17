@@ -108,7 +108,9 @@ class Restful extends MY_Controller {
         $products=$this->Product_model->search_product($search);
 
         if(!empty($products)){
-            echo json_encode($products, JSON_PRETTY_PRINT);
+            $array=$this->generate_error_message(200,"Produto encontrado para o pesquisado");
+            $array['products']=$products;
+            echo json_encode($array, JSON_PRETTY_PRINT);
         }else{
             $array=$this->generate_error_message(404);
             echo json_encode($array);
