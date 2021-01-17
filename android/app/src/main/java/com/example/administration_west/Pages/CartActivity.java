@@ -107,7 +107,11 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
         Pagamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mostrarMorada();
+                if(cartList.isEmpty()){
+                    getCartDetail();
+                }else{
+                    mostrarMorada();
+                }
             }
         });
     }
@@ -132,7 +136,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                         ArrayList<Cart> lista= new ArrayList<Cart>();
 
                         try {
-
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             JSONArray jsonArray = jsonObject.getJSONArray("cart");
@@ -153,13 +156,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                                                 obj.getInt("quantity")
                                         );
                                         lista.add(products);
-
-
                                 }
-
-
                                 Total.setText(totalPrice + " €");
-
 
                                 cartAdapter.addItems(lista);
                                 mRecyclerView.setAdapter(cartAdapter);
@@ -171,7 +169,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                         } catch (JSONException e){
                             e.printStackTrace();
                            // Toast.makeText(getApplicationContext(), "Erro " +e.toString(),Toast.LENGTH_LONG).show();
-
                         }
 
                     }
