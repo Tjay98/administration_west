@@ -89,29 +89,6 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-//    public Products adicionar1a1(int Product_id, String Product_name, )
-
-
-//    public boolean editarLivroDB(Livro livro){
-//        ContentValues valores = new ContentValues();
-//        valores.put(TITULO_LIVRO, livro.getTitulo());
-//        valores.put(SERIE_LIVRO, livro.getSerie());
-//        valores.put(AUTOR_LIVRO, livro.getAutor());
-//        valores.put(ANO_LIVRO, livro.getAno());
-//        valores.put(CAPA_LIVRO, livro.getCapa());
-//
-//        int registosalterados = this.basedados.update(TABELA, valores,
-//                "id = ?", new String [] {""+ livro.getId()});
-//
-//        return registosalterados > 0;
-//    }
-
-
-    public boolean removerProductsDB(int id){
-        return this.basedados.delete(TABELA, "id = ?",
-                new String [] {""+ id}) == 1;
-    }
-
     public void removerAllProductsDB(){
         this.basedados.delete(TABELA, null, null);
     }
@@ -131,12 +108,7 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
                         cursor.getString(6),cursor.getInt(7),
                         cursor.getInt(8),cursor.getDouble(9),
                         cursor.getDouble(10));
-
-                //OU
-                //Livro livro = new Livro (cursor.getString(1),
-                //                        cursor.getString(2), cursor.getString(3),
-                //                        cursor.getInt(4), cursor.getInt(5));
-                //livro.setId(cursor.getInt(0))
+                
 
                 lista.add(products);
 

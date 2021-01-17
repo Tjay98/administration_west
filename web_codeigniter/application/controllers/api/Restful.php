@@ -104,7 +104,17 @@ class Restful extends MY_Controller {
             echo json_encode($array);
         }
     }
-    
+    public function search_this_product($search){
+        $products=$this->Product_model->search_product($search);
+
+        if(!empty($products)){
+            echo json_encode($products, JSON_PRETTY_PRINT);
+        }else{
+            $array=$this->generate_error_message(404);
+            echo json_encode($array);
+        }
+    }
+
     public function get_products_by_company($id){
         $product=$this->Product_model->products_by_company($id);
         if(!empty($product)){
@@ -591,6 +601,8 @@ class Restful extends MY_Controller {
         }
         echo json_encode($array,JSON_PRETTY_PRINT);
     }
+
+
 
     public function create_billing_address(){
         $user_key=$this->input->post('profile_key');

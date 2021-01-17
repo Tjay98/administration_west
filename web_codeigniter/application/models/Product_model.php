@@ -56,7 +56,7 @@ class Product_model extends CI_Model{
     }
 
 
-    function products_by_company($company_id){
+    public function products_by_company($company_id){
         if($this->session->userdata('role_id')!=3){
             $this->db->where('products.status',1);
         }
@@ -74,6 +74,12 @@ class Product_model extends CI_Model{
     }
     
     
+    public function search_product($search){
+        $this->db->like('product_name',$search);
+        $products= $this->db->get('products')->result_array();
 
+        return $products;
+
+    }
 
 }

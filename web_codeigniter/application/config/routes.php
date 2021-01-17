@@ -174,6 +174,7 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
         $route['restful/products_company/(:any)'] = 'api/restful/get_products_by_company/$1';
         $route['restful/products_category/(:any)'] = 'api/restful/get_products_by_category/$1';
+        $route['restful/search_product/(:any)'] = 'api/restful/search_this_product/$1';
 
         //companies
         $route['restful/companies'] = 'api/restful/get_companies';
