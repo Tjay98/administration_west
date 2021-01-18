@@ -108,7 +108,7 @@ public class ProductsDBHelper extends SQLiteOpenHelper {
                         cursor.getString(6),cursor.getInt(7),
                         cursor.getInt(8),cursor.getDouble(9),
                         cursor.getDouble(10));
-                
+
 
                 lista.add(products);
 
