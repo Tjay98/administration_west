@@ -59,7 +59,7 @@
                     <h5 style="font-weight:bold;">Produtos (<?php echo count($sale['sale_products']); ?>)</h5>
 				</div>
 				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-					<div class="card-body">
+					<div class="card-body table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>

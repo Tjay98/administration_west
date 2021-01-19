@@ -8,6 +8,7 @@
         min-height:400px
     }
      .custom-boxes{
+         margin-top:10px;
         padding: 20px;
         box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
         background: #fff;
@@ -30,7 +31,7 @@
         <div class="row">
             <?php 
                 foreach ($companies as $companies): ?>
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="custom-boxes">
                         <h4 class="text-center"> <?php echo $companies['company_name']; ?></h4>   
                         <p class="text-justify"> <?php echo $companies['description']; ?></p>  

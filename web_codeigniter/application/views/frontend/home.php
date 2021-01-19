@@ -47,7 +47,7 @@
             <div class="row">
             <?php 
                 foreach ($categories as $categories){ ?>
-                <div class="col-lg-2 col-md-2 col-sm-12 mt-2 mb-5 mr-2 ml-2">
+                <div class="col-lg-3 col-md-3 col-sm-12 mt-2 mb-5 mr-2 ml-2">
                     <a class="custom-boxes" href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
                 </div>          
             <?php } ?>
@@ -65,7 +65,7 @@
                 <?php 
                 foreach ($companies as $companies): 
                 ?>
-                    <div class="col-lg-4 col-md-4 col-sm-12 mt-2 mb-5 mr-2 ml-2">
+                    <div class="col-lg-5 col-md-5 col-sm-12 mt-2 mb-5 mr-2 ml-2">
                         <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
                         <div class="custom-boxes" style="min-height:200px">
                             <div class="row">

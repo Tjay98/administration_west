@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
             <?php if(!empty($cartItems)) { $iva=0; $subtotal=0; $total=0;?>
                     
                     <table class="table table-striped table-bordered table-hover">

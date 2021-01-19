@@ -8,6 +8,7 @@
         min-height:400px
     }
      .custom-boxes{
+         margin-top:10px;
         padding: 20px;
         box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
         background: #fff;

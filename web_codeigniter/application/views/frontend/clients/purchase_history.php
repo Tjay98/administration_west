@@ -1,8 +1,10 @@
-<div  class="container" style="margin-top:100px; margin-bottom:100px" >
-    <div class="card">
+<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:100px; margin-bottom:100px" >
+    <div class="card box-body  dataTables_wrapper dt-bootstrap4 no-footer">
         <?php if(!empty($sales)){ ?>
             <center><h3>Pedidos</h3></center>
-            <table class="table table-bordered table-hover">
+            <div class="table-responsive">
+            <table class="table   table-bordered table-hover dataTable no-footer" 
+            style="width:100%;" >
                 <thead>
                     <tr>
                         <th>#</th>
@@ -45,4 +47,8 @@
             <h4 style="text-align:center;">Visite a nossa página de <a href="<?php echo base_url('products/') ?>">produtos</a></h4>
         <?php }?>
     </div>
+    </div>
 </div>
+</div>
+
+
