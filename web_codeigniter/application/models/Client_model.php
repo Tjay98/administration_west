@@ -207,6 +207,13 @@ class Client_model extends CI_Model{
 
         return $clients;
     }
+    
+    public function get_users(){
+
+        $clients=$this->db->get('user')->result_array();
+
+        return $clients;
+    }
 
     public function get_client_addresses($user_id){
         $this->db->where('user_id',$user_id);

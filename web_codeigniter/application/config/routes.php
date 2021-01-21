@@ -139,14 +139,14 @@ $route['translate_uri_dashes'] = FALSE;
         //users e clients mesmo controlador
 
             //clientes
-            $route['admin/clients'] = 'backend/clients/client_index';
+/*             $route['admin/clients'] = 'backend/clients/client_index';
             $route['admin/client_table']='backend/clients/get_client_datatable';
             $route['admin/clients/add'] = 'backend/clients/client_add';
             $route['admin/clients/edit/(:any)'] = 'backend/clients/client_edit/$1';
-            $route['admin/clients/delete/(:any)'] = 'backend/clients/client_delete/$1';
+            $route['admin/clients/delete/(:any)'] = 'backend/clients/client_delete/$1'; */
 
             //utilizadores
-            $route['admin/users'] = 'backend/clients/user_index';
+            $route['admin/users'] = 'backend/clients/index';
             $route['admin/user_table']='backend/clients/get_user_datatable';
             $route['admin/users/add'] = 'backend/clients/user_add';
             $route['admin/users/edit/(:any)'] = 'backend/clients/user_edit/$1';

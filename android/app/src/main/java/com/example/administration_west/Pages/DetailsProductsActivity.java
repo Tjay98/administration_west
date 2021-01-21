@@ -43,7 +43,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
     String getKey;
 
     String ADD_TO_CART_URL = ip + "restful/add_product_cart";
-
+    String product_id;
 
 
 
@@ -57,6 +57,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         sessionUser.checkLogin();
 
         Intent intent = getIntent();
+        product_id =  intent.getExtras().getString(EXTRA_PRODUCT_ID);
         String product_image = intent.getExtras().getString(EXTRA_PRODUCT_IMAGE);
         String product_name = intent.getExtras().getString(EXTRA_PRODUCT_NAME);
         String product_category_name = intent.getExtras().getString(EXTRA_PRODUCT_CATEGORY);
@@ -99,7 +100,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
 
     private void addToCart() {
         Intent intent = getIntent();
-        String product_id = intent.getExtras().getString(EXTRA_PRODUCT_ID);
+
 
         EditText _quantity = findViewById(R.id.editQuantCart);
 

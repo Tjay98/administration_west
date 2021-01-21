@@ -177,7 +177,7 @@ class Restful extends MY_Controller {
                 'birthday_date'=>date("Y-m-d",strtotime($this->input->post('birthday'))),
                 'password_hash'=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
             ];
-
+            
 
             $validate=$this->Client_model->register_client($registo_form);
             if(empty($validate)){
@@ -652,6 +652,17 @@ class Restful extends MY_Controller {
             $array=$this->generate_error_message(404,'Alguma informação está em falta');
         }
         echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function show_user_purchases(){
+
+        $user_key=$this->input->post('profile_key');
+    
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+            
+        }
+            
     }
 
 }
