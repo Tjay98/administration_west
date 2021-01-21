@@ -438,6 +438,9 @@ class Restful extends MY_Controller {
                     $this->db->set('total_iva',$total_iva);
                     $this->db->update('sales_group');
 
+                    $this->db->where('user_id',$profile['user_id']);
+                    $this->db->delete('user_cart');
+                    
                     $array=$this->generate_error_message(200,'Compra efetuada com sucesso');
                     echo json_encode($array,JSON_PRETTY_PRINT);
                 }else{
@@ -562,7 +565,7 @@ class Restful extends MY_Controller {
         if(!empty($user_key)){
             $profile=$this->Client_model->get_profile_by_key($user_key);
             $shipping_address=$this->Client_model->get_shipping_address_by_key($user_key);
-
+           
             $name=$this->input->post('name');
             $nif=$this->input->post('nif');
             $contact=$this->input->post('contact');
@@ -581,9 +584,11 @@ class Restful extends MY_Controller {
                         'zip_code'=>$zip,
                         
                     ];
-
-                if(empty($shipping_address)){
-                    $update=$this->db->insert('shipping_address',$data);
+                /* print_r($shipping_address); */
+                if(empty($shipping_address['id'])){
+                    $this->db->insert('shipping_address',$data);
+                    $update = $this->db->insert_id();
+                   /*  print_r($update);die; */
                 }else{
                     $data['modified_date']=date('Y-m-d H:i:s');
                     $this->db->where('id',$shipping_address['id']);
@@ -633,8 +638,9 @@ class Restful extends MY_Controller {
                     
                 ];
 
-                if(empty($billing_address)){
-                    $update=$this->db->insert('billing_address',$data);
+                if(empty($billing_address['id'])){
+                    $this->db->insert('billing_address',$data);
+                    $update = $this->db->insert_id();
                 }else{
                     $data['modified_date']=date('Y-m-d H:i:s');
                     $this->db->where('id',$billing_address['id']);
