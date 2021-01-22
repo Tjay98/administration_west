@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_product"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="@string/produto"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_company"
+            android:icon="@drawable/ic_storefront"
+            android:title="@string/company"/>
+    <!--    <item-->
+    <!--        android:id="@+id/nav_contacts"-->
+    <!--        android:icon="@drawable/ic_baseline_speaker_notes"-->
+    <!--        android:title="@string/contacts"/>-->
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/profile"/>
 
-    <item
-        android:id="@+id/nav_product"
-        android:icon="@drawable/ic_shopping_cart"
-        android:title="@string/produto"
-        android:checkable="true"/>
-    <item
-        android:id="@+id/nav_company"
-        android:icon="@drawable/ic_storefront"
-        android:title="@string/company"/>
-<!--    <item-->
-<!--        android:id="@+id/nav_contacts"-->
-<!--        android:icon="@drawable/ic_baseline_speaker_notes"-->
-<!--        android:title="@string/contacts"/>-->
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_person"
-        android:title="@string/profile"/>
-
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_exit_to_app"
-        android:title="@string/logout"/>
-
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_exit_to_app"
+            android:title="@string/logout"/>
+    </group>
 </menu>
