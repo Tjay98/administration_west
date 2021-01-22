@@ -13,40 +13,38 @@
         android:roundIcon="@mipmap/ic_adm_west_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-
-        <activity android:name=".Pages.DetailsProductsActivity"
-            android:parentActivityName=".Pages.ProductFragment"
-            />
-
-        <activity android:name=".Pages.MoradasActivity"
-            />
-
-        <activity android:name=".Pages.DetailsCompaniesActivity"
-            android:parentActivityName=".Pages.CompaniesFragment"/>
-
-        <activity android:name=".Pages.FinalizarCompraActivity" />
-
-        <activity android:name=".Pages.PagamentoActivity" />
-
-        <activity android:name=".Pages.CartActivity"
-            android:parentActivityName=".Pages.MainActivity"/>
-
-
-        <activity android:name=".Pages.DepoisCarrinhoActivity" />
-
-        <activity android:name=".Pages.ShippingAddressActivity" />
-
-        <activity android:name=".Pages.BillingAddressActivity" />
-
-
-        <activity android:name=".Pages.MainActivity" />
-
-
-        <activity android:name=".Pages.RegisterActivity"
-            android:parentActivityName=".Pages.LoginActivity"/>
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/searchable" />
 
         <activity
-            android:name=".Pages.LoginActivity" >
+            android:name=".Pages.DetailsProductsActivity"
+            android:parentActivityName=".Pages.ProductFragment" />
+        <activity android:name=".Pages.MoradasActivity" />
+        <activity
+            android:name=".Pages.DetailsCompaniesActivity"
+            android:parentActivityName=".Pages.CompaniesFragment" />
+        <activity android:name=".Pages.FinalizarCompraActivity" />
+        <activity android:name=".Pages.PagamentoActivity" />
+        <activity
+            android:name=".Pages.CartActivity"
+            android:parentActivityName=".Pages.MainActivity" />
+        <activity android:name=".Pages.DepoisCarrinhoActivity" />
+        <activity android:name=".Pages.ShippingAddressActivity" />
+        <activity android:name=".Pages.BillingAddressActivity" />
+        <activity android:name=".Pages.SendMessageActivity" />
+        <activity android:name=".Pages.MainActivity">
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Pages.RegisterActivity"
+            android:parentActivityName=".Pages.LoginActivity" />
+        <activity android:name=".Pages.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

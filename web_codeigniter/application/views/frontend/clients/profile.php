@@ -21,8 +21,11 @@
                             <label for="inputDate">Data de nascimento</label>
                             <label   class="form-control-custom"readonly ><?php echo $user['birthday_date'];?></label>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:20px;">
-                            <button type="submit" onclick="open_edit_moradas()" class="btn btn-success" style="width:100%;">Moradas</button>
+                        <div class="col-lg-6 col-md-12 col-sm-12" style="padding-top:20px;">
+                            <button type="submit" onclick="open_edit_moradas_entrega()" class="btn btn-success" style="width:100%;">Moradas de entrega</button>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12" style="padding-top:20px;">
+                            <button type="submit" onclick="open_edit_moradas_fatura()" class="btn btn-success" style="width:100%;">Moradas de fatura</button>
                         </div>
                     </div> 
                     <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:20px;">
@@ -77,79 +80,52 @@
     </div>
 </div>
  
-<!--Morada-->
-<div class="modal fade" id="moradaModal" tabindex="0" role="dialog" aria-labelledby="moradaModalLabel" aria-hidden="true">
+<!--Morada de entrega-->
+<div class="modal fade" id="moradaEntregaModal" tabindex="0" role="dialog" aria-labelledby="moradaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="moradaModalLabel" style="font-weight:bold;">Moradas</h4>
+                <h4 class="modal-title" id="moradaModalLabel" style="font-weight:bold;">Morada de entrega</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="moradas_form" method="POST" action="<?php echo base_url('clients/morada'); ?>"> 
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <label for="inputMorada">Morada de entrega</label> 
-                            <br><br>
-                            <label for="inputNomeCliente">Nome do cliente</label> 
+                    <form id="morada_entrega_form" method="POST" action="<?php echo base_url('clients/morada_shipping'); ?>"> 
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="inputNome">Nome do cliente</label> 
                             <input type="text" id="inputNomeClienteEntrega" class="form-control-custom" placeholder="Nome do cliente" tabindex="1" required>
                             <small class="text-danger" id="nome_error"></small>
 
-                            <label for="inputTelemovel">Número de telemóvel</label> 
-                            <input type="text" id="inputTelemovelEntrega" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
-                            <small class="text-danger" id="telemovel_error"></small>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="inputTelemovel">Número de telemóvel</label> 
+                                        <input type="text" id="inputTelemovelEntrega" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
+                                        <small class="text-danger" id="telemovel_error"></small>
+                                    </div>
 
-                            <label for="inputCidade">Cidade</label> 
-                            <input type="text" id="inputCidadeEntrega" class="form-control-custom" placeholder="Cidade" tabindex="3" required>
-                            <small class="text-danger" id="cidade_error"></small>
-
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="inputNif">NIF</label> 
+                                        <input type="text" id="inputNifEntrega" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
+                                        <small class="text-danger" id="nif_error"></small>
+                                    </div>
+                                </div>
+                        
                             <label for="inputMorada">Morada</label> 
                             <input type="text" id="inputMoradaEntrega" class="form-control-custom" placeholder="Morada" tabindex="4" required>
                             <small class="text-danger" id="morada_error"></small>
-
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="row">
+                            
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12 col-sm-12">
                                     <label for="inputCodPostal">Código postal</label> 
                                     <input type="text" id="inputCodPostalEntrega" class="form-control-custom" placeholder="Código postal" tabindex="5" required>
                                     <small class="text-danger" id="postal_error"></small>
-
-                                    <label for="inputLocalidade">Localidade</label> 
-                                    <input type="text" id="inputLocalidadeEntrega" class="form-control-custom" placeholder="Localidade" tabindex="6" required>
-                                    <small class="text-danger" id="localidade_error"></small>
-
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <label for="inputMorada">Morada de faturação</label> 
-                            <br><br>
-                            <label for="inputNomeCliente">Nome do cliente</label> 
-                            <input type="text" id="inputNomeClienteFaturacao" class="form-control-custom" placeholder="Nome do cliente" tabindex="1" required>
-                            <small class="text-danger" id="nome_error"></small>
-
-                            <label for="inputTelemovel">Número de telemóvel</label> 
-                            <input type="text" id="inputTelemovelFaturacao" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
-                            <small class="text-danger" id="telemovel_error"></small>
-
-                            <label for="inputCidade">Cidade</label> 
-                            <input type="text" id="inputCidadeFaturacao" class="form-control-custom" placeholder="Cidade" tabindex="3" required>
-                            <small class="text-danger" id="cidade_error"></small>
-
-                            <label for="inputMorada">Morada</label> 
-                            <input type="text" id="inputMoradaFaturacao" class="form-control-custom" placeholder="Morada" tabindex="4" required>
-                            <small class="text-danger" id="morada_error"></small>
-
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="row">
-                                    <label for="inputCodPostal">Código postal</label> 
-                                    <input type="text" id="inputCodPostalFaturacao" class="form-control-custom" placeholder="Código postal" tabindex="5" required>
-                                    <small class="text-danger" id="postal_error"></small>
-
-                                    <label for="inputLocalidade">Localidade</label> 
-                                    <input type="text" id="inputLocalidadeFaturacao" class="form-control-custom" placeholder="Localidade" tabindex="6" required>
-                                    <small class="text-danger" id="localidade_error"></small>
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <label for="inputCidade">Cidade</label> 
+                                    <input type="text" id="inputCidadeEntrega" class="form-control-custom" placeholder="Cidade" tabindex="3" required>
+                                    <small class="text-danger" id="cidade_error"></small>
                                 </div>
                             </div>
                         </div>
@@ -162,37 +138,92 @@
         </div>
     </div>
 </div>
+
+
+<!--Morada de faturaçao-->
+<div class="modal fade" id="moradaFaturaModal" tabindex="0" role="dialog" aria-labelledby="moradaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="moradaModalLabel" style="font-weight:bold;">Morada de faturação</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="morada_fatura_form" method="POST" action="<?php echo base_url('clients/morada_billing'); ?>"> 
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="inputNome">Nome do cliente</label> 
+                            <input type="text" id="inputNomeFaturacao" class="form-control-custom" placeholder="Nome do cliente" tabindex="1" required>
+                            <small class="text-danger" id="nome_error"></small>
+
+                            <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="inputTelemovel">Número de telemóvel</label> 
+                                        <input type="text" id="inputTelemovelFaturacao" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
+                                        <small class="text-danger" id="telemovel_error"></small>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="inputNif">NIF</label> 
+                                        <input type="text" id="inputNifFaturacao" class="form-control-custom" placeholder="Número de telemóvel" tabindex="2" required>
+                                        <small class="text-danger" id="nif_error"></small>
+                                    </div>
+                                </div>
+
+                            <label for="inputMorada">Morada</label> 
+                            <input type="text" id="inputMoradaFaturacao" class="form-control-custom" placeholder="Morada" tabindex="4" required>
+                            <small class="text-danger" id="morada_error"></small>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <label for="inputCodPostal">Código postal</label> 
+                                    <input type="text" id="inputCodPostalFaturacao" class="form-control-custom" placeholder="Código postal" tabindex="5" required>
+                                    <small class="text-danger" id="postal_error"></small>
+                                </div>
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <label for="inputCidade">Cidade</label> 
+                                    <input type="text" id="inputCidadeFaturacao" class="form-control-custom" placeholder="Cidade" tabindex="3" required>
+                                    <small class="text-danger" id="cidade_error"></small>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-warning" style="width:100%;" tabindex="4">Concluído</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
  
-    function open_edit_moradas(){
-        $('#moradaModal').modal('show');
+    function open_edit_moradas_entrega(){
+        $('#moradaEntregaModal').modal('show');
 
-        $('#moradas_form').on('submit', function () {
+        $('#morada_entrega_form').on('submit', function () {
             event.preventDefault();
  
             nome_cliente_entrega=$('#inputNomeClienteEntrega').val();
-            telemovel_entrega=$('#inputMoradaPrincipal').val();
-            cidade_entrega=$('#inputMoradaPrincipal').val();
-            morada_entrega=$('#inputMoradaPrincipal').val();
-            cod_postal_entrega=$('#inputMoradaPrincipal').val();
-            localidade_entrega=$('#inputMoradaPrincipal').val();
-
-            nome_cliente_faturacao=$('#inputMoradaPrincipal').val();
-            telemovel_faturacao=$('#inputMoradaPrincipal').val();
-            cidade_faturacao=$('#inputMoradaPrincipal').val();
-            morada_faturacao=$('#inputMoradaPrincipal').val();
-            cod_postal_faturacao=$('#inputMoradaPrincipal').val();
-            localidade_faturacao=$('#inputMoradaPrincipal').val();
-           
+            telemovel_entrega=$('#inputTelemovelEntrega').val();
+            nif_entrega=$('#inputNifEntrega').val();
+            morada_entrega=$('#inputMoradaEntrega').val();
+            cod_postal_entrega=$('#inputCodPostalEntrega').val();
+            cidade_entrega=$('#inputCidadeEntrega').val();
            
             flag=true
  
             if(flag==true){
                             
-            formdata=$('#moradas_form').serialize();
+            formdata=$('#morada_entrega_form').serialize();
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('clients/moradas'); ?>",
+                    url: "<?php echo base_url('clients/morada_shipping'); ?>",
                     data: formdata,
                     success: function (response) {
                         if(response=='success'){
@@ -204,8 +235,38 @@
         });
     }
 
+    function open_edit_moradas_fatura(){
+        $('#moradaFaturaModal').modal('show');
+
+        $('#morada_fatura_form').on('submit', function () {
+            event.preventDefault();
  
+            nome_fatura=$('#inputNomeFaturacao').val();
+            telemovel_fatura=$('#inputTelemovelFaturacao').val();
+            nif_fatura=$('#inputNifFaturacao').val();
+            morada_fatura=$('#inputMoradaFaturacao').val();
+            cod_postal_fatura=$('#inputCodPostalFaturacao').val();
+            cidade_fatura=$('#inputCidadeFaturacao').val();
+           
+            flag=true
  
+            if(flag==true){
+                            
+            formdata=$('#morada_fatura_form').serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('clients/morada_billing'); ?>",
+                    data: formdata,
+                    success: function (response) {
+                        if(response=='success'){
+                            window.location.href = '<?php echo base_url('clients/profile') ?>';
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     function open_edit_password(){
         $('#passwordModal').modal('show');
         

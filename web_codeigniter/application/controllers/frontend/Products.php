@@ -27,8 +27,15 @@ class Products extends MY_Controller {
     }
 
     //para ir a procura de produtos
-    public function search_product(){
-        echo $this->input->post('search_bar');
+    public function search_product($search){
+        $search=$this->input->post('search_bar');
+        $data['products']=$this->Product_model->search_product($search);
+        if(!empty($products)){
+            $this->load_views('frontend/products/products', $data);
+        } else {
+            print_r($data);
+        }
+
     }
 
     public function categories_index(){

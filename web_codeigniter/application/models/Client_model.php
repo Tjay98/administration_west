@@ -194,10 +194,7 @@ class Client_model extends CI_Model{
         if(!empty($clients)){
             $clients_count=count($clients); 
             return $clients_count;
-        }
-        
-
-        
+        }  
     }
 
     public function get_clients(){

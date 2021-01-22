@@ -12,10 +12,10 @@
             android:id="@+id/nav_company"
             android:icon="@drawable/ic_storefront"
             android:title="@string/company"/>
-    <!--    <item-->
-    <!--        android:id="@+id/nav_contacts"-->
-    <!--        android:icon="@drawable/ic_baseline_speaker_notes"-->
-    <!--        android:title="@string/contacts"/>-->
+       <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_baseline_speaker_notes"
+            android:title="@string/contacts"/>
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person"

@@ -12,15 +12,16 @@
     <div class="row">
         <div class="col-lg-4 col-md-3 col-sm-12 mt-5">
             <h4>Localização</h4>
-            <p>Rua bla bla bla</p>
+            <p>Avenida 5 de outubro 2560-270 Torres Vedras</p>
             <br>
             <h4>Telefone</h4>
             <p>912 345 678</p>
             <br>
             <h4>Email</h4>
-            <p>@gmail.com</p>
+            <p>administration_west@gmail.com</p>
         </div>
-        <div class="col-lg-8 col-md-9 col-sm-12 mt-5">
+        <div class="col-lg-8 col-md-9 col-sm-12 mt-5 mb-5">
+        <div class="form-responsive" >
             <form class="form">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Nome">
                 
@@ -33,6 +34,7 @@
 
                 <button class="mt-3 btn-primary" type="submit">Enviar mensagem</button>
             </form>
+            </div>
         </div>
     </div>
 </div>

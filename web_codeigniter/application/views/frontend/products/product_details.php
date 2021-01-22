@@ -21,7 +21,7 @@
     <div class="custom-boxes">
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-12 mt-5">
-                <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo $product['image']; ?>">
+                <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo base_url('uploads/products/')?><?php echo $product['image']; ?>">
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 mt-5">
                 <h4 style="text-align: center;"><?php echo $product['product_name']; ?></h4>

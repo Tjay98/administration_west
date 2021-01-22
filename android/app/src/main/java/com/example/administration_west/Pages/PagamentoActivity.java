@@ -117,6 +117,7 @@ public  class PagamentoActivity extends AppCompatActivity implements PagamentoAd
         detail.putExtra(EXTRA_PAGAMENTO_NOME, String.valueOf(clicked.getNome()));
 
         startActivity(detail);
+        finish();
 
     }
 }

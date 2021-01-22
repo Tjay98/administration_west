@@ -137,7 +137,7 @@ class Clients extends MY_Controller {
         }
     }
  
-    public function moradas(){
+   /*  public function moradas(){
         if(empty($this->input->post('inputMoradaPrincipal'))){
             $this->load_views('frontend/clients/profile');
         }else{
@@ -149,13 +149,113 @@ class Clients extends MY_Controller {
 
                     //vai enviar os dados para a função register_client do modelo Client_model 
             /* print_r($registo_form);die; */
-            $validate=$this->Client_model->register_address_client($registo_address_form);
+           /* $validate=$this->Client_model->register_address_client($registo_address_form);
             if(empty($validate)){
                 //if register happens correctly
                 echo 'success';
             }else{
                 echo $validate;
             }
+        }
+    } */
+
+    public function morada_shipping(){
+        $this->is_user_logged();
+
+        $user_key=$this->session->userdata('unique_key');
+
+        print_r($user_key); die;
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+            $shipping_address=$this->Client_model->get_shipping_address_by_key($user_key);
+           
+            $name=$this->input->post('inputNomeClienteEntrega');
+            $nif=$this->input->post('inputNifEntrega');
+            $contact=$this->input->post('inputTelemovelEntrega');
+            $city=$this->input->post('inputCidadeEntrega');
+            $address=$this->input->post('inputMoradaEntrega');
+            $zip=$this->input->post('inputCodPostalEntrega');
+            
+            if( $name && $nif && $contact && $city && $address && $zip){
+                    $data=[
+                        'user_id'=>$profile['user_id'],
+                        'name'=>$name,
+                        'nif'=>$nif,
+                        'contact_number'=>$contact,
+                        'city'=>$city,
+                        'address'=>$address,
+                        'zip_code'=>$zip,
+                    ];
+                print_r($shipping_address); 
+                if(empty($shipping_address['id'])){
+                    $this->db->insert('shipping_address',$data);
+                    $update = $this->db->insert_id();
+                }else{
+                    $data['modified_date']=date('Y-m-d H:i:s');
+                    $this->db->where('id',$shipping_address['id']);
+                    $update=$this->db->update('shipping_address',$data);
+                }
+
+                if($update){
+                    echo ('Sucesso');
+                }
+
+            }else{
+                echo('Alguma informação está em falta');
+            }
+
+        }else{
+            echo('Alguma informação está em falta');
+        }
+
+    }
+
+    public function morada_billing(){
+        $this->is_user_logged();
+
+        $user_key=$this->session->userdata('unique_key');
+        print_r($user_key); die;
+
+        if(!empty($user_key)){
+            $profile=$this->Client_model->get_profile_by_key($user_key);
+            $shipping_address=$this->Client_model->get_shipping_address_by_key($user_key);
+
+            $name=$this->input->post('inputNomeFaturacao');
+            $nif=$this->input->post('inputNifFaturacao');
+            $contact=$this->input->post('inputTelemovelFaturacao');
+            $city=$this->input->post('inputCidadeFaturacao');
+            $address=$this->input->post('inputMoradaFaturacao');
+            $zip=$this->input->post('inputCodPostalFaturacao');
+            
+            if( $name && $nif && $contact && $city && $address && $zip){
+                    $data=[
+                        'user_id'=>$profile['user_id'],
+                        'name'=>$name,
+                        'nif'=>$nif,
+                        'contact_number'=>$contact,
+                        'city'=>$city,
+                        'address'=>$address,
+                        'zip_code'=>$zip,
+                    ];
+                if(empty($shipping_address['id'])){
+                    $this->db->insert('shipping_address',$data);
+                    $update = $this->db->insert_id();
+                }else{
+                    $data['modified_date']=date('Y-m-d H:i:s');
+                    $this->db->where('id',$shipping_address['id']);
+                    $update=$this->db->update('shipping_address',$data);
+                }
+
+                if($update){
+                    echo ('Sucesso');
+                }
+
+            }else{
+                echo('Alguma informação está em falta');
+            }
+
+        }else{
+            echo('Alguma informação está em falta');
         }
     }
 

@@ -52,64 +52,127 @@ class Sales extends MY_Controller {
 
     public function cart(){
         $this->is_user_logged();
+        $user_key = $this->session->userdata('user_id');
+        if(!empty($user_key)){
+            $cartItems=$this->Sale_model->get_user_cart($user_key);
+            
 
-        $cart_items = $this->cart->contents();
-        $data['cartItems']=$cart_items;
+            if(!empty($cartItems)){
+                $data['cartItems']=$cartItems;
+                $this->load_views('frontend/sales/cart', $data);
 
-        $this->load_views('frontend/sales/cart', $data);
+              
+            }else{
+                $this->load_views('frontend/sales/cart', $cartItems);
 
+            }
+        }
     }
+
 
     public function add_to_cart($id){
 
         $this->is_user_logged();
+        $user_key = $this->session->userdata('user_id');
 
-        $product=$this->Product_model->get_detail_products($id);
+        $quantity= 1;
 
-        $data=[
-            'id'=>$product['id'],
-            'qty'=>1,
-            'price'=>$product['price'],
-            'iva'=>$product['price_iva'],
-            'name'=>$product['product_name'],
-            'image'=>$product['image'],
-        ];
+        // $product=$this->Product_model->get_detail_products($id);
 
-        $this->cart->insert($data);
-        
+        // $data=[
+        //     'id'=>$product['id'],
+        //     'quantity'=>1,
+        //     'price'=>$product['price'],
+        //     'iva'=>$product['price_iva'],
+        //     'name'=>$product['product_name'],
+        //     'image'=>$product['image'],
+        // ];
+
+        $cart = $this->Sale_model->get_cart_by_user_product_id($user_key, $id, $quantity);
+
+        if(!empty($cart)){
+            $old_quantity=$cart['quantity'];
+            if( ($old_quantity + ($quantity)) <= 0){
+                //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
+                $this->db->where('user_id',$user_key);
+                $this->db->where('product_id',$id);
+                $this->db->delete('user_cart');
+
+            }else{
+                //verifica se a quantidade é superior a 0, caso seja atualiza
+                $new_quantity = $old_quantity + $quantity;
+                $this->db->where('user_id',$user_key);
+                $this->db->where('product_id',$id);
+                $this->db->set('quantity',$new_quantity);
+                $this->db->update('user_cart');
+            }
+        }else{
+            //adiciona o produto ao carrinho
+            if($quantity > 0){
+                $product_data= [
+                    'user_id'=>$user_key,
+                    'product_id'=>$id,
+                    'quantity'=>$quantity,
+                ];
+                $this->db->insert('user_cart',$product_data);
+                $insert_id=$this->db->insert_id();
+            }
+        }
         return redirect('cart');
-        
     }
+
+        
+    
 
     public function updateItemQty(){
         $this->is_user_logged();
+        $user_key = $this->session->userdata('user_id');
 
         $update=0;
 
-        $rowid=$this->input->post('rowid');
-        $qty=$this->input->post('qty');
+        $product_id=$this->input->post('product_id');
+        $quantity=$this->input->post('quantity');
 
-        if(!empty($rowid)&&!empty($qty)){
+        if(!empty($user_key) && !empty($product_id)&&!empty($quantity)){
 
             $data=[
-                'rowid'=>$rowid,
-                'qty'=>$qty,
+                'product_id'=>$product_id,
+                'quantity'=>$quantity,
+                'user_id'=>$user_key,
             ];
 
             $update=$this->cart->update($data);
+
+            $this->db->update('user_cart',$data);
+            $update_id=$this->db->update_id();
+
         }
         echo $update?'ok':'err';
     }
+    
 
 
 
-
-    public function remove_from_cart($rowid){
+    public function remove_from_cart($product_id){
 
         $this->is_user_logged();
+        $user_key = $this->session->userdata('user_id');
 
+        if( (!empty($product_id)) && !empty($user_key)){
+
+
+            $this->db->where('user_id',$user_key);
+            $this->db->where('product_id',$product_id);
+            $this->db->delete('user_cart');
+
+            echo('Produto apagado do carrinho');
+
+        }else{
+            
+            echo('Alguma informação está errada');
+        }
         
-        $remove=$this->cart->remove($rowid);
+    
         return redirect('cart');
     }
 

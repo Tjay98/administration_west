@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,15 +16,16 @@ import com.example.administration_west.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.administration_west.Pages.ProductFragment.ip;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> implements Filterable {
 
     private Context ccontext;
     private ArrayList<Products> cproducts;
     private OnItemClickListener mListener;
-
+    private ArrayList<Products> productListFiltered;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -35,6 +38,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public ProductsAdapter(Context context, ArrayList<Products> products) {
         this.ccontext = context;
         this.cproducts = products;
+        this.productListFiltered = cproducts;
     }
 
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
@@ -97,6 +101,37 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return cproducts.size();
     }
 
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    productListFiltered = cproducts;
+                } else {
+                    ArrayList<Products> filteredList = new ArrayList<>();
+                    for (Products row : cproducts) {
+
+                        if (row.getProduct_name().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+                    productListFiltered = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = productListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                productListFiltered = (ArrayList<Products>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 }
 
 

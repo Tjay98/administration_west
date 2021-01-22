@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +18,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Filter;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administration_west.Adapters.ProductsAdapter;
+import com.example.administration_west.Models.Products;
 import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.R;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
     SessionUser sessionUser;
+    private SearchView searchView;
+    private ArrayList<Products> contactList;
+    private ProductsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +94,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_toolbar, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
 
-        return super.onCreateOptionsMenu(menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
 
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(mAdapter != null) {
+                    mAdapter.getFilter().filter(query);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if(mAdapter != null) {
+                    mAdapter.getFilter().filter(query);
+                    return true;
+                }
+                return false;
+            }
+        });
+        return true;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // close search view on back button pressed
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+            return;
+        }
+        super.onBackPressed();
     }
 
 
@@ -95,9 +141,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.search:
-//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
-//                return true;
+            case R.id.search:
+                return true;
             case R.id.shop:
                 mostrarCart();
                 return true;
@@ -132,11 +177,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationview.setCheckedItem(R.id.nav_profile);
                 setTitle("Perfil");
                 break;
-//            case R.id.nav_contacts:
-//                fragmento = null;
-//                navigationview.setCheckedItem(R.id.nav_contacts);
-//                setTitle("Contactos");
-//                break;
+            case R.id.nav_contacts:
+                fragmento = new ContactsFragment();
+                navigationview.setCheckedItem(R.id.nav_contacts);
+                setTitle("Contactos");
+                break;
             case R.id.nav_logout:
                 navigationview.setCheckedItem(R.id.nav_logout);
                 sessionUser.logout();
