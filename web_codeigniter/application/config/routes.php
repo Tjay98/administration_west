@@ -84,6 +84,7 @@ $route['translate_uri_dashes'] = FALSE;
         $route['remove/cart/(:any)']='frontend/sales/remove_from_cart/$1';
         $route['update/cart/quantity']='frontend/sales/updateItemQty/';
         $route['cart']='frontend/sales/cart';
+        $route['pagamento']='frontend/sales/pagamento/';
         $route['checkout']='frontend/sales/checkout/';
             
 

@@ -176,6 +176,7 @@ class Sales extends MY_Controller {
         return redirect('cart');
     }
 
+    //mudar o botao esta dessatualizado
     public function checkout (){
         $this->is_user_logged();
 
@@ -196,6 +197,16 @@ class Sales extends MY_Controller {
         }else{
             'error';
         }
+
+    }
+
+    public function pagamento(){
+        $this->is_user_logged();
+
+        //dados do cliente
+        $id=$this->session->userdata('user_id');
+        
+        $this->load_views('frontend/sales/pagamento');
 
     }
 
