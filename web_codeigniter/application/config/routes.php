@@ -149,7 +149,7 @@ $route['translate_uri_dashes'] = FALSE;
 
             //utilizadores
             $route['admin/users'] = 'backend/clients/index';
-            $route['admin/user_table']='backend/clients/get_user_datatable';
+            $route['admin/user_table']='backend/clients/get_datatable';
             $route['admin/users/add'] = 'backend/clients/user_add';
             $route['admin/users/edit/(:any)'] = 'backend/clients/user_edit/$1';
             $route['admin/users/delete/(:any)'] = 'backend/clients/user_delete/$1';

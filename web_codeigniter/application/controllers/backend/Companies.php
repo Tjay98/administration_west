@@ -28,16 +28,10 @@ class Companies extends MY_Controller {
         }
 
 
-        if(!$admin){
-            $user_id=$this->session->userdata('user_id');
-            $company_id=$this->client_model->get_company_by_user($user_id); 
+        if($admin){
     
-            $products=$this->product_model->products_by_company($company_id);
-        }else{
-            $products=$this->product_model->get_products();
+            $companies=$this->Company_model->get_companies();
         }
-
-
 
 
     }
