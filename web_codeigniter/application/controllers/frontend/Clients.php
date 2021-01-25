@@ -123,17 +123,20 @@ class Clients extends MY_Controller {
             $this->load_views('frontend/clients/profile');
         }else{
             $password_form=[
-                'old_password'=>password_hash($this->input->post('inputOldPassword'),PASSWORD_DEFAULT),
+                'old_password'=>$this->input->post('inputOldPassword'),
                 'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
                 'repeat_password'=>password_hash($this->input->post('inputRepetirPassword'),PASSWORD_DEFAULT),
             ];
             $validate=$this->Client_model->new_password_client($password_form, $id);
             if(empty($validate)){
                 //if register happens correctly
-                echo 'success';
+                 redirect('clients/profile');            
             }else{
+
                 echo $validate;
+
             }
+
         }
     }
  

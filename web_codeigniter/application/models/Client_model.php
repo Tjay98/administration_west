@@ -153,30 +153,29 @@ class Client_model extends CI_Model{
 
     public function new_password_client($password_form, $id){
 
-        $this->db->select('id, password_hash');
+        $this->db->select('user.*');
         $this->db->where('user.id', $id);
-        $this->db->where('user.password_hash', $password_form['old_password']);
-
+       // $this->db->where('user.password_hash', $password_form['old_password']);
         $data=$this->db->get('user')->row_array();
-
-        if($data->num_rows()>0){
-            $dados=$data->row();
-            if($dados->id==$this->session->userdata('id')){
-                $data=[
-                    'password_hash'=>$password_form['password_hash'],
-                ];
-                if($this->db->update('user',$data)){
-                    return "Password mudada com sucesso!";
+        if(!empty($data)){
+            if(password_verify($password_form['old_password'], $data['password_hash'])) {
+                if($data!== FALSE){
+                    $dados=[
+                        'password_hash'=>$password_form['password_hash'],
+                    ];
+                    $this->db->update('user',$dados);
                 } else {
-                    return "Alguma coisa esta errada.";
+                    return 'error';
                 }
-            } else {
-                return "Alguma coisa esta errada! Password não foi mudada com sucesso";
-            }
-        } else {
-            return "Password antiga errada!";
-        }
+             } else {
+                 return 'Password errada';
+             }
+         } else {
+             return 'Sem dados';
+         }
     }
+
+
 
     public function get_company_by_user($user_id){
         $this->db->select('store_id');
