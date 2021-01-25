@@ -205,7 +205,7 @@ class Client_model extends CI_Model{
     }
     
     public function get_users(){
-
+        $this->db->where('role_id !=',3);
         $clients=$this->db->get('user')->result_array();
 
         return $clients;

@@ -1,3 +1,32 @@
+<section class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1><?php if(!empty($page_title)){ echo $page_title;} ?></h1>
+
+			</div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                        <div class="dropleft ">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cogs"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="<?php echo base_url('admin/sales/add') ?>"><i class="fa fa-plus"></i> Criar venda</a>
+                                <a class="dropdown-item"  id="export_pdf_button" href="#"><i class="fa fa-file-pdf-o"></i> Exportar PDF</a>
+                                <a class="dropdown-item" id="export_excel_button" href="#"><i class="fa fa-file-excel-o"></i> Exportar Excel da tabela</a>
+                            </div>
+                        </div>
+                    </div>  
+            </div>
+
+
+		</div>
+
+        
+	</div>
+	<!-- /.container-fluid -->
+</section>
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
@@ -10,12 +39,14 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nome do produto</th>
-                                    <th>Categoria</th>
-                                    <th>Preço</th>
-                                    <th>Preço sem iva</th>
-                                    <th>Valor do iva</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telemóvel</th>
+<!--                                     <th>Data de nascimento</th> -->
+                                    <th>Cargo</th>
+                                    <th>Loja</th>
                                     <th>Data criado</th>
+                                    <th>&nbsp;</th>
 
                                 </tr>
                             </thead>
@@ -34,19 +65,11 @@
         //datatable
         var table=$('#table-products').DataTable({
             "ajax": {
-                url : "",
+                url : "<?php echo base_url('admin/user_table') ?>",
                 type : 'POST',
             },
             stateSave: false,
-/*             "columnDefs": [ 
-                {
-                searchPanes:{
-                    show: false, },
-                    targets: [0,2,3,4,5,7,8], // Index of columns (starting at 0) that you want show/hide
-                }
-                
-            ], */
-            "order": [[2,"asc"]],
+            "order": [[0,"asc"]],
             responsive: false,
             "autoWidth": false,
             //plugins
@@ -55,9 +78,9 @@
             select: true,
             dom: 'Bfrtip',
             buttons: [
-                { extend: 'excel', text: 'Exportar excel',title:'Produtos_<?php echo date('Y-m-d');?>'},
-                { extend: 'pdf', text: 'Exportar pdf' ,title:'Produtos_<?php echo date('Y-m-d');?>'},
-                'searchPanes',
+                { extend: 'excel', text: 'Exportar excel',title:'Utilizadores_<?php echo date('Y-m-d');?>'},
+                { extend: 'pdf', text: 'Exportar pdf' ,title:'Utilizadores_<?php echo date('Y-m-d');?>'},
+
             ],
             "language": {
                 "lengthMenu": "Mostrar _MENU_ resultados por página",
@@ -73,17 +96,7 @@
                     "next":       "Próximo",
                     "previous":   "Anterior",
                 },
-                searchPanes: {
-                    collapse: 'Filtros de pesquisa',
-                    title:{
-                        _: 'Filtros Selecionados - %d',
-                        0: 'Nenhum filtro selecionado',
-                        1: '1 filtro selecionado',
 
-                    }
-                    
-                    
-                }
             },
             "pageLength": 25,
 
