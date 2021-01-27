@@ -17,14 +17,23 @@ class Client_model extends CI_Model{
                 /* $key = md5(microtime().rand());  */
                 $key = md5(uniqid(rand(), true));
 
+                if(empty($registo_form['store_id'])){
+                    $registo_form['store_id']='';
+                }
+
+                if(empty($registo_form['role_id'])){
+                    $registo_form['role_id']=1;
+                }
+
                 $data=[
                     'username'=>$registo_form['username'],
                     'email'=>$registo_form['email'],
                     'phone_number'=>$registo_form['phone_number'],
                     'birthday_date'=>$registo_form['birthday_date'],
                     'password_hash'=>$registo_form['password_hash'],
-                    'role_id'=>1,
-                    'status'=>1,
+                    'role_id'=>$registo_form['role_id'],
+                    'store_id'=>$registo_form['store_id'],
+                    'status'=>$registo_form['store_id'],
                     'unique_key'=>$key,
                     'created_at'=>date("Y-m-d_H:i:s"),
                     'updated_at'=>date("Y-m-d_H:i:s"),  
@@ -240,5 +249,47 @@ class Client_model extends CI_Model{
         $roles=$this->db->get('roles')->result_array();
 
         return $roles;
+    }
+
+    public function validate_edit_client($form){
+        $this->db->where('id !=',$form['id']);
+        $this->db->where('email',$form['email']);
+        $validate_email=$this->db->get('user')->row_array();
+
+        if(empty($validate_email)){
+            $this->db->where('id !=',$form['id']);
+            $this->db->where('phone_number',$form['phone_number']);
+            $validate_phone_number=$this->db->get('user')->row_array();
+            if(empty($validate_phone_number)){
+
+                $data=[
+                    'username'=>$form['username'],
+                    'email'=>$form['email'],
+                    'phone_number'=>$form['phone_number'],
+                    'birthday_date'=>$form['birthday_date'], 
+                    'role_id'=>$form['role_id'],
+                    'store_id'=>$form['store_id'],
+                    'updated_at'=>date("Y-m-d_H:i:s"),  
+                ];
+
+                if(!empty($form['password_hash'])){
+                    $data['password_hash']=$form['password_hash'];
+                }
+
+                $this->db->where('id',$form['id']);
+                $this->db->update('user',$data);
+            }else{
+                return 'phone_number_error';
+            }
+        }else{
+            return 'email_error';
+        }
+    }
+    public function verify_admin_id($user_id){
+        $this->db->select('role_id');
+        $this->db->where('id',$user_id);
+        $verify=$this->db->get('user')->row_array();
+
+        return count($verify);
     }
 }

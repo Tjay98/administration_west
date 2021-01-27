@@ -7,10 +7,12 @@
 			</div>
             <div class="col-sm-6">
                 <div class="pull-right">
+                    <?php if($this->session->userdata('role_id')==3){ ?>
                         <div class="dropleft ">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cogs"></i>
                             </button>
+                            
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="create_user()"><i class="fa fa-plus"></i> Criar utilizador para empresa</a>
                                 <a class="dropdown-item"  id="export_pdf_button" href="#"><i class="fa fa-file-pdf-o"></i> Exportar PDF</a>
@@ -18,6 +20,7 @@
                             </div>
                         </div>
                     </div>  
+                    <?php }?>
             </div>
 
 
@@ -83,7 +86,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email">
+                            <input type="email" class="form-control" id="email" placeholder="Email">
                             <small class="text-danger form_error" id="email_error"></small>
 
                         </div>
@@ -91,7 +94,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Nº de telemóvel</label>
-                            <input type="text" class="form-control" id="phone_number" placeholder="Nº de telemóvel">
+                            <input type="number" class="form-control" id="phone_number" placeholder="Nº de telemóvel">
                             <small class="text-danger form_error" id="phone_number_error"></small>
 
                         </div>
@@ -100,7 +103,7 @@
                         <div class="form-group">
                             <label>Data de nascimento</label>
                             <input type="date" id="birthday" class="form-control" placeholder="Data de nascimento">
-                            <small class="text-danger form_error" id="phone_number_error"></small>
+                            <small class="text-danger form_error" id="birthday_error"></small>
 
                         </div>
                     </div>
@@ -222,29 +225,82 @@
 
     function submit_create_user(){
         clear_errors();
+        var validation=true;
+        
+        username=$('#username').val();
+        email=$('#email').val();
+        phone_number=$('#phone_number').val();
+        birthday=$('#birthday').val();
+        role_id=$('#role_id').val();
+        store_id=$('#store_id').val();
+        password=$('#password').val();
+        repeat_password=$('#repeat_password').val();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('admin/users/add') ?>",
-            data: {
-                    'username':username,
-                    'email':email,
-                    'phone_number':phone_number,
-                    'birthday_date':birthda_date,
-                    'password':password,
-                    'store_id':store_id,
-                },
-            success: function (response) {
-                if(response == 'success'){
-                    $('#userModal').modal('hide');
-                    table.ajax.reload();
-                }else if(response=='email_error'){
+        if(username.length <= 0 || username.length > 255){
+            $('#username_error').text('Preencha o campo');
+            validation=false;
+        }
 
-                }else if(response=='phone_error'){
+        if(email.length <= 0 || email.length > 255){
+            $('#email_error').text('Preencha o campo');
+            validation=false;
+        }
+        if(phone_number.length !=9){
+            $('#phone_number_error').text('Preencha o campo (9 digitos)');
+            validation=false;
+        }
+        if(birthday.length <= 0 ){
+            $('#birthday_error').text('Preencha o campo');
+            validation=false;
+        }
+        if(role_id.length <= 0 ){
+            $('#role_id_error').text('Selecione uma opção');
+            validation=false;
+        }
+/*         if(store_id.length <= 0 ){
+            $('#username_error').text('Preencha o campo');
+            validation=false;
+        } */
 
+        if(password.length < 8 || password.length > 25){
+            $('#password_error').text('Preencha o campo (8 a 25 digitos)');
+            validation=false;
+        }
+
+        if(repeat_password != password){
+            $('#repeat_password_error').text('O campo de password não coincide');
+            validation=false;
+        }
+
+        if(validation){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('admin/users/add') ?>",
+                data: {
+                        'username':username,
+                        'email':email,
+                        'phone_number':phone_number,
+                        'birthday_date':birthday,
+                        'password':password,
+                        'store_id':store_id,
+                        'role_id':role_id,
+                    },
+                success: function (response) {
+                    
+                    if(response == 'success'){ 
+                        alert('Sucesso');
+                        $('#userModal').modal('hide');
+                        table.ajax.reload();
+                    }else if(response=='email_error'){
+                        $('#email_error').text('Já existe um email igual registado');
+                    }else if(response=='phone_error'){
+                        $('#phone_number_error').text('Já existe um nº de telemóvel igual registado');
+                    }else{
+                        alert(response);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function edit_user(user_id){
@@ -256,7 +312,7 @@
             url: "<?php echo base_url('admin/users/edit/'); ?>"+user_id,
             data: '',
             success: function (response) {
-                alert(response);
+                /* alert(response); */
                 var user_obj=JSON.parse(response);
                 if(user_obj){
                     //definir variaveis atraves do json
@@ -297,27 +353,81 @@
 
     function submit_edit_user(user_id){
         clear_errors();
+        var validation=true;
+        
+        username=$('#username').val();
+        email=$('#email').val();
+        phone_number=$('#phone_number').val();
+        birthday=$('#birthday').val();
+        role_id=$('#role_id').val();
+        store_id=$('#store_id').val();
+        password=$('#password').val();
+        repeat_password=$('#repeat_password').val();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('admin/users/edit/'); ?>"+user_id,
-            data: {
-                    'username':username,
-                    'email':email,
-                    'phone_number':phone_number,
-                    'birthday_date':birthda_date,
-                    'password':password,
-                    'store_id':store_id,
-                },
-            success: function (response) {
-                if(response == 'success'){
-                    $('#userModal').modal('hide');
-                    table.ajax.reload();
-                }else{
-                    alert('erro');
+        if(username.length <= 0 || username.length > 255){
+            $('#username_error').text('Preencha o campo');
+            validation=false;
+        }
+
+        if(email.length <= 0 || email.length > 255){
+            $('#email_error').text('Preencha o campo');
+            validation=false;
+        }
+        if(phone_number.length !=9){
+            $('#phone_number_error').text('Preencha o campo (9 digitos)');
+            validation=false;
+        }
+        if(birthday.length <= 0 ){
+            $('#birthday_error').text('Preencha o campo');
+            validation=false;
+        }
+        if(role_id.length <= 0 ){
+            $('#role_id_error').text('Selecione uma opção');
+            validation=false;
+        }
+/*         if(store_id.length <= 0 ){
+            $('#username_error').text('Preencha o campo');
+            validation=false;
+        } */
+
+/*         if(password.length < 8 || password.length > 25){
+            $('#password_error').text('Preencha o campo (8 a 25 digitos)');
+            validation=false;
+        } */
+
+        if(repeat_password != password){
+            $('#repeat_password_error').text('O campo de password não coincide');
+            validation=false;
+        }
+
+        if(validation){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('admin/users/edit/'); ?>"+user_id,
+                data: {
+                        'username':username,
+                        'email':email,
+                        'phone_number':phone_number,
+                        'birthday_date':birthday,
+                        'password':password,
+                        'store_id':store_id,
+                        'role_id':role_id,
+                    },
+                success: function (response) {
+                    if(response == 'success'){ 
+                        alert('Sucesso');
+                        $('#userModal').modal('hide');
+                        table.ajax.reload();
+                    }else if(response=='email_error'){
+                        $('#email_error').text('Já existe um email igual registado');
+                    }else if(response=='phone_error'){
+                        $('#phone_number_error').text('Já existe um nº de telemóvel igual registado');
+                    }else{
+                        alert(response);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function suspend_user(user_id){
@@ -328,8 +438,13 @@
                 url: "<?php echo base_url('admin/users/delete/'); ?>"+user_id,
                 data: '',
                 success: function (response) {
-                    $('#userModal').modal('hide');
-                    table.ajax.reload();
+                    if(response=='success'){
+
+                        $('#userModal').modal('hide');
+                        table.ajax.reload();
+                    }else{
+                        alert('Ocorreu algum erro ou não tem permissão');
+                    }
                     
                 }
             });
@@ -340,14 +455,16 @@
         $('.form_error').text('');
     }
 
-    $('#userModal').on('hidden.bs.modal', function (e) {
+    $('#userModal').on('hidden.bs.modal', function () {
+
         $('#username').val('');
         $('#email').val('');
         $('#phone_number').val('');
         $('#birthday').val('');
         $('#role_id').val('');
         $('#store_id').val('');
-
         clear_errors();
+
     })
+    
 </script>
