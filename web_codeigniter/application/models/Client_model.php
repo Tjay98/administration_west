@@ -116,7 +116,7 @@ class Client_model extends CI_Model{
     }
 
     public function profile($id){
-        $this->db->select('id, username, email, phone_number, birthday_date, status, role_id');
+        $this->db->select('id, username, email, phone_number, birthday_date, status, role_id, store_id');
         $this->db->where('user.id',$id);
         $data=$this->db->get('user')->row_array();
 
@@ -205,8 +205,14 @@ class Client_model extends CI_Model{
     }
     
     public function get_users(){
-        $this->db->where('role_id !=',3);
-        $clients=$this->db->get('user')->result_array();
+        /* $this->db->where('role_id !=',3); */
+        if($this->session->userdata('role_id' == 2)){
+            $this->db->where('role_id',1);
+        }
+        $this->db->select('user.*,roles.name as role');
+        $this->db->from('user');
+        $this->db->join('roles','roles.id=user.role_id','LEFT');
+        $clients=$this->db->get()->result_array();
 
         return $clients;
     }
@@ -228,5 +234,11 @@ class Client_model extends CI_Model{
             return $data;
         }
 
+    }
+
+    public function get_roles(){
+        $roles=$this->db->get('roles')->result_array();
+
+        return $roles;
     }
 }
