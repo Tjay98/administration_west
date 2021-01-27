@@ -261,6 +261,14 @@ class Client_model extends CI_Model{
             $this->db->where('phone_number',$form['phone_number']);
             $validate_phone_number=$this->db->get('user')->row_array();
             if(empty($validate_phone_number)){
+                
+                if(empty($registo_form['store_id'])){
+                    $registo_form['store_id']='';
+                }
+
+                if(empty($registo_form['role_id'])){
+                    $registo_form['role_id']=1;
+                }
 
                 $data=[
                     'username'=>$form['username'],
