@@ -2,7 +2,13 @@
 
 class Company_model extends CI_Model{
 
+    public function get_all_companies(){
+        $companies = $this->db->get('companies')->result_array();
+        return $companies;
+    }
+
     public function get_companies(){
+        $this->db->where('status',1);
         $companies = $this->db->get('companies')->result_array();
         return $companies;
     }

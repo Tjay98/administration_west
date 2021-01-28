@@ -1,3 +1,35 @@
+<section class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1><?php if(!empty($page_title)){ echo $page_title;} ?></h1>
+
+			</div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                    <?php if($this->session->userdata('role_id')==3){ ?>
+                        <div class="dropleft ">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cogs"></i>
+                            </button>
+                            
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="<?php echo base_url('admin/companies/add'); ?>"><i class="fa fa-plus"></i> Criar empresa</a>
+                                <a class="dropdown-item"  id="export_pdf_button" href="#"><i class="fa fa-file-pdf-o"></i> Exportar PDF</a>
+                                <a class="dropdown-item" id="export_excel_button" href="#"><i class="fa fa-file-excel-o"></i> Exportar Excel da tabela</a>
+                            </div>
+                        </div>
+                    </div>  
+                    <?php }?>
+            </div>
+
+
+		</div>
+
+        
+	</div>
+	<!-- /.container-fluid -->
+</section>
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
@@ -6,16 +38,15 @@
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="info-box">
                     <div class="box-body table-responsive" >
-                        <table class="table table-striped table-bordered table-hover" id="table-products" style="width:100%;">
+                        <table class="table table-striped table-bordered table-hover" id="table-companies" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nome do produto</th>
-                                    <th>Categoria</th>
-                                    <th>Preço</th>
-                                    <th>Preço sem iva</th>
-                                    <th>Valor do iva</th>
-                                    <th>Data criado</th>
+                                    <th>Imagem</th>
+                                    <th>Nome</th>
+                                    <th>Data criada</th>
+                                    <th>Estado</th>
+                                    <th>&nbsp;</th>
 
                                 </tr>
                             </thead>
@@ -28,25 +59,27 @@
         </div>
     </div>
 </section>
+
+
 <script type="text/javascript">
+    var table
+
     $(document).ready(function() {  
 
         //datatable
-        var table=$('#table-products').DataTable({
+       table=$('#table-companies').DataTable({
             "ajax": {
-                url : "",
+                url : "<?php echo base_url('admin/companies_table') ?>",
                 type : 'POST',
             },
             stateSave: false,
-/*             "columnDefs": [ 
+            "order": [[0,"desc"]],
+            "columnDefs": [
                 {
-                searchPanes:{
-                    show: false, },
-                    targets: [0,2,3,4,5,7,8], // Index of columns (starting at 0) that you want show/hide
+                    "targets": [ 1 , 5],
+                    "orderable": false
                 }
-                
-            ], */
-            "order": [[2,"asc"]],
+            ],
             responsive: false,
             "autoWidth": false,
             //plugins
@@ -55,9 +88,9 @@
             select: true,
             dom: 'Bfrtip',
             buttons: [
-                { extend: 'excel', text: 'Exportar excel',title:'Produtos_<?php echo date('Y-m-d');?>'},
-                { extend: 'pdf', text: 'Exportar pdf' ,title:'Produtos_<?php echo date('Y-m-d');?>'},
-                'searchPanes',
+                { extend: 'excel', text: 'Exportar excel',title:'Empresas_<?php echo date('Y-m-d');?>'},
+                { extend: 'pdf', text: 'Exportar pdf' ,title:'Empresas_<?php echo date('Y-m-d');?>'},
+
             ],
             "language": {
                 "lengthMenu": "Mostrar _MENU_ resultados por página",
@@ -73,20 +106,50 @@
                     "next":       "Próximo",
                     "previous":   "Anterior",
                 },
-                searchPanes: {
-                    collapse: 'Filtros de pesquisa',
-                    title:{
-                        _: 'Filtros Selecionados - %d',
-                        0: 'Nenhum filtro selecionado',
-                        1: '1 filtro selecionado',
 
-                    }
-                    
-                    
-                }
             },
             "pageLength": 25,
 
         });
+
+        $('#export_pdf_button').on('click',function(){
+            $('#pdfButton').click();
+        })
+        $('#export_excel_button').on('click',function(){
+            $('#excelButton').click();
+        })
     });
+
+    function enable_company(company_id){
+        var confirmation = confirm('Deseja ativar a empresa?');
+        new_status=1;
+        if(confirmation){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('admin/companies/delete/'); ?>"+company_id+"/"+new_status,
+                data: "",
+                success: function (response) {
+                    table.ajax.reload();
+                }
+            });
+        }
+    }
+    function disable_company(company_id){
+        var confirmation = confirm('Deseja desativar a empresa?');
+        new_status=0;
+        if(confirmation){
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('admin/companies/delete/'); ?>"+company_id+"/"+new_status,
+                data: "",
+                success: function (response) {
+                   /*  alert(response); */
+                    table.ajax.reload();
+                }
+            });
+        }
+    }
+
+    
+   
 </script>

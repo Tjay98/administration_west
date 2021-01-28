@@ -79,9 +79,9 @@ $route['translate_uri_dashes'] = FALSE;
     
         //vendas
         $route['sales/history']='frontend/sales/sale_history';
-        $route['sales/history/(:any)']= 'frontend/sales/sale_detail/$1';
-        $route['add/cart/(:any)']='frontend/sales/add_to_cart/$1';
-        $route['remove/cart/(:any)']='frontend/sales/remove_from_cart/$1';
+        $route['sales/history/(:num)']= 'frontend/sales/sale_detail/$1';
+        $route['add/cart/(:num)']='frontend/sales/add_to_cart/$1';
+        $route['remove/cart/(:num)']='frontend/sales/remove_from_cart/$1';
         $route['update/cart/quantity']='frontend/sales/updateItemQty/';
         $route['cart']='frontend/sales/cart';
         $route['pagamento']='frontend/sales/pagamento/';
@@ -90,12 +90,12 @@ $route['translate_uri_dashes'] = FALSE;
 
         //produtos
         $route['products']   =  'frontend/products/index';
-        $route['products/(:any)'] = 'frontend/products/get_products/$1';
+        $route['products/(:num)'] = 'frontend/products/get_products/$1';
         $route['products/search_product']   =  'frontend/products/search_product';
         $route['categories'] = 'frontend/products/categories_index';
         $route['companies'] = 'frontend/products/companies_index';
-        $route['categories/(:any)'] = 'frontend/products/products_by_category/$1';
-        $route['companies/(:any)'] = 'frontend/products/products_by_company/$1';
+        $route['categories/(:num)'] = 'frontend/products/products_by_category/$1';
+        $route['companies/(:num)'] = 'frontend/products/products_by_company/$1';
 
         //contactos
         $route['contacts']   =  'frontend/home/contactos';
@@ -110,17 +110,17 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/products'] = 'backend/products/index';
         $route['admin/product_table']='backend/products/get_datatable';
         $route['admin/products/add'] = 'backend/products/add';
-        $route['admin/products/edit/(:any)'] = 'backend/products/edit/$1';
-        $route['admin/products/delete/(:any)'] = 'backend/products/delete/$1';
-        $route['admin/products/show/(:any)'] = 'backend/products/show_product/$1';
+        $route['admin/products/edit/(:num)'] = 'backend/products/edit/$1';
+        $route['admin/products/delete/(:num)'] = 'backend/products/delete/$1';
+        $route['admin/products/show/(:num)'] = 'backend/products/show_product/$1';
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';
         $route['admin/sales_table']='backend/sales/get_datatable';
         $route['admin/sales/add'] = 'backend/sales/add';
-        $route['admin/sales/edit/(:any)'] = 'backend/sales/edit/$1';
-        $route['admin/sales/delete/(:any)'] = 'backend/sales/delete/$1';
-        $route['admin/sales/update_send_status/(:any)'] = 'backend/sales/update_send_status/$1';
+        $route['admin/sales/edit/(:num)'] = 'backend/sales/edit/$1';
+        $route['admin/sales/delete/(:num)'] = 'backend/sales/delete/$1';
+        $route['admin/sales/update_send_status/(:num)'] = 'backend/sales/update_send_status/$1';
         $route['admin/sales/client_address'] = 'backend/sales/client_address';
 
 
@@ -128,41 +128,28 @@ $route['translate_uri_dashes'] = FALSE;
         $route['admin/categories'] = 'backend/categories/index';
         $route['admin/categories_table']='backend/categories/get_datatable';
         $route['admin/categories/add'] = 'backend/categories/add';
-        $route['admin/categories/edit/(:any)'] = 'backend/categories/edit/$1';
+        $route['admin/categories/edit/(:num)'] = 'backend/categories/edit/$1';
 
         //companies
         $route['admin/companies'] = 'backend/companies/index';
         $route['admin/companies_table']='backend/companies/get_datatable';
         $route['admin/companies/add'] = 'backend/companies/add';
-        $route['admin/companies/edit/(:any)'] = 'backend/companies/edit/$1';
-        $route['admin/companies/delete/(:any)'] = 'backend/companies/delete/$1';
-
-
-        //users e clients mesmo controlador
-
-            //clientes
-/*             $route['admin/clients'] = 'backend/clients/client_index';
-            $route['admin/client_table']='backend/clients/get_client_datatable';
-            $route['admin/clients/add'] = 'backend/clients/client_add';
-            $route['admin/clients/edit/(:any)'] = 'backend/clients/client_edit/$1';
-            $route['admin/clients/delete/(:any)'] = 'backend/clients/client_delete/$1'; */
-
-            //utilizadores
-            $route['admin/users'] = 'backend/clients/index';
-            $route['admin/user_table']='backend/clients/get_datatable';
-            $route['admin/users/add'] = 'backend/clients/user_add';
-            $route['admin/users/edit/(:any)'] = 'backend/clients/user_edit/$1';
-            $route['admin/users/delete/(:any)'] = 'backend/clients/user_delete/$1';
-
-            //adicionar utilizador a empresa
-            $route['admin/users/create_company_user'] = 'backend/clients/create_company_user';
-        
+        $route['admin/companies/edit/(:num)'] = 'backend/companies/edit/$1';
+        $route['admin/companies/delete/(:num)/(:num)'] = 'backend/companies/delete/$1/$2';
 
         //contacts
         $route['admin/contacts'] = 'backend/contacts/index';
         $route['admin/contact_table']='backend/contacts/get_client_datatable';
-        $route['admin/contacts/edit/(:any)'] = 'backend/contacts/edit/$1';
-        $route['admin/contacts/delete/(:any)'] = 'backend/contacts/delete/$1';
+        $route['admin/contacts/edit/(:num)'] = 'backend/contacts/edit/$1';
+        $route['admin/contacts/delete/(:num)'] = 'backend/contacts/delete/$1';
+
+        //users e clients mesmo controlador
+        $route['admin/users'] = 'backend/clients/index';
+        $route['admin/user_table']='backend/clients/get_datatable';
+        $route['admin/users/add'] = 'backend/clients/user_add';
+        $route['admin/users/edit/(:num)'] = 'backend/clients/user_edit/$1';
+        $route['admin/users/delete/(:num)'] = 'backend/clients/user_delete/$1';
+
 
     
     //api
@@ -173,14 +160,14 @@ $route['translate_uri_dashes'] = FALSE;
 
         //products
         $route['restful/products'] = 'api/restful/get_products';
-        $route['restful/products/(:any)'] = 'api/restful/get_product/$1';
-        $route['restful/products_company/(:any)'] = 'api/restful/get_products_by_company/$1';
-        $route['restful/products_category/(:any)'] = 'api/restful/get_products_by_category/$1';
+        $route['restful/products/(:num)'] = 'api/restful/get_product/$1';
+        $route['restful/products_company/(:num)'] = 'api/restful/get_products_by_company/$1';
+        $route['restful/products_category/(:num)'] = 'api/restful/get_products_by_category/$1';
         $route['restful/search_product/(:any)'] = 'api/restful/search_this_product/$1';
 
         //companies
         $route['restful/companies'] = 'api/restful/get_companies';
-        $route['restful/company/(:any)'] = 'api/restful/get_company/$1';
+        $route['restful/company/(:num)'] = 'api/restful/get_company/$1';
 
         //users 
         $route['restful/users/profile'] = 'api/restful/get_profile';
@@ -189,7 +176,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //categories
         $route['restful/categories'] = 'api/restful/get_categories';
-        $route['restful/category/(:any)'] = 'api/restful/get_category/$1';
+        $route['restful/category/(:num)'] = 'api/restful/get_category/$1';
 
         //sales
 

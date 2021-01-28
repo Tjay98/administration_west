@@ -96,3 +96,7 @@ th,td{
 th,tr, td{
     white-space: nowrap;
 }
+
+.this_100{
+    width:100%;
+}
