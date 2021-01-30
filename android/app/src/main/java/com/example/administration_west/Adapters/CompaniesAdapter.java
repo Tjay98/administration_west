@@ -87,8 +87,8 @@ public class CompaniesAdapter extends RecyclerView.Adapter<CompaniesAdapter.Comp
 
 
         Picasso.with(ccontext).load(company_image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.sem_imagem)
+                .error(R.drawable.sem_imagem)
                 .fit()
                 .centerInside()
                 .into(holder.company_image);

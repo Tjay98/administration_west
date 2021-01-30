@@ -75,6 +75,9 @@ $route['translate_uri_dashes'] = FALSE;
         $route['clients/password']   =  'frontend/clients/password';
         $route['clients/morada_shipping']   =  'frontend/clients/morada_shipping';
         $route['clients/morada_billing']   =  'frontend/clients/morada_billing';
+        $route['sales/create_sale']='frontend/sales/create_sale';
+        $route['clients/shipping_address'] = 'frontend/clients/get_shipping_address';
+        $route['clients/billing_address'] = 'frontend/clients/get_billing_address';
         $route['clients/purchase_history']   =  'frontend/clients/purchase_history';
     
         //vendas

@@ -125,7 +125,7 @@ class Client_model extends CI_Model{
     }
 
     public function profile($id){
-        $this->db->select('id, username, email, phone_number, birthday_date, status, role_id, store_id');
+        $this->db->select('user.*');
         $this->db->where('user.id',$id);
         $data=$this->db->get('user')->row_array();
 

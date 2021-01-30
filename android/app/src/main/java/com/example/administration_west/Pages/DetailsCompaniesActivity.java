@@ -32,8 +32,8 @@ public class DetailsCompaniesActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.tVDescricaoEmpresaDC);
 
         Picasso.with(this).load(company_image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.sem_imagem)
+                .error(R.drawable.sem_imagem)
                 .fit()
                 .centerInside()
                 .into(image);

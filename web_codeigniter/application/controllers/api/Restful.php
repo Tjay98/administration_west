@@ -82,7 +82,7 @@ class Restful extends MY_Controller {
         $products=$this->Product_model->get_products();
         
         if(!empty($products)){
-/*             foreach($products as $product){
+            /*foreach($products as $product){
                 if($product['quantity']>0){
                     $data[]=$product;
                 }
@@ -144,7 +144,7 @@ class Restful extends MY_Controller {
                 'password'=>$this->input->post('password'),
             ];
             $validate=$this->Client_model->verify_login($login_form);
-/*             print_R(json_encode($validate));
+            /*print_R(json_encode($validate));
             die; */
             if(!empty($validate['unique'])){
                 $array=$this->generate_error_message(200,"Login successful");
@@ -268,11 +268,9 @@ class Restful extends MY_Controller {
                 
             }
             
-            
         }else{
             $array=$this->generate_error_message(404);
         }
-
         echo json_encode($array,JSON_PRETTY_PRINT);
     }
 

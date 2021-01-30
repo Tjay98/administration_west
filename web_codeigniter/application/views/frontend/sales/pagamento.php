@@ -1,26 +1,103 @@
-//aqui metodos de pagamento e escolher as moradas e os botoes das moradas aqui tambem
 <div class="container" style="margin-top: 100px">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-            <h1>Compra quase a acabar</h1>
+            <h1 >Compra quase a acabar</h1>
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <h3>Método de pagamento</h3>
+        <div class="col-lg-5 col-md-12 col-sm-12 text-center">
+            <h3 >Método de pagamento</h3>
+            <p>Selecione o método de pagamento que deseja</p>
+            <div style="padding-top:20px; height: 80%">
+            
+            <form role="form" class="text-center " style="height: 100%  " method="POST" action="<?php echo base_url('sales/create_sale') ?>">
+            <div style="padding: 70px 0;">
+
+            <?php 
+            
+                foreach ($payments as $payment){ ?>
+                    <input type="radio"    id="<?php echo $payment['id']; ?>" name="payment_id" value="<?php echo $payment['id']; ?>">
+                    <label   for="<?php echo $payment['name']; ?>"> <?php echo $payment['name']; ?></label><br>
+            <?php } ?> 
+            </div>
+
+            </form>
+            
+            </div>
+
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-7 col-md-12 col-sm-12 text-center">
             <h3>Moradas</h3>
+            <p>Verifique se as moradas estao corretas</p>
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12" style="padding-top:20px;">
+                <h4>Morada de entrega</h4>
+                <div class="row">
+                <p><b>Nome:</b> </p>
+                <p><?php echo $shipping['name']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>NIF:</b> </p>
+                <p><?php echo $shipping['nif']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Telemóvel:</b> </p>
+                <p><?php echo $shipping['contact_number']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Cidade:</b> </p>
+                <p><?php echo $shipping['city']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Morada:</b> </p>
+                <p><?php echo $shipping['address']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Código:</b> </p>
+                <p><?php echo $shipping['zip_code']; ?></p>
+                </div>
+
+
                     <button type="submit" onclick="open_edit_moradas_entrega()" class="btn btn-success" style="width:100%;">Mudar morada de entrega</button>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12" style="padding-top:20px;">
+                <h4>Morada de faturação</h4>
+                <div class="row">
+                <p><b>Nome:</b> </p>
+                <p><?php echo $billing['name']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>NIF:</b> </p>
+                <p><?php echo $billing['nif']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Telemóvel:</b> </p>
+                <p><?php echo $billing['contact_number']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Cidade:</b> </p>
+                <p><?php echo $billing['city']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Morada:</b> </p>
+                <p><?php echo $billing['address']; ?></p>
+                </div>
+                <div class="row">
+                <p><b>Código:</b> </p>
+                <p><?php echo $billing['zip_code']; ?></p>
+                </div>
+
+
+
                     <button type="submit" onclick="open_edit_moradas_fatura()" class="btn btn-success" style="width:100%;">Mudar morada de faturação</button>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 text-center mt-5">
-            <a href="<?php echo base_url('checkout/') ?>" class="btn btn-success"> Concluir compra </a>
+        <div class="col-lg-12 col-md-12 col-sm-12  mt-5">
+        <div class="row">
+
+            <a href="<?php echo base_url('sales/create_sale') ?>" class="btn btn-success" style="width:100%;"> Concluir compra </a>
         </div>
+        </div>
+
     </div>
 </div>
 
@@ -171,7 +248,7 @@
                     data: formdata,
                     success: function (response) {
                         if(response=='success'){
-                            window.location.href = '<?php echo base_url('clients/profile') ?>';
+                            window.location.href = '<?php echo base_url('pagamento') ?>';
                         }
                     }
                 });
@@ -203,7 +280,7 @@
                     data: formdata,
                     success: function (response) {
                         if(response=='success'){
-                            window.location.href = '<?php echo base_url('clients/profile') ?>';
+                            window.location.href = '<?php echo base_url('pagamento') ?>';
                         }
                     }
                 });
