@@ -54,7 +54,7 @@ class Companies extends MY_Controller {
 
                     switch($company['status']){
                         case 0:
-                            $status="<button class='btn btn-md btn-warning this_100' onclick='enable_company(".$id.")'>Inativo</button>";
+                            $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='enable_company(".$id.")'>Inativo</button>";
                         break;
 
                         case 1:
@@ -67,7 +67,7 @@ class Companies extends MY_Controller {
                     }
                     
 
-                    $action="<a class='btn btn-md btn-warning' href='".base_url('admin/companies/edit/'.$id)."'><i class='fa fa-pencil'></i></a>";
+                    $action="<a class='btn btn-md btn-warning btn_white_color' href='".base_url('admin/companies/edit/'.$id)."'><i class='fa fa-pencil'></i></a>";
 
                     $data[]=[
                         $id,

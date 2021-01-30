@@ -75,7 +75,6 @@ $route['translate_uri_dashes'] = FALSE;
         $route['clients/password']   =  'frontend/clients/password';
         $route['clients/morada_shipping']   =  'frontend/clients/morada_shipping';
         $route['clients/morada_billing']   =  'frontend/clients/morada_billing';
-        $route['sales/create_sale']='frontend/sales/create_sale';
         $route['clients/shipping_address'] = 'frontend/clients/get_shipping_address';
         $route['clients/billing_address'] = 'frontend/clients/get_billing_address';
         $route['clients/purchase_history']   =  'frontend/clients/purchase_history';
@@ -87,8 +86,8 @@ $route['translate_uri_dashes'] = FALSE;
         $route['remove/cart/(:num)']='frontend/sales/remove_from_cart/$1';
         $route['update/cart/quantity']='frontend/sales/updateItemQty/';
         $route['cart']='frontend/sales/cart';
-        $route['pagamento']='frontend/sales/pagamento/';
-        $route['checkout']='frontend/sales/checkout/';
+        $route['sales/checkout']='frontend/sales/checkout/';
+        $route['sales/create_sale']='frontend/sales/create_sale';
             
 
         //produtos

@@ -88,7 +88,9 @@ th,td{
 .btn_white_color{
     color:white;
 }
-
+.btn-warning{
+    background-color:orange;
+}
 .modal-title{
     font-weight:bold;
 }

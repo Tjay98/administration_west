@@ -53,9 +53,9 @@ class Sales extends MY_Controller {
 
     public function cart(){
         $this->is_user_logged();
-        $user_key = $this->session->userdata('user_id');
-        if(!empty($user_key)){
-            $cartItems=$this->Sale_model->get_user_cart($user_key);
+        $user_id = $this->session->userdata('user_id');
+        if(!empty($user_id)){
+            $cartItems=$this->Sale_model->get_user_cart($user_id);
             
 
             if(!empty($cartItems)){
@@ -178,7 +178,7 @@ class Sales extends MY_Controller {
     }
 
     //mudar o botao esta dessatualizado
-    public function checkout (){
+    public function old_checkout (){
         $this->is_user_logged();
 
         //dados do cliente
@@ -201,43 +201,39 @@ class Sales extends MY_Controller {
 
     }
 
-    public function pagamento(){
+    public function checkout(){
         $this->is_user_logged();
 
         //dados do cliente
-        $id=$this->session->userdata('user_id');
-        $profile=$this->Client_model->profile($id)['unique_key'];
+        $user_id=$this->session->userdata('user_id');
 
-        if(!empty($profile)){
-            $array['shipping']=$this->Client_model->get_shipping_address_by_key($profile);
-            $array['billing']=$this->Client_model->get_billing_address_by_key($profile);
-            $array['payments']=$this->Sale_model->payment_methods();
-
-        } else{
-            return 'error';
+        if(!empty($user_id)){
+            $data['shipping']=$this->Client_model->get_user_shipping($user_id);
+            $data['billing']=$this->Client_model->get_user_billing($user_id);
+            $data['cart_items']=$this->Sale_model->get_user_cart($user_id);
+            $data['payment_methods']=$this->Sale_model->payment_methods();
+            $this->load_views('frontend/sales/checkout', $data);
         }
-        
-        $this->load_views('frontend/sales/pagamento', $array);
 
     }
 
     public function create_sale(){
-        $id=$this->session->userdata('user_id');
-        $user_key=$this->Client_model->profile($id)['unique_key'];
-
-        if ($this->input->post('REQUEST_METHOD') == 'POST') {
-
+        $user_id=$this->session->userdata('user_id');
+        
+        print_r($this->input->post());die;
+        if (!empty($this->input->post())) {
+            
             $payment_method = $this->input->post('payment_id');
-print_r($payment_method); die;
+            
             if(!empty($user_key) && !empty($payment_method)){
-                $profile = $this->Client_model->get_profile_by_key($user_key);
-                $shipping_address = $this->Client_model->get_shipping_address_by_key($user_key);
-                $billing_address = $this->Client_model->get_billing_address_by_key($user_key);
+                
+                $shipping_address = $this->Client_model->get_user_shipping($user_id);
+                $billing_address = $this->Client_model->get_user_billing($user_id);
 
-                $cart_products= $this->Sale_model->get_user_cart($profile['user_id']);
+                $cart_products= $this->Sale_model->get_user_cart($user_id);
 
                 $sale_data=[
-                    'user_id'=>$profile['user_id'],
+                    'user_id'=>$user_id,
                     'billing_address_id'=>$shipping_address['id'],
                     'shipping_address_id'=>$billing_address['id'],
                     'payment_method_id'=>$payment_method,
@@ -245,6 +241,7 @@ print_r($payment_method); die;
                     'total_iva'=>0,
 
                 ];
+
                 $this->db->insert('sales_group',$sale_data);
                 $sale_group_id=$this->db->insert_id();
                 if(!empty($sale_group_id)){
@@ -278,27 +275,27 @@ print_r($payment_method); die;
                         $this->db->set('total_iva',$total_iva);
                         $this->db->update('sales_group');
 
-                        $this->db->where('user_id',$profile['user_id']);
+                        $this->db->where('user_id',$user_id);
                         $this->db->delete('user_cart');
                         
-                        return('Compra efetuada com sucesso');
-                        $this->load_views('frontend/sales/checkout/');
+                        echo 'Compra efetuada com sucesso';
+                        exit;
                     }else{
                         //apagar o grupo quando falha
                         $this->db->where('id',$sale_group_id);
                         $this->db->delete('sales_group');
 
-                        return('Quantidade de um dos produtos é insuficiente.Verifique o pedido');
-                        $this->load_views('frontend/sales/cart');
+                        echo 'Quantidade de um dos produtos é insuficiente.Verifique o pedido';
+                        exit;
                     }
                 }else{
-                    return('Alguma informação está errada');
-                    $this->load_views('frontend/sales/cart');            
+                    echo 'Alguma informação está errada';
+                    exit;         
                 }
             }
         }else {
-            return('Alguma informação está errada');
-            $this->load_views('frontend/sales/cart');   
+            echo 'Alguma informação está errada';
+            exit;
         }
     }
 

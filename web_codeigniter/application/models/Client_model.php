@@ -125,7 +125,7 @@ class Client_model extends CI_Model{
     }
 
     public function profile($id){
-        $this->db->select('user.*');
+        $this->db->select('id, username, email, phone_number, birthday_date, status, role_id, store_id');
         $this->db->where('user.id',$id);
         $data=$this->db->get('user')->row_array();
 
@@ -158,6 +158,18 @@ class Client_model extends CI_Model{
         $data=$this->db->get()->row_array();
 
         return $data;
+    }
+
+    public function get_user_shipping($user_id){
+        $this->db->where('user_id',$user_id);
+        $shipping=$this->db->get('shipping_address')->row_array();
+        return $shipping;
+    }
+
+    public function get_user_billing($user_id){
+        $this->db->where('user_id',$user_id);
+        $billing=$this->db->get('billing_address')->row_array();
+        return $billing;
     }
 
     public function new_password_client($password_form, $id){

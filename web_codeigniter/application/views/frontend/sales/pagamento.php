@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 100px">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-            <h1 >Compra quase a acabar</h1>
+            <h1 >Concluir a compra</h1>
         </div>
         <div class="col-lg-5 col-md-12 col-sm-12 text-center">
             <h3 >Método de pagamento</h3>

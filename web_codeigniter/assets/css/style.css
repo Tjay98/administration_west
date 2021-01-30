@@ -154,3 +154,8 @@ table, th, td {
   th, td {
     padding: 15px;
   }
+
+.content{
+    margin-top:100px;
+    margin-bottom:100px;
+}

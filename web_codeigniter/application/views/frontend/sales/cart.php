@@ -67,7 +67,7 @@
                             <hr> 
                         </ul> 
                         <a class="btn btn-warning" href="<?php echo base_url('products/') ?>" > Continuar a comprar </button>
-                        <a href="<?php echo base_url('pagamento/') ?>" class="btn btn-success pull-right"> Concluir compra </a>
+                        <a href="<?php echo base_url('sales/checkout/') ?>" class="btn btn-success pull-right"> Concluir compra </a>
                     </div>
 
             <?php }else{?>
