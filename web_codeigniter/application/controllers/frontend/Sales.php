@@ -218,19 +218,44 @@ class Sales extends MY_Controller {
     }
 
     public function create_sale(){
-        $user_id=$this->session->userdata('user_id');
+       
         
-        print_r($this->input->post());die;
-        if (!empty($this->input->post())) {
+        /* print_r($this->input->post());die; */
+        if (!empty($this->input->post('payment'))) {
+            $user_id=$this->session->userdata('user_id');
             
-            $payment_method = $this->input->post('payment_id');
             
-            if(!empty($user_key) && !empty($payment_method)){
-                
+            if(!empty($user_id)){
+                $payment = $this->input->post('payment');
+
+                $payment_method=$payment['payment_method']['payment_method_id'];
                 $shipping_address = $this->Client_model->get_user_shipping($user_id);
                 $billing_address = $this->Client_model->get_user_billing($user_id);
 
                 $cart_products= $this->Sale_model->get_user_cart($user_id);
+
+                if(empty($shipping_address['id'])){
+                    $shipping_address=$payment['shipping'];
+                    $shipping_address['user_id']=$user_id;
+
+                    $this->db->insert('shipping_address',$shipping_address);
+                    $shipping_address['id']=$this->db->insert_id();
+                }else{
+                    $this->db->where('user_id',$user_id);
+                    $this->db->update('shipping_address',$payment['shipping']);
+                }
+
+                if(empty($billing_address['id'])){
+                    $billing_address=$payment['billing'];
+                    $billing_address['user_id']=$user_id;
+
+                    $this->db->insert('billing_address',$billing_address);
+                    $billing_address['id']=$this->db->insert_id();
+                }else{
+                    $this->db->where('user_id',$user_id);
+                    $this->db->update('billing_address',$payment['billing']);
+                }
+
 
                 $sale_data=[
                     'user_id'=>$user_id,
@@ -278,23 +303,27 @@ class Sales extends MY_Controller {
                         $this->db->where('user_id',$user_id);
                         $this->db->delete('user_cart');
                         
-                        echo 'Compra efetuada com sucesso';
+                        /* echo 'Compra efetuada com sucesso'; */
+                        echo "success";
                         exit;
                     }else{
                         //apagar o grupo quando falha
                         $this->db->where('id',$sale_group_id);
                         $this->db->delete('sales_group');
 
-                        echo 'Quantidade de um dos produtos é insuficiente.Verifique o pedido';
+                        /* echo 'Quantidade de um dos produtos é insuficiente.Verifique o pedido'; */
+                        echo "product_quantity_error";
                         exit;
                     }
                 }else{
-                    echo 'Alguma informação está errada';
+                    /* echo 'Alguma informação está errada'; */
+                    echo "error";
                     exit;         
                 }
             }
         }else {
-            echo 'Alguma informação está errada';
+            /* echo 'Alguma informação está errada'; */
+            echo "error";
             exit;
         }
     }
