@@ -27,6 +27,7 @@ import com.example.administration_west.Adapters.ProductsAdapter;
 import com.example.administration_west.Models.Products;
 import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.R;
+import com.example.administration_west.Utils.ProductsJsonParse;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -144,16 +145,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.search:
                 return true;
             case R.id.shop:
-                mostrarCart();
+                mostrarCart(ProductsJsonParse.isConnected(getApplicationContext()));
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void mostrarCart() {
-        Intent intentCart = new Intent(this, CartActivity.class);
-        startActivity(intentCart);
-        finish();
+    private void mostrarCart(final boolean isConnected) {
+        if(!isConnected){
+            Toast.makeText(getApplicationContext(), "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intentCart = new Intent(this, CartActivity.class);
+            startActivity(intentCart);
+            finish();
+        }
     }
 
 

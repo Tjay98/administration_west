@@ -162,13 +162,86 @@
     function submit_sale_button(){
         form = $('#payment').serialize();
 
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('sales/create_sale') ?>",
-            data: form,
-            success: function (response) {
-                console.log(response);
-            }
-        });
+        //shipping address
+        name_shipping=$('#shipping_name').val();
+        number_shipping=$('#shipping_contact_number').val();
+        nif_shipping=$('#shipping_nif').val();
+        city_shipping=$('#shipping_city').val();
+        code_shipping=$('#shipping_zip_code').val();
+        address_shipping=$('#shipping_address').val();
+        //billing address
+        name_billing=$('#billing_name').val();
+        number_billing=$('#billing_contact_number').val();
+        nif_billing=$('#billing_nif').val();
+        city_billing=$('#billing_city').val();
+        code_billing=$('#billing_zip_code').val();
+        address_billing=$('#billing_address').val(); 
+
+        flag=true
+
+        //shipping address
+        if(name_shipping.length < 5 || name_shipping.length > 255){
+            $('#shipping_name_error').text('Preencha o seu nome');
+            flag=false;
+        }
+        if(number_shipping.length!=9){
+            $('#shipping_contact_number_error').text('O número de telemóvel é inválido');
+            flag=false;
+        }
+        if(nif_shipping.length!=9){
+            $('#shipping_nif_error').text('O NIF é inválido');
+            flag=false;
+        }
+        if(city_shipping.length < 5 || city_shipping.length > 255){
+            $('#shipping_city_error').text('Preencha o nome da sua cidade');
+            flag=false;
+        }
+        if(code_shipping.length!=9){
+            $('#shipping_zip_code_error').text('O código postal é inválido');
+            flag=false;
+        }
+        if(address_shipping.length < 5 || address_shipping.length > 255){
+            $('#shipping_address_error').text('Preencha a sua morada');
+            flag=false;
+        }
+        
+        //billing address
+        if(name_billing.length < 5 || name_billing.length > 255){
+            $('#billing_name_error').text('Preencha o seu nome');
+            flag=false;
+        }
+        if(number_billing.length!=9){
+            $('#billing_contact_number_error').text('O número de telemóvel é inválido');
+            flag=false;
+        }
+        if(nif_billing.length!=9){
+            $('#billing_nif_error').text('O NIF é inválido');
+            flag=false;
+        }
+        if(city_billing.length < 5 || city_billing.length > 255){
+            $('#billing_city_error').text('Preencha o nome da sua cidade');
+            flag=false;
+        }
+        if(code_billing.length!=9){
+            $('#billing_zip_code_error').text('O código postal é inválido');
+            flag=false;
+        }
+        if(address_billing.length < 5 || address_billing.length > 255){
+            $('#billing_address_error').text('Preencha a sua morada');
+            flag=false;
+        }
+
+        if(flag==true){
+            form = $('#payment').serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('sales/create_sale') ?>",
+                data: form,
+                success: function (response) {
+                    //console.log(response);
+                
+                }
+            });
     }
 </script>

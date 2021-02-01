@@ -25,13 +25,6 @@
             android:textSize="20sp"
             android:text="@string/morada_faturacao" />
 
-        <RadioButton
-            android:id="@+id/radioButtonMoradaFaturacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Morada de Faturação" />
-
-
 
         <TextView
             android:id="@+id/textView3"
@@ -41,23 +34,34 @@
             android:textSize="20sp"
             android:text="@string/morada_entrega" />
 
-        <RadioButton
-            android:id="@+id/radioButtonMoradaEntrega"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Morada de Entrega" />
-
 
         <Button
-            android:id="@+id/buttonEditar"
+            android:id="@+id/buttonEditarEntrega"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/editar_morada" />
+            android:layout_marginTop="20dp"
+            android:text="@string/editar_morada_entrega" />
+
+        <Button
+            android:id="@+id/buttonEditarFatura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/editar_morada_faturacao" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Caso já tenha as moradas e não pretende muda-las clique em prosseguir" />
 
         <Button
             android:id="@+id/buttonProsseguirMoradas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/prosseguir" />
 </LinearLayout>

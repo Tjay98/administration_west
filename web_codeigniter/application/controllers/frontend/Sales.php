@@ -123,32 +123,62 @@ class Sales extends MY_Controller {
     }
 
         
-    
+    /* $product_id=$this->input->post('product_id');
+    if(!empty($user_key) && !empty($product_id)&&!empty($quantity)){
 
-    public function updateItemQty(){
+        $data=[
+            'product_id'=>$product_id,
+            'quantity'=>$quantity,
+            'user_id'=>$user_key,
+        ];
+
+        $update=$this->cart->update($data);
+
+        $this->db->update('user_cart',$data);
+        $update_id=$this->db->update_id();
+
+    }
+    echo $update?'ok':'err'; */
+
+
+    public function updateItemQty($product_id){
         $this->is_user_logged();
-        $user_key = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('user_id');
 
-        $update=0;
-
-        $product_id=$this->input->post('product_id');
         $quantity=$this->input->post('quantity');
 
-        if(!empty($user_key) && !empty($product_id)&&!empty($quantity)){
+        $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id, $quantity);
 
-            $data=[
-                'product_id'=>$product_id,
-                'quantity'=>$quantity,
-                'user_id'=>$user_key,
-            ];
 
-            $update=$this->cart->update($data);
+        if(!empty($cart)){
+            $old_quantity=$cart['quantity'];
+            if( ($old_quantity + ($quantity)) <= 0){
+                //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
+                $this->db->where('user_id',$user_id);
+                $this->db->where('product_id',$product_id);
+                $this->db->delete('user_cart');
 
-            $this->db->update('user_cart',$data);
-            $update_id=$this->db->update_id();
-
+            }else{
+                //verifica se a quantidade é superior a 0, caso seja atualiza
+                $new_quantity = $old_quantity + $quantity;
+                $this->db->where('user_id',$user_id);
+                $this->db->where('product_id',$product_id);
+                $this->db->set('quantity',$new_quantity);
+                $this->db->update('user_cart');
+            }
+        }else{
+            //adiciona o produto ao carrinho
+            if($quantity > 0){
+                $product_data= [
+                    'user_id'=>$user_id,
+                    'product_id'=>$product_id,
+                    'quantity'=>$quantity,
+                ];
+                $this->db->update('user_cart',$product_data);
+                $update_id=$this->db->update_id();
+            }
         }
-        echo $update?'ok':'err';
+        return redirect('cart');
     }
     
 

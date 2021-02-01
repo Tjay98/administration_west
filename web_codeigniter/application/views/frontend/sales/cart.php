@@ -32,7 +32,7 @@
                                 <th> <?php echo $item['product_name']; ?> </th>
                                 <th> <?php echo $item['price'] .' €'; ?> </th>
                                 <th> <?php echo $item['price_iva']; ?> </th>
-                                <th><input type="number" value="<?php echo $item['quantity']; ?>" onchange="<?php echo base_url('update/cart/quantity/').$item['product_id']; ?>"></th>
+                                <th><input type="number" id="qty" value="<?php echo $item['quantity']; ?>" onchange="updateCartItem(this, <?php echo $item['product_id']; ?>)"></th>
                                 <th><?php echo floatval($item["subtotal"]=($item['price']*$item['quantity'])).'  €';?></th>
                                 <th> <?php echo $item['iva_total']=($item['price_iva']*$item['quantity']) .'  €'; ?> </th>
                                 <th> <button class="btn btn-danger remove-products" onclick="return confirm('Tem a certeza que pretende apagar este item?')?window.location.href='<?php echo base_url('remove/cart/').$item['product_id']; ?>':false;">Remover  X</button> </th>
@@ -82,18 +82,24 @@
 </div>
 <script>
     // Update item quantity
-    function updateCartItem(obj, quantity){
+    function updateCartItem(qty, product_id){
+        console.log(product_id);
+
+        quantity=$('#qty').val();
+        console.log(quantity);
+
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('update/cart/quantity');?>",
-            data: {'quantity':rowid,qty:obj.value},
+            url: "<?php echo base_url('update/cart/quantity/').$item['product_id'];?>",
+            data: {product_id:product_id, quantity:quantity},
             success: function (response) {
-                if(response == 'ok'){
+                console.log(response);
+                /* if(response == 'ok'){
                     location.reload();
                 }else{
                     alert('Erro');
                     location.reload();
-                }
+                } */
             }
         });
     }

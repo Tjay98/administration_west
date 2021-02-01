@@ -48,7 +48,10 @@
     <string name="morada_faturacao">Morada de Faturação</string>
     <string name="morada_entrega">Morada de Entrega</string>
     <string name="prosseguir">Prosseguir</string>
-    <string name="editar_morada">Editar Morada</string>
+    <string name="editar_morada">Editar morada</string>
+    <string name="editar_morada_entrega">Editar morada entrega</string>
+    <string name="editar_morada_faturacao">Editar morada faturação</string>
+
     <string name="menu_principal">Voltar ao Menu Principal</string>
     <string name="total">Total</string>
     <string name="quant">Quant</string>
