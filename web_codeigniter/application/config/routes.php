@@ -173,6 +173,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //users 
         $route['restful/users/profile'] = 'api/restful/get_profile';
+        $route['restful/users/password'] = 'api/restful/change_password';
         $route['restful/users/shipping_address'] = 'api/restful/get_shipping_address';
         $route['restful/users/billing_address'] = 'api/restful/get_billing_address';
 

@@ -32,7 +32,6 @@
             <div class="col-lg-5 col-md-5 col-sm-12 mt-5">
                 <h6>Descrição</h6>
                 <p class="text-justify"><?php echo $product['big_description']; ?></p>
-                <input type="number" placeholder="Quantidade">
             <button class="btn-primary" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products'); ?>" >Adicionar ao Carrinho</a> </button>
         </div>       
     </div>

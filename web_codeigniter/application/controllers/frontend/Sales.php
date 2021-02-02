@@ -152,7 +152,7 @@ class Sales extends MY_Controller {
 
         if(!empty($cart)){
             $old_quantity=$cart['quantity'];
-            if( ($old_quantity + ($quantity)) <= 0){
+            if( $quantity <= 0){
                 //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
                 $this->db->where('user_id',$user_id);
                 $this->db->where('product_id',$product_id);
@@ -160,10 +160,9 @@ class Sales extends MY_Controller {
 
             }else{
                 //verifica se a quantidade é superior a 0, caso seja atualiza
-                $new_quantity = $old_quantity + $quantity;
                 $this->db->where('user_id',$user_id);
                 $this->db->where('product_id',$product_id);
-                $this->db->set('quantity',$new_quantity);
+                $this->db->set('quantity',$quantity);
                 $this->db->update('user_cart');
             }
         }else{

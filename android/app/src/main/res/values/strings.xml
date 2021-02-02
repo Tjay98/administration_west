@@ -68,6 +68,8 @@
     <string name="assunto">Assunto</string>
     <string name="mensagem">Mensagem</string>
     <string name="enviar_mensagem">Enviar Mensagem</string>
+    <string name="antiga_password">Antiga password</string>
+    <string name="nova_password">Nova password</string>
 
 
 </resources>

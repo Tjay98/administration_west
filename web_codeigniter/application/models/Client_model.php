@@ -140,6 +140,34 @@ class Client_model extends CI_Model{
         return $data;
     }
 
+    
+
+    public function new_password_by_key($password_form, $key){
+        $this->db->select('id as user_id, password_hash');
+        $this->db->where('user.unique_key',$key);
+        $data=$this->db->get('user')->row_array();
+
+        if(!empty($data)){
+            if(password_verify($password_form['old_password'], $data['password_hash'])) {
+                if($data!== FALSE){
+                    $dados=[
+                        'password_hash'=>$password_form['password_hash'],
+                    ];
+                    $this->db->update('user',$dados);
+                    
+                } else {
+                    return 'error';
+                }
+             } else {
+                 return 'Password errada';
+             }
+         } else {
+             return 'Sem dados';
+         }
+
+       // return $data;
+    }
+
     public function get_shipping_address_by_key($key){
         $this->db->select('shipping_address.*');
         $this->db->where('user.unique_key',$key);

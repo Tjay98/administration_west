@@ -20,7 +20,7 @@ public class MoradasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moradas);
 
-        Editar = findViewById(R.id.buttonEditar);
+        ///Editar = findViewById(R.id.buttonEditar);
         Prosseguir = findViewById(R.id.buttonProsseguirMoradas);
 
         Editar.setOnClickListener(new View.OnClickListener() {

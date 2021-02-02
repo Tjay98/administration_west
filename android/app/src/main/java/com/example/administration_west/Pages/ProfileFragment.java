@@ -1,10 +1,13 @@
 package com.example.administration_west.Pages;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import static com.example.administration_west.Pages.ProductFragment.ip;
 public class ProfileFragment extends Fragment {
 
     TextView tVNome, tVEmail, tVMobile, tVData;
+    Button ChangePassword;
     SessionUser sessionUser;
     String getKey;
     String URL_PROFILE = ip + "restful/users/profile";
@@ -61,11 +65,24 @@ public class ProfileFragment extends Fragment {
         tVEmail = (TextView) view.findViewById(R.id.tVEmailEditProfile);
         tVMobile = (TextView) view.findViewById(R.id.tVMobileEditProfile);
         tVData = (TextView) view.findViewById(R.id.tVDataEditProfile);
+        ChangePassword = (Button) view.findViewById(R.id.buttonMudarPasswordProfile);
 
 
+        ChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePasssword();
+            }
+        });
 
-return view;
+    return view;
     }
+
+    private void changePasssword() {
+        Intent intentMain = new Intent(getContext(), ChangePasswordActivity.class);
+        startActivity(intentMain);
+    }
+
 
     private void getUserDetail(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_PROFILE,

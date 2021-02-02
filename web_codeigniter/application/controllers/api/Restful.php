@@ -244,14 +244,40 @@ class Restful extends MY_Controller {
                 $array['profile']=$check_profile;
             }else{
                 $array=$this->generate_error_message(404);
-                
             }
-            
-            
         }else{
             $array=$this->generate_error_message(404);
         }
         echo json_encode($array,JSON_PRETTY_PRINT);
+    }
+
+    public function change_password(){
+        if(!empty($this->input->post('profile_key'))){
+            $profile_key= $this->input->post('profile_key');
+            $old_password= $this->input->post('old_password');
+            $new_password= $this->input->post('new_password');
+
+            //se nao estiver vazio
+            if(!empty($this->input->post('old_password'))){
+                $password_form=[
+                    'old_password'=>$this->input->post('old_password'),
+                    'password_hash'=>password_hash($this->input->post('new_password'),PASSWORD_DEFAULT),
+                ];
+                $validate=$this->Client_model->new_password_by_key($password_form, $profile_key);
+                if(empty($validate)){
+                    //if change password happens correctly
+                    $array=$this->generate_error_message(200,"Change password successful");
+                }else{
+                    $array=$this->generate_error_message(401,'Alguma coisa errada');
+                }
+            }else{
+                //se estiver vazio
+                $array=$this->generate_error_message(404);
+            }
+        } else{
+            $array=$this->generate_error_message(400,'Invalid method');
+        }
+        echo json_encode($array, JSON_PRETTY_PRINT);
     }
 
     public function get_shipping_address(){

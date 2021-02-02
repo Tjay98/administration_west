@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -31,9 +32,13 @@ public class BillingAddressActivity extends AppCompatActivity {
 
 
     TextInputLayout eTName, eTNIF, eTMobile, eTCidade, eTMorada, eTCodigo;
+    TextInputEditText Name, NIF, Mobile, Cidade, Morada, Codigo;
+
     Button buttonMorada, buttonVoltar;
 
     String SEND_BILLING_ADRRESS_URL = ip + "restful/create_billing";
+    String BILLING_ADDRESS = ip +"/restful/users/billing_address";
+
 
     SessionUser sessionUser;
     String getKey;
@@ -59,10 +64,19 @@ public class BillingAddressActivity extends AppCompatActivity {
         eTCidade=findViewById(R.id.etCidadeBillingAddress);
         eTMorada=findViewById(R.id.eTmoradaBillingAddress);
         eTCodigo=findViewById(R.id.etcodigoBillingAddress);
+
+            Name=findViewById(R.id.NameBillingAddress);
+            NIF=findViewById(R.id.NifBillingAddress);
+            Mobile=findViewById(R.id.MobileBillingAddress);
+            Cidade=findViewById(R.id.CidadeBillingAddress);
+            Morada=findViewById(R.id.moradaBillingAddress);
+            Codigo=findViewById(R.id.codigoBillingAddress);
+
         //Button
         buttonMorada=findViewById(R.id.buttonEnviarBillingAddress);
         buttonVoltar=findViewById(R.id.buttonVoltarBillingAddress);
 
+        getBillingAddress();
 
         //clicar no botao para ligar vista do Login no Registo
         buttonVoltar.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +112,62 @@ public class BillingAddressActivity extends AppCompatActivity {
         Intent intent=new Intent(this,PagamentoActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void getBillingAddress(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BILLING_ADDRESS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            JSONObject jsonArray = jsonObject.getJSONObject("billing_address");
+                            if(status.equals("200")){
+                                for(int i=0; i<jsonArray.length();i++) {
+
+                                    String nome_billing = jsonArray.getString("name");
+                                    String nif_billing = jsonArray.getString("nif");
+                                    String telemovel_billing = jsonArray.getString("contact_number");
+                                    String city_billing = jsonArray.getString("city");
+                                    String morada_billing = jsonArray.getString("address");
+                                    String codigo_billing = jsonArray.getString("zip_code");
+
+
+                                    Name.setText(nome_billing);
+                                    NIF.setText(nif_billing);
+                                    Mobile.setText(telemovel_billing);
+                                    Cidade.setText(city_billing);
+                                    Morada.setText(morada_billing);
+                                    Codigo.setText(codigo_billing);
+                                }
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                            //Toast.makeText(getApplicationContext(), "Error" +e.toString(),Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Error" +error.toString(),Toast.LENGTH_LONG).show();
+
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("profile_key", getKey);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 
     private void registarBillingAddress() {

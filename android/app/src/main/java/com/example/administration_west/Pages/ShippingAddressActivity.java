@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -30,9 +31,12 @@ import static com.example.administration_west.Pages.ProductFragment.ip;
 public class ShippingAddressActivity  extends AppCompatActivity {
 
         TextInputLayout eTName, eTNIF, eTMobile, eTCidade, eTMorada, eTCodigo;
+        TextInputEditText Name, Nif, Mobile, Cidade, Morada, Codigo;
         Button buttonMorada, buttonVoltar;
 
         String SEND_SHIPPING_ADRRESS_URL = ip + "restful/create_shipping";
+        String SHIPPING_ADDRESS = ip +"/restful/users/shipping_address";
+
 
         SessionUser sessionUser;
         String getKey;
@@ -58,11 +62,20 @@ public class ShippingAddressActivity  extends AppCompatActivity {
             eTCidade=findViewById(R.id.etCidadeShippingAdress);
             eTMorada=findViewById(R.id.eTmoradaShippingAdress);
             eTCodigo=findViewById(R.id.etcodigoShippingAdress);
+
+                Name=findViewById(R.id.NameShippingAdress);
+                Nif=findViewById(R.id.NifShippingAdress);
+                Mobile=findViewById(R.id.MobileShippingAdress);
+                Cidade=findViewById(R.id.CidadeShippingAdress);
+                Morada=findViewById(R.id.moradaShippingAdress);
+                Codigo=findViewById(R.id.codigoShippingAdress);
+
             //Button
             buttonMorada=findViewById(R.id.buttonEnviarMoradaipping);
             buttonVoltar=findViewById(R.id.buttonVoltarShipping);
 
 
+        getShippingAddress();
             //clicar no botao para ligar vista do Login no Registo
             buttonVoltar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +112,64 @@ public class ShippingAddressActivity  extends AppCompatActivity {
         finish();
     }
 
-        private void registarShippingAddress() {
+    private void getShippingAddress(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SHIPPING_ADDRESS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            JSONObject jsonArray = jsonObject.getJSONObject("shipping_address");
+                            if(status.equals("200")){
+                                for(int i=0; i<jsonArray.length();i++) {
+
+                                    String nome_shipping = jsonArray.getString("name");
+                                    String nif_shipping = jsonArray.getString("nif");
+                                    String telemovel_shipping = jsonArray.getString("contact_number");
+                                    String city_shipping = jsonArray.getString("city");
+                                    String morada_shipping = jsonArray.getString("address");
+                                    String codigo_shipping = jsonArray.getString("zip_code");
+
+
+                                    Name.setText(nome_shipping);
+                                    Nif.setText(nif_shipping);
+                                    Mobile.setText(telemovel_shipping);
+                                    Cidade.setText(city_shipping);
+                                    Morada.setText(morada_shipping);
+                                    Codigo.setText(codigo_shipping);
+
+                                }
+
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                           // Toast.makeText(getApplicationContext(), "Error" +e.toString(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Error" +error.toString(),Toast.LENGTH_LONG).show();
+
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("profile_key", getKey);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+
+    private void registarShippingAddress() {
             final String name = eTName.getEditText().getText().toString();
             final String nif = eTNIF.getEditText().getText().toString();
             final String mobile = eTMobile.getEditText().getText().toString();

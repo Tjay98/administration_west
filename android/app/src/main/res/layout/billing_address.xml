@@ -47,6 +47,7 @@
                 android:hint="@string/nome"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NameBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nome"
@@ -66,6 +67,7 @@
                 android:inputType="number"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NifBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nif"
@@ -84,6 +86,7 @@
                 android:hint="@string/telemovel"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/MobileBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/telemovel"
@@ -101,6 +104,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/CidadeBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/cidade"
@@ -118,6 +122,7 @@
                 android:hint="@string/morada"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/moradaBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/morada"
@@ -137,6 +142,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/codigoBillingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/codigo_postal"
