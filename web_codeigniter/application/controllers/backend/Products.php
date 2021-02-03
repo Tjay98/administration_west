@@ -132,7 +132,7 @@ class Products extends MY_Controller {
 
     public function add(){
         if(!empty($this->input->post('product_name'))){
-            $config['upload_path']          = base_url('/uploads/products');
+            $config['upload_path']          = './uploads/products';
             $config['allowed_types']        = 'gif|jpg|png';
             $config['max_size']             = 0;
             $config['max_width']            = 0;

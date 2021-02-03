@@ -39,6 +39,7 @@
   transition: all .2s ease;
 }
 </style>
+
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -52,7 +53,7 @@
     <!-- /.container-fluid -->
 </section>
 <section class="content">
-    <form id="form-sales" action="<?php echo base_url('admin/sales/add') ?>" method="post" enctype="multipart/form-data">
+    <form id="form-companies" action="<?php echo base_url('admin/companies/add') ?>" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
             <!-- Info boxes -->
             <div class="row">
@@ -65,14 +66,16 @@
                             </h4>
                                 <!-- /.box-tools -->
                         </div>
-                        <div class="card-body" style="min-height:340px">
+                        <div class="card-body" >
                             <div class="form-group">
                                 <label>Nome da empresa</label>
-                                <input type="text" class="form-control" id="company_name" name="company[name]">
+                                <input type="text" class="form-control" id="company_name" name="company_name">
+                                <small class="text-danger" id="company_name_error"></small>
                             </div>
                             <div class="form-group">
                                 <label>Nome da empresa</label>
-                                <textarea class="form-control" id="company_description" name="company[description]" rows=3></textarea>
+                                <textarea class="form-control" id="company_description" name="description" rows=3></textarea>
+                                <small class="text-danger" id="company_description_error"></small>
                             </div>
 
                         </div>
@@ -88,9 +91,10 @@
                         <div class="card-body" >
                             <div class="card-header" >
                                 <div class="file-upload">
+                                    <small class="text-danger" id="upload_image_error"></small>
                                     <center><button class="btn btn-md btn-info" type="button" style="width:100%" onclick="click_image_upload()">Adicionar imagem</button></center>
                                     <div id="fill_image_upload">
-                                        <input  id="upload_image" name="company[image]" type='file' onchange="show_image(this)" accept="image/*" />
+                                        <input  id="upload_image" name="company_image" type='file' onchange="show_image(this)" accept="image/*" />
                                     </div>
                                     <div id="show_image_div" >
                                         <img id="show_image_here" src="#" alt="Imagem empresa" />
@@ -105,6 +109,7 @@
         </div>
     </form>
 </section>
+
 
 <script>
     function show_image(input) {
@@ -132,6 +137,61 @@
        
         $('#show_image_here').attr('src','#');
         $('#show_image_div').hide();
+    }
+
+    $('#form-companies').on('submit',function(){
+        event.preventDefault();
+        clear_error_messages();
+
+        var flag=true;
+        var message='';
+
+        company_name=$('#company_name').val();
+        company_description=$('#company_description').val();
+
+        if(company_name.length <= 0){
+            flag=false;
+            $('#company_name_error').text('Preencha o campo');
+            $('#company_name').focus();
+
+            message+='<p>Preencha o nome da empresa</p>';
+        
+        }
+
+        if(company_description.length <=0){
+            flag=false;
+            $('#company_description_error').text('Preencha o campo');
+            $('#company_description').focus();
+
+            message+='<p>Preencha a descrição da empresa</p>';
+        }
+
+
+        if ($('#upload_image').get(0).files.length === 0) {
+            message+='<p>Adicione uma imagem<p>';
+
+            $('#upload_image_error').text('Adicione uma imagem');
+            flag=false;
+        }
+
+        if(flag){
+            this.submit();
+        }else{
+            Swal.fire({
+                
+                icon: 'error',
+                title: 'Erro',
+                /* text: , */
+                html:message,
+            
+            })
+        }
+    })
+
+    function clear_error_messages(){
+        $('#company_name_error').text('');
+        $('#company_description_error').text('');
+        $('#upload_image_error').text('');
     }
 
 </script>

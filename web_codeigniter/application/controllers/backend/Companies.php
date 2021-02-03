@@ -95,6 +95,39 @@ class Companies extends MY_Controller {
             //implementar criação
             if(!empty($this->input->post())){
 
+                $config['upload_path']          = './uploads/companies';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 0;
+                $config['max_width']            = 0;
+                $config['max_height']           = 0;
+                
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('company_image')){
+                        $error = array('error' => $this->upload->display_errors());
+                        $imagem='';
+
+                }else{
+                        $image_data = $this->upload->data();
+                        $imagem=$image_data['file_name'];
+                        
+                }
+                /* print_r($error);die; */
+                $company_name=$this->input->post('company_name');
+                $description=$this->input->post('description');
+
+                $data=[
+                    'company_name'=>$company_name,
+                    'image'=>$imagem,
+                    'description'=>$description,
+                ];
+
+                /* $this->db->where('company_name',$company_name); */
+                
+                $this->db->insert('companies',$data);
+                redirect('admin/companies');
+
+
             }else{
                 $data['page_title']="Criar empresa";
                 $this->load_admin_views('backend/companies/add',$data);

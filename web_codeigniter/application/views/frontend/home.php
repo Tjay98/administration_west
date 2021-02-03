@@ -29,55 +29,61 @@
 	}
     
 </style>
+<section class="content">
+    <div class="container">
+        <div class="row">
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Administration West</h1>
-        <p class="lead text-muted">Somos uma empresa criada com o objetivo de vender produtos de empreasas locais.</p>
-        <p>
-            <p class="lead text-muted">És uma empresa local e queres vender os teus produtos na nossa plataforma? Contacta-nos através do seguinte botão.</p>
-            <a href="<?php echo base_url('contacts'); ?>" class="btn btn-primary my-2">Contacta-nos</a>
-        </p>
-    </div>
-</section>
-<section class="text-center" style="min-height:350px">
-    <div class="container">
-        <div class="background-custom-boxes">
-            <h1 class="jumbotron-heading mb-5">Categorias</h1>
-            <div class="row">
-            <?php 
-                foreach ($categories as $categories){ ?>
-                <div class="col-lg-3 col-md-3 col-sm-12 mt-2 mb-5 mr-2 ml-2">
-                    <a class="custom-boxes" href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
-                </div>          
-            <?php } ?>
-            </div>
-        </div>
-    </div>
-</section>
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Administration West</h1>
+                    <p class="lead text-muted">Somos uma empresa criada com o objetivo de vender produtos de empreasas locais.</p>
+                    <p>
+                        <p class="lead text-muted">És uma empresa local e queres vender os teus produtos na nossa plataforma? Contacta-nos através do seguinte botão.</p>
+                        <a href="<?php echo base_url('contacts'); ?>" class="btn btn-primary my-2">Contacta-nos</a>
+                    </p>
+                </div>
+            </section>
+            <section class="text-center" style="min-height:350px">
+                <div class="container">
+                    <div class="background-custom-boxes">
+                        <h1 class="jumbotron-heading mb-5">Categorias</h1>
+                        <div class="row">
+                        <?php 
+                            foreach ($categories as $categories){ ?>
+                            <div class="col-lg-3 col-md-3 col-sm-12 mt-2 mb-5 mr-2 ml-2">
+                                <a class="custom-boxes" href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
+                            </div>          
+                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-<section class="text-center mt-5" style="min-height:600px">
-    <div class="container">
-        <div class="background-custom-boxes">
-            <h1 class="jumbotron-heading">Empresas</h1>
-            <div class="container">
-                <div class="row">
-                <?php 
-                foreach ($companies as $companies): 
-                ?>
-                    <div class="col-lg-5 col-md-5 col-sm-12 mt-2 mb-5 mr-2 ml-2">
-                        <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
-                        <div class="custom-boxes" style="min-height:200px">
+            <section class="text-center mt-5" style="min-height:600px">
+                <div class="container">
+                    <div class="background-custom-boxes">
+                        <h1 class="jumbotron-heading">Empresas</h1>
+                        <div class="container">
                             <div class="row">
-                                <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
-                                <h4><b> <?php echo $companies['company_name']; ?> </b> </h4> 
-                            </div>  
-                            <p class="text-justify"> <?php echo $companies['description']; ?></p> 
-                        </div> 
-                        </a>
-                    </div> 
-                <?php  endforeach; ?>
-            </div>
+                            <?php 
+                            foreach ($companies as $companies){ 
+                            ?>
+                                <div class="col-lg-5 col-md-5 col-sm-12 mt-2 mb-5 mr-2 ml-2">
+                                    <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
+                                    <div class="custom-boxes" style="min-height:200px">
+                                        <div class="row">
+                                            <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
+                                            <h4><b> <?php echo $companies['company_name']; ?> </b> </h4> 
+                                        </div>  
+                                        <p class="text-justify"> <?php echo $companies['description']; ?></p> 
+                                    </div> 
+                                    </a>
+                                </div> 
+                            <?php  } ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </section>

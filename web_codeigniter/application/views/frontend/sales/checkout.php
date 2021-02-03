@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content">
     <div class="container">
         <div class="row">
@@ -139,6 +140,7 @@
                     <?php if(!empty($payment_methods)){ ?>
 
                         <hr class="mb-4">
+                        <small class="text-danger" id="payment_method_error"></small>
                         <h4 class="mb-3"  style="font-weight:bold;">Método de pagamento</h4>
                         <div class="d-block my-3">
                             <?php foreach($payment_methods as $payment){ ?>
@@ -162,6 +164,8 @@
     function submit_sale_button(){
         form = $('#payment').serialize();
 
+        $('.text-danger').text('');
+
         //shipping address
         name_shipping=$('#shipping_name').val();
         number_shipping=$('#shipping_contact_number').val();
@@ -169,6 +173,7 @@
         city_shipping=$('#shipping_city').val();
         code_shipping=$('#shipping_zip_code').val();
         address_shipping=$('#shipping_address').val();
+
         //billing address
         name_billing=$('#billing_name').val();
         number_billing=$('#billing_contact_number').val();
@@ -176,6 +181,11 @@
         city_billing=$('#billing_city').val();
         code_billing=$('#billing_zip_code').val();
         address_billing=$('#billing_address').val(); 
+
+        //payment_method
+        payment_method=$('input[name="payment[payment_method][payment_method_id]"]:checked').val();
+
+       
 
         flag=true
 
@@ -196,7 +206,7 @@
             $('#shipping_city_error').text('Preencha o nome da sua cidade');
             flag=false;
         }
-        if(code_shipping.length!=9){
+        if(code_shipping.length >10 ){
             $('#shipping_zip_code_error').text('O código postal é inválido');
             flag=false;
         }
@@ -222,13 +232,18 @@
             $('#billing_city_error').text('Preencha o nome da sua cidade');
             flag=false;
         }
-        if(code_billing.length!=9){
+        if(code_billing.length > 10){
             $('#billing_zip_code_error').text('O código postal é inválido');
             flag=false;
         }
         if(address_billing.length < 5 || address_billing.length > 255){
             $('#billing_address_error').text('Preencha a sua morada');
             flag=false;
+        }
+        /* alert(payment_method); */
+        if(payment_method =='undefined' || !payment_method){
+            flag=false;
+            $('#payment_method_error').text('Selecione uma opção');
         }
 
         if(flag==true){
@@ -240,8 +255,41 @@
                 data: form,
                 success: function (response) {
                     //console.log(response);
+                    if(response=='success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Venda criada com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        setTimeout(function() {
+                            url="<?php echo base_url('sales/history')?>"
+                            window.location.href= url;
+                        }, 2000);
+                    }else if(response="product_quantity_error"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Algum dos produtos já não está em stock',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        setTimeout(function() {
+                            url="<?php echo base_url('cart')?>"
+                            window.location.href= url;
+                        }, 2000);
+                    }else if(response=='error'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Ocorreu um erro inesperado, porfavor contacte-nos',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
                 
                 }
             });
+        }
     }
 </script>

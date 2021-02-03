@@ -47,7 +47,8 @@
         </div>
         
         <div class="col-lg-9 col-md-8 col-sm-12">
-            <div class="custom-boxes" >
+            <!--class="custom-boxes" -->
+            <div >
                 <h3 class="text-center">Produtos</h3>
                 <?php 
                 foreach ($products as $products){ ?>
