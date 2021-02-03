@@ -97,7 +97,7 @@ class Companies extends MY_Controller {
 
             }else{
                 $data['page_title']="Criar empresa";
-                $this->load_admin_views('backend/companies/crud',$data);
+                $this->load_admin_views('backend/companies/add',$data);
             }
         }else{
             redirect('admin/companies/edit/'.$this->session->userdata('company_id'));
@@ -112,7 +112,7 @@ class Companies extends MY_Controller {
             }else{
                 $data['company']=$this->Company_model->get_company_by_id($company_id);
                 $data['page_title']="Editar empresa";
-                $this->load_admin_views('backend/companies/crud',$data);
+                $this->load_admin_views('backend/companies/edit',$data);
             }
         }
     }

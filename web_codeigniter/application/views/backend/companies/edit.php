@@ -1,22 +1,3 @@
-<style>
-    .hidden-client{
-        display:none;
-    }
-    .box-header{
-        padding:10px;
-    }
-    .text-bold{
-        font-weight:bold;
-    }
-    .accordion_header{
-        cursor:pointer;
-    }
-    .create_addresses{
-        position:absolute;
-        right:10px;
-        top:5px;
-    }
-</style>
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -39,14 +20,6 @@
             </div> -->
 
 		</div>
-        <div class="row">
-            <?php if(!empty($this->session->flashdata('error'))){?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo $this->session->flashdata('error'); ?>
-                </div>
-            <?php } ?>
-        </div>
-
         
 	</div>
 	<!-- /.container-fluid -->
@@ -73,132 +46,6 @@
                         </div>
                         <div class="card-body">
                             
-                            <div class="hidden-client">
-                                    
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <h4 >Informações</h4>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Nome do cliente</label>
-                                            <input type="hidden" class="form-control" id="client_id" name="sale[user_info][client_id]" readonly>
-                                            <input type="text" class="form-control" id="client_name" name="sale[user_info][client_name]" readonly>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="text" class="form-control" id="client_email" name="sale[user_info][client_email]" readonly>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Telemóvel</label>
-                                            <input type="text" class="form-control" id="client_phone" name="sale[user_info][client_phone]" readonly>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:10px;">
-                                        <div id="accordion2">
-                                            <div class="card">
-                                                <div class="card-header " >
-                                                    <h5 class="mb-0 accordion_header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                            Morada de envio 
-                                                        
-                                                    </h5>
-                                                    <!-- <button type="button" class="btn btn-warning btn-sm create_addresses" onclick="copy_billing_address()">Copiar morada de faturação</button> -->
-                                                    <!-- <button type="button" class="btn btn-info btn-sm create_addresses" onclick="create_address_shipping()">Criar</button> -->
-                                                </div>
-                                                
-                                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion2">
-                                                    <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label>Nome do cliente</label>
-                                                            <input type="hidden" id="shipping_address_id" name="sale[shipping_address][id]" value="">
-                                                            <input type="hidden" id="shipping_address_user_id" name="sale[shipping_address][user_id]" value="">
-                                                            <input type="text" class="form-control" id="shipping_address_name"  name="sale[shipping_address][name]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>NIF</label>
-                                                            <input type="text" class="form-control" id="shipping_address_nif"  name="sale[shipping_address][nif]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Nº de telemóvel</label>
-                                                            <input type="text" class="form-control" id="shipping_address_contact_number" name="sale[shipping_address][contact_number]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Cidade</label>
-                                                            <input type="text" class="form-control" id="shipping_address_city" name="sale[shipping_address][city]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Morada</label>
-                                                            <input type="text" class="form-control" id="shipping_address_address" name="sale[shipping_address][address]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Código postal</label>
-                                                            <input type="text" class="form-control" id="shipping_address_zip_code"  name="sale[shipping_address][zip_code]" value="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </Div>
-                                        <div id="accordion">
-                                            <div class="card">
-                                                <div class="card-header" >
-                                                    <h5 class="mb-0 accordion_header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Morada de faturação
-                                                    </h5>
-
-                                                    <!-- <div class="btn-group btn-sm create_addresses" role="group"> -->
-                                                        <button type="button" class="btn btn-warning btn-sm create_addresses" onclick="copy_shipping_address()">Copiar morada de envio</button>
-    <!--                                                     <button type="button" class="btn btn-info btn-sm" onclick="create_address_billing()">Criar morada</button>
-                                                    </div> -->
-                                                </div>
-                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label>Nome do cliente</label>
-                                                            <input type="hidden"  id="billing_address_id" name="sale[billing_address][id]" value="">
-                                                            <input type="hidden" id="billing_address_user_id" name="sale[billing_address][user_id]" value="">
-                                                            <input type="text" class="form-control" id="billing_address_name"  name="sale[billing_address][name]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>NIF</label>
-                                                            <input type="text" class="form-control" id="billing_address_nif"  name="sale[billing_address][nif]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Nº de telemóvel</label>
-                                                            <input type="text" class="form-control" id="billing_address_contact_number"  name="sale[billing_address][contact_number]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Cidade</label>
-                                                            <input type="text" class="form-control" id="billing_address_city"  name="sale[billing_address][city]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Morada</label>
-                                                            <input type="text" class="form-control" id="billing_address_address"  name="sale[billing_address][address]" value="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Código postal</label>
-                                                            <input type="text" class="form-control" id="billing_address_zip_code"  name="sale[billing_address][zip_code]" value="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                    
-                                </div>
-                                
-                            </div>
                         </div>
                     </div>
                 </div>

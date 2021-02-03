@@ -173,6 +173,7 @@ class Restful extends MY_Controller {
             $registo_form=[
                 'username'=>$username,
                 'email'=>$email,
+                'role_id'=>1,
                 'phone_number'=>$this->input->post('phone_number'),
                 'birthday_date'=>date("Y-m-d",strtotime($this->input->post('birthday'))),
                 'password_hash'=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),

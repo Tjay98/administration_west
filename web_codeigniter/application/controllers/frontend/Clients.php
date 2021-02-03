@@ -50,6 +50,7 @@ class Clients extends MY_Controller {
                 $registo_form=[
                     'username'=>$username,
                     'email'=>strtolower($email),
+                    'role_id'=>1,
                     'phone_number'=>$this->input->post('inputPhone'),
                     'birthday_date'=>$this->input->post('inputDate'),
                     'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
