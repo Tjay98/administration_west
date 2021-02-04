@@ -73,7 +73,7 @@
                                 <small class="text-danger" id="company_name_error"></small>
                             </div>
                             <div class="form-group">
-                                <label>Nome da empresa</label>
+                                <label>Descrição</label>
                                 <textarea class="form-control" id="company_description" name="description" rows=3></textarea>
                                 <small class="text-danger" id="company_description_error"></small>
                             </div>
