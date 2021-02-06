@@ -1,4 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <section class="content">
     <div class="container">
         <div class="row">

@@ -29,11 +29,11 @@
 	}
     
 </style>
-<section class="content">
+<section class="content" style="margin-top:60px">
     <div class="container">
         <div class="row">
 
-            <section class="jumbotron text-center">
+            <section class="jumbotron text-center" style="width:100%;">
                 <div class="container">
                     <h1 class="jumbotron-heading">Administration West</h1>
                     <p class="lead text-muted">Somos uma empresa criada com o objetivo de vender produtos de empreasas locais.</p>
@@ -43,7 +43,7 @@
                     </p>
                 </div>
             </section>
-            <section class="text-center" style="min-height:350px">
+            <section class="text-center" >
                 <div class="container">
                     <div class="background-custom-boxes">
                         <h1 class="jumbotron-heading mb-5">Categorias</h1>

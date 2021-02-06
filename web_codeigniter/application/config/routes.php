@@ -100,7 +100,8 @@ $route['translate_uri_dashes'] = FALSE;
         $route['companies/(:num)'] = 'frontend/products/products_by_company/$1';
 
         //contactos
-        $route['contacts']   =  'frontend/home/contactos';
+        $route['contacts']   =  'frontend/home/contacts';
+        $route['create_contact']   =  'frontend/home/create_contact';
         
 
     //backend

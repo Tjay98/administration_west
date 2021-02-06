@@ -24,9 +24,18 @@ class Home extends MY_Controller {
     }
 
     //implementar
-    public function contactos(){
+    public function contacts(){
         $this->load_views('frontend/contacts');
     }
 
-    
+    public function create_contact(){
+        if(!empty($this->input->post('contact'))){
+            $contact=$this->input->post('contact');
+            
+            $this->db->insert('contact_form',$contact);
+            /* print_r($contact);die;*/
+        }else{
+            redirect('contacts');
+        }
+    }
 }
