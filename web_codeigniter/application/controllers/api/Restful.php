@@ -691,9 +691,23 @@ class Restful extends MY_Controller {
     
         if(!empty($user_key)){
             $profile=$this->Client_model->get_profile_by_key($user_key);
+
+            if(!empty($profile)){
+                $sales=$this->Sale_model->get_user_sales($profile['user_id']);
+
+                $array=$this->generate_error_message(200);
+                $array['sales']=$sales;
+            }else{
+                $array=$this->generate_error_message(400,'Alguma informação está errada');
+            }
             
+        }else{
+            $array=$this->generate_error_message(404,'Alguma informação está em falta');
         }
-            
+
+        echo json_encode($array,JSON_PRETTY_PRINT);
     }
+
+    
 
 }

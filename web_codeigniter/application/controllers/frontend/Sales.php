@@ -26,12 +26,6 @@ class Sales extends MY_Controller {
         
         $this->load_views('frontend/clients/purchase_history', $data);
         
-
-        
-        //shipping = morada envio
-        //billing = morada faturação
-
-        //mostrar produtos
     }
 
     public function sale_detail($sale_id){

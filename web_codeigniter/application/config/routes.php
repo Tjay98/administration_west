@@ -195,6 +195,8 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/create_shipping'] = 'api/restful/create_shipping_address';
         $route['restful/create_billing'] = 'api/restful/create_billing_address';
 
+        $route['restful/show_user_purchases'] = 'api/restful/show_user_purchases';
+
 
 
        

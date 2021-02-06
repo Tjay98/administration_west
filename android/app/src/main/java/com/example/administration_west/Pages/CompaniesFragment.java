@@ -49,41 +49,41 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_companies, container, false);
+            View view = inflater.inflate(R.layout.fragment_companies, container, false);
 
-        final SwipeRefreshLayout refreshLayoutCompanies;
+            final SwipeRefreshLayout refreshLayoutCompanies;
 
-        refreshLayoutCompanies = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainCompanies);
-
-
-        recyclerViewCompanies = view.findViewById(R.id.RecicleViewCompanies);
-        recyclerViewCompanies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-
-        companiesList = new ArrayList<>();
-
-        requestQueue = Volley.newRequestQueue(getContext());
-        parseJSONCompanies(getContext());
+            refreshLayoutCompanies = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainCompanies);
 
 
+            recyclerViewCompanies = view.findViewById(R.id.RecicleViewCompanies);
+            recyclerViewCompanies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        refreshLayoutCompanies.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshLayoutCompanies.setRefreshing(true);
-                parseJSONCompanies(getContext());
-                adapterCompanies.notifyDataSetChanged();
-                refreshLayoutCompanies.setRefreshing(false);
-            }
-        });
+            companiesList = new ArrayList<>();
 
-     /*   refreshLayoutCompanies.post(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });*/
+            requestQueue = Volley.newRequestQueue(getContext());
+            parseJSONCompanies(getContext());
 
-return view;
-}
+
+
+            refreshLayoutCompanies.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshLayoutCompanies.setRefreshing(true);
+                    parseJSONCompanies(getContext());
+                    adapterCompanies.notifyDataSetChanged();
+                    refreshLayoutCompanies.setRefreshing(false);
+                }
+            });
+
+         /*   refreshLayoutCompanies.post(new Runnable() {
+                @Override
+                public void run() {
+                }
+            });*/
+
+        return view;
+    }
 
     private void parseJSONCompanies(final Context context) {
         String url = ip + "restful/companies";

@@ -63,12 +63,10 @@
     <string name="codigo_postal">Código Postal</string>
     <string name="enviar_morada">Enviar Morada</string>
     <string name="m_todos_de_pagamento">Métodos de Pagamento</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="assunto">Assunto</string>
     <string name="mensagem">Mensagem</string>
     <string name="enviar_mensagem">Enviar Mensagem</string>
-    <string name="antiga_password">Antiga password</string>
+    <string name="antiga_password">Password atual</string>
     <string name="nova_password">Nova password</string>
 
 

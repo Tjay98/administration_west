@@ -27,11 +27,11 @@ class Sale_model extends CI_Model{
             $i=0;
             foreach($results as $result){
 
-                $this->db->select('product.product_name');
+                $this->db->select('product.id, product.product_name, sproduct.quantity, sproduct.price,sproduct.price_iva');
                 $this->db->where('sproduct.sale_group_id',$result['id']);
                 $this->db->join('products as product','sproduct.sale_product_id=product.id','LEFT');
                 $this->db->from('sales_product as sproduct');
-                $products=$this->db->get('sales_product')->result_array();
+                $products=$this->db->get()->result_array();
                 if(!empty($products)){
                     $results[$i]['sale_products']=$products;
                 }
