@@ -56,11 +56,19 @@ public class DetailsHistoryActivity extends AppCompatActivity {
     SessionUser sessionUser;
     String getKey;
 
+    int id_history;
+
+    int id_product, quant_product;
+    String name_product;
+    double price_product, price_iva_product;
+
     String URL_HISTORY = ip + "restful/show_user_purchases/";
 
     private RecyclerView recyclerViewDetailHistory;
     private DetailsHistoryAdapter adapterDetailHistory;
     private ArrayList<DetailsHistory> historyList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +81,6 @@ public class DetailsHistoryActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionUser.getUserDetail();
         getKey= user.get(sessionUser.UNIQUE_KEY);
 
-
         Intent intent = getIntent();
         String history_id =  intent.getExtras().getString(EXTRA_HISTORY_ID);
         String history_data = intent.getExtras().getString(EXTRA_HISTORY_DATA);
@@ -81,6 +88,7 @@ public class DetailsHistoryActivity extends AppCompatActivity {
         String history_total = intent.getExtras().getString(EXTRA_HISTORY_TOTAL);
         String history_total_iva = intent.getExtras().getString(EXTRA_HISTORY_TOTAL_IVA);
 
+        id_history=Integer.valueOf(history_id);
 
         TextView id = findViewById(R.id.tVIdDetailsHistory);
         TextView data = findViewById(R.id.tVDataDetailsHistory);
@@ -137,31 +145,32 @@ public class DetailsHistoryActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             JSONArray jsonArray = jsonObject.getJSONArray("sales");
-
                             if( status.equals("200") ){
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject obj = jsonArray.getJSONObject(i);
-                                    JSONArray array = obj.getJSONArray("sale_products");
-                                    for (int a = 0; a < array.length(); a++) {
+                                    int id_historico = obj.getInt("id");
+                                    if(id_historico == id_history) {
+                                        JSONArray array = obj.getJSONArray("sale_products");
 
-                                        JSONObject object = array.getJSONObject(a);
-                                        DetailsHistory products = new DetailsHistory(
-                                                object.getInt("id"),
-                                                object.getString("product_name"),
-                                                object.getDouble("price"),
-                                                object.getDouble("price_iva"),
-                                                object.getInt("quantity")
-                                        );
+                                        for (int a = 0; a < array.length(); a++) {
+                                            JSONObject object = array.getJSONObject(a);
+                                            //DetailsHistory products = new DetailsHistory(
+                                                    id_product=object.getInt("id");
+                                                    name_product=object.getString("product_name");
+                                                    price_product=object.getDouble("price");
+                                                    price_iva_product= object.getDouble("price_iva");
+                                                    quant_product=object.getInt("quantity");
+                                           // );
 
+                                        }
+                                        DetailsHistory products = new DetailsHistory(id_product, name_product, price_product, price_iva_product, quant_product);
                                         lista.add(products);
+
                                     }
                                 }
-
-
-                                historyList=lista;
-                                adapterDetailHistory=new DetailsHistoryAdapter(getApplicationContext(), historyList);
+                                historyList = lista;
+                                adapterDetailHistory = new DetailsHistoryAdapter(getApplicationContext(), historyList);
                                 recyclerViewDetailHistory.setAdapter(adapterDetailHistory);
-
                             }else{
                                 Toast.makeText(getApplicationContext(), "Não tem produtos no carrinho!", Toast.LENGTH_LONG).show();
                             }
