@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_adm_west_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-        <activity android:name=".Pages.ChangePasswordActivity"/>
+        <activity android:name=".Pages.DetailsHistoryActivity"></activity>
+        <activity android:name=".Pages.ChangePasswordActivity" />
 
         <meta-data
             android:name="com.google.android.actions"

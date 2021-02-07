@@ -94,12 +94,9 @@
             data: {product_id:product_id, quantity:quantity},
             success: function (response) {
                 console.log(response);
-                /* if(response == 'ok'){
+                 
                     location.reload();
-                }else{
-                    alert('Erro');
-                    location.reload();
-                } */
+               
             }
         });
     }

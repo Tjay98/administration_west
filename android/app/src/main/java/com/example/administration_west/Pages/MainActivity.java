@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     SessionUser sessionUser;
     private SearchView searchView;
-    private ArrayList<Products> contactList;
-    private ProductsAdapter mAdapter;
+    ProductsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +180,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmento = new ProfileFragment();
                 navigationview.setCheckedItem(R.id.nav_profile);
                 setTitle("Perfil");
+                break;
+            case R.id.nav_history:
+                fragmento = new HistoryFragment();
+                navigationview.setCheckedItem(R.id.nav_history);
+                setTitle("Historico");
                 break;
             case R.id.nav_contacts:
                 fragmento = new ContactsFragment();

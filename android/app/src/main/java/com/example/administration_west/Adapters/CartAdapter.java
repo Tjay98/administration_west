@@ -98,6 +98,7 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.CartViewHolde
     public void onBindViewHolder(CartViewHolder holder, int position) {
         Cart currentItem = ccart.get(position);
 
+
         // Indices for the _id, description, and priority columns
         int ProductId = currentItem.getId();
         String ProductName = currentItem.getProduct_name();

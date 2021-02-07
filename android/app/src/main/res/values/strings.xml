@@ -35,6 +35,7 @@
     <string name="company">Empresas</string>
     <string name="profile">Perfil</string>
 
+    <string name="produtos">Produtos</string>
     <string name="produto">Produtos</string>
 
     <string name="nome_produto">Nome do Produto</string>
@@ -68,6 +69,7 @@
     <string name="enviar_mensagem">Enviar Mensagem</string>
     <string name="antiga_password">Password atual</string>
     <string name="nova_password">Nova password</string>
+    <string name="historico">Histórico</string>
 
 
 </resources>
