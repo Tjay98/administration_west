@@ -118,7 +118,7 @@ public class DetailsHistoryActivity extends AppCompatActivity {
         }
 
 
-        id.setText("Detalhes da compra #" + history_id);
+        id.setText("Compra #" + history_id);
        // data.setText(history_data);
        // estado.setText(history_estado);
         total.setText(history_total + " €");
@@ -154,17 +154,17 @@ public class DetailsHistoryActivity extends AppCompatActivity {
 
                                         for (int a = 0; a < array.length(); a++) {
                                             JSONObject object = array.getJSONObject(a);
-                                            //DetailsHistory products = new DetailsHistory(
-                                                    id_product=object.getInt("id");
-                                                    name_product=object.getString("product_name");
-                                                    price_product=object.getDouble("price");
-                                                    price_iva_product= object.getDouble("price_iva");
-                                                    quant_product=object.getInt("quantity");
-                                           // );
-
+                                            DetailsHistory products = new DetailsHistory(
+                                                    object.getInt("id"),
+                                                    object.getString("product_name"),
+                                                    object.getDouble("price"),
+                                                    object.getDouble("price_iva"),
+                                                    object.getInt("quantity")
+                                            );
+                                            lista.add(products);
                                         }
-                                        DetailsHistory products = new DetailsHistory(id_product, name_product, price_product, price_iva_product, quant_product);
-                                        lista.add(products);
+                                       // DetailsHistory products = new DetailsHistory(id_product, name_product, price_product, price_iva_product, quant_product);
+
 
                                     }
                                 }
