@@ -207,10 +207,11 @@
 </div>
 
 <script type="text/javascript">
+    var table;
     $(document).ready(function() {  
 
         //datatable
-        var table=$('#table-sales').DataTable({
+        table=$('#table-sales').DataTable({
             "ajax": {
                 url : "<?php echo base_url('admin/sales_table') ?>",
                 type : 'POST',
@@ -382,6 +383,7 @@
             success: function (response) {
                 if(response=='success'){
                     alert('O estado da venda foi atualizado para enviado');
+                    table.ajax.reload();
                 }else{
                     console.log(response);
                 }

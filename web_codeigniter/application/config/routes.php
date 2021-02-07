@@ -142,7 +142,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //contacts
         $route['admin/contacts'] = 'backend/contacts/index';
-        $route['admin/contact_table']='backend/contacts/get_client_datatable';
+        $route['admin/contact_table']='backend/contacts/get_datatable';
         $route['admin/contacts/edit/(:num)'] = 'backend/contacts/edit/$1';
         $route['admin/contacts/delete/(:num)'] = 'backend/contacts/delete/$1';
 

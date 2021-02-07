@@ -3,6 +3,7 @@
 class Contact_model extends CI_Model{
 
     public function get_contacts(){
+        $this->db->where('status !=',3);
         $contacts = $this->db->get('contact_form')->result_array();
         return $contacts;
     }
@@ -14,4 +15,16 @@ class Contact_model extends CI_Model{
         return $contact;
     }
     
+
+    public function count_by_status($status=''){
+        if(!empty($status)){
+            $this->db->where('status',$status);
+
+        }else{
+            $this->db->where('status != ',3);
+        }
+        $count=$this->db->get('contact_form')->num_rows();
+
+        return $count;
+    }
 }

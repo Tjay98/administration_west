@@ -69,7 +69,7 @@ class Products extends MY_Controller {
     //envia as informações das empresas para a página de empresas
     public function companies_index(){
         $data['companies']=$this->Company_model->get_companies();
-        $this->load_views('frontend/companies', $data);
+        $this->load_views('frontend/products/companies', $data);
     }
 
 

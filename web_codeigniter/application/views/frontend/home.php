@@ -43,7 +43,7 @@
                     </p>
                 </div>
             </section>
-            <section class="text-center" >
+            <section class="text-center"  style="width:100%;">
                 <div class="container">
                     <div class="background-custom-boxes">
                         <h1 class="jumbotron-heading mb-5">Categorias</h1>
@@ -59,7 +59,7 @@
                 </div>
             </section>
 
-            <section class="text-center mt-5" style="min-height:600px">
+            <section class="text-center mt-5" style="width:100%;">
                 <div class="container">
                     <div class="background-custom-boxes">
                         <h1 class="jumbotron-heading">Empresas</h1>
