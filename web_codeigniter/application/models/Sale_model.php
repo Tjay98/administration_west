@@ -22,6 +22,7 @@ class Sale_model extends CI_Model{
         $this->db->join('shipping_address as saddress','saddress.id=sgroup.shipping_address_id','LEFT');
         $this->db->join('billing_address as baddress','saddress.id=sgroup.shipping_address_id','LEFT');
         $this->db->order_by('sgroup.id','desc');
+        $this->db->group_by('sgroup.id');
         $results=$this->db->get()->result_array();
         if(!empty($results)){
             $i=0;

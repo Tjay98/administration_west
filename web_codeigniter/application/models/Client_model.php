@@ -202,11 +202,12 @@ class Client_model extends CI_Model{
 
     public function new_password_client($password_form, $id){
 
-        $this->db->select('user.*');
+        $this->db->select('id as user_id, password_hash');
         $this->db->where('user.id', $id);
        // $this->db->where('user.password_hash', $password_form['old_password']);
         $data=$this->db->get('user')->row_array();
         if(!empty($data)){
+            $this->db->where('user.id', $id);
             if(password_verify($password_form['old_password'], $data['password_hash'])) {
                 if($data!== FALSE){
                     $dados=[
