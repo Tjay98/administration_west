@@ -218,9 +218,9 @@ class Client_model extends CI_Model{
                 } else {
                     return 'error';
                 }
-             } else {
+            } else {
                  return 'Password errada';
-             }
+            }
          } else {
              return 'Sem dados';
          }
@@ -341,5 +341,13 @@ class Client_model extends CI_Model{
         $verify=$this->db->get('user')->row_array();
 
         return count($verify);
+    }
+
+    public function count_users_by_role($role=''){
+        if(!empty($role)){
+            $this->db->where('role_id',$role);
+        }
+        $count=$this->db->get('user')->num_rows();
+        return $count;
     }
 }

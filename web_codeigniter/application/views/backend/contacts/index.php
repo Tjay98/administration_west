@@ -1,7 +1,4 @@
 <style>
-    .status_button{
-        cursor:pointer;
-    }
     .form-control:disabled, .form-control[readonly] {
         background-color: transparent;
         

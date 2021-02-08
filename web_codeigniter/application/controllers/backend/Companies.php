@@ -23,7 +23,9 @@ class Companies extends MY_Controller {
         }
 
         if($admin){
-
+            $data['count_total']=$this->Company_model->count_company_by_status('all');
+            $data['count_invactive']=$this->Company_model->count_company_by_status('0');
+            $data['count_active']=$this->Company_model->count_company_by_status('1');
             $data['page_title']="Empresas";
             $this->load_admin_views('backend/companies/index',$data);
         }else{
@@ -54,11 +56,11 @@ class Companies extends MY_Controller {
 
                     switch($company['status']){
                         case 0:
-                            $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='enable_company(".$id.")'>Inativo</button>";
+                            $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='enable_company(".$id.")'>Inativa</button>";
                         break;
 
                         case 1:
-                            $status="<button class='btn btn-md btn-success this_100' onclick='disable_company(".$id.")'>Ativo</button>";
+                            $status="<button class='btn btn-md btn-success this_100' onclick='disable_company(".$id.")'>Ativa</button>";
                         break;
 
                         default:

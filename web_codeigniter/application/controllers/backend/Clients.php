@@ -11,6 +11,12 @@ class Clients extends MY_Controller {
 
     public function index(){
         $data['page_title']="Utilizadores";
+
+        $data['count_total']=$this->Client_model->count_users_by_role();
+        $data['count_users']=$this->Client_model->count_users_by_role(1);
+        $data['count_companies']=$this->Client_model->count_users_by_role(2);
+        $data['count_admins']=$this->Client_model->count_users_by_role(3);
+
         $data['companies']=$this->Company_model->get_companies();
         $data['roles']=$this->Client_model->get_roles();
 
@@ -69,10 +75,12 @@ class Clients extends MY_Controller {
 
                 }
                 $created_date=$user['created_at'];
-                $action='<button class="btn btn-md btn-warning" onclick="edit_user('.$id.')"><i class="fa fa-pencil"></i></button>';
-                if($user['role_id']!=3 || $this->session->userdata('role_id') != 3){
-
+               
+                if($user['role_id']!=3 && $this->session->userdata('role_id') == 3){
+                    $action='<button class="btn btn-md btn-warning" onclick="edit_user('.$id.')"><i class="fa fa-pencil"></i></button>';
                     $action.='&nbsp<button class="btn btn-md btn-danger" onclick="suspend_user('.$id.')"><i class="fa fa-ban"></i></button>';
+                }else{
+                    $action='<button class="btn btn-md btn-light" onclick="edit_user('.$id.')"><i class="fa fa-eye"></i></button>';
                 }
 
 

@@ -69,7 +69,7 @@ $products=array_slice($all_products, 0, 5);
 			</div>
 			<!-- /.col -->
 			<div class="col-12 col-sm-6 col-md-3">
-				<a href="<?php echo base_url('admin/clients'); ?>">
+				<a href="<?php echo base_url('/admin/users'); ?>">
 					<div class="info-box mb-3">
 						<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
 						<div class="info-box-content">

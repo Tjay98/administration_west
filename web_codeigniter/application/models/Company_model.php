@@ -20,4 +20,12 @@ class Company_model extends CI_Model{
         return $company;
     }
     
+    public function count_company_by_status($status){
+        if($status!='all'){
+            $this->db->where('status',$status);
+        }
+        $count=$this->db->get('companies')->num_rows();
+
+        return $count;
+    }
 }

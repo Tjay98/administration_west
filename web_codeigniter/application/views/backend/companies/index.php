@@ -33,7 +33,44 @@
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
-		<!-- Info boxes -->
+    	<!-- Info boxes -->
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+
+                <div class="info-box status_button" onclick="change_table_status('')">
+					<span class="info-box-icon bg-info elevation-1"><i class="fa fa-building-o"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Total</span>
+						<span class="info-box-number"><?php if(!empty($count_total)){echo $count_total;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+
+                <div class="info-box status_button" onclick="change_table_status('Inativa')" id="status_button_pending">
+					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-power-off"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Inativas</span>
+						<span class="info-box-number"><?php if(!empty($count_inactive)){echo $count_invactive;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+
+                <div class="info-box status_button" onclick="change_table_status('Ativa')">
+					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-check"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Ativas</span>
+						<span class="info-box-number"><?php if(!empty($count_active)){echo $count_active;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+        </div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="info-box">
@@ -150,6 +187,12 @@
         }
     }
 
+    function change_table_status(status){
+        table
+            .column(4)
+            .search(status)
+            .draw()
+    }
     
    
 </script>

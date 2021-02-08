@@ -33,6 +33,57 @@
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+
+                <div class="info-box status_button" onclick="change_table_status('')">
+					<span class="info-box-icon bg-primary elevation-1"><i class="fa fa-users"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Total</span>
+						<span class="info-box-number"><?php if(!empty($count_total)){echo $count_total;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6">
+
+                <div class="info-box status_button" onclick="change_table_status('Utilizador')" id="status_button_pending">
+					<span class="info-box-icon bg-info elevation-1"><i class="fa fa-user"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Utilizadores</span>
+						<span class="info-box-number"><?php if(!empty($count_users)){echo $count_users;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            <?php if($this->session->userdata('role_id') == 3){?>
+
+            <div class="col-lg-3 col-md-3 col-sm-6">
+
+                <div class="info-box status_button" onclick="change_table_status('Empresa')">
+					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-building-o"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Gestores de empresas</span>
+						<span class="info-box-number"><?php if(!empty($count_companies)){echo $count_companies;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-6">
+
+                <div class="info-box status_button" onclick="change_table_status('Admin')">
+					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-user-secret"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Admins</span>
+						<span class="info-box-number"><?php if(!empty($count_admins)){echo $count_admins;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            <?php }?>
+        </div>
 		<!-- Info boxes -->
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12">
@@ -215,6 +266,12 @@
         })
     });
 
+    function change_table_status(status){
+        table
+            .column(4)
+            .search(status)
+            .draw()
+    }
     
     function create_user(){
         $('#create_user_button').attr('onclick','submit_create_user()');
@@ -337,11 +394,16 @@
                     $('#role_id').val(role_id);
                     $('#store_id').val(store_id);
                     
-                    
+                    if(role_id==3){
+                        $('#create_user_button').hide();
+                    }else{
+                        $('#create_user_button').attr('onclick','submit_edit_user('+user_id+')');
+                        $('#create_user_button').text('Editar');
+                        $('#create_user_button').show();
+                    }
                     
                     $('#userModalLabel').html(message_title);
-                    $('#create_user_button').attr('onclick','submit_edit_user('+user_id+')');
-                    $('#create_user_button').text('Editar');
+                    
                     $('#userModal').modal('show');
                 }
                 

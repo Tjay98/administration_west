@@ -300,4 +300,12 @@ class Sale_model extends CI_Model{
         
         return $cart;
     }
+
+    public function count_sales_by_status($status){
+        if($status!='all'){
+            $this->db->where('status',$status);
+        }
+        $count=$this->db->get('sales_group')->num_rows();
+        return $count;
+    }
 }

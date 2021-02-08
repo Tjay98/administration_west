@@ -38,6 +38,65 @@
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
+    <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-4">
+
+                <div class="info-box status_button" onclick="change_table_status('')">
+					<span class="info-box-icon bg-primary elevation-1"><i class="fa fa-shopping-cart"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Total</span>
+						<span class="info-box-number"><?php if(!empty($count_total)){echo $count_total;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-4">
+
+                <div class="info-box status_button" onclick="change_table_status('Por processar')" id="status_button_pending">
+					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-hourglass-start"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Por processar</span>
+						<span class="info-box-number"><?php if(!empty($count_processing)){echo $count_processing;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4">
+
+                <div class="info-box status_button" onclick="change_table_status('Processada')">
+					<span class="info-box-icon elevation-1" style="background-color:#fd7e14;border-color:#fd7e14;"><i class="fa fa-hourglass-end"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Processadas</span>
+						<span class="info-box-number"><?php if(!empty($count_processed)){echo $count_processed;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            
+            <div class="col-lg-2 col-md-2 col-sm-4">
+
+                <div class="info-box status_button" onclick="change_table_status('Enviada')">
+					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-paper-plane-o"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Enviadas</span>
+						<span class="info-box-number"><?php if(!empty($count_sent)){echo $count_sent;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4">
+
+                <div class="info-box status_button" onclick="change_table_status('Cancelada')">
+					<span class="info-box-icon bg-danger elevation-1"><i class="fa fa-times"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Canceladas</span>
+						<span class="info-box-number"><?php if(!empty($count_canceled)){echo $count_canceled;}else{echo 0;}  ?></span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+            </div>
+        </div>
 		<!-- Info boxes -->
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12">
@@ -272,6 +331,14 @@
         })
        
     });
+
+    function change_table_status(status){
+        table
+            .column(7)
+            .search(status)
+            .draw()
+    }
+
     function show_address(sale_id){
         $.ajax({
             type: "POST",

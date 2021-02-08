@@ -21,6 +21,12 @@ class Sales extends MY_Controller {
     public function index(){
         
         $data['page_title']="Vendas";
+        $data['count_total']=$this->Sale_model->count_sales_by_status('all');
+        $data['count_processing']=$this->Sale_model->count_sales_by_status('0');
+        $data['count_processed']=$this->Sale_model->count_sales_by_status('1');
+        $data['count_sent']=$this->Sale_model->count_sales_by_status('2');
+        $data['count_canceled']=$this->Sale_model->count_sales_by_status('3');
+
         $data['categories']=$this->Category_model->get_categories();
         $data['companies']=$this->Company_model->get_companies();
         $this->load_admin_views('backend/sales/index',$data);
@@ -62,13 +68,13 @@ class Sales extends MY_Controller {
                 $address='<button class="btn btn-md btn-info" onclick="show_address('.$sale['id'].')">Ver moradas</button>';
 
                 if($sale['status']==0){
-                    $status="<button class='btn btn-md btn-warning' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Por processar</button>";
+                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Por processar</button>";
                 }elseif($sale['status']==1){
-                    $status="<button class='btn btn-md btn-warning' style='background-color:#fd7e14;border-color:#fd7e14;' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Processado</button>";
+                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' style='background-color:#fd7e14;border-color:#fd7e14;' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Processada</button>";
                 }elseif($sale['status']==2){
-                    $status="<button class='btn btn-md btn-info'  onclick='show_status(".$sale['id'].",".$sale['status'].")'>Enviado</button>";
+                    $status="<button class='btn btn-md btn-success this_100'  onclick='show_status(".$sale['id'].",".$sale['status'].")'>Enviada</button>";
                 }elseif($sale['status']==3){
-                    $status="<button class='btn btn-md btn-danger'' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Cancelado</button>";
+                    $status="<button class='btn btn-md btn-danger this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Cancelada</button>";
                 }else{
                     $status='';
                 }

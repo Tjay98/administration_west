@@ -31,12 +31,11 @@ class Test extends MY_Controller {
         }    
     }
 
-    public function password($user_id, $old_password, $password_hash, $repeat_password){
+    public function password($user_id, $old_password, $password_hash){
         $id=$user_id;
             $password_form=[
                 'old_password'=>$old_password,
                 'password_hash'=>password_hash($password_hash,PASSWORD_DEFAULT),
-                'repeat_password'=>password_hash($repeat_password,PASSWORD_DEFAULT),
             ];
         $validate=$this->Client_model->new_password_client($password_form, $id);
         if(empty($validate)){
@@ -46,9 +45,8 @@ class Test extends MY_Controller {
         }        
     }
  
-    public function add_to_cart($user_id, $product_id){
+    public function add_to_cart($user_id, $product_id,$quantity){
 
-        $quantity= 1;
 
         $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id, $quantity);
         if(!empty($cart)){
@@ -87,28 +85,42 @@ class Test extends MY_Controller {
     }
 
     public function index(){
+        // Função de mudar password
+        $test = $this->password(1, 'Password-123', 'Not_fail_123');
+        $expected_result = true;
+        $test_name = 'Mudar a password';
+        echo $this->unit->run($test, $expected_result, $test_name);
+        
+        //Função para propositadamente falhar o login
+        $test = $this->login('rodolfo-barreira@hotmail.com', 'Fail');
+        $expected_result = 'success';
+        $test_name = 'Login Fail';
+        echo $this->unit->run($test, $expected_result, $test_name);
 
         // Função de login
-        $test = $this->login('rodolfo-barreira@hotmail.com', '123-Password');
+        $test = $this->login('rodolfo-barreira@hotmail.com', 'Not_fail_123');
         $expected_result = 'success';
         $test_name = 'Login sucessful';
         echo $this->unit->run($test, $expected_result, $test_name);
 
-
-         // Função de mudar password
-         $test = $this->password(3, 'Password', '123-Password', '123-Password');
-         $expected_result = true;
-         $test_name = 'Mudar a password';
-         echo $this->unit->run($test, $expected_result, $test_name);
-
+        // Função para dar reset à password
+        $test = $this->password(1, 'Not_fail_123', 'Password-123');
+        $expected_result = true;
+        $test_name = 'Reset Password';
+        echo $this->unit->run($test, $expected_result, $test_name);
          
-         //Função de Carrinho
-        //  $test = $this->add_to_cart(4, 2);
-        //  $expected_result =true;
-        //  $test_name = 'Carrinho';
-        //  echo $this->unit->run($test, $expected_result, $test_name);
- 
- 
+        //Função de Carrinho
+        $test = $this->add_to_cart(1, 3 , 2);
+        $expected_result =true;
+        $test_name = 'Add product to cart';
+        echo $this->unit->run($test, $expected_result, $test_name);
 
+        //Função para criar venda
+
+
+        //Função para criar produto backend
+
+
+        //Função para apagar produto backend
     }    
 }
