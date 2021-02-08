@@ -148,6 +148,7 @@ class Client_model extends CI_Model{
         $data=$this->db->get('user')->row_array();
 
         if(!empty($data)){
+            $this->db->where('user.unique_key',$key);
             if(password_verify($password_form['old_password'], $data['password_hash'])) {
                 if($data!== FALSE){
                     $dados=[

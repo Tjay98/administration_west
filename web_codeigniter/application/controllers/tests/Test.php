@@ -46,6 +46,45 @@ class Test extends MY_Controller {
         }        
     }
  
+    public function add_to_cart($user_id, $product_id){
+
+        $quantity= 1;
+
+        $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id, $quantity);
+        if(!empty($cart)){
+            $old_quantity=$cart['quantity'];
+            if( ($old_quantity + ($quantity)) <= 0){
+                //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
+                $this->db->where('user_id',$user_id);
+                $this->db->where('product_id',$product_id);
+                $this->db->delete('user_cart');
+                return true; 
+
+            }else{
+                //verifica se a quantidade é superior a 0, caso seja atualiza
+                $new_quantity = $old_quantity + $quantity;
+                $this->db->where('user_id',$user_id);
+                $this->db->where('product_id',$product_id);
+                $this->db->set('quantity',$new_quantity);
+                $this->db->update('user_cart');
+                return true; 
+
+            }
+        }else{
+            //adiciona o produto ao carrinho
+            if($quantity > 0){
+                $product_data= [
+                    'user_id'=>$user_id,
+                    'product_id'=>$product_id,
+                    'quantity'=>$quantity,
+                ];
+                $this->db->insert('user_cart',$product_data);
+                $insert_id=$this->db->insert_id();
+                return true; 
+            }
+         }
+         return false;
+    }
 
     public function index(){
 
@@ -56,26 +95,20 @@ class Test extends MY_Controller {
         echo $this->unit->run($test, $expected_result, $test_name);
 
 
-       
-        //Função de mudar password
-        $test = $this->password(3, 'Password', '123-Password', '123-Password');
-
-        $expected_result = true;
-
-        $test_name = 'Mudar a password';
-
-        echo $this->unit->run($test, $expected_result, $test_name);
-
-        
-         //Função de Carrinho
-         $test = 1 + 1;
-
-         $expected_result = 2;
- 
-         $test_name = 'Carrinho';
- 
+         // Função de mudar password
+         $test = $this->password(3, 'Password', '123-Password', '123-Password');
+         $expected_result = true;
+         $test_name = 'Mudar a password';
          echo $this->unit->run($test, $expected_result, $test_name);
+
+         
+         //Função de Carrinho
+        //  $test = $this->add_to_cart(4, 2);
+        //  $expected_result =true;
+        //  $test_name = 'Carrinho';
+        //  echo $this->unit->run($test, $expected_result, $test_name);
  
  
-    }
+
+    }    
 }
