@@ -83,17 +83,17 @@
 <script>
     // Update item quantity
     function updateCartItem(qty, product_id){
-        console.log(product_id);
+       // console.log(product_id);
 
         quantity=$('#qty').val();
-        console.log(quantity);
+       // console.log(quantity); 
 
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('update/cart/quantity/').$item['product_id'];?>",
+            url: "<?php echo base_url('update/cart/quantity/'); ?>"  + product_id,
             data: {product_id:product_id, quantity:quantity},
             success: function (response) {
-                console.log(response);
+               // console.log(response);
                  
                     location.reload();
                

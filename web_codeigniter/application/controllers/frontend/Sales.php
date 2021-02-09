@@ -141,11 +141,11 @@ class Sales extends MY_Controller {
 
         $quantity=$this->input->post('quantity');
 
-        $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id, $quantity);
+        $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id);
 
 
         if(!empty($cart)){
-            $old_quantity=$cart['quantity'];
+          
             if( $quantity <= 0){
                 //método para prevenir se a quantidade é inferior a 0, caso seja apaga o produto tal como o delete product
                 $this->db->where('user_id',$user_id);
@@ -158,17 +158,6 @@ class Sales extends MY_Controller {
                 $this->db->where('product_id',$product_id);
                 $this->db->set('quantity',$quantity);
                 $this->db->update('user_cart');
-            }
-        }else{
-            //adiciona o produto ao carrinho
-            if($quantity > 0){
-                $product_data= [
-                    'user_id'=>$user_id,
-                    'product_id'=>$product_id,
-                    'quantity'=>$quantity,
-                ];
-                $this->db->update('user_cart',$product_data);
-                $update_id=$this->db->update_id();
             }
         }
         return redirect('cart');

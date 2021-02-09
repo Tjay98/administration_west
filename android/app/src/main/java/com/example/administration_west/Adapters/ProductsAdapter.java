@@ -1,6 +1,7 @@
 package com.example.administration_west.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,11 @@ import java.util.List;
 
 import static com.example.administration_west.Pages.ProductFragment.ip;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> implements Filterable {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
     private Context ccontext;
     private ArrayList<Products> cproducts;
     private OnItemClickListener mListener;
-    private ArrayList<Products> productListFiltered;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -38,7 +38,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public ProductsAdapter(Context context, ArrayList<Products> products) {
         this.ccontext = context;
         this.cproducts = products;
-        this.productListFiltered = cproducts;
     }
 
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
@@ -94,6 +93,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .centerInside()
                 .into(holder.product_image);
 
+
+
     }
 
     @Override
@@ -101,37 +102,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return cproducts.size();
     }
 
+    public void setFilter(ArrayList<Products> arrayList) {
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    productListFiltered = cproducts;
-                } else {
-                    ArrayList<Products> filteredList = new ArrayList<>();
-                    for (Products row : cproducts) {
-
-                        if (row.getProduct_name().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
-                        }
-                    }
-                    productListFiltered = filteredList;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = productListFiltered;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                productListFiltered = (ArrayList<Products>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
+        cproducts.clear();
+        cproducts.addAll(arrayList);
+        notifyDataSetChanged();
     }
+
 }
 
 

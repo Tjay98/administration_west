@@ -1,5 +1,6 @@
 package com.example.administration_west.Pages;
 
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +11,12 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,7 +39,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener, CategoriesAdapter.OnItemClickListener {
+public class ProductFragment extends Fragment implements ProductsAdapter.OnItemClickListener, CategoriesAdapter.OnItemClickListener, SearchView.OnQueryTextListener {
 
     public static final String EXTRA_PRODUCT_ID = "product_id";
     public static final String EXTRA_PRODUCT_IMAGE = "product_image";
@@ -44,6 +49,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     public static final String EXTRA_PRODUCT_PRICE = "product_price";
     public static final String EXTRA_PRODUCT_DESCRIPTION = "product_description";
 
+    private Menu menu;
 
 
     private RecyclerView recyclerViewCategories;
@@ -74,6 +80,8 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         final SwipeRefreshLayout refreshLayoutProducts;
 
         refreshLayoutProducts = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshMainProduct);
+
+        setHasOptionsMenu(true);
 
 
 
@@ -113,6 +121,68 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_toolbar, menu);
+        this.menu = menu;
+        final MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView)
+                MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.search) {
+            return true;
+        }
+        return onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if (adapterProducts != null) {
+            query = query.toLowerCase();
+            ArrayList<Products> productsArrayList = new ArrayList<>();
+
+            for (Products productList : productsList) {
+
+                String name = productList.getProduct_name().toLowerCase();
+                if (name.contains(query))
+
+                    productsArrayList.add(productList);
+            }
+
+            adapterProducts.setFilter(productsArrayList);
+            
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        newText = newText.toLowerCase();
+        ArrayList<Products> productsArrayList = new ArrayList<>();
+        for (Products productList : productsList) {
+
+            String name = productList.getProduct_name().toLowerCase();
+            if (name.contains(newText))
+
+                productsArrayList.add(productList);
+        }
+
+        adapterProducts.setFilter(productsArrayList);
+        return true;
+    }
+
 
     private void parseJSONCategories(final Context context){
 

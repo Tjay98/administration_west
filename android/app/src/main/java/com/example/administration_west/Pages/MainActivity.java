@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
     SessionUser sessionUser;
-    private SearchView searchView;
-    ProductsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,53 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        TextView tvmail = cabecalho.findViewById(R.id.tvNavMail);
 //        tvmail.setText(email);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        // listening to search query text change
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if(mAdapter != null) {
-                    mAdapter.getFilter().filter(query);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                if(mAdapter != null) {
-                    mAdapter.getFilter().filter(query);
-                    return true;
-                }
-                return false;
-            }
-        });
-        return true;
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        // close search view on back button pressed
-        if (!searchView.isIconified()) {
-            searchView.setIconified(true);
-            return;
-        }
-        super.onBackPressed();
-    }
-
-
+    
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
