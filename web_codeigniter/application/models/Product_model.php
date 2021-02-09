@@ -75,10 +75,33 @@ class Product_model extends CI_Model{
     
     
     public function search_product($search){
-        $this->db->like('product_name',$search);
-        $products= $this->db->get('products')->result_array();
+/*         if($this->session->userdata('role_id')!=3){
+            $this->db->where('products.status',1);
+        } */
 
-        return $products;
+        if(!empty($search['product_name'])){
+            $this->db->like('product_name',$search['product_name']);
+        }
+        if(!empty($search['category'])){
+            $this->db->like('categories.id',$search['category']);
+        }
+        if(!empty($search['company'])){
+            $this->db->like('companies.id',$search['company']);
+        }        
+        $this->db->select('products.*,
+                            categories.id as category_id,
+                            categories.category_name, 
+                            companies.id as company_id,
+                            companies.company_name');
+                            
+        $this->db->from('products');
+        $this->db->join('categories','categories.id=products.category_id','LEFT');
+        $this->db->join('companies','companies.id=products.company_id','LEFT');
+
+        $this->db->order_by('products.id','desc');
+        $results=$this->db->get()->result_array();
+
+        return $results;
 
     }
 

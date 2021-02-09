@@ -19,22 +19,70 @@ class Products extends MY_Controller {
 
     //enviar os productos para a página de produtos as categorias tambem estao lá
     public function index(){
+        $search=array();
+        
+        if(!empty($this->input->get('product_name'))){
+            $search['product_name']=$this->input->get('product_name');
+        }
+
+        if(!empty($this->input->get('category'))){
+            $search['category']=$this->input->get('category');
+        }
+
+        if(!empty($this->input->get('company'))){
+            $search['company']=$this->input->get('company');
+        }
+
+        
+        /* print_r($search);die; */
         $data['categories']=$this->Category_model->get_categories();
-        $data['products']=$this->Product_model->get_products();
+        $data['products']=$this->Product_model->search_product($search);
         $data['companies']=$this->Company_model->get_companies();
+        
 
         $this->load_views('frontend/products/products', $data);
     }
 
     //para ir a procura de produtos
-    public function search_product($search){
-        $search=$this->input->post('search_bar');
-        $data['products']=$this->Product_model->search_product($search);
-        if(!empty($products)){
-            $this->load_views('frontend/products/products', $data);
-        } else {
-            print_r($data);
+    public function search_product(){
+        
+
+        
+        if(!empty($this->input->get('product_name'))){
+            $search['product_name']=$this->input->get('product_name');
         }
+
+        if(!empty($this->input->get('category'))){
+            $search['category']=$this->input->get('category');
+        }
+
+        if(!empty($this->input->get('company'))){
+            $search['company']=$this->input->get('company');
+        }
+        
+        
+        if(!empty($search['product_name'])){
+            $this->db->like('product_name',$search['product_name']);
+        }
+        if(!empty($search['category'])){
+            $this->db->like('categories.category_name',$search['category']);
+        }
+        if(!empty($search['company'])){
+            $this->db->like('companies.company_name',$search['company']);
+        }        
+        $this->db->select('products.*,
+                            categories.category_name, 
+                            companies.company_name');
+                            
+        $this->db->from('products');
+        $this->db->join('categories','categories.id=products.category_id','LEFT');
+        $this->db->join('companies','companies.id=products.company_id','LEFT');
+
+        $this->db->order_by('products.id','desc');
+        $results=$this->db->get()->result_array();
+
+        print_r($results);
+        
 
     }
 

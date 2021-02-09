@@ -143,7 +143,7 @@ class Sales extends MY_Controller {
 
         $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id);
 
-
+        /* print_r($this->input->post());die; */
         if(!empty($cart)){
           
             if( $quantity <= 0){
@@ -152,15 +152,17 @@ class Sales extends MY_Controller {
                 $this->db->where('product_id',$product_id);
                 $this->db->delete('user_cart');
 
-            }else{
+                echo "Reduce";
+            }elseif($quantity > 0){
                 //verifica se a quantidade é superior a 0, caso seja atualiza
                 $this->db->where('user_id',$user_id);
                 $this->db->where('product_id',$product_id);
                 $this->db->set('quantity',$quantity);
                 $this->db->update('user_cart');
+
+                echo "Increase";
             }
         }
-        return redirect('cart');
     }
     
 

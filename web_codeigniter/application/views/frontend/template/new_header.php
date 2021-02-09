@@ -58,11 +58,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url('companies'); ?>">Empresas</a>
                 </li>
-                <form class="form-inline my-2 my-lg-0 form-group" style="padding-left:10px;" method="POST" action="<?php echo base_url('products/search_product');?>">
+                <form class="form-inline my-2 my-lg-0 form-group" style="padding-left:10px;" method="GET" action="<?php echo base_url('products/');?>">
                     <div class="input-group">
-                        <input class="form-control" name="search_bar" id="search_bar" type="text" placeholder="Procurar produto">
+                        <input class="form-control" name="product_name" id="product_name" type="text" placeholder="Procurar produto" val="<?php if(!empty($this->input->get('product_name'))){ echo $this->input->get('product_name');} ?>">
                         <div class="input-group-append">
-                            <Button class="input-group-text btn" onclick="search_bar_submit()"><i class="fa fa-search"></i></button>
+                            <Button class="input-group-text btn" ><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>

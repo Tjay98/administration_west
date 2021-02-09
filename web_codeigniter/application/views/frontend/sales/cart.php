@@ -25,22 +25,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                    
-                            <?php foreach($cartItems as $item){ ?>
-                            <tr class="text-center">
+
+                            <?php
+                            $i=0;
+                                foreach($cartItems as $item){
+                                    $total_row=$item["subtotal"]=($item['price']*$item['quantity']);
+                                    $total_row= number_format($total_row, 2, '.', '');
+                                    
+                                    $iva_row=$item['iva_total']=($item['price_iva']*$item['quantity']);
+                                    $iva_row=number_format($iva_row, 2, '.', '');?>
+                            <tr class="text-center" id="cart_row<?php echo $i; ?>">
                                 <th> <img class="image-products ml-3" style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:120px; max-height:70px; " src="<?php echo base_url('uploads/products/').$item['image']; ?>" alt="Imagem <?php echo $item['product_name']; ?>"> </th>
                                 <th> <?php echo $item['product_name']; ?> </th>
-                                <th> <?php echo $item['price'] .' €'; ?> </th>
-                                <th> <?php echo $item['price_iva']; ?> </th>
-                                <th><input type="number" id="qty" value="<?php echo $item['quantity']; ?>" onchange="updateCartItem(this, <?php echo $item['product_id']; ?>)"></th>
-                                <th><?php echo floatval($item["subtotal"]=($item['price']*$item['quantity'])).'  €';?></th>
-                                <th> <?php echo $item['iva_total']=($item['price_iva']*$item['quantity']) .'  €'; ?> </th>
+                                <th id="price_row<?php echo $i; ?>"> <?php echo $item['price'] .' €'; ?> </th>
+                                <th id="iva_row<?php echo $i; ?>"> <?php echo $item['price_iva']; ?> </th>
+                                <th><input type="number" id="qty<?php echo $i; ?>" value="<?php echo $item['quantity']; ?>" onchange="updateCartItem($(this).attr('id'), <?php echo $item['product_id']; ?>)"></th>
+                                <th id="total_row<?php echo $i; ?>"><?php echo $total_row.'  €';?></th>
+                                <th id="iva_total_row<?php echo $i; ?>"> <?php echo $iva_row .'  €'; ?> </th>
                                 <th> <button class="btn btn-danger remove-products" onclick="return confirm('Tem a certeza que pretende apagar este item?')?window.location.href='<?php echo base_url('remove/cart/').$item['product_id']; ?>':false;">Remover  X</button> </th>
                             </tr>
                             <?php 
                                 $iva+=floatval($item['iva_total']);
                                 $total+=floatval($item["subtotal"]);
                                 $subtotal+=(floatval($item["subtotal"])-floatval($item['iva_total']));
+
+                                $i++;
                             } ?>
                         <tr> 
                         <!-- <td colspan="8"><p>Carrinho vazio</p> </td> -->
@@ -82,21 +91,39 @@
 </div>
 <script>
     // Update item quantity
-    function updateCartItem(qty, product_id){
-       // console.log(product_id);
+    function updateCartItem(row_id, product_id){
+        row_id=row_id.replace('qty','');
+        
+        quantity=$('#qty'+row_id).val();
+        
 
-        quantity=$('#qty').val();
-       // console.log(quantity); 
 
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('update/cart/quantity/'); ?>"  + product_id,
-            data: {product_id:product_id, quantity:quantity},
+            url: "<?php echo base_url('update/cart/quantity/'); ?>"+product_id,
+            data: {/* 'product_id':product_id,  */'quantity':quantity},
             success: function (response) {
-               // console.log(response);
-                 
-                    location.reload();
-               
+                /* alert(response); 
+                location.reload(); */
+                if(quantity <= 0 ){
+
+                    $('#cart_row'+row_id).remove();
+
+                }else{
+                    price=$('#price_row'+row_id).text();
+                    price=price.replace('€','');
+
+                    iva=$('#iva_row'+row_id).text();
+                    iva=iva.replace('€','');
+
+                    total_row_text=parseFloat(price)*parseFloat(quantity);
+                    iva_total_row_text=parseFloat(iva)*parseFloat(quantity);
+
+                    $('#total_row'+row_id).text(total_row_text.toFixed(2)+" €");
+                    $('#iva_total_row'+row_id).text(iva_total_row_text.toFixed(2)+" €");
+                }
+        
+                
             }
         });
     }
