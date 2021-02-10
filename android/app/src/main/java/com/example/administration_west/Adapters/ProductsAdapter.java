@@ -21,11 +21,12 @@ import java.util.List;
 
 import static com.example.administration_west.Pages.ProductFragment.ip;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>   {
 
     private Context ccontext;
     private ArrayList<Products> cproducts;
     private OnItemClickListener mListener;
+
 
     public interface OnItemClickListener {
         void onItemClick(int position);

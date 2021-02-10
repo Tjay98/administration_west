@@ -131,6 +131,14 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
                 MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
 
+        searchView.setOnCloseListener(new SearchView.OnCloseListener(){
+            @Override
+            public boolean onClose() {
+                parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
+
+                return false;
+            }
+        });
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -159,9 +167,11 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
             }
 
             adapterProducts.setFilter(productsArrayList);
-            
+
             return true;
         }
+        parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
+
         return false;
     }
 
@@ -171,16 +181,22 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
         newText = newText.toLowerCase();
         ArrayList<Products> productsArrayList = new ArrayList<>();
-        for (Products productList : productsList) {
+        if (adapterProducts != null) {
+            for (Products productList : productsList) {
 
-            String name = productList.getProduct_name().toLowerCase();
-            if (name.contains(newText))
+                String name = productList.getProduct_name().toLowerCase();
+                if (name.contains(newText))
 
-                productsArrayList.add(productList);
+                    productsArrayList.add(productList);
+
+
+            }
+            adapterProducts.setFilter(productsArrayList);
+            return true;
         }
+        parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
 
-        adapterProducts.setFilter(productsArrayList);
-        return true;
+        return false;
     }
 
 
