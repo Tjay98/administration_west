@@ -145,33 +145,28 @@
 
     function search_by_category(category){
         event.preventDefault();
-        if(category !== null){
-            /* alert(category); */
-            search_category=category;
-            /* alert(category); */
+        if(category !=''){
 
-            
-            search_products();
+            search_category=category;
             
         }else{
             search_category='';
-            search_products();
+            
         }
+        search_products();
         
     }
 
     function search_by_company(company){
         event.preventDefault();
        
-        if(company.length > 0){
+        if(company!=''){
             search_company=company;
-            
-            search_products();
             
         }else{
             search_company='';
-            search_products();
         }
+        search_products();
     }
 
     function clear_all_filters(){
@@ -181,8 +176,8 @@
 
     function search_products(){
         
-        alert(search_category);
-        if(search_category!== null  && search_company !== null){
+        if(search_category != ''  && search_company.length != ''){
+            
             $('.product_box').each(function(){
                 if( $(this).attr('category_id') == search_category &&  $(this).attr('company_id') == search_company  ){
                     $(this).show();
@@ -191,7 +186,8 @@
                 }
             })
             
-        }else if(search_category!==null && search_company.length === null){
+            
+        }else if(search_category!='' && search_company.length == ''){
             
             $('.product_box').each(function(){
                
@@ -203,7 +199,7 @@
                 }
             })
 
-        }else if(search_category.length === null && search_company.length !== null ){
+        }else if(search_category.length == '' && search_company.length != '' ){
 
             $('.product_box').each(function(){
                 
@@ -214,7 +210,7 @@
                 }
             })
 
-        }else if(search_category.length === null && search_company.length === null){
+        }else if(search_category.length == '' && search_company.length == ''){
            
             clear_all_filters();
         }
