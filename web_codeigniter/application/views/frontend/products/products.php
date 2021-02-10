@@ -103,7 +103,8 @@
                 <h4 class="text-center ">Empresas</h4>
                 <?php 
                 foreach ($companies as $company){ ?>
-                <p class="text-center category"> <a href="<?php echo base_url($url); ?>"> <?php echo $company['company_name']; ?></a> </p>   
+                    <!-- <p class="text-center category"> <a href="<?php echo base_url($url); ?>"> <?php echo $company['company_name']; ?></a> </p>    -->
+                    <p class="text-center category"> <a href="" onclick="search_by_company(<?php echo $company['id'] ?>)"> <?php echo $company['company_name']; ?></a> </p>   
                 <?php } ?>
             </div>
         </div>
@@ -147,11 +148,11 @@
         if(category !== null){
             /* alert(category); */
             search_category=category;
-            alert(category);
+            /* alert(category); */
 
-            if(search_category.length > 0){
-                search_products();
-            }
+            
+            search_products();
+            
         }else{
             search_category='';
             search_products();
@@ -164,9 +165,9 @@
        
         if(company.length > 0){
             search_company=company;
-            if(search_company.length > 0){
-                search_products();
-            }
+            
+            search_products();
+            
         }else{
             search_company='';
             search_products();
@@ -179,8 +180,8 @@
 
 
     function search_products(){
-       
         
+        alert(search_category);
         if(search_category!== null  && search_company !== null){
             $('.product_box').each(function(){
                 if( $(this).attr('category_id') == search_category &&  $(this).attr('company_id') == search_company  ){
@@ -191,7 +192,7 @@
             })
             
         }else if(search_category!==null && search_company.length === null){
-
+            
             $('.product_box').each(function(){
                
                  
@@ -214,7 +215,7 @@
             })
 
         }else if(search_category.length === null && search_company.length === null){
-            alert(search_category);
+           
             clear_all_filters();
         }
     }
