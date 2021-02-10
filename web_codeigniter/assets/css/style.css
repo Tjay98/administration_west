@@ -159,3 +159,16 @@ table, th, td {
     margin-top:100px;
     margin-bottom:100px;
 }
+
+#cart_badge{
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;  padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}

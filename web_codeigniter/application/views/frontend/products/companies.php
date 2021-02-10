@@ -26,19 +26,19 @@
 
 </style>
 <div class="container" style="margin-top:100px; margin-bottom:100px;">
-    <div class="background-custom-boxes">
+    <div >
         <h3 class="text-center mb-4">Empresas</h3>
         <div class="row">
             <?php 
-                foreach ($companies as $companies): ?>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="custom-boxes">
-                        <h4 class="text-center"> <?php echo $companies['company_name']; ?></h4>   
-                        <p class="text-justify"> <?php echo $companies['description']; ?></p>  
-                        <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
-                    </div>
-                </div>
-            <?php endforeach; ?>
+                foreach ($companies as $company){ ?>
+                    <a style="text-decoration:none;color:black;" href="<?php echo base_url('products/?company='.$company['id']); ?>" class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="custom-boxes">
+                            <h4 class="text-center"> <?php echo $company['company_name']; ?></h4>   
+                            <p class="text-center"> <?php echo $company['description']; ?></p>  
+                            <img class="image-products" style =" max-width:150px; max-height:150px;width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$company['image']; ?>">
+                        </div>
+                    </a>
+            <?php }?>
         </div>
     </div>
 </div>

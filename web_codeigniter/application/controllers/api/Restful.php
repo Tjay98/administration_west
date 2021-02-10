@@ -120,6 +120,7 @@ class Restful extends MY_Controller {
     public function get_products_by_company($id){
         $product=$this->Product_model->products_by_company($id);
         if(!empty($product)){
+            
             echo json_encode($product, JSON_PRETTY_PRINT);
         }else{
             $array=$this->generate_error_message(404);
@@ -197,7 +198,18 @@ class Restful extends MY_Controller {
     public function get_categories(){
         $categories=$this->Category_model->get_categories();
         if(!empty($categories)){
-            echo json_encode($categories, JSON_PRETTY_PRINT);
+            
+            $data[0]=[
+                "id"=> "0",
+                "category_name"=> "Todas as categorias",
+                "iva"=> "0",
+            ];
+            $i=1;
+            foreach($categories as $category){
+                $data[$i]=$categories;
+                $i++;
+            }
+            echo json_encode($data, JSON_PRETTY_PRINT);
         }else{
             $array=$this->generate_error_message(404);
             echo json_encode($array);

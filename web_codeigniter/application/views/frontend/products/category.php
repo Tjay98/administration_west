@@ -33,16 +33,18 @@
     }
 </style>
 <div class="container" style="margin-top:100px; margin-bottom:100px;">
-    <div class="background-custom-boxes">
+    <div >
         <h3 class="text-center mb-4">Categorias</h3>
         <div class="row">
             <?php 
-            foreach ($categories as $categories){ ?>
-                <div class="col-lg-2 col-md-3 col-sm-12">
-                    <div class="custom-boxes">
-                        <a href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
-                    </div>
-                </div>
+            foreach ($categories as $category){ ?>
+                <a style="text-decoration:none;color:black;" class="col-lg-2 col-md-3 col-sm-12" href="<?php echo base_url('products/?category=').$category['id']; ?>">
+                    
+                        <div class="custom-boxes">
+                            <?php echo $category['category_name']; ?>
+                        </div>
+                    
+                </a> 
             <?php } ?>
         </div>
     </div>

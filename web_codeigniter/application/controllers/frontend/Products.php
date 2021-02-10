@@ -19,7 +19,7 @@ class Products extends MY_Controller {
 
     //enviar os productos para a página de produtos as categorias tambem estao lá
     public function index(){
-        $search=array();
+/*         $search=array();
         
         if(!empty($this->input->get('product_name'))){
             $search['product_name']=$this->input->get('product_name');
@@ -32,11 +32,12 @@ class Products extends MY_Controller {
         if(!empty($this->input->get('company'))){
             $search['company']=$this->input->get('company');
         }
-
+ */
         
         /* print_r($search);die; */
         $data['categories']=$this->Category_model->get_categories();
-        $data['products']=$this->Product_model->search_product($search);
+        /* $data['products']=$this->Product_model->search_product($search); */
+        $data['products']=$this->Product_model->get_products();
         $data['companies']=$this->Company_model->get_companies();
         
 

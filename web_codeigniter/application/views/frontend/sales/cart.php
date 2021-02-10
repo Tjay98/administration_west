@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body table-responsive">
             <?php if(!empty($cartItems)) { $iva=0; $subtotal=0; $total=0;?>
-                    
+                    <center><h4 style="font-weight:bold;">Carrinho</h4></center>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr class="text-center">

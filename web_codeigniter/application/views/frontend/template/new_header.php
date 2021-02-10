@@ -75,8 +75,15 @@
                     </li>
                         
                 <?php }else{?>
-                    <li class="nav-item">
-                        <b><a class="nav-link" href="<?php echo base_url('cart'); ?>"> <i class="fa fa-shopping-cart"><?php echo $count_cart; ?></i></a></b>
+                    <li class="nav-item"><!-- <i class="fa fa-shopping-cart"><?php echo $count_cart; ?></i> -->
+                        <b>
+                            <a class="nav-link" href="<?php echo base_url('cart'); ?>" > 
+                                <span>Carrinho <i class="fa fa-shopping-cart"></i></span>
+                                <?php if(!empty($count_cart)){ ?>
+                                <span class='badge ' id="cart_badge"><?php echo $count_cart; ?></span>
+                                <?php }?>
+                            </a>
+                        </b>
                     </li>
 <!--                     <li class="nav-item">
                         <b><a class="nav-link" href="<?php echo base_url('clients/profile'); ?>"><i class="fa fa-user"></i> <?php echo $this->session->userdata('username'); ?></a></b>

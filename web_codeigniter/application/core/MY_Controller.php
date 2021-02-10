@@ -13,12 +13,17 @@ class MY_Controller extends CI_Controller {
     {
         parent::__construct();
         setlocale(LC_TIME, 'Portuguese_Portugal');
-        $this->load->library('cart');
+        /* $this->load->library('cart'); */
+        $this->load->model('Client_model');
     }
 
     function load_views($viewName, $pageInfo = NULL, $headerInfo = NULL, $footerInfo = NULL){
-
-        $count_cart_items = count($this->cart->contents());
+        if(!empty($this->session->userdata('user_id'))){
+            $count_cart_items = $this->Client_model->count_user_cart($this->session->userdata('user_id'));
+        }else{
+            $count_cart_items=0;
+        }
+        
         
         $headerInfo['count_cart']=$count_cart_items;
 

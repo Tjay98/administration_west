@@ -198,6 +198,10 @@ class Companies extends MY_Controller {
                 $this->db->where('id',$company_id);
                 $this->db->set('status',$new_status);
                 $this->db->update('companies');
+
+                $this->db->where('company_id',$company_id);
+                $this->db->set('status',$new_status);
+                $this->db->update('products');
             }
 
 

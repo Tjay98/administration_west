@@ -25,6 +25,7 @@ class Client_model extends CI_Model{
                     $registo_form['role_id']=1;
                 }
 
+
                 $data=[
                     'username'=>$registo_form['username'],
                     'email'=>$registo_form['email'],
@@ -33,7 +34,7 @@ class Client_model extends CI_Model{
                     'password_hash'=>$registo_form['password_hash'],
                     'role_id'=>$registo_form['role_id'],
                     'store_id'=>$registo_form['store_id'],
-                    'status'=>$registo_form['store_id'],
+                    /* 'status'=>$registo_form['status'], */
                     'unique_key'=>$key,
                     'created_at'=>date("Y-m-d_H:i:s"),
                     'updated_at'=>date("Y-m-d_H:i:s"),  
@@ -348,6 +349,13 @@ class Client_model extends CI_Model{
             $this->db->where('role_id',$role);
         }
         $count=$this->db->get('user')->num_rows();
+        return $count;
+    }
+
+    public function count_user_cart($user_id){
+        $this->db->where('user_id',$user_id);
+        $count=$this->db->get('user_cart')->num_rows();
+
         return $count;
     }
 }
