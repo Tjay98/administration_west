@@ -206,7 +206,7 @@ class Restful extends MY_Controller {
             ];
             $i=1;
             foreach($categories as $category){
-                $data[$i]=$categories;
+                $data[$i]=$category;
                 $i++;
             }
             echo json_encode($data, JSON_PRETTY_PRINT);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,9 +19,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.administration_west.Adapters.CategoriesAdapter;
 import com.example.administration_west.Adapters.CompaniesAdapter;
+import com.example.administration_west.Models.Categories;
+import com.example.administration_west.Models.CategoriesDBHelper;
 import com.example.administration_west.Models.Companies;
+import com.example.administration_west.Models.CompaniesDBHelper;
 import com.example.administration_west.R;
+import com.example.administration_west.Utils.CategoriesJsonParse;
 import com.example.administration_west.Utils.CompaniesJsonParse;
 
 import org.json.JSONArray;
@@ -62,7 +68,7 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
             companiesList = new ArrayList<>();
 
             requestQueue = Volley.newRequestQueue(getContext());
-            parseJSONCompanies(getContext());
+            parseJSONCompanies(getContext(), CompaniesJsonParse.isConnected(getContext()));
 
 
 
@@ -70,7 +76,7 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
                 @Override
                 public void onRefresh() {
                     refreshLayoutCompanies.setRefreshing(true);
-                    parseJSONCompanies(getContext());
+                    parseJSONCompanies(getContext(), CompaniesJsonParse.isConnected(getContext()));
                     adapterCompanies.notifyDataSetChanged();
                     refreshLayoutCompanies.setRefreshing(false);
                 }
@@ -85,27 +91,52 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
         return view;
     }
 
-    private void parseJSONCompanies(final Context context) {
-        String url = ip + "restful/companies";
-        JsonArrayRequest request = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        companiesList = CompaniesJsonParse.parseJsonCompanies(response, context);
-                        adapterCompanies = new CompaniesAdapter(getContext(), companiesList);
-                        recyclerViewCompanies.setAdapter(adapterCompanies);
-                        adapterCompanies.setOnItemClickListener(CompaniesFragment.this);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(request);
+    private void parseJSONCompanies(final Context context, final boolean isConnected) {
+        if (!isConnected) {
+            Toast.makeText(context, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+
+            CompaniesDBHelper Pbd = new CompaniesDBHelper(getContext());
+            companiesList = Pbd.getAllCompanies();
+
+            adapterCompanies = new CompaniesAdapter(getContext(), companiesList);
+            recyclerViewCompanies.setAdapter(adapterCompanies);
+            adapterCompanies.setOnItemClickListener(CompaniesFragment.this);
+
+        } else {
+            String url = ip + "restful/companies";
+            JsonArrayRequest request = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            companiesList = CompaniesJsonParse.parseJsonCompanies(response, context);
+                            adapterCompanies = new CompaniesAdapter(getContext(), companiesList);
+                            recyclerViewCompanies.setAdapter(adapterCompanies);
+                            adapterCompanies.setOnItemClickListener(CompaniesFragment.this);
+
+                            adicionarCompaniesDB(companiesList);
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue.add(request);
+        }
+    }
+
+    public void adicionarCompaniesDB(ArrayList<Companies> lista){
+        CompaniesDBHelper Pbd = new CompaniesDBHelper(getContext());
+        Pbd.removerAllCompaniesDB();
+        for(Companies companies: lista){
+            Pbd.addCompaniesdb(companies);
+        }
+         Pbd.close();
+
     }
 
     @Override

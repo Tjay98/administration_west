@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Adapters.CategoriesAdapter;
 import com.example.administration_west.Adapters.ProductsAdapter;
 import com.example.administration_west.Models.Categories;
+import com.example.administration_west.Models.CategoriesDBHelper;
 import com.example.administration_west.Models.Products;
 import com.example.administration_west.Models.ProductsDBHelper;
 import com.example.administration_west.R;
@@ -86,14 +87,18 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
 
         //Categories
+
+
         recyclerViewCategories= view.findViewById(R.id.RecicleViewCategories);
         recyclerViewCategories.setHasFixedSize(true);
         recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
 
+
+
         categoriesList = new ArrayList<>();
 
         requestQueue = Volley.newRequestQueue(getContext());
-        parseJSONCategories(getContext());
+        parseJSONCategories(getContext(), CategoriesJsonParse.isConnected(getContext()));
 
         //Products
         recyclerViewProducts= view.findViewById(R.id.RecicleViewProduct);
@@ -110,7 +115,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
             @Override
             public void onRefresh() {
                 refreshLayoutProducts.setRefreshing(true);
-                parseJSONCategories(getContext());
+                parseJSONCategories(getContext(), CategoriesJsonParse.isConnected(getContext()));
                 parseJSONProducts(getContext(), ProductsJsonParse.isConnected(getContext()));
                 adapterCategories.notifyDataSetChanged();
                 adapterProducts.notifyDataSetChanged();
@@ -154,8 +159,10 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
         if (adapterProducts != null) {
             query = query.toLowerCase();
+            Toast.makeText(getContext(), query, Toast.LENGTH_SHORT).show();
             ArrayList<Products> productsArrayList = new ArrayList<>();
 
             for (Products productList : productsList) {
@@ -168,11 +175,11 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
             adapterProducts.setFilter(productsArrayList);
 
-            return true;
+            return false;
         }
         parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
 
-        return false;
+        return true;
     }
 
 
@@ -182,17 +189,19 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         newText = newText.toLowerCase();
         ArrayList<Products> productsArrayList = new ArrayList<>();
         if (adapterProducts != null) {
+
             for (Products productList : productsList) {
 
                 String name = productList.getProduct_name().toLowerCase();
                 if (name.contains(newText))
-
                     productsArrayList.add(productList);
-
-
             }
-            adapterProducts.setFilter(productsArrayList);
+            parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
+
+            //adapterProducts.setFilter(productsArrayList);
+
             return true;
+
         }
         parseJSONProducts(getContext(),ProductsJsonParse.isConnected(getContext()));
 
@@ -200,29 +209,44 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
     }
 
 
-    private void parseJSONCategories(final Context context){
+    private void parseJSONCategories(final Context context, final boolean isConnected) {
+        if (!isConnected) {
+            Toast.makeText(context, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
-        String url= ip + "restful/categories";
-        JsonArrayRequest request=new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        categoriesList = CategoriesJsonParse.parseJsonCategories(response, context);
-                        adapterCategories=new CategoriesAdapter(getContext(), categoriesList);
-                        recyclerViewCategories.setAdapter(adapterCategories);
-                        adapterCategories.setOnItemClickListener(ProductFragment.this);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(request);
+            CategoriesDBHelper Pbd = new CategoriesDBHelper(getContext());
+            categoriesList = Pbd.getAllCategories();
+
+            adapterCategories = new CategoriesAdapter(getContext(), categoriesList);
+            recyclerViewCategories.setAdapter(adapterCategories);
+            adapterCategories.setOnItemClickListener(ProductFragment.this);
+
+        } else {
+            String url = ip + "restful/categories";
+            JsonArrayRequest request = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            categoriesList = CategoriesJsonParse.parseJsonCategories(response, context);
+                            adapterCategories = new CategoriesAdapter(getContext(), categoriesList);
+                            recyclerViewCategories.setAdapter(adapterCategories);
+                            adapterCategories.setOnItemClickListener(ProductFragment.this);
+
+                            adicionarCategoriasDB(categoriesList);
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            requestQueue.add(request);
+        }
     }
+
     private void parseJSONCategoriesProducts(final Context context, String category_id){
 
         String url= ip + "restful/products_category/"+category_id;
@@ -234,12 +258,9 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
                     @Override
                     public void onResponse(JSONArray response) {
                         productsList = ProductsJsonParse.parseJsonProducts(response, context);
-
-
                         adapterProducts = new ProductsAdapter(getContext(), productsList);
                         recyclerViewProducts.setAdapter(adapterProducts);
                         adapterProducts.setOnItemClickListener(ProductFragment.this);
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -290,13 +311,23 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
         }
     }
 
+    public void adicionarCategoriasDB(ArrayList<Categories> ListCategories){
+        CategoriesDBHelper Pbd = new CategoriesDBHelper(getContext());
+        Pbd.removerAllCategoriesDB();
+        for(Categories categories: ListCategories){
+            Pbd.addPCategoriesdb(categories);
+        }
+          Pbd.close();
+
+    }
+
     public void adicionarProdutosDB(ArrayList<Products> lista){
         ProductsDBHelper Pbd = new ProductsDBHelper(getContext());
         Pbd.removerAllProductsDB();
         for(Products products: lista){
             Pbd.addProductsdb(products);
         }
-      //  db.close();
+        Pbd.close();
 
     }
 
@@ -325,6 +356,7 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
         String id = String.valueOf(clicked.getId());
         parseJSONCategoriesProducts(getContext(),id);
+        
 
     }
 }
