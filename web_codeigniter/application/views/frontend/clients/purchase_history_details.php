@@ -8,12 +8,12 @@
 	<div class="card">
         
 		<h3><u>Detalhes da compra #<?php echo $sale['id']; ?></u> <small class="pull-right"><?php echo strftime('%d de %B de %Y', strtotime($sale['created_date'])); ?></small></h3>
-		<div id="accordion">
+		<div id="accordion_1">
 			<div class="card">
 				<div class="accordion_open_hand" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                    <h5 style="font-weight:bold;">Dados de envio </h5>
 				</div>
-				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion_1">
 					<div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -32,11 +32,14 @@
 					</div>
 				</div>
 			</div>
+        </div>
+
+        <div id="accordion_2">
 			<div class="card">
 				<div class="accordion_open_hand" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <h5 style="font-weight:bold;">Dados de faturação </h5>
 				</div>
-				<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+				<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion_2">
 					<div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -49,16 +52,18 @@
                                 <p><b>Cidade:</b> <?php echo $sale['billing_city']; ?></p>
                                 <p><b>Código postal:</b> <?php echo $sale['billing_zip']; ?></p>
                             </div>
-
                         </div>
 					</div>
 				</div>
 			</div>
+        </div>
+
+        <div id="accordion_3">
 			<div class="card">
 				<div class="accordion_open_hand" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <h5 style="font-weight:bold;">Produtos (<?php echo count($sale['sale_products']); ?>)</h5>
 				</div>
-				<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+				<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion_3">
 					<div class="card-body table-responsive text-center">
                         <table class="table table-bordered table-hover">
                             <thead>
