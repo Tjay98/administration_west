@@ -272,7 +272,7 @@
         //datatable
         table=$('#table-sales').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/sales_table') ?>",
+                url : "<?php echo base_url('admin/sales/sales_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

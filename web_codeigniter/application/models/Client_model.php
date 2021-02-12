@@ -358,4 +358,24 @@ class Client_model extends CI_Model{
 
         return $count;
     }
+
+    public function get_user_permission($user_id){
+        $this->db->select('role_id');
+        $this->db->where('id',$user_id);
+        $user_role=$this->db->get('user')->row_array();
+
+        $role_id=$user_role['role_id'];
+        
+        $this->db->select('permissions.id as role_id,
+                            permissions.name as controller,
+                            assignment.view,
+                            assignment.crud');
+        $this->db->where('role_id',$role_id);
+        $this->db->from('permissions');
+        $this->db->group_by('assignment.permission_id');
+        $this->db->join('permission_assignment as assignment','assignment.permission_id = permissions.id');
+        $permissions=$this->db->get()->result_array();
+
+        return $permissions;
+    }
 }

@@ -18,7 +18,7 @@ class Test extends MY_Controller {
 
     }
 
-    public function login($email, $password){
+    private function login($email, $password){
         $login_form=[
             'email'=>strtolower($email),
             'password'=>$password,
@@ -31,7 +31,7 @@ class Test extends MY_Controller {
         }    
     }
 
-    public function password($user_id, $old_password, $password_hash){
+    private function password($user_id, $old_password, $password_hash){
         $id=$user_id;
             $password_form=[
                 'old_password'=>$old_password,
@@ -45,7 +45,7 @@ class Test extends MY_Controller {
         }        
     }
  
-    public function add_to_cart($user_id, $product_id,$quantity){
+    private function add_to_cart($user_id, $product_id,$quantity){
 
 
         $cart = $this->Sale_model->get_cart_by_user_product_id($user_id, $product_id, $quantity);
@@ -84,7 +84,90 @@ class Test extends MY_Controller {
          return false;
     }
 
+    private function finish_sale($user_id,$payment_method){
+        $addresses=$this->Client_model->get_client_addresses($user_id);
+
+        $cart_products= $this->Sale_model->get_user_cart($user_id);
+
+        $sale_data=[
+            'user_id'=>$user_id,
+            'billing_address_id'=>$addresses['billing_address']['id'],
+            'shipping_address_id'=>$addresses['shipping_address']['id'],
+            'payment_method_id'=>$payment_method,
+            'total_price'=>0,
+            'total_iva'=>0,
+
+        ];
+
+        $this->db->insert('sales_group',$sale_data);
+        $sale_group_id=$this->db->insert_id();
+        if(!empty($sale_group_id)){
+            $total_price = 0;
+            $total_iva = 0;
+
+            foreach($cart_products as $cart){
+
+                $price = $cart['price'] * $cart['quantity'];
+                $price_iva = $cart['price_iva'] * $cart['quantity'];
+                
+                $total_price+=$price;
+                $total_iva+=$price_iva;
+
+                $sale_products[]=[
+                    'sale_group_id'=>$sale_group_id,
+                    'sale_product_id'=>$cart['product_id'],
+                    'quantity'=>$cart['quantity'],
+                    'price'=>$price,
+                    'price_iva'=>$price_iva,
+                ];
+            }
+            
+            $reduce=$this->Sale_model->reduce_stock($sale_products);
+            if($reduce=="success"){
+                $this->db->insert_batch('sales_product',$sale_products);
+
+                $this->db->where('id',$sale_group_id);
+                $this->db->set('total_price',$total_price);
+                $this->db->set('total_iva',$total_iva);
+                $this->db->update('sales_group');
+
+                $this->db->where('user_id',$user_id);
+                $this->db->delete('user_cart');
+                
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    private function change_sale_status($user_id){
+        $this->db->select('id');
+        $this->db->where('user_id',$user_id);
+        $sale_group=$this->db->get('sales_group')->row_array();
+
+        if(!empty($sale_group)){
+            $sale_group_id=$sale_group['id'];
+
+            $this->db->where('sale_group_id',$sale_group_id);
+            $this->db->set('status',1);
+            $update=$this->db->update('sales_product');
+
+            if($update){
+                $this->db->where('id',$sale_group_id);
+                $this->db->set('status',2);
+                $sale_group_update=$this->db->update('sales_group');
+
+                if($sale_group_update){
+                    return true;
+                }
+            }
+        }
+
+    }
+
     public function index(){
+
         // Função de mudar password
         $test = $this->password(1, 'Password-123', 'Not_fail_123');
         $expected_result = true;
@@ -116,10 +199,16 @@ class Test extends MY_Controller {
         echo $this->unit->run($test, $expected_result, $test_name);
 
         //Função para criar venda
-
+        $test=$this->finish_sale(1,1);
+        $expected_result=true; 
+        $test_name="Create sale";
+        echo $this->unit->run($test,$expected_result,$test_name);
 
         //Função para criar produto backend
-
+        $test=$this->change_sale_status(1);
+        $expected_result=true; 
+        $test_name="Change sale status";
+        echo $this->unit->run($test,$expected_result,$test_name);
 
         //Função para apagar produto backend
     }    

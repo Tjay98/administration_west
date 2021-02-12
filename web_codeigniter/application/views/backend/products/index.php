@@ -172,7 +172,7 @@
         //datatable
         var table=$('#table-products').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/product_table') ?>",
+                url : "<?php echo base_url('admin/products/product_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

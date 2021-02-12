@@ -162,7 +162,7 @@
         //datatable
         table=$('#table-contacts').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/contact_table') ?>",
+                url : "<?php echo base_url('admin/contacts/contact_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

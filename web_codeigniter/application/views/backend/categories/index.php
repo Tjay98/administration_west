@@ -109,7 +109,7 @@
         //datatable
         var table=$('#table-categories').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/categories_table') ?>",
+                url : "<?php echo base_url('admin/categories/categories_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

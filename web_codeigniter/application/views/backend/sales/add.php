@@ -24,20 +24,6 @@
 				<h1><?php if(!empty($page_title)){ echo $page_title;} ?></h1>
 
 			</div>
-<!--             <div class="col-sm-6">
-                <div class="pull-right">
-                    <div class="dropleft ">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-cogs"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item"  id="export_pdf_button" href="#"><i class="fa fa-file-pdf-o"></i> Exportar PDF</a>
-                            <a class="dropdown-item" id="export_excel_button" href="#"><i class="fa fa-file-excel-o"></i> Exportar Excel da tabela</a>
-                        </div>
-                    </div>
-                </div>  
-            </div> -->
-
 		</div>
         <div class="row">
             <?php if(!empty($this->session->flashdata('error'))){?>
@@ -47,7 +33,6 @@
             <?php } ?>
         </div>
 
-        
 	</div>
 	<!-- /.container-fluid -->
 </section>
@@ -119,29 +104,35 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label>Nome do cliente</label>
-                                                            <input type="hidden" id="shipping_address_id" name="sale[shipping_address][id]" value="">
-                                                            <input type="hidden" id="shipping_address_user_id" name="sale[shipping_address][user_id]" value="">
+                                                            <!-- <input type="hidden" id="shipping_address_id" name="sale[shipping_address][id]" value="">
+                                                            <input type="hidden" id="shipping_address_user_id" name="sale[shipping_address][user_id]" value=""> -->
                                                             <input type="text" class="form-control" id="shipping_address_name"  name="sale[shipping_address][name]" value="">
+                                                            <small class="text-danger" id="shipping_address_name_error"></small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>NIF</label>
                                                             <input type="text" class="form-control" id="shipping_address_nif"  name="sale[shipping_address][nif]" value="">
+                                                            <small class="text-danger" id="shipping_address_nif_error"></small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nº de telemóvel</label>
                                                             <input type="text" class="form-control" id="shipping_address_contact_number" name="sale[shipping_address][contact_number]" value="">
+                                                            <small class="text-danger" id="shipping_address_contact_number_error"></small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Cidade</label>
                                                             <input type="text" class="form-control" id="shipping_address_city" name="sale[shipping_address][city]" value="">
+                                                            <small class="text-danger" id="shipping_address_city_error"></small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Morada</label>
                                                             <input type="text" class="form-control" id="shipping_address_address" name="sale[shipping_address][address]" value="">
+                                                            <small class="text-danger" id="shipping_address_address_error"></small>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Código postal</label>
                                                             <input type="text" class="form-control" id="shipping_address_zip_code"  name="sale[shipping_address][zip_code]" value="">
+                                                            <small class="text-danger" id="shipping_address_zip_code_error"></small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,8 +154,8 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label>Nome do cliente</label>
-                                                            <input type="hidden"  id="billing_address_id" name="sale[billing_address][id]" value="">
-                                                            <input type="hidden" id="billing_address_user_id" name="sale[billing_address][user_id]" value="">
+                                                            <!-- <input type="hidden"  id="billing_address_id" name="sale[billing_address][id]" value="">
+                                                            <input type="hidden" id="billing_address_user_id" name="sale[billing_address][user_id]" value=""> -->
                                                             <input type="text" class="form-control" id="billing_address_name"  name="sale[billing_address][name]" value="">
                                                         </div>
                                                         <div class="form-group">
@@ -206,10 +197,24 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-header" >
+                                <?php if(!empty($payment_methods)){ ?>
+                                    <small class="text-danger" id="payment_method_error"></small>
+                                    <h4 class="mb-3"  style="font-weight:bold;">Método de pagamento</h4>
+                                    <div class="d-block my-3">
+                                        <?php foreach($payment_methods as $payment){ ?>
+                                            <div class="custom-control custom-radio">
+                                                <input id="<?php echo "method_".strtolower($payment['name']); ?>" name="sale[payment_method][payment_method_id]" type="radio" class="custom-control-input payment_methods" value="<?php echo $payment['id'] ?>" required="">
+                                                <label class="custom-control-label" for="method_<?php echo strtolower($payment['name']); ?>"><?php echo $payment['name'] ?></label>
+                                            </div>
+                                        <?php }?>
+                                    </div>
+                                <?php }?>
+                                <hr class="mb-4">
                                 <h4 class="text-bold">Totais</h4>
                                 
                             </div>
                             <div class="row" style="padding-top:10px;">
+                            
                                 <div class="col-lg-6 col-md-6 col-lg-12">
                                     <h4>Total <span id="total_price" style="font-weight:bold;">0.00</span>€</h4>
                                 </div>
@@ -289,8 +294,8 @@
                     if(obj){
                         if(obj.shipping_address){
                             shipping_address=obj.shipping_address;
-                            $('#shipping_address_id').val(shipping_address.id);
-                            $('#shipping_address_user_id').val(shipping_address.user_id);
+/*                             $('#shipping_address_id').val(shipping_address.id);
+                            $('#shipping_address_user_id').val(shipping_address.user_id); */
                             $('#shipping_address_name').val(shipping_address.name);
                             $('#shipping_address_nif').val(shipping_address.nif);
                             $('#shipping_address_contact_number').val(shipping_address.contact_number);
@@ -302,8 +307,8 @@
                         if(obj.billing_address){
                             
                             billing_address=obj.billing_address;
-                            $('#billing_address_id').val(billing_address.id);
-                            $('#billing_address_user_id').val(billing_address.user_id);
+                            /* $('#billing_address_id').val(billing_address.id);
+                            $('#billing_address_user_id').val(billing_address.user_id); */
                             $('#billing_address_name').val(billing_address.name);
                             $('#billing_address_nif').val(billing_address.nif);
                             $('#billing_address_contact_number').val(billing_address.contact_number);
@@ -314,7 +319,7 @@
                     }
 
                     
-
+                    $('#clientModal').modal('hide');
                 }
 
             }
@@ -398,40 +403,91 @@
     }
 
     function submit_sale(){
+        clear_errors();
         flag=true;
+        shipping_message_error=false;
+
+        message_error='';
+        
+
         //validate client
         client_id=$('#client_id').val();
-        //alert(client_id);
+        
         if(!client_id){
-            alert('Selecione um cliente');
             flag=false;
-			
+			message_error+='<p>Selecione um cliente</p>';
         }
 
         //validate product
         if (!$('.product_row')[0]){
-			alert('Adicione um produto à venda');
+			/* alert('Adicione um produto à venda'); */
 			flag=false;
+            message_error+='<p>Adicione um produto à venda</p>';
         }
 
-        //validate addresses
-       /*  shipping_id=$('#shipping_address_id').val(); */
-                    
-        shipping_user_id=$('#shipping_address_user_id').val();
-        shipping_user_name= $('#shipping_address_name').val();
+
+        /* shipping_user_id=$('#shipping_address_user_id').val();*/
+        shipping_user_name= $('#shipping_address_name').val(); 
         shipping_user_nif=$('#shipping_address_nif').val();
         shipping_user_contact_number=$('#shipping_address_contact_number').val();
         shipping_user_city=$('#shipping_address_city').val();
         shipping_user_address=$('#shipping_address_address').val();
-        shipping_user_zip_code =$('#shipping_address_zip_code').val();          
+        shipping_user_zip_code =$('#shipping_address_zip_code').val();         
+        
+        payment_method=$('input[name="sale[payment_method][payment_method_id]"]:checked').val();
                            
                             
-        if( !(shipping_user_id && shipping_user_name && shipping_user_nif && shipping_user_contact_number && shipping_user_city && shipping_user_address && shipping_user_zip_code) ){
+        /* if( !(shipping_user_id && shipping_user_name && shipping_user_nif && shipping_user_contact_number && shipping_user_city && shipping_user_address && shipping_user_zip_code) ){
             alert('Preencha a morada de envio');
             flag=false;
+        } */
+
+        if(shipping_user_name.length <= 0){
+            $('#shipping_address_name_error').text('Preencha o campo');
+            shipping_message_error=true;
+
+            flag=false;
         }
+        if(shipping_user_nif.length !=9){
+            $('#shipping_address_nif_error').text('Preencha o campo (9 digitos)');
+            shipping_message_error=true;
+
+            flag=false;
+        }
+        if(shipping_user_contact_number.length !=9){
+            $('#shipping_address_contact_number_error').text('Preencha o campo (9 digitos)');
+            shipping_message_error=true;
+
+            flag=false;
+        }
+        if(shipping_user_city.length <= 0){
+            $('#shipping_address_city_error').text('Preencha o campo');
+            shipping_message_error=true;
+
+            flag=false;
+        }
+        if(shipping_user_address.length <= 0){
+            $('#shipping_address_address_error').text('Preencha o campo');
+            shipping_message_error=true;
+
+            flag=false;
+        }
+        if(shipping_user_zip_code.length <= 0){
+            $('#shipping_address_zip_code_error').text('Preencha o campo');
+            shipping_message_error=true;
+
+            flag=false;
+        }
+
+        if(payment_method =='undefined' || !payment_method){
+            flag=false;
+            message_error+='<p>Selecione um metodo de pagamento</p>';
+            $('#payment_method_error').text('Selecione uma opção');
+        }
+
+
                             
-/*         billing_user_id=$('#billing_address_user_id').val();
+         /*billing_user_id=$('#billing_address_user_id').val();
         billing_user_name= $('#billing_address_name').val();
         billing_user_nif=$('#billing_address_nif').val();
         billing_user_contact_number=$('#billing_address_contact_number').val();
@@ -444,13 +500,29 @@
             alert('Preencha a morada de faturação ou copie a morada de envio');
             flag=false;
         }    */             
-                            
+                    
+
+        if(shipping_message_error){
+            message_error+='<p>Algum dos campos da morada está por preencher</p>';
+        }
 
         if(flag==false){
+            Swal.fire({
+                
+                icon: 'error',
+                title: 'Erro',
+                html:message_error,
+            
+            })
+
             return null;
         }else{
             $('#form-sales').submit();
         }
+    }
+
+    function clear_errors(){
+        $('.text-danger').text('');
     }
 
     function copy_shipping_address(){
@@ -475,6 +547,7 @@
     function copy_billing_address(){
         
     }
+
 
     $(document).ready(function() {  
 

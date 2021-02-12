@@ -106,7 +106,7 @@
         //datatable
        table=$('#table-companies').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/companies_table') ?>",
+                url : "<?php echo base_url('admin/companies/companies_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

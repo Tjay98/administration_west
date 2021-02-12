@@ -221,7 +221,7 @@
         //datatable
        table=$('#table-users').DataTable({
             "ajax": {
-                url : "<?php echo base_url('admin/user_table') ?>",
+                url : "<?php echo base_url('admin/users/user_table') ?>",
                 type : 'POST',
             },
             stateSave: false,

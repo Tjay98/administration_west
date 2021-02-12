@@ -56,6 +56,34 @@ class MY_Controller extends CI_Controller {
     function is_admin_logged(){
         if($this->session->userdata('role_id') <= 1){
             return redirect('admin/login');
+        }else{
+            $user_permissions=$this->Client_model->get_user_permission($this->session->userdata('user_id'));
+            $controller=$this->uri->segment(2);
+            $controller=strtolower($controller);
+            
+            $has_permission=false;
+            if($controller!=''){
+                if(!empty($user_permissions)){
+                    foreach($user_permissions as $permission){
+                        if($permission['controller'] == $controller){
+                            $has_permission=true;
+                        }
+    
+                    }
+    
+    
+                    if($has_permission==false){
+                        /* $controller=$this->uri->segment(2);
+                        $controller=strtolower($controller);
+                        print_r($controller);
+                        die; */
+                        return redirect('admin/');
+                    }
+                }else{
+                    return redirect('admin/');
+                }
+            }
+
         }
     }
 

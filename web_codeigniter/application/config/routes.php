@@ -111,7 +111,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //products
         $route['admin/products'] = 'backend/products/index';
-        $route['admin/product_table']='backend/products/get_datatable';
+        $route['admin/products/product_table']='backend/products/get_datatable';
         $route['admin/products/add'] = 'backend/products/add';
         $route['admin/products/edit/(:num)'] = 'backend/products/edit/$1';
         $route['admin/products/delete/(:num)'] = 'backend/products/delete/$1';
@@ -119,7 +119,7 @@ $route['translate_uri_dashes'] = FALSE;
 
         //sales
         $route['admin/sales'] = 'backend/sales/index';
-        $route['admin/sales_table']='backend/sales/get_datatable';
+        $route['admin/sales/sales_table']='backend/sales/get_datatable';
         $route['admin/sales/add'] = 'backend/sales/add';
         $route['admin/sales/edit/(:num)'] = 'backend/sales/edit/$1';
         $route['admin/sales/delete/(:num)'] = 'backend/sales/delete/$1';
@@ -129,26 +129,26 @@ $route['translate_uri_dashes'] = FALSE;
 
         //categories
         $route['admin/categories'] = 'backend/categories/index';
-        $route['admin/categories_table']='backend/categories/get_datatable';
+        $route['admin/categories/categories_table']='backend/categories/get_datatable';
         $route['admin/categories/add'] = 'backend/categories/add';
         $route['admin/categories/edit/(:num)'] = 'backend/categories/edit/$1';
 
         //companies
         $route['admin/companies'] = 'backend/companies/index';
-        $route['admin/companies_table']='backend/companies/get_datatable';
+        $route['admin/companies/companies_table']='backend/companies/get_datatable';
         $route['admin/companies/add'] = 'backend/companies/add';
         $route['admin/companies/edit/(:num)'] = 'backend/companies/edit/$1';
         $route['admin/companies/delete/(:num)/(:num)'] = 'backend/companies/delete/$1/$2';
 
         //contacts
         $route['admin/contacts'] = 'backend/contacts/index';
-        $route['admin/contact_table']='backend/contacts/get_datatable';
+        $route['admin/contacts/contact_table']='backend/contacts/get_datatable';
         $route['admin/contacts/edit/(:num)'] = 'backend/contacts/edit/$1';
         $route['admin/contacts/delete/(:num)'] = 'backend/contacts/delete/$1';
 
         //users e clients mesmo controlador
         $route['admin/users'] = 'backend/clients/index';
-        $route['admin/user_table']='backend/clients/get_datatable';
+        $route['admin/users/user_table']='backend/clients/get_datatable';
         $route['admin/users/add'] = 'backend/clients/user_add';
         $route['admin/users/edit/(:num)'] = 'backend/clients/user_edit/$1';
         $route['admin/users/delete/(:num)'] = 'backend/clients/user_delete/$1';
@@ -197,6 +197,9 @@ $route['translate_uri_dashes'] = FALSE;
         $route['restful/create_billing'] = 'api/restful/create_billing_address';
 
         $route['restful/show_user_purchases'] = 'api/restful/show_user_purchases';
+
+    //tests
+        $route['tests'] = 'tests/test/index';
 
 
 

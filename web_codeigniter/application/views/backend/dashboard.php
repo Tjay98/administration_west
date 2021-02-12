@@ -88,8 +88,6 @@ $products=array_slice($all_products, 0, 5);
 			<!-- Left col -->
 			<div class="col-md-8">
 
-
-
 				<!-- TABLE: LATEST ORDERS -->
 				<div class="card">
 					<div class="card-header border-transparent">

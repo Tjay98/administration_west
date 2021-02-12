@@ -91,7 +91,7 @@
                 foreach ($products as $product){ ?>
 
                     <div class="row mt-2 p-2 bg-white border product_box" category_id="<?php echo $product['category_id']; ?>" company_id="<?php echo $product['company_id']; ?>" product_name="<?php echo strtolower($product['product_name']); ?>">
-                        <div class="col-md-3 mt-1"><img style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:200px; " src="<?php echo base_url('uploads/products/').$product['image']; ?>" alt="Imagem <?php echo $product['product_name']; ?>"></div>
+                        <div class="col-md-3 mt-1"><img style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:200px;max-height:200px; " src="<?php echo base_url('uploads/products/').$product['image']; ?>" alt="Imagem <?php echo $product['product_name']; ?>"></div>
                         <div class="col-md-6 mt-1">
                             <h4 style="font-weight:bold;"><?php echo $product['product_name']; ?></h4>
                             <p>

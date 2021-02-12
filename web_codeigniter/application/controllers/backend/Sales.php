@@ -140,44 +140,59 @@ class Sales extends MY_Controller {
     
             $data['page_title']="Criar venda";
             $data['clients']=$this->Client_model->get_clients();
-            
-            
+            $data['payment_methods']=$this->Sale_model->payment_methods();
             $data['categories']=$this->Category_model->get_categories();
             $data['companies']=$this->Company_model->get_companies();
-            $this->load_admin_views('backend/sales/crud',$data);
+
+            $this->load_admin_views('backend/sales/add',$data);
+
         }else{
             $sale=$this->input->post('sale');
             $client_id=$sale['user_info']['client_id'];
             $addresses=$this->Client_model->get_client_addresses($client_id);
-            /* print_r($sale);die; */
+            
+            $billing_address=$sale['billing_address'];
+            $shipping_address=$sale['shipping_address'];
+            $payment_method=$sale['payment_method']['payment_method_id'];
 
             //inserções das moradas
-            if(!empty($addresses['shipping_address'])){
-                $this->db->where('user_id',$client_id);
-                $this->db->update('shipping_address',$sale['shipping_address']);
-                $shipping_address_id=$addresses['shipping_address']['id'];
-            }else{
-                $sale['shipping_address']['user_id']=$client_id;
-                $this->db->insert('shipping_address',$sale['shipping_address']);
+
+            //morada de envio
+            if(empty($addresses['shipping_address'])){
+                $shipping_address['user_id']=$client_id;
+                $this->db->insert('shipping_address',$shipping_address);
                 $shipping_address_id=$this->db->insert_id();
-            }
 
-            if(!empty($addresses['billing_address'])){
-                $this->db->where('user_id',$client_id);
-                $this->db->update('billing_address',$sale['billing_address']);
-                $billing_address_id=$addresses['billing_address']['id'];
             }else{
-                $sale['billing_address']['user_id']=$client_id;
-                $this->db->insert('billing_address',$sale['billing_address']);
-                $billing_address_id=$this->db->insert_id();
+                $this->db->where('user_id',$client_id);
+                $this->db->update('shipping_address',$shipping_address);
+                $shipping_address_id=$addresses['shipping_address']['id'];
             }
 
-            if( (empty($addresses['billing_address'])) && (empty($sale['billing_address']))){
 
-                $this->db->insert('billing_address',$sale['shipping_address']);
-                $billing_address_id=$this->db->insert_id();
+            //morada de faturação
+            if(empty($addresses['billing_address'])){
+                //caso esteja vazia a morada copia a de envio
+                if( empty($billing_address['name']) || empty($billing_address['nif']) || empty($billing_address['contact_number']) ||
+                        empty($billing_address['city']) || empty($billing_address['address']) || empty($billing_address['zip_code']) ){
+
+                    $shipping_address['user_id']=$client_id;
+                    $this->db->insert('billing_address',$shipping_address);
+                    $billing_address_id=$this->db->insert_id();
+
+                }else{ // caso nao estejas vazia a morada de faturaçao
+                    $billing_address['user_id']=$client_id;
+                    $this->db->insert('billing_address',$billing_address);
+                    $billing_address_id=$this->db->insert_id();
+                }
+                
+            }else{
+                $this->db->where('user_id',$client_id);
+                $this->db->update('billing_address',$billing_address);
+                $billing_address_id=$addresses['billing_address']['id'];
             }
 
+            
             $total_price=0;
             $total_price_iva=0;
             foreach($sale['product'] as $product){
@@ -191,7 +206,7 @@ class Sales extends MY_Controller {
                 'user_id'=>$client_id,
                 'billing_address_id'=>$billing_address_id,
                 'shipping_address_id'=>$shipping_address_id,
-                'payment_method_id'=>1, //implementar melhor
+                'payment_method_id'=>$payment_method, //implementar melhor
                 'total_price'=>$total_price,
                 'total_iva'=>$total_price_iva,
 
