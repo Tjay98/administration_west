@@ -334,23 +334,52 @@
     }
 
     function select_product(product_id){
+        $('#productModal').modal('hide');
+        var has_product=false;
+
         id=$('#product_modal_id_'+product_id).text();
         product=$('#product_modal_name_'+product_id).text();
         quantity=$('#product_modal_quantity_'+product_id).text();
         price=$('#product_modal_price_'+product_id).text();
         price_iva=$('#product_modal_price_iva_'+product_id).text();
 
-        html  = '<tr id="product_row' + row + '" class="product_row">';
-        html +=     '<td><input type="hidden" id="product_id_'+row+'" name="sale[product]['+row+'][id]" value="'+id+'"><input type="text" class="form-control" id="product_name_'+row+'" name="sale[product]['+row+'][product_name]" value="'+product+'" readonly></td>';
-        html +=     '<td><input type="number" class="form-control"  min="1" id="product_quantity_'+row+'" onchange="change_quantity('+row+')" name="sale[product]['+row+'][quantity]" value="1" ></td>';
-        html +=     '<td><input type="hidden" id="original_price_'+row+'" value="'+price+'"><input type="text" class="form-control" id="product_price_'+row+'" name="sale[product]['+row+'][price]" value="'+price+'" readonly></td>';
-        html +=     '<td><input type="hidden" id="original_price_iva_'+row+'" value="'+price_iva+'"><input type="text" class="form-control" id="product_price_iva_'+row+'" name="sale[product]['+row+'][iva]" value="'+price_iva+'" readonly></td>';
-        html +=     '<td><button type="button" onclick="remove_row('+row+')" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
-        html += '</tr>';
         
-        $('#product_table_body').append(html);
+
+        $('.product_row').each(function(){
+            this_id=$(this).attr('id');
+            this_id=this_id.replace('product_row','');
+            
+            this_product_id=$('#product_id_'+this_id).val();
+            
+            if(this_product_id == product_id){
+                has_product=true;
+                quantity=$('#product_quantity_'+this_id).val();
+
+                new_quantity=parseInt(quantity)+1;
+                $('#product_quantity_'+this_id).val(new_quantity);
+            }
+
+        })
+
+        if(has_product!=true){
+
+            html  = '<tr id="product_row' + row + '" class="product_row">';
+            html +=     '<td><input type="hidden" id="product_id_'+row+'" name="sale[product]['+row+'][id]" value="'+id+'"><input type="text" class="form-control" id="product_name_'+row+'" name="sale[product]['+row+'][product_name]" value="'+product+'" readonly></td>';
+            html +=     '<td><input type="number" class="form-control"  min="1" id="product_quantity_'+row+'" onchange="change_quantity('+row+')" name="sale[product]['+row+'][quantity]" value="1" ></td>';
+            html +=     '<td><input type="hidden" id="original_price_'+row+'" value="'+price+'"><input type="text" class="form-control" id="product_price_'+row+'" name="sale[product]['+row+'][price]" value="'+price+'" readonly></td>';
+            html +=     '<td><input type="hidden" id="original_price_iva_'+row+'" value="'+price_iva+'"><input type="text" class="form-control" id="product_price_iva_'+row+'" name="sale[product]['+row+'][iva]" value="'+price_iva+'" readonly></td>';
+            html +=     '<td><button type="button" onclick="remove_row('+row+')" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+            html += '</tr>';
+
+            $('#product_table_body').append(html);
+            row++;
+        }
+
+
+        
+        
         refresh_prices(price,price_iva,'add');
-        row++;
+        
     }
 
     function remove_row(row){

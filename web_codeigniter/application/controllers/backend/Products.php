@@ -105,10 +105,19 @@ class Products extends MY_Controller {
                 }
             } 
 
-            $records=['data'=>$data];
+/*             $records=['data'=>$data];
             $records= json_encode($records);
-            echo $records;
+            echo $records; */
         }    
+
+        if(!empty($data)){
+            $records=['data'=>$data];
+
+        }else{
+            $records=['data'=>[]];
+        }
+        $records= json_encode($records);
+        echo $records;
     }
 
     public function show_product($id){
@@ -161,9 +170,13 @@ class Products extends MY_Controller {
             }else{
                 $iva=0.23;
             }
+
+            if($iva < 100){
+                $iva+=1;
+            }
             
-            $value_iva=round($price*$iva,2);
-            $price_without_iva=round($price-$value_iva);
+            $price_without_iva=round($price/$iva,2);
+            $value_iva=round($price-$price_without_iva,2);
 
             $data=[
                 'product_name'=>$this->input->post('product_name'),
@@ -177,6 +190,8 @@ class Products extends MY_Controller {
                 'price_without_iva'=>$price_without_iva,
                 'price_iva'=>$value_iva,
             ];
+
+            
             $this->db->insert('products',$data);
             redirect('admin/products');
         }

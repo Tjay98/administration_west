@@ -87,7 +87,7 @@ $products=array_slice($all_products, 0, 5);
 		<div class="row">
 			<!-- Left col -->
 			<div class="col-md-8">
-
+				<?php /* print_r($sales); */ ?>
 				<!-- TABLE: LATEST ORDERS -->
 				<div class="card">
 					<div class="card-header border-transparent">
@@ -105,24 +105,24 @@ $products=array_slice($all_products, 0, 5);
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Produto</th>
-										<!-- <th>Cliente</th> -->
-										<th>Quantidade</th>
+										<!-- <th>Produto</th>
+										<th>Cliente</th>
+										<th>Quantidade</th> -->
 										<th>Estado</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php foreach($sales as $sale){ 
 										if($sale['status']=='0'){
-											$status='<span class="badge badge-warning">Pendente</span>';
+											$status='<button type="button" class="btn btn-md btn-warning">Pendente</button>';
 										}elseif($sale['status']==1){
-											$status='<span class="badge badge-success">Enviado</span>';
+											$status='<button type="button" class="btn btn-md btn-success">Enviado</button>';
 										} ?>
 									<tr>
-										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/edit/').$sale['id']; ?>">Venda #<?php echo $sale['id']; ?></a></td>
-										<td><?php echo $sale['product_name']; ?></td>
+										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/?sale_id=').$sale['sale_group_id']; ?>">Venda #<?php echo $sale['id']; ?></a></td>
+										<!-- <td><?php echo $sale['product_name']; ?></td>
 
-										<th><?php echo $sale['quantity']; ?></th>
+										<th><?php echo $sale['quantity']; ?></th> -->
 										<td><?php echo $status; ?></td>
 									</tr>
 

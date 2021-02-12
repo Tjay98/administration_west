@@ -29,7 +29,7 @@ class Categories extends MY_Controller {
                 $id=$category['id'];
                 $name=$category['category_name'];
                 $iva=$category['iva']."%";
-                $buttons="<button class='btn btn-md btn-warning' onclick='edit_category(".$id.")'><i class='fa fa-pencil'></i></button>";
+                $buttons="<button class='btn btn-md btn-warning btn_white_color' onclick='edit_category(".$id.")'><i class='fa fa-pencil'></i></button>";
                 $data[]=[
                     $id,
                     $name,
@@ -37,10 +37,18 @@ class Categories extends MY_Controller {
                     $buttons,
                 ];
             }
-            $records=['data'=>$data];
+/*             $records=['data'=>$data];
             $records= json_encode($records);
-            echo $records;
+            echo $records; */
         } 
+        if(!empty($data)){
+            $records=['data'=>$data];
+
+        }else{
+            $records=['data'=>[]];
+        }
+        $records= json_encode($records);
+        echo $records;
     }
 
     public function add(){

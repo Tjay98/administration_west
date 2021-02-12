@@ -23,7 +23,7 @@
 				<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
 				<div class="input-group-append">
 					<button class="btn btn-sidebar">
-					<i class="fa fa-search fa-fw"></i>
+						<i class="fa fa-search fa-fw"></i>
 					</button>
 				</div>
 			</div>
@@ -75,12 +75,21 @@
 								<p>Utilizadores</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="<?php echo base_url('admin/companies'); ?>" class="nav-link">
-                				<i class="fa fa-building-o"></i>
-								<p>Empresas</p>
-							</a>
-						</li>
+						<?php if($this->session->userdata('role_id') == 3){?>
+							<li class="nav-item">
+								<a href="<?php echo base_url('admin/companies'); ?>" class="nav-link">
+									<i class="fa fa-building-o"></i>
+									<p>Empresas</p>
+								</a>
+							</li>
+						<?php }else{?>
+							<li class="nav-item">
+								<a href="<?php echo base_url('admin/companies/edit/'.$this->session->userdata('store_id')); ?>" class="nav-link">
+									<i class="fa fa-building-o"></i>
+									<p>Empresas</p>
+								</a>
+							</li>
+						<?php }?>
 					</ul>
 				</li>
 

@@ -329,6 +329,17 @@
                 }
             });
         })
+
+        <?php
+            if(!empty($this->input->get('sale_id'))){?>
+                sale_id= <?php echo $this->input->get('sale_id').";";?>
+                table.on( 'init.dt', function () {
+                    $('#show_status_'+sale_id).click();
+                })
+               
+            <?php
+            }    
+        ?>
        
     });
 

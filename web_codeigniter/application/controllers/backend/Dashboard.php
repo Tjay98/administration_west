@@ -18,13 +18,7 @@ class Dashboard extends MY_Controller {
 
     public function index(){
         $this->is_admin_logged();
-/*         $user=$this->db->get('user')->result_array();
-        foreach($user as $u){
-            $key = md5(uniqid(rand(), true));
-            $this->db->where('id',$u['id']);
-            $this->db->set('unique_key',$key);
-            $this->db->update('user');
-        } */
+        
         $data['page_title']="Dashboard";
 
         $user_id=$this->session->userdata('user_id');

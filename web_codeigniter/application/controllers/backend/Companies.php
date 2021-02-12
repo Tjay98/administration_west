@@ -81,12 +81,16 @@ class Companies extends MY_Controller {
                     ];
                 }
 
-                if(!empty($data)){
-                    $records=['data'=>$data];
-                    echo json_encode($records);
-                    
-                }
+
             }
+            if(!empty($data)){
+                $records=['data'=>$data];
+    
+            }else{
+                $records=['data'=>[]];
+            }
+            $records= json_encode($records);
+            echo $records;
         }
 
 

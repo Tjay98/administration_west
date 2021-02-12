@@ -167,10 +167,12 @@
 
 
 <script type="text/javascript">
+    var table
+
     $(document).ready(function() {  
 
         //datatable
-        var table=$('#table-products').DataTable({
+        table=$('#table-products').DataTable({
             "ajax": {
                 url : "<?php echo base_url('admin/products/product_table') ?>",
                 type : 'POST',
@@ -240,7 +242,7 @@
                 flag=false;
                 $('#product_price_error').text('Preencha o campo');
             }
-            if (stock.length < 0 || stock > 99999999 ) {
+            if (stock.length < 0 || stock > 9999 ) {
                 flag=false;
                 $('#product_quantity_error').text('Preencha o campo');
             }
@@ -332,6 +334,8 @@
                     $('#product_category').val(obj.category_id);
                     $('#product_quantity').val(obj.quantity_in_stock);
                     $('#product_company').val(obj.company_id);
+                    $('#product_small_description').val(obj.small_description);
+                    $('#product_big_description').val(obj.big_description);
 
                     $('#product_form').attr('action', '<?php echo base_url('admin/products/edit/'); ?>'+obj.id);
                     

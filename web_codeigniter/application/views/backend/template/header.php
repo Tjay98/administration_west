@@ -53,9 +53,11 @@
 				<li class="nav-item d-none d-sm-inline-block">
 					<a href="<?php echo base_url('admin') ?>" class="nav-link">Home</a>
 				</li>
+				<?php if($this->session->userdata('role_id')==3){ ?>
 				<li class="nav-item d-none d-sm-inline-block">
 					<a href="<?php echo base_url('admin/contacts')?>" class="nav-link">Contactos</a>
 				</li>
+				<?php }?>
 			</ul>
 			<!-- SEARCH FORM -->
 <!-- 			<form class="form-inline ml-3">

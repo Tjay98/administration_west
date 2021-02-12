@@ -68,13 +68,13 @@ class Sales extends MY_Controller {
                 $address='<button class="btn btn-md btn-info" onclick="show_address('.$sale['id'].')">Ver moradas</button>';
 
                 if($sale['status']==0){
-                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Por processar</button>";
+                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")' id='show_status_".$sale['id']."'>Por processar</button>";
                 }elseif($sale['status']==1){
-                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' style='background-color:#fd7e14;border-color:#fd7e14;' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Processada</button>";
+                    $status="<button class='btn btn-md btn-warning btn_white_color this_100' style='background-color:#fd7e14;border-color:#fd7e14;' onclick='show_status(".$sale['id'].",".$sale['status'].")' id='show_status_".$sale['id']."'>Processada</button>";
                 }elseif($sale['status']==2){
-                    $status="<button class='btn btn-md btn-success this_100'  onclick='show_status(".$sale['id'].",".$sale['status'].")'>Enviada</button>";
+                    $status="<button class='btn btn-md btn-success this_100'  onclick='show_status(".$sale['id'].",".$sale['status'].")' id='show_status_".$sale['id']."'>Enviada</button>";
                 }elseif($sale['status']==3){
-                    $status="<button class='btn btn-md btn-danger this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")'>Cancelada</button>";
+                    $status="<button class='btn btn-md btn-danger this_100' onclick='show_status(".$sale['id'].",".$sale['status'].")' id='show_status_".$sale['id']."'>Cancelada</button>";
                 }else{
                     $status='';
                 }
@@ -116,10 +116,18 @@ class Sales extends MY_Controller {
 
             } 
             
-            $records=['data'=>$data];
+/*             $records=['data'=>$data];
             $records= json_encode($records);
-            echo $records;
+            echo $records; */
         }
+        if(!empty($data)){
+            $records=['data'=>$data];
+
+        }else{
+            $records=['data'=>[]];
+        }
+        $records= json_encode($records);
+        echo $records;
     }
 
     public function add(){

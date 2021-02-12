@@ -118,9 +118,11 @@ class Sale_model extends CI_Model{
         $this->db->select('sale_product.*,products.product_name');
         $this->db->where('company_id',$company_id);
         $this->db->from('sales_product as sale_product');
+        
+        $this->db->join('products','products.id=sale_product.sale_product_id','LEFT');
+        $this->db->join('user','user.id=sale_product.sale_product_id','LEFT');
+        $this->db->join('sales_group','sales_group.id = sale_product.sale_group_id ','LEFT');
         $this->db->order_by('sale_product.id','desc');
-        $this->db->join('products','products.id=sale_product.sale_product_id');
-        $this->db->join('user','user.id=sale_product.sale_product_id');
         $products=$this->db->get()->result_array();
 
         return $products;
@@ -305,7 +307,22 @@ class Sale_model extends CI_Model{
         if($status!='all'){
             $this->db->where('status',$status);
         }
-        $count=$this->db->get('sales_group')->num_rows();
+
+        if($this->session->userdata('role_id')==3){
+
+            $count=$this->db->get('sales_group')->num_rows();
+
+        }else{
+
+            $this->db->where('product.company_id',$this->session->userdata('store_id'));
+            $this->db->from('sales_group as sgroup');
+            $this->db->join('user','user.id=sgroup.user_id');
+            $this->db->join('sales_product as sproduct','sproduct.sale_group_id=sgroup.id');
+            $this->db->join('products as product','product.id=sproduct.sale_product_id');
+            $this->db->group_by('sgroup.id');
+            $count=$this->db->get()->num_rows();
+
+        }
         return $count;
     }
 }
