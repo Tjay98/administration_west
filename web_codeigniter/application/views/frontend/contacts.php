@@ -1,4 +1,4 @@
-<div class="container " style="margin-top:100px;">
+<div class="container " style="margin-top:100px; margin-bottom:100px;">
     <h2 class="text-center">Contactos</h2>
     <p style="text-align:center;">Caso tenha alguma dúvida, problema, ou seja uma empresa que deseja utilizar o nosso serviço contacte-nos através dos métodos abaixo. </p>
     <div class="row">

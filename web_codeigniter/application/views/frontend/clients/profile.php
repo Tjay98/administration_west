@@ -93,25 +93,37 @@
  
             flag=true
  
-            if(password.length < 6 || password.length > 25){
+            if(password_hash.length < 6 || password_hash.length > 25){
                 flag=false;
                 $('#password_error').text('A password não corresponde ao tamanho permitido (6 caractéres a 25)');
+
             }
-            if(repeat_password!=password){
+            if(repeat_password!=password_hash){
                 flag=false;
                 $('#repeat_error').text('As passwords não correspondem'); 
+
             }
  
             if(flag==true){
                             
-            formdata=$('#password_form').serialize();
+                formdata=$('#password_form').serialize();
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('clients/password'); ?>",
                     data: formdata,
                     success: function (response) {
                         if(response=='success'){
-                            window.location.href = '<?php echo base_url('clients/profile') ?>';
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Password mudada com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            url="<?php echo base_url('clients/profile')?>"
+                            window.location.href= url;
+                        }, 2000);
+                            //window.location.href = '<?php// echo base_url('clients/profile') ?>';
                         } else {
                             if(response=='pass_number_error'){
                                 $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');

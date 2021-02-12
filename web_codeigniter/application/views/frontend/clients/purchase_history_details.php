@@ -33,10 +33,10 @@
 				</div>
 			</div>
 			<div class="card">
-				<div class="accordion_open_hand" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				<div class="accordion_open_hand" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <h5 style="font-weight:bold;">Dados de faturação </h5>
 				</div>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+				<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
 					<div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -55,18 +55,18 @@
 				</div>
 			</div>
 			<div class="card">
-				<div class="accordion_open_hand" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				<div class="accordion_open_hand" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <h5 style="font-weight:bold;">Produtos (<?php echo count($sale['sale_products']); ?>)</h5>
 				</div>
-				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-					<div class="card-body table-responsive">
+				<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+					<div class="card-body table-responsive text-center">
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Produto</th>
                                     <th>Quantidade</th>
-                                    <th>Preço</th>
+                                    <th>Preço (IVA incluído)</th>
                                     <th>Valor do iva</th>
                                 </tr>
                             </thead>

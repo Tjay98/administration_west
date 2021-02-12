@@ -119,24 +119,38 @@ class Clients extends MY_Controller {
 
         $id=$this->session->userdata('user_id');
 
-
         if(empty($this->input->post('inputOldPassword'))){
             $this->load_views('frontend/clients/profile');
         }else{
+            if(!preg_match("#[0-9]+#",$this->input->post('inputPassword'))) {
+                echo "pass_number_error";
+            }
+            elseif(!preg_match("#[A-Z]+#",$this->input->post('inputPassword'))) {
+                echo "pass_capital_letter";
+            }
+            elseif(!preg_match("#[a-z]+#",$this->input->post('inputPassword'))) {
+                echo "pass_lower_letter";
+            }
+            elseif(!preg_match('@[^\w]@',$this->input->post('inputPassword'))) {
+                echo "pass_special_caracter";
+            }else{
             $password_form=[
                 'old_password'=>$this->input->post('inputOldPassword'),
                 'password_hash'=>password_hash($this->input->post('inputPassword'),PASSWORD_DEFAULT),
-                'repeat_password'=>password_hash($this->input->post('inputRepetirPassword'),PASSWORD_DEFAULT),
+                //'repeat_password'=>password_hash($this->input->post('inputRepetirPassword'),PASSWORD_DEFAULT),
             ];
             $validate=$this->Client_model->new_password_client($password_form, $id);
             if(empty($validate)){
                 //if register happens correctly
-                 redirect('clients/profile');            
+                 redirect('clients/profile');  
+               echo 'success';          
             }else{
+                redirect('clients/profile');            
 
                 echo $validate;
 
             }
+        }
 
         }
     }

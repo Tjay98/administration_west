@@ -107,7 +107,7 @@
                         data: formdata,
                         success: function (response) {
                             if(response=='success'){
-                                window.location.href = '<?php echo base_url('clients/login') ?>';
+                                
                             }else{
                                 if(response=='username_error'){
                                     $('#username_error').text('Este nome de utilizador já está em uso');

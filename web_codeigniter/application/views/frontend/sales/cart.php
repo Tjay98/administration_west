@@ -58,25 +58,27 @@
                         </tbody>
                     </table>
                     </div>
-                    <div class="card-footer">
-                        <ul>
-                            <div class="d-flex">
-                                <li class="text-order">Sub Total</li>
-                                <div class="ml-auto font-weight-bold"><?php echo number_format($subtotal, 2, '.', '')." €"; ?></div>
-                            </div>
-                            <div class="d-flex">
-                                <li class="text-order">IVA Total</li>
-                                <div class="ml-auto font-weight-bold"><?php echo number_format($iva, 2, '.', '')." €"; ?></div>
-                            </div>
-                            <hr>
-                            <div class="d-flex gr-total">
-                                <h5>Total</h5>
-                                <div class="ml-auto h5"><?php echo number_format($total, 2, '.', '')." €"; ?></div>
-                            </div>
-                            <hr> 
-                        </ul> 
-                        <a class="btn btn-warning" href="<?php echo base_url('products/') ?>" > Continuar a comprar </button>
-                        <a href="<?php echo base_url('sales/checkout/') ?>" class="btn btn-success pull-right"> Concluir compra </a>
+                    <div class="card-footer" >
+                        <div id="card-footer">
+                            <ul>
+                                <div class="d-flex">
+                                    <li class="text-order">Sub Total</li>
+                                    <div class="ml-auto font-weight-bold"><?php echo number_format($subtotal, 2, '.', '')." €"; ?></div>
+                                </div>
+                                <div class="d-flex">
+                                    <li class="text-order">IVA Total</li>
+                                    <div class="ml-auto font-weight-bold"><?php echo number_format($iva, 2, '.', '')." €"; ?></div>
+                                </div>
+                                <hr>
+                                <div class="d-flex gr-total">
+                                    <h5>Total</h5>
+                                    <div class="ml-auto h5"><?php echo number_format($total, 2, '.', '')." €"; ?></div>
+                                </div>
+                                <hr> 
+                            </ul> 
+                            <a class="btn btn-warning" href="<?php echo base_url('products/') ?>" > Continuar a comprar </button>
+                            <a href="<?php echo base_url('sales/checkout/') ?>" class="btn btn-success pull-right"> Concluir compra </a>
+                        </div>
                     </div>
 
             <?php }else{?>
@@ -103,11 +105,13 @@
             url: "<?php echo base_url('update/cart/quantity/'); ?>"+product_id,
             data: {/* 'product_id':product_id,  */'quantity':quantity},
             success: function (response) {
-                /* alert(response); 
-                location.reload(); */
+                /* alert(response);*/ 
                 if(quantity <= 0 ){
 
                     $('#cart_row'+row_id).remove();
+                    //location.reload(); 
+                    $('#card-footer').load(document.URL +  ' #card-footer');
+
 
                 }else{
                     price=$('#price_row'+row_id).text();
@@ -121,8 +125,12 @@
 
                     $('#total_row'+row_id).text(total_row_text.toFixed(2)+" €");
                     $('#iva_total_row'+row_id).text(iva_total_row_text.toFixed(2)+" €");
+                    //location.reload(); 
+                    $('#card-footer').load(document.URL +  ' #card-footer');
+                   
                 }
-        
+                
+                
                 
             }
         });

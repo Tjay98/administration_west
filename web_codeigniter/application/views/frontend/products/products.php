@@ -29,10 +29,30 @@
         padding:2px;
     }
 
+    .image-products{
+        margin-top: auto;
+         margin-bottom: auto; 
+         position: relative; 
+         max-width:200px;
+         max-height:200px;
+    }
+
+    @media (max-width: 995px) {
+        .image-products{
+        margin-top: auto;
+         margin-bottom: auto; 
+         position: relative; 
+         max-width:160px;
+         max-height:160px;
+         
+        }
+    }
+
     @media only screen and (min-width: 600px) {
         .filter_bar{
             position:fixed;
         }
+        
     }
     .pointer{
         cursor:pointer;
@@ -91,8 +111,8 @@
                 foreach ($products as $product){ ?>
 
                     <div class="row mt-2 p-2 bg-white border product_box" category_id="<?php echo $product['category_id']; ?>" company_id="<?php echo $product['company_id']; ?>" product_name="<?php echo strtolower($product['product_name']); ?>">
-                        <div class="col-md-3 mt-1"><img style =" margin-top: auto; margin-bottom: auto; position: relative; max-width:200px;max-height:200px; " src="<?php echo base_url('uploads/products/').$product['image']; ?>" alt="Imagem <?php echo $product['product_name']; ?>"></div>
-                        <div class="col-md-6 mt-1">
+                    <div class="col-md-4 col-lg-3 col-xs-12 mt-1 text-center"><img class="image-products" src="<?php echo base_url('uploads/products/').$product['image']; ?>" alt="Imagem <?php echo $product['product_name']; ?>"></div>
+                        <div class="col-md-5 col-lg-6 col-xs-12 mt-1 text-center">
                             <h4 style="font-weight:bold;"><?php echo $product['product_name']; ?></h4>
                             <p>
                                 <b>Empresa:</b>
@@ -108,6 +128,7 @@
                             </p>
 
                         </div>
+                        
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row align-items-center">
                                 <h4 class="mr-1"><?php echo $product['price']." €" ?></h4>

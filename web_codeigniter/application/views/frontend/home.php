@@ -49,9 +49,9 @@
                         <h1 class="jumbotron-heading mb-5">Categorias</h1>
                         <div class="row">
                         <?php 
-                            foreach ($categories as $categories){ ?>
+                            foreach ($categories as $category){ ?>
                             <div class="col-lg-3 col-md-3 col-sm-12 mt-2 mb-5 mr-2 ml-2">
-                                <a class="custom-boxes" href="<?php echo base_url('categories/').$categories['id']; ?>"> <?php echo $categories['category_name']; ?></a> 
+                                <a class="custom-boxes" href="<?php echo base_url('products/?category=').$category['id']; ?>"> <?php echo $category['category_name']; ?></a> 
                             </div>          
                         <?php } ?>
                         </div>
@@ -66,16 +66,16 @@
                         <div class="container">
                             <div class="row">
                             <?php 
-                            foreach ($companies as $companies){ 
+                            foreach ($companies as $company){ 
                             ?>
                                 <div class="col-lg-5 col-md-5 col-sm-12 mt-2 mb-5 mr-2 ml-2">
-                                    <a style="text-decoration:none;" href="<?php echo base_url('companies/').$companies['id'];?>">
+                                    <a style="text-decoration:none;" href="<?php echo base_url('products/?company='.$company['id']); ?>" >
                                     <div class="custom-boxes" style="min-height:200px">
                                         <div class="row">
-                                            <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$companies['image']; ?>">
-                                            <h4><b> <?php echo $companies['company_name']; ?> </b> </h4> 
+                                            <img class="image-products mr-4" style =" max-width:100px; max-height:50px; width: auto;height: auto;" src="<?php echo base_url('uploads/companies/').$company['image']; ?>">
+                                            <h4><b> <?php echo $company['company_name']; ?> </b> </h4> 
                                         </div>  
-                                        <p class="text-justify"> <?php echo $companies['description']; ?></p> 
+                                        <p class="text-justify"> <?php echo $company['description']; ?></p> 
                                     </div> 
                                     </a>
                                 </div> 

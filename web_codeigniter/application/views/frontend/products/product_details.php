@@ -23,6 +23,9 @@
             width: auto;
             height: auto;
         }
+        .description{
+            overflow:scroll;
+        }
     }
     @media (min-width: 768px) {
     .image-products{
@@ -56,7 +59,7 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <h5 class="text-center"><b>Descrição:</b></h5>
-                <p class="text-justify"><?php echo $product['big_description']; ?></p>
+                <p class="text-justify description"><?php echo $product['big_description']; ?></p>
         </div>       
     </div>
 </div>
