@@ -28,6 +28,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +51,8 @@ public class DetailsProductsActivity extends AppCompatActivity {
     String product_id;
 
     Button buttonVoltarProducts;
+
+    NumberFormat formatter = new DecimalFormat("#0.00");
 
 
     @Override
@@ -89,7 +93,11 @@ public class DetailsProductsActivity extends AppCompatActivity {
         category_name.setText(product_category_name);
         product_company_name1.setText(product_company_name);
         product_description2.setText(product_description);
-        product_price1.setText(product_price + " €");
+
+        double price;
+        price = Double.parseDouble(product_price);
+        product_price1.setText(formatter.format(price) + " €");
+
 
 
 

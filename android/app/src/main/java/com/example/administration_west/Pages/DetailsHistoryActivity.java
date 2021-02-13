@@ -31,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,6 +73,7 @@ public class DetailsHistoryActivity extends AppCompatActivity {
     private ArrayList<DetailsHistory> historyList;
 
     Button buttonVoltarHistory;
+    NumberFormat formatter = new DecimalFormat("#0.00");
 
 
     @Override
@@ -122,11 +125,16 @@ public class DetailsHistoryActivity extends AppCompatActivity {
         }
 
 
+
         id.setText("Compra #" + history_id);
        // data.setText(history_data);
        // estado.setText(history_estado);
-        total.setText(history_total + " €");
-        total_iva.setText(history_total_iva + " €");
+        double price, priceIVa;
+        price = Double.parseDouble(history_total);
+        priceIVa = Double.parseDouble(history_total_iva);
+
+        total.setText(formatter.format(price) + " €");
+        total_iva.setText(formatter.format(priceIVa) + " €");
 
         recyclerViewDetailHistory = findViewById(R.id.RecycleViewDetailHistory);
         recyclerViewDetailHistory.setHasFixedSize(true);

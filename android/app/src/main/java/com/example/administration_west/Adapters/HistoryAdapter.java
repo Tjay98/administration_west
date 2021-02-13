@@ -99,8 +99,8 @@ public class HistoryAdapter  extends RecyclerView.Adapter<HistoryAdapter.History
 
         // Indices for the _id, description, and priority columns
         String Id = String.valueOf(currentItem.getId());
-        String TotalPrice = String.valueOf(currentItem.getTotal_price());
-        String TotalIva = String.valueOf(currentItem.getTotal_iva());
+        String TotalPrice = String.format("%.2f",currentItem.getTotal_price());
+        String TotalIva = String.format("%.2f", currentItem.getTotal_iva());
         String CreatedDate = String.valueOf(currentItem.getCreated_date());
         String Status = currentItem.getStatus();
 

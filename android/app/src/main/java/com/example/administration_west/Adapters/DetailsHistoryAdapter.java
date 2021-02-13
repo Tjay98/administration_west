@@ -77,8 +77,8 @@ public class DetailsHistoryAdapter  extends RecyclerView.Adapter<DetailsHistoryA
         // Indices for the _id, description, and priority columns
         int ProductId = currentItem.getId();
         String ProductName = currentItem.getProduct_name();
-        String ProductPrice = String.valueOf(currentItem.getPrice());
-        String ProductPriceIva = String.valueOf(currentItem.getPriceIva());
+        String ProductPrice = String.format("%.2f", currentItem.getPrice());
+        String ProductPriceIva = String.format("%.2f", currentItem.getPriceIva());
         String ProductQuantity = String.valueOf(currentItem.getQuantity());
 
         //Set values

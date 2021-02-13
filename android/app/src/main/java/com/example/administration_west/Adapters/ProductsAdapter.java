@@ -79,7 +79,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         Products currentItem = cproducts.get(position);
 
         String product_name = currentItem.getProduct_name();
-        String product_price = String.valueOf(currentItem.getPrice());
+        String product_price = String.format("%.2f", currentItem.getPrice());
         String product_image =  ip + "uploads/products/"+currentItem.getImage();
 
 

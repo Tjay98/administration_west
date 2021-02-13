@@ -35,6 +35,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +61,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
 
     String getKey;
     int getProductID;
+
+    NumberFormat formatter = new DecimalFormat("#0.00");
+
 
     public static final Double EXTRA_TOTAL_PRECO = 0.0;
 
@@ -91,6 +96,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
 
         cartAdapter=new CartAdapter(getApplicationContext(), cartList);
         mRecyclerView.setAdapter(cartAdapter);
+
 
         getCartDetail();
 
@@ -141,7 +147,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                             JSONArray jsonArray = jsonObject.getJSONArray("cart");
 
                             if( status.equals("200") ){
-                                totalPrice=0.0;
+                                totalPrice=0.00;
                                     for (int i = 0; i < jsonArray.length(); i++) {
 
                                         JSONObject obj = jsonArray.getJSONObject(i);
@@ -157,7 +163,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnIte
                                         );
                                         lista.add(products);
                                 }
-                                Total.setText(totalPrice + " €");
+                                Total.setText(formatter.format(totalPrice) + " €");
 
                                 cartAdapter.addItems(lista);
                                 mRecyclerView.setAdapter(cartAdapter);

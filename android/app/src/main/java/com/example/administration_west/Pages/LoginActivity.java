@@ -105,13 +105,13 @@ public class LoginActivity extends AppCompatActivity {
     public Boolean validatePassword() {
         String password = etPassword.getEditText().getText().toString();
         if (password.isEmpty()) {
-            etEmail.setError("Password não pode estar vazio");
+            etPassword.setError("Password não pode estar vazio");
             return false;
         } else if (password.length() < 6 || password.length() > 255) {
-            etEmail.setError("A pasword não tem o tamanho permitido");
+            etPassword.setError("A pasword não tem o tamanho permitido");
             return false;
         } else {
-            etEmail.setError(null);
+            etPassword.setError(null);
             return true;
         }
     }

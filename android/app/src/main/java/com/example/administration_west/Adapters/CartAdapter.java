@@ -103,7 +103,7 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.CartViewHolde
         int ProductId = currentItem.getId();
         String ProductName = currentItem.getProduct_name();
         String ProductQuantity = String.valueOf(currentItem.getQuantity());
-        String ProductPrice = String.valueOf(currentItem.getPrice());
+        String ProductPrice = String.format("%.2f", currentItem.getPrice());
         String product_image =  ip + "uploads/products/"+currentItem.getImage();
 
         //Set values
