@@ -15,7 +15,8 @@
 
     <string name="descricao">Descrição</string>
 
-    <string name="compra_finalizada">Compra realizada com sucesso!</string>
+    <string name="compra_finalizada">Finalizar compra</string>
+    <string name="compra">Compras</string>
 
     <string name="finalizar_compra">Finalizar Compra!</string>
 
@@ -71,6 +72,8 @@
     <string name="antiga_password">Password atual</string>
     <string name="nova_password">Nova password</string>
     <string name="historico">Histórico</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

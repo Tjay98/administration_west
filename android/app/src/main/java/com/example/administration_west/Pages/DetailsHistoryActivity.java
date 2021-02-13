@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +70,7 @@ public class DetailsHistoryActivity extends AppCompatActivity {
     private DetailsHistoryAdapter adapterDetailHistory;
     private ArrayList<DetailsHistory> historyList;
 
+    Button buttonVoltarHistory;
 
 
     @Override
@@ -95,6 +98,7 @@ public class DetailsHistoryActivity extends AppCompatActivity {
         TextView estado = findViewById(R.id.tVEstadoDetailsHistory);
         TextView total = findViewById(R.id.tVTotalPriceDetailsHistory);
         TextView total_iva = findViewById(R.id.tVTotalIvaDetailsHistory);
+        buttonVoltarHistory = findViewById(R.id.buttonVoltarHistory);
 
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -132,6 +136,19 @@ public class DetailsHistoryActivity extends AppCompatActivity {
 
         parseJSONDetailHistory();
 
+        buttonVoltarHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainactivity();
+            }
+        });
+
+    }
+
+    private void mainactivity() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
+        finish();
     }
 
     private void parseJSONDetailHistory() {

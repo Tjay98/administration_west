@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,9 @@ import static com.example.administration_west.Pages.CompaniesFragment.EXTRA_DESC
 import static com.example.administration_west.Pages.CompaniesFragment.EXTRA_IMAGE;
 
 public class DetailsCompaniesActivity extends AppCompatActivity {
+
+    Button buttonVoltarCompanies;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class DetailsCompaniesActivity extends AppCompatActivity {
         ImageView image = findViewById(R.id.iVEmpresaDC);
         TextView name = findViewById(R.id.tVNomeEmpresaDC);
         TextView description = findViewById(R.id.tVDescricaoEmpresaDC);
+        buttonVoltarCompanies = findViewById(R.id.buttonVoltarCompanies);
 
         Picasso.with(this).load(company_image)
                 .placeholder(R.drawable.sem_imagem)
@@ -41,6 +47,18 @@ public class DetailsCompaniesActivity extends AppCompatActivity {
         name.setText(company_name);
         description.setText(company_description);
 
-
+        buttonVoltarCompanies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainactivity();
+            }
+        });
     }
+
+    private void mainactivity() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
+        finish();
+    }
+
 }

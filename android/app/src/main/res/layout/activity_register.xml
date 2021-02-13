@@ -18,10 +18,11 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_adm_west_logo"  />
+        app:srcCompat="@mipmap/ic_adm_west_logo"
+        android:focusable="true" android:focusableInTouchMode="true"/>
 
     <!--    </LinearLayout>-->
 
@@ -40,146 +41,136 @@
         android:orientation="vertical"
         >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="25dp"
-        android:orientation="vertical">
-
-        <!--nome-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eTNameRegister"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nome"
-            >
-            <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <!--nome-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/eTNameRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nome"
-                android:inputType="textPersonName"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/nome">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nome"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-
-        <!--email-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eTEmailRegister"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            >
-            <com.google.android.material.textfield.TextInputEditText
+            <!--email-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/eTEmailRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                />
+                android:hint="@string/email">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!--telemovel-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eTMobileRegister"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/telemovel"
-            >
-            <com.google.android.material.textfield.TextInputEditText
+            <!--telemovel-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/eTMobileRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/telemovel"
-                android:inputType="number"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="@string/telemovel">
 
-        <!--Data-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etDataRegister"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/data"
-            >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/telemovel"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <!--Data-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etDataRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/data"
-                android:inputType="date" />
+                android:hint="@string/data">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/data"
+                    android:inputType="date" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!--password-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eTPasswordRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="@string/passsword"
-            app:passwordToggleEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:inputType="textPassword"
+            <!--password-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/eTPasswordRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/passsword"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/passsword"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-        <!--password 2 -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPasswordRegister2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="@string/passsword_2"
-            app:passwordToggleEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-                android:inputType="textPassword"
+            <!--password 2 -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPasswordRegister2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/passsword_2"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/passsword_2"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+            <Button
+                android:id="@+id/buttonRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blue"
+                android:text="@string/registo_2"
+                android:textColor="@color/white" />
 
 
-        <Button
-            android:id="@+id/buttonRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/registo_2"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/blue"/>
+            <Button
+                android:id="@+id/buttonLoginRegister"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/white"
+                android:text="@string/registo_3"
+                android:textColor="@color/secondblue" />
 
 
-        <Button
-            android:id="@+id/buttonLoginRegister"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/white"
-            android:text="@string/registo_3"
-            android:textColor="@color/secondblue" />
-
-
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

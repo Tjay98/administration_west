@@ -91,6 +91,8 @@ public class CompaniesFragment extends Fragment implements CompaniesAdapter.OnIt
         return view;
     }
 
+
+
     private void parseJSONCompanies(final Context context, final boolean isConnected) {
         if (!isConnected) {
             Toast.makeText(context, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();

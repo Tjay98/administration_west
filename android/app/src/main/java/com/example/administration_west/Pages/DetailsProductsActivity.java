@@ -1,10 +1,13 @@
 package com.example.administration_west.Pages;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +48,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
     String ADD_TO_CART_URL = ip + "restful/add_product_cart";
     String product_id;
 
-
+    Button buttonVoltarProducts;
 
 
     @Override
@@ -73,6 +76,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         TextView product_price1 = findViewById(R.id.tVPriceProdutoDP);
         TextView product_description2 = findViewById(R.id.tVDescricaoProdutoDP);
         ImageButton addToCart = findViewById(R.id.BAdicionarDP);
+        Button buttonVoltarProducts = findViewById(R.id.buttonVoltarProducts);
 
         Picasso.with(this).load(product_image)
                 .placeholder(R.drawable.sem_imagem)
@@ -88,6 +92,9 @@ public class DetailsProductsActivity extends AppCompatActivity {
         product_price1.setText(product_price + " €");
 
 
+
+
+
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +103,16 @@ public class DetailsProductsActivity extends AppCompatActivity {
             }
         });
 
+        buttonVoltarProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainactivity();
+            }
+        });
+
     }
+
+
 
     private void addToCart() {
         Intent intent = getIntent();

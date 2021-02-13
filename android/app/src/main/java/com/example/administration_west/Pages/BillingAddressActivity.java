@@ -190,7 +190,7 @@ public class BillingAddressActivity extends AppCompatActivity {
                             String status = jsonObject.getString("status");
 
                             if (status.equals("200")) {
-                                Toast.makeText(BillingAddressActivity.this, "Morada efetuado com sucesso!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BillingAddressActivity.this, "Morada registada com sucesso!", Toast.LENGTH_LONG).show();
                                 Pagamentos();
 
                             }else{

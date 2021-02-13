@@ -109,6 +109,12 @@ public class FinalizarCompraActivity extends AppCompatActivity {
         finish();
     }
 
+    public void cartShoppingPage(){
+        Intent intent=new Intent(this,CartActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void getShippingAddress(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SHIPPING_ADDRESS,
                 new Response.Listener<String>() {
@@ -122,7 +128,7 @@ public class FinalizarCompraActivity extends AppCompatActivity {
                                 for(int i=0; i<jsonArray.length();i++) {
 
                                     String nome_shipping = jsonArray.getString("name");
-                                   // String email = jsonArray.getString("nif");
+                                    // String email = jsonArray.getString("nif");
                                     String telemovel_shipping = jsonArray.getString("contact_number");
                                     //String phone_number = jsonArray.getString("city");
                                     String morada_shipping = jsonArray.getString("address");
@@ -228,6 +234,7 @@ public class FinalizarCompraActivity extends AppCompatActivity {
                                 Toast.makeText(FinalizarCompraActivity.this, "Compra efetuada com sucesso!",Toast.LENGTH_LONG).show();
                                 mostrarMain();
                             } else if(status.equals("412")) {
+                                cartShoppingPage();
                                 Toast.makeText(FinalizarCompraActivity.this, "Falta de stock num dos produtos. Contacte-nos",Toast.LENGTH_LONG).show();
                             } else{
                                 Toast.makeText(FinalizarCompraActivity.this, "Alguma informação está errada. Contacte-nos",Toast.LENGTH_LONG).show();

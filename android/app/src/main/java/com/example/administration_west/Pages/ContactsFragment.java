@@ -16,7 +16,6 @@ import com.example.administration_west.R;
 
 public class ContactsFragment extends Fragment {
 
-    Button buttonSendMessageContactos;
 
     public ContactsFragment() {
 
@@ -28,23 +27,11 @@ public class ContactsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        buttonSendMessageContactos = (Button) view.findViewById(R.id.buttonSendMessageContactos);
 
-
-        buttonSendMessageContactos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessage();
-            }
-        });
 
 
         return view;
     }
-    private void sendMessage() {
-        Intent intentRegist = new Intent(getContext(), SendMessageActivity.class);
-        startActivity(intentRegist);
 
-    }
 
 }

@@ -13,48 +13,66 @@
         android:roundIcon="@mipmap/ic_adm_west_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Administration_west">
-        <activity android:name=".Pages.DetailsHistoryActivity"></activity>
-        <activity android:name=".Pages.ChangePasswordActivity" />
+        <activity android:name=".Pages.DetailsHistoryActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"
+        />
 
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/searchable" />
+        <activity android:name=".Pages.ChangePasswordActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Pages.DetailsProductsActivity"
-            android:parentActivityName=".Pages.ProductFragment" />
-        <activity android:name=".Pages.MoradasActivity" />
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Pages.DetailsCompaniesActivity"
-            android:parentActivityName=".Pages.CompaniesFragment" />
-        <activity android:name=".Pages.FinalizarCompraActivity" />
-        <activity android:name=".Pages.PagamentoActivity" />
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Pages.FinalizarCompraActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Pages.PagamentoActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Pages.ShippingAddressActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Pages.BillingAddressActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Pages.CartActivity"
-            android:parentActivityName=".Pages.MainActivity" />
-        <activity android:name=".Pages.DepoisCarrinhoActivity" />
-        <activity android:name=".Pages.ShippingAddressActivity" />
-        <activity android:name=".Pages.BillingAddressActivity" />
-        <activity android:name=".Pages.SendMessageActivity" />
-        <activity android:name=".Pages.MainActivity">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+        <activity android:name=".Pages.MainActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".Pages.RegisterActivity"
-            android:parentActivityName=".Pages.LoginActivity" />
-        <activity android:name=".Pages.LoginActivity">
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Pages.LoginActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

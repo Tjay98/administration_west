@@ -34,6 +34,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
     Button buttonChange;
     SessionUser sessionUser;
     String getKey;
+    Button buttonVoltarProfile;
+
 
     String CHANGE_URL = ip + "restful/users/password";
 
@@ -54,6 +56,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         eTRepeatPassword = findViewById(R.id.eTRepetirPasswordProfile);
         //button
         buttonChange = findViewById(R.id.ButtonChange);
+        buttonVoltarProfile = findViewById(R.id.buttonVoltarProfile);
 
 
         buttonChange.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +68,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
             }
         });
+
+        buttonVoltarProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainactivity();
+            }
+        });
+    }
+    private void mainactivity() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
+        finish();
     }
 
     public Boolean validadePassword() {
