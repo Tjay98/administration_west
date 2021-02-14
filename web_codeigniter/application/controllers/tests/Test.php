@@ -210,6 +210,6 @@ class Test extends MY_Controller {
         $test_name="Change sale status";
         echo $this->unit->run($test,$expected_result,$test_name);
 
-        //Função para apagar produto backend
+        
     }    
 }

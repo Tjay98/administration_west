@@ -102,7 +102,7 @@ class Companies extends MY_Controller {
             if(!empty($this->input->post())){
 
                 $config['upload_path']          = './uploads/companies';
-                $config['allowed_types']        = 'gif|jpg|png';
+                $config['allowed_types']        =  'gif|jpeg|jpg|png';
                 $config['max_size']             = 0;
                 $config['max_width']            = 0;
                 $config['max_height']           = 0;
@@ -145,13 +145,13 @@ class Companies extends MY_Controller {
     }
     
     public function edit($company_id){
-        if($this->session->userdata('company_id') == $company_id || $this->session->userdata('role_id')==3){
+        if($this->session->userdata('store_id') == $company_id || $this->session->userdata('role_id')==3){
             //implementar edição
             if(!empty($this->input->post())){
                 $this_company=$this->Company_model->get_company_by_id($company_id);
 
                 $config['upload_path']          = './uploads/companies';
-                $config['allowed_types']        = 'gif|jpg|png';
+                $config['allowed_types']        = 'gif|jpeg|jpg|png';
                 $config['max_size']             = 0;
                 $config['max_width']            = 0;
                 $config['max_height']           = 0;
@@ -184,7 +184,13 @@ class Companies extends MY_Controller {
 
                 $this->db->where('id',$company_id);
                 $this->db->update('companies',$data);
-                redirect('admin/companies');
+                
+                if($this->session->userdata('role_id')==3){
+                    redirect('admin/companies');
+                }else{
+                    redirect('admin/companies/edit/'.$company_id);
+                }
+                
             }else{
                 $data['company']=$this->Company_model->get_company_by_id($company_id);
                 

@@ -15,8 +15,12 @@
 $company_count=count($companies);
 $products_count=count($all_products);
 $sales_count=count($products_sold);
-$sales=array_slice($products_sold, 0, 5);
+
+$sales=array_slice($all_sales, 0, 5);
+
 $products=array_slice($all_products, 0, 5);
+/* 
+print_r($sales); */
 
 ?>
 <!-- Main content -->
@@ -113,13 +117,23 @@ $products=array_slice($all_products, 0, 5);
 								</thead>
 								<tbody>
 									<?php foreach($sales as $sale){ 
-										if($sale['status']=='0'){
-											$status='<button type="button" class="btn btn-md btn-warning">Pendente</button>';
+
+										if(empty($sale['sale_group_id'])){
+											$sale['sale_group_id']=$sale['id'];
+										}
+
+										if($sale['status']==0){
+											$status='<button type="button" class="btn btn-md btn-warning">Por processar</button>';
 										}elseif($sale['status']==1){
+											$status='<button type="button" class="btn btn-md btn-warning" style="background-color:#fd7e14;border-color:#fd7e14;">Processado</button>';
+										}elseif($sale['status']==2){
 											$status='<button type="button" class="btn btn-md btn-success">Enviado</button>';
-										} ?>
+										}elseif($sale['status']==3){
+											$status='<button type="button" class="btn btn-md btn-danger">Cancelado</button>';
+										}?>
+										
 									<tr>
-										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/?sale_id=').$sale['sale_group_id']; ?>">Venda #<?php echo $sale['id']; ?></a></td>
+										<td><a class="btn btn-md btn-info" href="<?php echo base_url('admin/sales/?sale_id=').$sale['sale_group_id']; ?>">Venda #<?php echo $sale['sale_group_id']; ?></a></td>
 										<!-- <td><?php echo $sale['product_name']; ?></td>
 
 										<th><?php echo $sale['quantity']; ?></th> -->

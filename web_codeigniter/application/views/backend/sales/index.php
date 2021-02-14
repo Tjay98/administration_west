@@ -401,28 +401,54 @@
             success: function (response) {
                 /* alert(response); */
                 if(response){
+                    /* alert(response);
+                    return null; */
                     obj=JSON.parse(response);
-                   
+                    
                     if(obj){
                         html='';
                         i=0;
                         obj.forEach(function(product) {
-                            html+='<tr>';
-                            html+='<td><input type="hidden" name="product['+i+'][sale_group_id]" value="'+sale_id+'"><input type="hidden" name="product['+i+'][sale_product_id]" value="'+product.sale_product_id+'">'+product.product_name+'</td>';
-                            html+='<td>'+product.quantity+'</td>';
-                            html+='<td>'+product.price+'</td>';
-                            html+='<td>'+product.price_iva+'</td>';
-                            if(product.status==0){
-                            html+='<td><select class="form-control" name="product['+i+'][status]">';
-                            html+='<option value="0">Por processar</option>';
-                            html+='<option value="1">Processado</option>';
-                            html+='</select></td>';
-                            }else{
-                                html+='<td>Processado</td>';
-                            }
-                            html+='</tr>';
-                            
-                            i++;
+                            <?php if($this->session->userdata('role_id')==3){ ?>
+                                
+                           
+                                html+='<tr>';
+                                html+='<td><input type="hidden" name="product['+i+'][sale_group_id]" value="'+sale_id+'"><input type="hidden" name="product['+i+'][sale_product_id]" value="'+product.sale_product_id+'">'+product.product_name+'</td>';
+                                html+='<td>'+product.quantity+'</td>';
+                                html+='<td>'+product.price+'</td>';
+                                html+='<td>'+product.price_iva+'</td>';
+                                if(product.status==0){
+                                html+='<td><select class="form-control" name="product['+i+'][status]">';
+                                html+='<option value="0">Por processar</option>';
+                                html+='<option value="1">Processado</option>';
+                                html+='</select></td>';
+                                }else{
+                                    html+='<td>Processado</td>';
+                                }
+                                html+='</tr>';
+                                
+                                i++;
+                            <?php }else{?>
+                                this_user_store_id=<?Php echo $this->session->userdata('store_id'); ?>;
+                                
+                                if(product.company_id == this_user_store_id){
+                                    html+='<tr>';
+                                    html+='<td><input type="hidden" name="product['+i+'][sale_group_id]" value="'+sale_id+'"><input type="hidden" name="product['+i+'][sale_product_id]" value="'+product.sale_product_id+'">'+product.product_name+'</td>';
+                                    html+='<td>'+product.quantity+'</td>';
+                                    html+='<td>'+product.price+'</td>';
+                                    html+='<td>'+product.price_iva+'</td>';
+                                    if(product.status==0){
+                                    html+='<td><select class="form-control" name="product['+i+'][status]">';
+                                    html+='<option value="0">Por processar</option>';
+                                    html+='<option value="1">Processado</option>';
+                                    html+='</select></td>';
+                                    }else{
+                                        html+='<td>Processado</td>';
+                                    }
+                                    html+='</tr>';
+                                }
+                                i++;
+                            <?php }?>
                             
                         });
 

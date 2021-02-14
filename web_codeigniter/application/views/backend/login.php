@@ -68,11 +68,8 @@
 							<!-- /.col -->
 						</div>
 					</form>
-					<p class="mb-1">
-						<a href="#">Recuperar password</a>
-					</p>
-					<p class="mb-0">
-						<a href="<?php echo base_url('') ?>" class="text-center">Efetuar pedido de registo</a>
+					<p class="mb-0" style="text-align:center;">
+						<a href="<?php echo base_url('contacts') ?>" class="text-center">Efetuar pedido de registo</a>
 					</p>
 				</div>
 				<!-- /.login-card-body -->

@@ -130,7 +130,8 @@ class Products extends MY_Controller {
 
 
         if(!$admin){
-            if($product['store_id']==$this->session->userdata('store_id')){
+            /* print_r($product); */
+            if($product['company_id']==$this->session->userdata('store_id')){
                 echo json_encode($product);
             }
         }else{
@@ -142,7 +143,7 @@ class Products extends MY_Controller {
     public function add(){
         if(!empty($this->input->post('product_name'))){
             $config['upload_path']          = './uploads/products';
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        =  'gif|jpeg|jpg|png';
             $config['max_size']             = 0;
             $config['max_width']            = 0;
             $config['max_height']           = 0;
@@ -158,6 +159,8 @@ class Products extends MY_Controller {
                     $imagem=$image_data['file_name'];
                     
             }
+
+            /* print_r($error);die; */
 
             $category_id=$this->input->post('product_category');
             $price=$this->input->post('product_price');
@@ -201,7 +204,7 @@ class Products extends MY_Controller {
         if(!empty($this->input->post('product_name'))){
             
             $config['upload_path']          = './uploads/products';
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        = 'gif|jpg|jpeg|png';
             $config['max_size']             = 0;
             $config['max_width']            = 0;
             $config['max_height']           = 0;
@@ -219,6 +222,7 @@ class Products extends MY_Controller {
                     $imagem=$image_data['file_name'];
                     
             }
+            /* print_r($error);die; */
 
             $category_id=$this->input->post('product_category');
             $price=$this->input->post('product_price');
@@ -258,6 +262,8 @@ class Products extends MY_Controller {
     public function delete($product_id){
         if($this->session->userdata('role_id')==3){
             $admin=true;
+        }else{
+            $admin=false;
         }
 
         if($admin){

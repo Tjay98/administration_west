@@ -22,7 +22,11 @@
                     </div>  
                     <?php }?>
             </div>
-
+            <?php if($this->session->userdata('role_id')==3){
+                $admin=true;
+             }else{
+                $admin=false;
+             }?>
 
 		</div>
 
@@ -129,7 +133,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="form-group">
                             <label>Nome do utilizador</label>
-                            <input type="text" class="form-control" id="username" placeholder="Nome do utilizador">
+                            <input type="text" class="form-control" id="username" placeholder="Nome do utilizador" <?php if(!$admin){echo 'disabled';} ?>>
                             <small class="text-danger form_error" id="username_error"></small>
 
                         </div>
@@ -137,7 +141,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email">
+                            <input type="email" class="form-control" id="email" placeholder="Email" <?php if(!$admin){echo 'disabled';} ?>>
                             <small class="text-danger form_error" id="email_error"></small>
 
                         </div>
@@ -145,7 +149,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Nº de telemóvel</label>
-                            <input type="number" class="form-control" id="phone_number" placeholder="Nº de telemóvel">
+                            <input type="number" class="form-control" id="phone_number" placeholder="Nº de telemóvel" <?php if(!$admin){echo 'disabled';} ?>>
                             <small class="text-danger form_error" id="phone_number_error"></small>
 
                         </div>
@@ -153,15 +157,16 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Data de nascimento</label>
-                            <input type="date" id="birthday" class="form-control" placeholder="Data de nascimento">
+                            <input type="date" id="birthday" class="form-control" placeholder="Data de nascimento" <?php if(!$admin){echo 'disabled';} ?>>
                             <small class="text-danger form_error" id="birthday_error"></small>
 
                         </div>
                     </div>
+                    <?php if($admin){ ?>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Cargo</label>
-                            <select class="form-control" id="role_id">
+                            <select class="form-control" id="role_id" <?php if(!$admin){echo 'disabled';} ?>>
                                 <option value="">Selecione uma opção</option>
                                 <?php foreach($roles as $role){?>
                                     <option value="<?php echo $role['id'] ?>"><?php echo $role['name']; ?></option>
@@ -174,7 +179,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Loja</label>
-                            <select class="form-control"  id="store_id">
+                            <select class="form-control"  id="store_id" <?php if(!$admin){echo 'disabled';} ?>>
                                 <option value="">Nenhuma</option>
                                 <?php foreach($companies as $company){?>
                                     <option value="<?php echo $company['id'] ?>"><?php echo $company['company_name']; ?></option>
@@ -184,6 +189,7 @@
 
                         </div>
                     </div> 
+                    
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Password</label>
@@ -200,14 +206,17 @@
 
                         </div>
                     </div>
+                    <?php }?>
 
 
                     
                 </div>
             </div>
+            <?php if($admin){ ?>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" style="width:100%;" id="create_user_button">Criar</button>
             </div>
+            <?php }?>
         </div>
     </div>
 </div>
@@ -385,8 +394,11 @@
                     var day = ("0" + birthday_date.getDate()).slice(-2);
                     var month = ("0" + (birthday_date.getMonth() + 1)).slice(-2);
                     var date = birthday_date.getFullYear()+"-"+(month)+"-"+(day) ; */
-
-                    message_title='Editar utilizador - '+username;
+                    <?php if($admin){ ?>
+                        message_title='Editar utilizador - '+username;
+                    <?php }else{?>
+                        message_title='Visualizar utilizador - '+username;
+                    <?php }?>
                     $('#username').val(username);
                     $('#email').val(email);
                     $('#phone_number').val(phone_number);

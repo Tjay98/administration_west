@@ -95,7 +95,9 @@
                 
             </div>
             <div class="modal-footer">
+            <?php if($this->session->userdata('role_id')==3){ ?>
                 <button class="btn btn-success btn-md" id="categoryModalButton" style="width:100%;">Editar</button>
+            <?php }?>
             </div>
         </div>
     </div>

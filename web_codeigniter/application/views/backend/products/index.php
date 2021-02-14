@@ -140,20 +140,25 @@
                                 <small class="text-danger" id="product_big_description_error"></small>
                             </div>
                         </div>  
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label>Empresa</label>
-                                <select name="product_company" id="product_company" class="form-control">
-                                    <option value="">Selecione uma opção</option>
+                        <?php if($this->session->userdata('role_id')==3){ ?>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Empresa</label>
+                                    <select name="product_company" id="product_company" class="form-control">
+                                        <option value="">Selecione uma opção</option>
+                                        
+                                        <?php foreach($companies as $company){ ?>
+                                            <option value="<?php echo $company['id']; ?>"><?php echo $company['company_name']; ?></option>
+                                        <?php }?>
+                                    </select>
+                                    <small class="text-danger" id="product_company_error"></small>
                                     
-                                    <?php foreach($companies as $company){ ?>
-                                        <option value="<?php echo $company['id']; ?>"><?php echo $company['company_name']; ?></option>
-                                    <?php }?>
-                                </select>
-                                <small class="text-danger" id="product_company_error"></small>
-                                
+                                </div>
                             </div>
-                        </div>
+                        <?php }else{?>
+                            <input type="hidden" name="product_company" id="product_company" class="form-control" value="<?php echo $this->session->userdata('store_id'); ?>">
+                            <!-- <?php echo $this->session->userdata('store_id'); ?> -->
+                        <?php }?>
                     </div>
                 
             </div>
@@ -305,7 +310,12 @@
             $('#product_quantity').val('');
             $('#product_small_description').val('');
             $('#product_big_description').val('');
-            $('#product_company').val('');
+            <?php if($this->session->userdata('role_id')==3){ ?>
+                $('#product_company').val('');
+            <?php }else{?>
+                $('#product_company').val('<?php echo $this->session->userdata('store_id'); ?>');
+            <?php } ?>
+           
 
             $('#product_image').val('');
 
@@ -322,6 +332,7 @@
             url: "<?php echo base_url('admin/products/show/');?>"+product_id,
             data: "",
             success: function (response) {
+               /*  alert(response); */
                 if(response){
                     var obj = JSON.parse(response);
                     $('#editModalLabel').text("Editar "+obj.product_name);
@@ -359,7 +370,9 @@
                 }else if(response=='success'){
                     alert('Produto removido');
                     window.location.reload();
-                }
+                }/* else{
+                    alert(response);
+                } */
             }
         });
     }

@@ -86,7 +86,7 @@
 							<li class="nav-item">
 								<a href="<?php echo base_url('admin/companies/edit/'.$this->session->userdata('store_id')); ?>" class="nav-link">
 									<i class="fa fa-building-o"></i>
-									<p>Empresas</p>
+									<p>Empresa</p>
 								</a>
 							</li>
 						<?php }?>

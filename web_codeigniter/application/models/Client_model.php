@@ -258,8 +258,8 @@ class Client_model extends CI_Model{
     
     public function get_users(){
         /* $this->db->where('role_id !=',3); */
-        if($this->session->userdata('role_id' == 2)){
-            $this->db->where('role_id',1);
+        if($this->session->userdata('role_id') == 2){
+            $this->db->where('user.role_id',1);
         }
         $this->db->select('user.*,roles.name as role');
         $this->db->from('user');

@@ -43,7 +43,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="pasword_form" method="POST" action="<?php echo base_url('clients/password'); ?>"> 
+                    <!-- <form id="pasword_form" method="POST" action="<?php echo base_url('clients/password'); ?>">  -->
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -64,9 +64,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning" style="width:100%;">Alterar password</button>
+                            <button type="button" id="change_password_button" class="btn btn-warning" style="width:100%;">Alterar password</button>
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
            
@@ -80,9 +80,10 @@
    
     function open_edit_password(){
         $('#passwordModal').modal('show');
+    }
         
-        $('#password_form').on('submit', function () {
-            event.preventDefault();
+    $('#change_password_button').on('click', function (e) {
+            e.preventDefault();
  
             old_password=$('#inputOldPassword').val();
             password_hash=$('#inputPassword').val();
@@ -91,7 +92,7 @@
             $('#password_error').text('');
             $('#repeat_error').text('');
  
-            flag=true
+            flag=true;
  
             if(password_hash.length < 6 || password_hash.length > 25){
                 flag=false;
@@ -105,25 +106,25 @@
             }
  
             if(flag==true){
-                            
-                formdata=$('#password_form').serialize();
+                
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('clients/password'); ?>",
-                    data: formdata,
+                    data: {'inputPassword':password_hash,'inputOldPassword':old_password},
                     success: function (response) {
+                        /* alert(response); */
                         if(response=='success'){
                             Swal.fire({
-                            icon: 'success',
-                            title: 'Password mudada com sucesso',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        setTimeout(function() {
-                            url="<?php echo base_url('clients/profile')?>"
-                            window.location.href= url;
-                        }, 2000);
-                            //window.location.href = '<?php// echo base_url('clients/profile') ?>';
+                                icon: 'success',
+                                title: 'Password mudada com sucesso',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(function() {
+                                url="<?php echo base_url('clients/profile')?>"
+                                window.location.href= url;
+                            }, 2000);
+
                         } else {
                             if(response=='pass_number_error'){
                                 $('#password_error').text('A password deve conter um número, letra maiúscula, letra minúscula e um caractere especial');
@@ -138,9 +139,9 @@
                     }
                 }); 
             }
-        });
+    });
 
-    }
+    
 
     
 

@@ -119,7 +119,7 @@ class Clients extends MY_Controller {
 
         $id=$this->session->userdata('user_id');
 
-        if(empty($this->input->post('inputOldPassword'))){
+        if(empty($this->input->post('inputPassword'))){
             $this->load_views('frontend/clients/profile');
         }else{
             if(!preg_match("#[0-9]+#",$this->input->post('inputPassword'))) {
@@ -142,10 +142,10 @@ class Clients extends MY_Controller {
             $validate=$this->Client_model->new_password_client($password_form, $id);
             if(empty($validate)){
                 //if register happens correctly
-                 redirect('clients/profile');  
+                /*  redirect('clients/profile');   */
                echo 'success';          
             }else{
-                redirect('clients/profile');            
+               /*  redirect('clients/profile');           */  
 
                 echo $validate;
 

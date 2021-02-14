@@ -29,7 +29,11 @@ class Categories extends MY_Controller {
                 $id=$category['id'];
                 $name=$category['category_name'];
                 $iva=$category['iva']."%";
-                $buttons="<button class='btn btn-md btn-warning btn_white_color' onclick='edit_category(".$id.")'><i class='fa fa-pencil'></i></button>";
+                if($this->session->userdata('role_id')==3){
+                    $buttons="<button class='btn btn-md btn-warning btn_white_color' onclick='edit_category(".$id.")'><i class='fa fa-pencil'></i></button>";
+                }else{
+                    $buttons="<button class='btn btn-md btn-light' onclick='edit_category(".$id.")'><i class='fa fa-eye'></i></button>";
+                }
                 $data[]=[
                     $id,
                     $name,

@@ -115,7 +115,7 @@ class Sale_model extends CI_Model{
 
     
     public function get_sale_by_company($company_id){
-        $this->db->select('sale_product.*,products.product_name');
+        $this->db->select('sale_product.*,products.product_name,sales_group.id as sale_group_id');
         $this->db->where('company_id',$company_id);
         $this->db->from('sales_product as sale_product');
         
@@ -304,16 +304,18 @@ class Sale_model extends CI_Model{
     }
 
     public function count_sales_by_status($status){
-        if($status!='all'){
-            $this->db->where('status',$status);
-        }
+
 
         if($this->session->userdata('role_id')==3){
-
+            if($status!='all'){
+                $this->db->where('status',$status);
+            }
             $count=$this->db->get('sales_group')->num_rows();
 
         }else{
-
+            if($status!='all'){
+                $this->db->where('sgroup.status',$status);
+            }
             $this->db->where('product.company_id',$this->session->userdata('store_id'));
             $this->db->from('sales_group as sgroup');
             $this->db->join('user','user.id=sgroup.user_id');

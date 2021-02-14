@@ -62,7 +62,7 @@ class MY_Controller extends CI_Controller {
             $controller=strtolower($controller);
             
             $has_permission=false;
-            if($controller!=''){
+            if($controller!='' && $controller!='login' && $controller !='logout'){
                 if(!empty($user_permissions)){
                     foreach($user_permissions as $permission){
                         if($permission['controller'] == $controller){

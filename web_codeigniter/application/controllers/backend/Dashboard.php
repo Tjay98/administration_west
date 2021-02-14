@@ -29,6 +29,7 @@ class Dashboard extends MY_Controller {
         if($this->session->userdata('role_id')==2){
             $data['all_products']=$this->Product_model->products_by_company($company_id);
             $data['products_sold']=$this->Sale_model->get_sale_by_company($company_id);
+            $data['all_sales']=$this->Sale_model->get_company_sale_groups($company_id);
         }else{
             $data['all_products']=$this->Product_model->get_products();
             $data['all_sales']=$this->Sale_model->get_all_sale_groups();
