@@ -30,10 +30,10 @@
     
 </style>
 <section class="content" style="margin-top:60px">
-    <div class="container">
-        <div class="row">
+    
+        
 
-            <section class="jumbotron text-center" style="width:100%;">
+            <section class="jumbotron text-center" style="width:100%">
                 <div class="container">
                     <h1 class="jumbotron-heading">Administration West</h1>
                     <p class="lead text-muted">Somos uma empresa criada com o objetivo de vender produtos de empreasas locais.</p>
@@ -43,10 +43,11 @@
                     </p>
                 </div>
             </section>
-
+    <div class="container">
+        <div class="row">
             <section class="text-center mt-5" style="width:100%;">
                 <div class="container">
-                    <div class="background-custom-boxes">
+                    <!-- <div class="background-custom-boxes"> -->
                         <h1 class="jumbotron-heading">Empresas</h1>
                         <div class="container">
                             <div class="row">
@@ -66,12 +67,12 @@
                                 </div> 
                             <?php  } ?>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </section>
             <section class="text-center"  style="width:100%;">
                 <div class="container">
-                    <div class="background-custom-boxes">
+                    <!-- <div class="background-custom-boxes"> -->
                         <h1 class="jumbotron-heading mb-5">Categorias</h1>
                         <div class="row">
                         <?php 
@@ -81,7 +82,7 @@
                             </div>          
                         <?php } ?>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </section>
 
