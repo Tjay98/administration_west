@@ -39,7 +39,7 @@
             <div class="col-12 col-sm-6 col-md-3">
 
                 <div class="info-box status_button" onclick="change_table_status('')">
-					<span class="info-box-icon bg-info elevation-1"><i class="fa fa-building-o"></i></span>
+					<span class="info-box-icon bg-info elevation-1"><i class="fa fa-envelope-o"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">Total</span>
 						<span class="info-box-number"><?php if(!empty($total_count)){echo $total_count;}else{echo 0;}  ?></span>
@@ -51,7 +51,7 @@
             <div class="col-12 col-sm-6 col-md-3">
 
                 <div class="info-box status_button" onclick="change_table_status('Recebido')" id="status_button_pending">
-					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-building-o"></i></span>
+					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-reply"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">Recebidos</span>
 						<span class="info-box-number"><?php if(!empty($count_pending)){echo $count_pending;}else{echo 0;}  ?></span>
@@ -63,7 +63,7 @@
             <div class="col-12 col-sm-6 col-md-3">
 
                 <div class="info-box status_button" onclick="change_table_status('Resolvido')">
-					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-building-o"></i></span>
+					<span class="info-box-icon bg-success elevation-1"><i class="fa fa-check"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">Resolvidos</span>
 						<span class="info-box-number"><?php if(!empty($count_done)){echo $count_done;}else{echo 0;}  ?></span>
