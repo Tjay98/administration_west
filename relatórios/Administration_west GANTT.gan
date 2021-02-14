@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="AdministrationWest" company="" webLink="http://" view-date="2020-12-31" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="3.0.3000" locale="pt_PT">
+<?xml version="1.0" encoding="UTF-8"?><project name="AdministrationWest" company="" webLink="http://" view-date="2020-09-21" view-index="0" gantt-divider-location="529" resource-divider-location="300" version="2.8.11" locale="pt_PT">
     <description/>
-    <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="158" order="0"/>
-        <field id="tpd4" name="Data de início" width="62" order="1"/>
-        <field id="tpd5" name="Data de fim" width="61" order="2"/>
-        <option id="color.recent">
-            <![CDATA[#ff6600 #0000ff #f4f4f4 #33ffff #ff3300 #0000cc #3333ff #0033ff #66ff66 #3399ff]]>
-        </option>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="333" order="0"/>
+        <field id="tpd4" name="Data de início" width="89" order="1"/>
+        <field id="tpd5" name="Data de fim" width="103" order="2"/>
+        <option id="color.recent"><![CDATA[#ff6600 #0000ff #f4f4f4 #33ffff #ff3300 #0000cc #3333ff #0033ff #66ff66 #3399ff]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nome" width="199" order="0"/>
-        <field id="1" name="Função padrão" width="82" order="1"/>
+        <field id="0" name="Nome" width="206" order="0"/>
+        <field id="1" name="Função padrão" width="90" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -140,164 +138,98 @@
         </taskproperties>
         <task id="0" name="Ideia inicial do projeto" color="#3399ff" shape="0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1" meeting="false" start="2020-09-27" duration="1" complete="0" thirdDate="2020-09-16" thirdDate-constraint="0" priority="2" expand="true"/>
         <task id="1" name="Desenvolvimento da base de dados" color="#66ff66" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2020-09-27" duration="134" complete="0" thirdDate="2020-09-27" thirdDate-constraint="0" priority="2" expand="true"/>
-        <task id="6" name="Desenhos do website e da aplicação" color="#8cb6ce" meeting="false" start="2020-10-26" duration="3" complete="0" thirdDate="2020-10-26" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Desenhos iniciais da aplicação]]>
-            </notes>
+        <task id="6" name="Desenhos iniciais do projeto" color="#8cb6ce" meeting="false" start="2020-10-26" duration="3" complete="0" thirdDate="2020-10-26" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Desenhos iniciais da aplicação]]></notes>
         </task>
         <task id="8" name="Início do desenvolvimento do website" color="#0000ff" meeting="false" start="2020-11-07" duration="1" complete="0" thirdDate="2020-10-25" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Utilizando a framework de codeigniter
-Configurações básicas de instalação]]>
-            </notes>
+            <notes><![CDATA[Utilizando a framework de codeigniter
+Configurações básicas de instalação]]></notes>
             <depend id="11" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="11" name="Login e registo" color="#0000ff" meeting="false" start="2020-11-08" duration="7" complete="0" thirdDate="2020-11-08" thirdDate-constraint="0" expand="true">
-            <depend id="18" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="18" name="Bug fixes ao  regisot/login" color="#0033ff" meeting="false" start="2020-11-15" duration="1" complete="0" thirdDate="2020-11-15" thirdDate-constraint="0" expand="true">
-            <depend id="22" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="22" name="Início de página de produtos" color="#3333ff" meeting="false" start="2020-11-16" duration="6" complete="0" thirdDate="2020-10-31" thirdDate-constraint="0" expand="true"/>
+        <task id="11" name="Login e registo" color="#0000ff" meeting="false" start="2020-11-08" duration="9" complete="0" thirdDate="2020-11-08" thirdDate-constraint="0" expand="true"/>
+        <task id="22" name="Início de página de produtos" color="#3333ff" meeting="false" start="2020-11-18" duration="6" complete="0" thirdDate="2020-10-31" thirdDate-constraint="0" expand="true"/>
         <task id="26" name="Desenvolvimento inicial da API" color="#33ffff" meeting="false" start="2020-11-22" duration="1" complete="0" thirdDate="2020-10-31" thirdDate-constraint="0" expand="true"/>
         <task id="28" name="Perfil do utilizador" color="#0000ff" meeting="false" start="2020-12-02" duration="1" complete="0" thirdDate="2020-10-31" thirdDate-constraint="0" expand="true">
             <depend id="31" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="31" name="Início do backoffice" color="#0000ff" meeting="false" start="2020-12-03" duration="2" complete="0" thirdDate="2020-11-24" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[AdminLTE 3
+            <notes><![CDATA[AdminLTE 3
 Overlayscrolls
-etc]]>
-            </notes>
+etc]]></notes>
             <depend id="35" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="35" name="Categorias, detalhes de produto e historico" color="#0000ff" meeting="false" start="2020-12-05" duration="1" complete="0" thirdDate="2020-11-18" thirdDate-constraint="0" expand="true"/>
-        <task id="39" name="Grande atualização do backoffice" color="#0000ff" meeting="false" start="2020-12-09" duration="1" complete="0" thirdDate="2020-11-29" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Criação de várias bases para depois colocar os vários elementos de controlo]]>
-            </notes>
+        <task id="39" name="Atualização do backoffice" color="#0000ff" meeting="false" start="2020-12-09" duration="1" complete="0" thirdDate="2020-11-29" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Criação de várias bases para depois colocar os vários elementos de controlo]]></notes>
         </task>
-        <task id="55" name="Carrinho inicial de produtos" color="#0000cc" meeting="false" start="2020-12-12" duration="1" complete="0" thirdDate="2020-11-30" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Nesta fase utilizava uma das funções do codeigniter de guardar carrinhos dos utilizadores]]>
-            </notes>
+        <task id="55" name="Carrinho inicial website(frontoffice)" color="#0000cc" meeting="false" start="2020-12-12" duration="1" complete="0" thirdDate="2020-11-30" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Nesta fase utilizava uma das funções do codeigniter de guardar carrinhos dos utilizadores]]></notes>
         </task>
         <task id="58" name="Inicio do desenvolvimento de android" color="#ff6600" meeting="false" start="2020-12-12" duration="1" complete="0" thirdDate="2020-11-30" thirdDate-constraint="0" expand="true"/>
         <task id="61" name="Produtos e outras modificações no backoffice" color="#0000ff" meeting="false" start="2020-12-14" duration="2" complete="0" thirdDate="2020-11-25" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Criação da página de edição de produtos
+            <notes><![CDATA[Criação da página de edição de produtos
 utilizando métodos para mostrar tudo na mesma página
-Outras modificações no backoffice]]>
-            </notes>
+Outras modificações no backoffice]]></notes>
         </task>
         <task id="64" name="Login e registo básico no android" color="#ff6600" meeting="false" start="2020-12-15" duration="1" complete="0" thirdDate="2020-11-24" thirdDate-constraint="0" expand="true"/>
-        <task id="65" name="Modelos no android" color="#ff6600" meeting="false" start="2020-12-18" duration="1" complete="0" thirdDate="2020-12-06" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Modelos base de android]]>
-            </notes>
-            <depend id="70" type="2" difference="0" hardness="Strong"/>
+        <task id="68" name="Métodos de GET para API" color="#33ffff" meeting="false" start="2020-12-18" duration="1" complete="0" thirdDate="2020-12-12" thirdDate-constraint="0" expand="true"/>
+        <task id="70" name="Design de inicial das atividades android" color="#ff6600" meeting="false" start="2020-12-19" duration="2" complete="0" thirdDate="2020-12-02" thirdDate-constraint="0" expand="true"/>
+        <task id="75" name="Vendas no backoffice" color="#0000ff" meeting="false" start="2020-12-19" duration="6" complete="0" thirdDate="2020-12-05" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Tabelas datatable no backoffice
+Melhoramento do tabelamento dos produtos]]></notes>
         </task>
-        <task id="68" name="Métodos de GET para produtos empresas e etc na API" color="#33ffff" meeting="false" start="2020-12-18" duration="1" complete="0" thirdDate="2020-12-12" thirdDate-constraint="0" expand="true"/>
-        <task id="70" name="Design de login e várias páginas" color="#ff6600" meeting="false" start="2020-12-19" duration="2" complete="0" thirdDate="2020-12-02" thirdDate-constraint="0" expand="true">
-            <depend id="78" type="2" difference="0" hardness="Strong"/>
+        <task id="85" name="Android produtos" color="#ff6600" meeting="false" start="2020-12-24" duration="6" complete="0" thirdDate="2020-12-09" thirdDate-constraint="0" expand="true"/>
+        <task id="87" name="Correção de erros" color="#ff6600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2021-01-03" duration="5" complete="0" thirdDate="2020-12-29" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Carregamento de produtos no android
+Correção de bugs nas vendas]]></notes>
         </task>
-        <task id="75" name="Vendas no backoffice e melhoramento dos produtos" color="#0000ff" meeting="false" start="2020-12-19" duration="2" complete="0" thirdDate="2020-12-05" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Tabelas datatable no backoffice
-Melhoramento do tabelamento dos produtos]]>
-            </notes>
-        </task>
-        <task id="78" name="Recycler views e menus laterais" color="#ff6600" meeting="false" start="2020-12-21" duration="1" complete="0" thirdDate="2020-12-07" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Desenvolvimento dos produtos
-Recycler views
-Barra lateral ]]>
-            </notes>
-        </task>
-        <task id="80" name="Conclusão das vendas no backoffice" color="#0000ff" meeting="false" start="2020-12-24" duration="1" complete="0" thirdDate="2020-12-09" thirdDate-constraint="0" expand="true"/>
-        <task id="82" name="Continuação do desenvolvimento dos produtos android" color="#ff6600" meeting="false" start="2020-12-24" duration="1" complete="0" thirdDate="2020-12-12" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Produtos
-Empresas
-]]>
-            </notes>
-        </task>
-        <task id="85" name="Categorias e mostrar produtos" color="#ff6600" meeting="false" start="2020-12-30" duration="1" complete="0" thirdDate="2020-12-09" thirdDate-constraint="0" expand="true"/>
-        <task id="87" name="Update grande android, api e bug fixes" color="#ff6600" shape="0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0" meeting="false" start="2021-01-03" duration="1" complete="0" thirdDate="2020-12-29" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Carregamento de produtos no android
-Correção de bugs nas vendas]]>
-            </notes>
-        </task>
-        <task id="89" name="Bug fixes nos registos" color="#0000ff" meeting="false" start="2021-01-07" duration="1" complete="0" thirdDate="2020-12-27" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Frontend e api]]>
-            </notes>
-        </task>
-        <task id="90" name="Login funcional em android e conversao em fragments" color="#ff6600" meeting="false" start="2021-01-07" duration="2" complete="0" thirdDate="2020-12-24" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Login utilizando a api 
-Conversao de algumas atividades em fragmentos]]>
-            </notes>
+        <task id="90" name="Android atualização nos designs" color="#ff6600" meeting="false" start="2021-01-07" duration="2" complete="0" thirdDate="2020-12-24" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Login utilizando a api 
+Conversao de algumas atividades em fragmentos]]></notes>
             <depend id="92" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="92" name="Registo e login android" color="#ff6600" meeting="false" start="2021-01-09" duration="2" complete="0" thirdDate="2020-12-26" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Mudanças importantes no android e api:
+            <notes><![CDATA[Mudanças importantes no android e api:
 Novo método de gerar chave de utilizador única para ser utilizada pela api
 para poder ter mais segurança
-Continuação do registo e login]]>
-            </notes>
+Continuação do registo e login]]></notes>
             <depend id="95" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="95" name="Mudanças android" color="#ff6600" meeting="false" start="2021-01-11" duration="3" complete="0" thirdDate="2021-01-02" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Detalhes no carrinho 
+        <task id="95" name="Atualizações android" color="#ff6600" meeting="false" start="2021-01-11" duration="3" complete="0" thirdDate="2021-01-02" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[Detalhes no carrinho 
 Swipe refresh
 Login com sessão
-Perfil]]>
-            </notes>
+Perfil]]></notes>
         </task>
         <task id="98" name="Api pagamentos" color="#33ffff" meeting="false" start="2021-01-11" duration="1" complete="0" thirdDate="2021-01-02" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Métodos de pagamento
-Criar venda]]>
-            </notes>
+            <notes><![CDATA[Métodos de pagamento
+Criar venda]]></notes>
         </task>
         <task id="100" name="Guardar carrinho e adicionar produtos ao carrinho API" color="#33ffff" meeting="false" start="2021-01-14" duration="2" complete="0" thirdDate="2021-01-02" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Guardar carrinho do utilizador
-Adicionar produtos ao carinho]]>
-            </notes>
+            <notes><![CDATA[Guardar carrinho do utilizador
+Adicionar produtos ao carinho]]></notes>
         </task>
         <task id="103" name="Base de dados em android para produtos" color="#ff6600" meeting="false" start="2021-01-16" duration="1" complete="0" thirdDate="2021-01-04" thirdDate-constraint="0" expand="true">
             <depend id="107" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="106" name="Criação de moradas na API" color="#33ffff" meeting="false" start="2021-01-16" duration="1" complete="0" thirdDate="2021-01-02" thirdDate-constraint="0" expand="true"/>
         <task id="107" name="Compras no android" color="#ff6600" meeting="false" start="2021-01-17" duration="7" complete="0" thirdDate="2020-12-31" thirdDate-constraint="0" expand="true"/>
-        <task id="112" name="Criação de utilizadores no backoffice" color="#0000ff" meeting="false" start="2021-01-25" duration="3" complete="0" thirdDate="2021-01-10" thirdDate-constraint="0" expand="true">
-            <depend id="115" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="115" name="Criação de empresas backoffice" color="#0000ff" meeting="false" start="2021-01-28" duration="7" complete="0" thirdDate="2021-01-14" thirdDate-constraint="0" expand="true"/>
-        <task id="118" name="Historico de vendas android" color="#ff6600" meeting="false" start="2021-02-06" duration="3" complete="0" thirdDate="2021-01-18" thirdDate-constraint="0" expand="true"/>
+        <task id="112" name="Criação de utilizadores no backoffice" color="#0000ff" meeting="false" start="2021-01-25" duration="10" complete="0" thirdDate="2021-01-10" thirdDate-constraint="0" expand="true"/>
+        <task id="118" name="Historico de vendas android" color="#ff6600" meeting="false" start="2021-02-03" duration="3" complete="0" thirdDate="2021-01-18" thirdDate-constraint="0" expand="true"/>
         <task id="120" name="Contactos frontend e backend" color="#0000ff" meeting="false" start="2021-02-06" duration="3" complete="0" thirdDate="2021-01-05" thirdDate-constraint="0" expand="true">
             <depend id="131" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="131" name="Testes unitarios" color="#0000ff" meeting="false" start="2021-02-09" duration="1" complete="0" thirdDate="2021-01-23" thirdDate-constraint="0" expand="true"/>
         <task id="136" name="Pesquisa de produtos no frontoffice e bug fixes" color="#0000ff" meeting="false" start="2021-02-09" duration="4" complete="0" thirdDate="2021-01-27" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Pesquisa de produtos no front office
+            <notes><![CDATA[Pesquisa de produtos no front office
 Bug fixes globais
 Melhoramentos no design
-Correção de problemas e inserção de dados ficticios na aplicação para a entrega]]>
-            </notes>
+Correção de problemas e inserção de dados ficticios na aplicação para a entrega]]></notes>
         </task>
         <task id="138" name="Terminar android" color="#ff6600" meeting="false" start="2021-02-09" duration="4" complete="0" thirdDate="2021-01-24" thirdDate-constraint="0" expand="true">
-            <notes>
-                <![CDATA[Pesquisa de produtos
+            <notes><![CDATA[Pesquisa de produtos
 Correção de problemas
-Design]]>
-            </notes>
+Design]]></notes>
         </task>
     </tasks>
     <resources>
@@ -309,22 +241,16 @@ Design]]>
         <allocation task-id="1" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="11" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="18" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="40.0"/>
         <allocation task-id="26" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="31" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="58" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="55" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="61" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="65" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="68" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="75" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="78" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="80" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="82" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="85" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="87" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="89" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="92" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="98" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="100" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
@@ -332,7 +258,6 @@ Design]]>
         <allocation task-id="106" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="107" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="112" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
-        <allocation task-id="115" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="118" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="40.0"/>
         <allocation task-id="120" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="131" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
