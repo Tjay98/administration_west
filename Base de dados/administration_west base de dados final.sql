@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `billing_address`
 --
 
+Create database administration_west;
+
+Use administration_west;
+
 CREATE TABLE `billing_address` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -384,7 +388,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `phone_number`, `birthday_date`, `password_hash`, `password_reset_token`, `unique_key`, `role_id`, `store_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Rodolfo Barreira', 'rodolfo-barreira@hotmail.com', 226831469, '1998-03-31', '$2y$10$HIl9fVXofH4YFNGvV1PRY.RsnKtN6SvZWwO2sPGFcke0ctUv5om7u', NULL, '7771de302a5c2d6d84c7eee28740d97b', 3, NULL, 1, '2020-11-15 20:37:53', '2020-11-15 20:37:53'),
-(2, 'Utilizador Comum', 'usercomum@gmail.com', 123456789, '2000-03-31', '$2y$10$Aij1g7vUleMjkgw1GAj4C.omgHMp1L5I0y.1ZGCm.DEt7HAq5FbRa', NULL, '146a70141050d4b8a580a5aee9bf5534', 1, NULL, 2, '2020-12-20 20:50:04', '2020-12-20 20:50:04'),
+(2, 'Utilizador Comum', 'usercomum@gmail.com', 123456789, '2000-03-31', '$2y$10$Aij1g7vUleMjkgw1GAj4C.omgHMp1L5I0y.1ZGCm.DEt7HAq5FbRa', NULL, '146a70141050d4b8a580a5aee9bf5534', 1, NULL, 1, '2020-12-20 20:50:04', '2020-12-20 20:50:04'),
 (3, 'Vinhos Oeste', 'vinhos@oeste.pt', 123456781, '1997-07-31', '$2y$10$zoh//JbXis5ZbnWQRh2mzOkQmyA9ZxpO111oXmYHrq6a.OihNknnO', NULL, '0718c9704202cb41ed2392bb5083d392', 2, 1, 1, '2020-12-20 20:50:04', '2021-02-13 00:52:34'),
 (15, 'Queijo Legítimo', 'queijo@queijolegitimo.pt', 912345678, '2021-02-14', '$2y$10$3UbltceRXVyUIJZxXWqdwOaRVGm/otsTBjtjsem.aya/iesUbImm.', NULL, 'f853c272e54379d63f36bbd2906a8191', 2, 2, 1, '2021-02-14 16:58:41', '2021-02-14 16:58:41');
 
