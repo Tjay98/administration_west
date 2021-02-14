@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.administration_west.Models.Users;
 
 import com.example.administration_west.R;
+import com.example.administration_west.Utils.ProductsJsonParse;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -68,16 +70,24 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateName();
-                validateEmail();
-                validadeMobile();
-                validateData();
-                validadePassword();
-                if(validateName() && validateEmail() && validadeMobile() && validateData() && validadePassword()){
-                    registerUser();
+                if(!ProductsJsonParse.isConnected(getApplicationContext())){
+                    Toast.makeText(getApplicationContext(),"Não tem ligação à internet",Toast.LENGTH_SHORT).show();
+                }else {
+                    validateName();
+                    validateEmail();
+                    validadeMobile();
+                    validateData();
+                    validadePassword();
+                    if (validateName() && validateEmail() && validadeMobile() && validateData() && validadePassword()) {
+                        registerUser();
+                    }
                 }
             }
         });
+    }
+
+    private boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public void loginPage(){
@@ -161,18 +171,25 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // validação de dados Email
-    public Boolean validateEmail(){
+    public Boolean validateEmail() {
         String email = eTEmail.getEditText().getText().toString();
-        if(email.isEmpty()) {
-            eTEmail.setError("Email não pode estar vazio");
+        if (isEmailValid(email)) {
+            if (email.isEmpty()) {
+                eTEmail.setError("Email não pode estar vazio");
+                return false;
+            } else if (email.length() < 6 || email.length() > 255) {
+                eTEmail.setError("O email não tem o tamanho permitido");
+                return false;
+            }
+            else {
+                eTEmail.setError(null);
+                return true;
+            }
+        }else{
+            eTEmail.setError("Escreva um email");
             return false;
-        } else if(email.length()<6 ||email.length()>255) {
-            eTEmail.setError("O email não tem o tamanho permitido");
-            return false;
-        } else {
-            eTEmail.setError(null);
-            return true;
         }
+
     }
 
     // validação de dados Password

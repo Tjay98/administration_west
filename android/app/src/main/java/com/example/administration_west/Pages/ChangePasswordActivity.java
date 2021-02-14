@@ -76,11 +76,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
     }
-    private void mainactivity() {
-        Intent intentMain = new Intent(this, MainActivity.class);
-        startActivity(intentMain);
-        finish();
-    }
 
     public Boolean validadePassword() {
         String oldPassword = eTOldPassword.getEditText().getText().toString();
@@ -142,13 +137,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         }
     }
-
-    /*private void profilePage() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentFragment, new ProfileFragment()).commit();
-
+    private void mainactivity() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
+        finish();
     }
-*/
 
 
 
@@ -169,10 +162,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                             if (status.equals("200")) {
                                 Toast.makeText(ChangePasswordActivity.this, "Password mudada com sucesso!", Toast.LENGTH_LONG).show();
-                               // profilePage();
+                                mainactivity();
 
+                            }else if(status.equals("401")){
+                                Toast.makeText(ChangePasswordActivity.this, "Verifique a password", Toast.LENGTH_LONG).show();
                             }else{
-                                Toast.makeText(ChangePasswordActivity.this, status, Toast.LENGTH_LONG).show();
+                                Toast.makeText(ChangePasswordActivity.this, "Alguma coisa errada", Toast.LENGTH_LONG).show();
                             }
 
 

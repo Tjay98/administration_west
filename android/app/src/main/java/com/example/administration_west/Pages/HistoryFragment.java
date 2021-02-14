@@ -142,7 +142,9 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.OnItemCl
                                 }
                             } catch (JSONException e){
                                 e.printStackTrace();
-                                 Toast.makeText(getContext(), "Erro " +e.toString(),Toast.LENGTH_LONG).show();
+                                 Toast.makeText(getContext(), "Ainda não tem histórico " ,Toast.LENGTH_LONG).show();
+                                mainactivity();
+
                             }
 
                         }
@@ -166,7 +168,10 @@ public class HistoryFragment extends Fragment implements HistoryAdapter.OnItemCl
             RequestQueue requestQueue= Volley.newRequestQueue(getContext());
             requestQueue.add(stringRequest);
         }
-
+    private void mainactivity() {
+        Intent intentMain = new Intent(getContext(), MainActivity.class);
+        startActivity(intentMain);
+    }
 
     @Override
     public void onItemClick(int position) {

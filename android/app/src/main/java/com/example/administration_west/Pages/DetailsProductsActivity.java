@@ -100,9 +100,6 @@ public class DetailsProductsActivity extends AppCompatActivity {
 
 
 
-
-
-
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

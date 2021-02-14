@@ -2,6 +2,7 @@ package com.example.administration_west.Pages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.administration_west.Models.SessionUser;
 import com.example.administration_west.Models.Users;
 
 import com.example.administration_west.R;
+import com.example.administration_west.Utils.ProductsJsonParse;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -65,12 +67,20 @@ public class LoginActivity extends AppCompatActivity {
         DoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateEmail();
-                validatePassword();
-                login();
+                if (!ProductsJsonParse.isConnected(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+                } else {
+                    validateEmail();
+                    validatePassword();
+                    login();
+                }
             }
         });
 
+    }
+
+    private boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void mostraRegisto() {
@@ -89,15 +99,20 @@ public class LoginActivity extends AppCompatActivity {
     // validação de dados Email
     public Boolean validateEmail() {
         String email = etEmail.getEditText().getText().toString();
-        if (email.isEmpty()) {
-            etEmail.setError("Email não pode estar vazio");
+        if (isEmailValid(email)) {
+            if (email.isEmpty()) {
+                etEmail.setError("Email não pode estar vazio");
+                return false;
+            } else if (email.length() < 6 || email.length() > 255) {
+                etEmail.setError("O email não tem o tamanho permitido");
+                return false;
+            } else {
+                etEmail.setError(null);
+                return true;
+            }
+        }else{
+            etEmail.setError("Escreva um email");
             return false;
-        } else if (email.length() < 6 || email.length() > 255) {
-            etEmail.setError("O email não tem o tamanho permitido");
-            return false;
-        } else {
-            etEmail.setError(null);
-            return true;
         }
     }
 

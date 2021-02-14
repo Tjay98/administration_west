@@ -162,7 +162,6 @@ public class ProductFragment extends Fragment implements ProductsAdapter.OnItemC
 
         if (adapterProducts != null) {
             query = query.toLowerCase();
-            Toast.makeText(getContext(), query, Toast.LENGTH_SHORT).show();
             ArrayList<Products> productsArrayList = new ArrayList<>();
 
             for (Products productList : productsList) {
