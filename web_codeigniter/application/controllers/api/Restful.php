@@ -98,6 +98,11 @@ class Restful extends MY_Controller {
     public function get_product($id){
         $product=$this->Product_model->get_detail_products($id);
         if(!empty($product)){
+            $product['big_description']=str_replace("<p>","",$product['big_description']);
+            $product['big_description']=str_replace("</p>","",$product['big_description']);
+            $product['big_description']=str_replace("<b>","",$product['big_description']);
+            $product['big_description']=str_replace("</b>","",$product['big_description']);
+            
             echo json_encode($product, JSON_PRETTY_PRINT);
         }else{
             $array=$this->generate_error_message(404);
