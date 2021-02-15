@@ -70,7 +70,7 @@ public class DetailsProductsActivity extends AppCompatActivity {
         String product_category_name = intent.getExtras().getString(EXTRA_PRODUCT_CATEGORY);
         String product_company_name = intent.getExtras().getString(EXTRA_PRODUCT_COMPANY);
         String product_price = intent.getExtras().getString(EXTRA_PRODUCT_PRICE);
-        String product_description = intent.getExtras().getString(EXTRA_PRODUCT_DESCRIPTION);
+        String product_description = intent.getExtras().getString(EXTRA_PRODUCT_DESCRIPTION).replace("<b>", "").replace("</b>", "").replace("<p>", "").replace("</p>", "");
 
 
         ImageView image = findViewById(R.id.iVDetailProduct);
