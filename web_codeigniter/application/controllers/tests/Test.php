@@ -169,7 +169,7 @@ class Test extends MY_Controller {
     public function index(){
 
         // Função de mudar password
-        $test = $this->password(1, 'Password-123', 'Not_fail_123');
+        $test = $this->password(1, '123-Password', 'Not_fail_123');
         $expected_result = true;
         $test_name = 'Mudar a password';
         echo $this->unit->run($test, $expected_result, $test_name);
@@ -187,7 +187,7 @@ class Test extends MY_Controller {
         echo $this->unit->run($test, $expected_result, $test_name);
 
         // Função para dar reset à password
-        $test = $this->password(1, 'Not_fail_123', 'Password-123');
+        $test = $this->password(1, 'Not_fail_123', '123-Password');
         $expected_result = true;
         $test_name = 'Reset Password';
         echo $this->unit->run($test, $expected_result, $test_name);
