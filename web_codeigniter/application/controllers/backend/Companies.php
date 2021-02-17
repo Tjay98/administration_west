@@ -24,12 +24,12 @@ class Companies extends MY_Controller {
 
         if($admin){
             $data['count_total']=$this->Company_model->count_company_by_status('all');
-            $data['count_invactive']=$this->Company_model->count_company_by_status('0');
+            $data['count_inactive']=$this->Company_model->count_company_by_status('0');
             $data['count_active']=$this->Company_model->count_company_by_status('1');
             $data['page_title']="Empresas";
             $this->load_admin_views('backend/companies/index',$data);
         }else{
-            redirect('admin/companies/edit/'.$this->session->userdata('company_id'));
+            redirect('admin/companies/edit/'.$this->session->userdata('store_id'));
         }
 
     }
@@ -140,7 +140,7 @@ class Companies extends MY_Controller {
                 $this->load_admin_views('backend/companies/add',$data);
             }
         }else{
-            redirect('admin/companies/edit/'.$this->session->userdata('company_id'));
+            redirect('admin/companies/edit/'.$this->session->userdata('store_id'));
         }
     }
     

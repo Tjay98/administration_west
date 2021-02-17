@@ -52,7 +52,7 @@
                         <p class="text-center" style="font-size:30px"><b><?php echo $product['price']." €"; ?></b></p>
                         </div>       
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <button class="btn-primary" style="border-radius: 10px; padding:5px"> <a href="<?php echo base_url('products'); ?>" >Adicionar ao Carrinho</a> </button>
+                        <a class="btn btn-primary" style="border-radius: 10px; padding:5px" href="<?php echo base_url('add/cart/').$product['id']; ?>" >Adicionar ao Carrinho </a>
                 </div>   
                 </div>       
     

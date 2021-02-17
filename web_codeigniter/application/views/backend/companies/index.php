@@ -53,7 +53,7 @@
 					<span class="info-box-icon bg-warning elevation-1"><i class="fa fa-power-off"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">Inativas</span>
-						<span class="info-box-number"><?php if(!empty($count_inactive)){echo $count_invactive;}else{echo 0;}  ?></span>
+						<span class="info-box-number"><?php if(!empty($count_inactive)){echo $count_inactive;}else{echo 0;}  ?></span>
 					</div>
 					<!-- /.info-box-content -->
 				</div>
