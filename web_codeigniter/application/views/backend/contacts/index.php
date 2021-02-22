@@ -148,8 +148,8 @@
                 </div>
                 
             </div>
-            <div class="modal-footer" style="border-color:transparent;">
-
+            <div class="modal-footer" >
+                <button class="btn btn-md btn-info this_100" id="finish_button">Colocar como resolvido</button>
             </div>
         </div>
     </div>
@@ -268,8 +268,12 @@
 
                     if(status==1){
                         status='<button class="btn btn-sm btn-warning" disabled>Recebido</button>';
+                        $('#finish_button').attr('onclick','confirm_edit('+contact_id+')');
+                        $('#finish_button').show();
                     }else if(status == 2){
                         status='<button class="btn btn-sm btn-success" disabled>Resolvido</button>';
+                        $('#finish_button').attr('onclick','');
+                        $('#finish_button').hide();
                     }
 
                     if(type == 1){
@@ -293,6 +297,8 @@
                     $('#contact_title').text('Contacto #'+contact_id);
                     /* $('#fill_this_contact').text(response); */
                     $('#contactModal').modal('show');
+
+                    
                 }
             }
         });
