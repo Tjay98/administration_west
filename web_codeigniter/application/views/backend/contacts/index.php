@@ -333,5 +333,53 @@
 
     }
 
+    function confirm_edit(contact_id){
+        Swal.fire({
+            title: 'Deseja atualizar os estado para resolvido?',
+            
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+            
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('admin/contacts/edit/');?>"+contact_id,
+                    data: {'update_status':'true'},
+                    success: function (response) {
+                        if(response=='success'){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Contacto atualizado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                            setTimeout(function() {
+                                url="<?php echo base_url('admin/contacts/')?>"
+                                window.location.href= url;
+                            }, 2000);
+                        }else{
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Ocorreu algum erro',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                            setTimeout(function() {
+                                url="<?php echo base_url('admin/contacts/')?>"
+                                window.location.href= url;
+                            }, 2000);
+                        }
+                    }
+                });
+            } 
+        })
+
+    }
+
     
 </script>

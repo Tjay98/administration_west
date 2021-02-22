@@ -35,7 +35,7 @@ class Contacts extends MY_Controller {
 
             switch($contact['status']){
                 case 1:
-                    $status='<button class="btn btn-md btn-warning btn_white_color this_100">Recebido</button>';
+                    $status='<button class="btn btn-md btn-warning btn_white_color this_100" onclick="confirm_edit('.$id.')">Recebido</button>';
                     $action.='&nbsp;<button class="btn btn-md btn-danger btn_white_color" onclick="delete_contact('.$id.')"><i class="fa fa-trash-o"></i></button>';
                 break;
 
@@ -93,8 +93,17 @@ class Contacts extends MY_Controller {
     }
 
     public function edit($contact_id){
-        $contact=$this->Contact_model->get_contact_by_id($contact_id);
-        echo json_encode($contact,JSON_PRETTY_PRINT);
+        if(empty($this->input->post('update_status'))){
+            $contact=$this->Contact_model->get_contact_by_id($contact_id);
+            echo json_encode($contact,JSON_PRETTY_PRINT);
+        }else{
+            $this->db->where('id',$contact_id);
+            $this->db->set('status',2);
+            $this->db->update('contact_form');
+    
+            echo 'success';
+        }
+
     }
 
     public function delete($contact_id){
