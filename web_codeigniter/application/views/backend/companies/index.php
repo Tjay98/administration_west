@@ -166,7 +166,8 @@
                 url: "<?php echo base_url('admin/companies/delete/'); ?>"+company_id+"/"+new_status,
                 data: "",
                 success: function (response) {
-                    table.ajax.reload();
+                    /* table.ajax.reload(); */
+                    window.location.reload();
                 }
             });
         }
@@ -181,7 +182,8 @@
                 data: "",
                 success: function (response) {
                    /*  alert(response); */
-                    table.ajax.reload();
+                    /* table.ajax.reload(); */
+                    window.location.reload();
                 }
             });
         }
